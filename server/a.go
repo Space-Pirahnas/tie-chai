@@ -2,6 +2,6 @@ package main;
 
 import "fmt";
 
-func test() {
+func Serving() {
 	fmt.Println("Serving on Port :8080");
 }
