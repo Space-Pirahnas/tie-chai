@@ -1,3 +1,5 @@
 .vscode/
 node_modules/
 src/bundles/
+server/vendor
+server/config.go
