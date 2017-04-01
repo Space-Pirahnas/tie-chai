@@ -1,0 +1,13 @@
+hash: 8ffcf564a6b045898029832ee93f24e882e45b731882cb6f30e75922fc9ef3d9
+updated: 2017-03-31T17:51:26.023975546-07:00
+imports:
+- name: github.com/dgrijalva/jwt-go
+  version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
+- name: github.com/julienschmidt/httprouter
+  version: 8c199fb6259ffc1af525cc3ad52ee60ba8359669
+- name: golang.org/x/crypto
+  version: 3cb07270c9455e8ad27956a70891c962d121a228
+  subpackages:
+  - bcrypt
+  - blowfish
+testImports: []
