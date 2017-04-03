@@ -13,3 +13,16 @@ var dbConfig = DB_CONFIG{
 	"tiechai",
 	"disable",
 }
+
+var interests = []string{
+	"Golang",
+	"JavaScript",
+	"Finance",
+	"Accounting",
+}
+
+var cities = []string {
+	"San Francisco, CA",
+	"San Jose, CA",
+	"Seattle, WA",
+}
