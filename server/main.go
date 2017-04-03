@@ -16,8 +16,9 @@ func init() {
 	if err != nil {
 		panic("can not connect to db");
 	}
-	db.AutoMigrate(&Users{}, &Cities{});
-	db.Create(&Cities{City_Name: "San Francisco"});
+	db.AutoMigrate(&Users{}, &Cities{}, &Events{}, &Interests{}, &User_Interests{});
+	// db.Create(&Cities{City_Name: "San Francisco"});
+	// db.Create(&Interests{Name: "Golang"});
 }
 
 func main() {
@@ -28,6 +29,8 @@ func main() {
 	http.Handle("/bundles/", bundle);
 	http.HandleFunc("/api/signup", signUp);
 	http.HandleFunc("/api/login", logIn);
+	http.HandleFunc("/api/create_event", handleEvent);
+	http.HandleFunc("/api/interests", handleInterest);
 	http.Handle("/favicon.ico", http.NotFoundHandler());
 	Serving();
 	http.ListenAndServe(":8080", nil);
