@@ -28,7 +28,6 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 	} else if req.Method == http.MethodDelete {
 		var ev Events;
 		db.Where(&Events{User_ID: users.ID, Location: e.Location, Date: e.Date, Time: e.Time, Description: e.Description }).First(&ev);
-		log.Println(e.Location, ev, ev.User_ID, ev.Location);
 		db.Unscoped().Delete(&ev);
 		w.Header().Set("Content-Type", "application/json");
 		r, _ := json.Marshal("removed event successfully");

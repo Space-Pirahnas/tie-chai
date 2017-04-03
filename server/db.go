@@ -26,7 +26,7 @@ type Events struct {
 
 type Images struct {
 	gorm.Model
-	Url string
+	Image_Url string
 }
 
 type User_Interests struct {
@@ -37,6 +37,6 @@ type User_Interests struct {
 
 type Interests struct {
 	gorm.Model
-	Name string
+	Interest_Name string
 }
 
