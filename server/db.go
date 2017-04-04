@@ -9,8 +9,11 @@ type Users struct {
 	gorm.Model
 	Name, Email string
 	Password []byte
-	City_ID uint `gorm:"ForeignKey:Cities.ID"`
-	Image_ID uint `gorm:"ForeignKey:Images.ID"`
+	CityID uint `gorm:"ForeignKey:Cities.ID"`
+	ImageID uint `gorm:"ForeignKey:Images.ID"`
+	// Cities Cities
+	// Image Image
+	// Interests []UserInterest
 }
 
 type Cities struct {
@@ -18,24 +21,27 @@ type Cities struct {
 	City_Name string
 }
 
-type Events struct {
+type Event struct {
 	gorm.Model
-	User_ID uint `gorm:"ForeignKey:Users.ID"`
+	// Users Users
+	UserID uint
 	Location, Date, Time, Description string
 }
 
-type Images struct {
+type Image struct {
 	gorm.Model
-	Image_Url string
+	ImageUrl string
 }
 
-type User_Interests struct {
+type UserInterest struct {
 	gorm.Model
-	User_ID uint `gorm:"ForeignKey:Users.ID"`
-	Interest_ID uint `gorm:"ForeignKey:Interests.ID`
+	// Users Users
+	// Interests Interest
+	UserID uint `gorm:"ForeignKey:Users.ID"`
+	InterestID uint `gorm:"ForeignKey:Interests.ID`
 }
 
-type Interests struct {
+type Interest struct {
 	gorm.Model
 	Interest_Name string
 }

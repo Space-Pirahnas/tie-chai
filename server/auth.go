@@ -30,7 +30,7 @@ func signUp (w http.ResponseWriter, req *http.Request) {
 			bp, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.MinCost);
 			if err != nil { log.Println("hashing failed"); }
 			db.Where(&Cities{ City_Name: u.City }).First(&city);
-			db.Create(&Users{Name: u.Name, Email: u.Email, Password: bp, City_ID: city.ID });
+			db.Create(&Users{Name: u.Name, Email: u.Email, Password: bp, CityID: city.ID });
 			db.Where(&Users{ Email: u.Email}).First(&id);
 			initializeInterests(id.ID, u.Interests);
 			successRequest(w, "success", "successfully signed up user");
