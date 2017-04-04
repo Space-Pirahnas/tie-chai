@@ -12,7 +12,7 @@ var err error;
 
 func seedTables() {
 	for _, v := range interests{
-		db.Create(&Interests{Interest_Name: v});
+		db.Create(&Interest{Interest_Name: v});
 	}
 	for _, i := range cities{
 		db.Create(&Cities{City_Name: i});
@@ -25,7 +25,7 @@ func init() {
 	if err != nil {
 		panic("can not connect to db");
 	}
-	db.AutoMigrate(&Users{}, &Cities{}, &Events{}, &Interests{}, &User_Interests{}, &Images{});
+	db.AutoMigrate(&Users{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{});
 	// seedTables();
 }
 
@@ -39,7 +39,8 @@ func main() {
 	http.HandleFunc("/api/login", logIn);
 	http.HandleFunc("/api/create_event", handleEvent);
 	http.HandleFunc("/api/interests", handleInterest);
-	http.HandleFunc("/api/images", handleImage)
+	http.HandleFunc("/api/images", handleImage);
+	http.HandleFunc("/api/users", handleUsers);
 	http.Handle("/favicon.ico", http.NotFoundHandler());
 	Serving();
 	http.ListenAndServe(":8080", nil);

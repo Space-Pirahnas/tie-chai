@@ -8,14 +8,14 @@ import (
 
 type user_interest struct {
 	Email string
-	Interests []string
+	Interest []string
 }
 
-func initializeInterests(id uint, interests []string) {
-	var i Interests;
-	for _, v := range interests {
-		db.Where(&Interests{Interest_Name: v}).First(&i);
-		db.Create(&User_Interests{User_ID: id, Interest_ID : i.ID });
+func initializeInterests(id uint, interest []string) {
+	var i Interest;
+	for _, v := range interest {
+		db.Where(&Interest{Interest_Name: v}).First(&i);
+		db.Create(&UserInterest{UserID: id, InterestID : i.ID });
 	}
 	log.Println("initialized interests table");
 }
@@ -23,17 +23,20 @@ func initializeInterests(id uint, interests []string) {
 func handleInterest (w http.ResponseWriter, req *http.Request) {
 	var ui user_interest;
 	var u Users;
-	var i Interests;
+	var i Interest;
 	defer req.Body.Close();
-	decoder := json.NewDecoder(req.Body);
-	decoder.Decode(&ui);
+	json.NewDecoder(req.Body).Decode(&ui);
 	db.Where(&Users{Email: ui.Email}).First(&u);
 	if req.Method == http.MethodPut {
-		db.Where("User_ID = ?", u.ID).Unscoped().Delete(&User_Interests{});
-		for _, v := range ui.Interests {
-			db.Where(&Interests{Interest_Name: v}).First(&i);
-			db.Create(&User_Interests{User_ID: u.ID, Interest_ID: i.ID});
-		}
+		updateInterests(ui, u, i);
 		successRequest(w, "updated interests", "saved users interests");
+	}
+}
+
+func updateInterests(ui user_interest, u Users, i Interest) {
+	db.Where("User_ID = ?", u.ID).Unscoped().Delete(&UserInterest{});
+	for _, v := range ui.Interest {
+		db.Where(&Interest{Interest_Name: v}).First(&i);
+		db.Create(&UserInterest{UserID: u.ID, InterestID: i.ID});
 	}
 }
