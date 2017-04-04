@@ -6,20 +6,20 @@ class IndexPage extends Component {
     super(props);
   }
 
-  render () {
+  render() {
     return (
-      <div> 
+      <div>
         <nav className="navbar navbar-light navbar-fixed-top">
           <div className="container-fluid">
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/signin">Sign In</Link></li>
-                <li><Link to="/signup">Sign Up</Link></li>
+                <li><Link to="/auth/signin">Sign In</Link></li>
+                <li><Link to="/auth/signup">Sign Up</Link></li>
               </ul>
             </div>
           </div>
         </nav>
-        <div className="indexPage" />
+        <img style={{"max-width": "100%"}}src={"styles/veer.jpg"} />
       </div>
     );
   }
