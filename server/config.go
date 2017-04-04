@@ -1,15 +1,15 @@
-package main;
+package main
 
-var secret = []byte("tie-chai-is-the-best");
+var secret = []byte("tie-chai-is-the-best")
 
-type DB_CONFIG struct{
+type DB_CONFIG struct {
 	DB_TYPE, DB_HOST, DB_USER, DB_NAME, DB_SSL string
 }
 
 var dbConfig = DB_CONFIG{
 	"postgres",
 	"localhost",
-	"Ryan",
+	"Work",
 	"tiechai",
 	"disable",
 }
@@ -21,7 +21,7 @@ var interests = []string{
 	"Accounting",
 }
 
-var cities = []string {
+var cities = []string{
 	"San Francisco, CA",
 	"San Jose, CA",
 	"Seattle, WA",
