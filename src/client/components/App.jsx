@@ -1,6 +1,6 @@
 import React from 'react';
-import IndexPage from './components/IndexPage.jsx';
-import Nav from './components/Nav/nav.jsx';
+import IndexPage from './IndexPage.jsx';
+import Nav from './Nav/nav.jsx';
 
 class App extends React.Component {
   constructor(props) {
