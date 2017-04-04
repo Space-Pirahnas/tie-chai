@@ -76,3 +76,21 @@
   color: #fff;
   background: none;
 }
+
+.indexPage {
+  margin: auto;
+  background-image: url('veer.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:hidden;
+    z-index:-1;
+}
