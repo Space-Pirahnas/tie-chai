@@ -19,7 +19,11 @@ class IndexPage extends Component {
           <div className="content">
             <img className="logo" src={"styles/mug.png"} />
             <h2>Tie-Chai</h2>
-            <p>Linkedin meets tinder</p>
+            <div>
+              <img style={{ "max-width": "80px", display: "inline-block" }} className="linkedin" src={"styles/linkedin.svg"} />
+              <span style={{ margin: "10px" }} >meets</span>
+              <img style={{ "max-width": "50px", display: "inline-block" }} className="tinder" src={"styles/tinder.svg"} />
+            </div>
             <div className="button-wrapper">
               <HeroButton />
             </div>
