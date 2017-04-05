@@ -18,7 +18,6 @@ class IndexPage extends Component {
         <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
           <div className="content">
             <img className="logo" src={"styles/mug.png"} />
-            <h2>Tie-Chai</h2>
             <div>
               <img style={{ "max-width": "80px", display: "inline-block" }} className="linkedin" src={"styles/linkedin.svg"} />
               <span style={{ margin: "10px" }} >meets</span>
