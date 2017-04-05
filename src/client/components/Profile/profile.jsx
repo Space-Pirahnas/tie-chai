@@ -10,7 +10,7 @@ class Profile extends React.Component {
       <div className="UserProfile">
         <div className="User">
           <div className="name">Veer Gangwal</div>
-          <div className="image"><img src={"styles/user.jpg"} /></div>
+          <div className="image"><img src={"styles/user.jpeg"} /></div>
         </div>
       </div>
     );
