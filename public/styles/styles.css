@@ -37,6 +37,15 @@ a:hover {
   text-decoration: none;
   color: white;
 }
+
+a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none;
+}
+
+ul:hover, ul:active, ul:visited, ul:focus {
+    list-style: none;
+}
+
 blockquote, q {
   quotes: none;
 }
