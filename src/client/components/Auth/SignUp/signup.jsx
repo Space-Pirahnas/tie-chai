@@ -7,11 +7,21 @@ import Survey from './survey.jsx';
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    console.log('In the signup.jsx contructor')
   }
 
   handleFormSubmit(values) {
-    console.log("the form value from surveydd ", values);
+    const signupObj = {
+      Name: values.name,
+      Email: values.email,
+      Password: values.password,
+      City: values.city,
+      Interests: values.interest.split(',')
+    }
+    console.log("the form value from survey OBJ send to server ", signupObj);
+    
+    // once user click submit button
+      // axios sent to server to register this user
+      // request token sent to home page
   }
 
   render() {
