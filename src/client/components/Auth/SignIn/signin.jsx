@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import SignInForm from './signinForm.jsx';
 
 class SignIn extends React.Component {
@@ -9,6 +11,16 @@ class SignIn extends React.Component {
 
   handleFormSubmit(values) {
     console.log("get the values ", values);
+    axios.post('/api/login', {
+      Email: values.email,
+      Password: values.password
+    })
+    .then(token => {
+      console.log('Sign In successfully, token is ', token);
+    })
+    .catch(error => {
+      console.log('Fail to sign in, error is ', error);
+    })
     
   }
 
