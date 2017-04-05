@@ -25,14 +25,12 @@ class Survey extends React.Component {
     const { onSubmit } = this.props;
     const { page } = this.state;
     const progressValue = page === 1 ? "50" : "100";
-    console.log("page is ", page);
-    console.log("progressValue is ", `${progressValue}%`);
     return (
       <div>
         <div className="progress">
-          <div className="progress-bar progress-bar-info progress-bar-striped" 
-          role="progressbar" aria-valuenow={progressValue} aria-valuemin="0" aria-valuemax="100" 
-          style={{"width": `${progressValue}%`}}>
+          <div className="progress-bar progress-bar-info progress-bar-striped"
+            role="progressbar" aria-valuenow={progressValue} aria-valuemin="0" aria-valuemax="100"
+            style={{ "width": `${progressValue}%` }}>
             <span className="sr-only">`${progressValue}%` Complete</span>
           </div>
         </div>
