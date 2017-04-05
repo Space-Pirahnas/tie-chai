@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
 import { signupFields } from '../form-fields.jsx';
-import validate from '../validate.jsx';
+import validate from './validate.jsx';
 
 const { emailField, nameField, passwordField, passwordConfirmField } = signupFields;
 
