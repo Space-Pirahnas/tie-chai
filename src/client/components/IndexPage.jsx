@@ -9,17 +9,18 @@ class IndexPage extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-light navbar-fixed-top">
-          <div className="container-fluid">
-            <div id="navbar" className="navbar-collapse collapse">
-              <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/auth/signin">Sign In</Link></li>
-                <li><Link to="/auth/signup">Sign Up</Link></li>
-              </ul>
+        <div id="hero" className="Hero" style={{backgroundImage: "url(styles/coffeebackground.jpg)"}}>
+          <div className="content">
+            <img id="logo" className="Logo" src={"styles/mug.png"} />
+            <h2>Tie-Chai</h2>
+            <p>Linkedin meets tinder</p>
+            <div className="button-wrapper">
+              <Link className="Button" to="/auth/signin">Sign In</Link>
+              <Link className="Button" to="/auth/signup">Sign Up</Link>
             </div>
           </div>
-        </nav>
-        <img style={{"max-width": "100%"}}src={"styles/veer.jpg"} />
+          <div className="overlay"></div>
+        </div>
       </div>
     );
   }
