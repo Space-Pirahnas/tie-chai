@@ -7,7 +7,12 @@ class Profile extends React.Component {
 
   render () {
     return (
-      <h1>Profile Page From Profile.jsx</h1>
+      <div className="UserProfile">
+        <div className="User">
+          <div className="name">Veer Gangwal</div>
+          <div className="image"><img src={"styles/user.jpeg"} /></div>
+        </div>
+      </div>
     );
   }
 };

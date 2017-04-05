@@ -1,6 +1,9 @@
 import React from 'react';
 import IndexPage from './IndexPage.jsx';
 import Nav from './Nav/nav.jsx';
+import Logo from './Logo/logo.jsx';
+import UserProfile from './Profile/profile.jsx';
+import Search from './Search/search.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,13 +12,16 @@ class App extends React.Component {
     this.state = {};
   }
 
-  render () {
+  render() {
     return (
-       <div className ="row">
-          <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            <Nav />
-          </div>
-        <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+      <div>
+        <header className="Header">
+          <Logo />
+          <Nav />
+          <Search />
+          <UserProfile />
+        </header>
+        <div>
           {this.props.children}
         </div>
       </div>
