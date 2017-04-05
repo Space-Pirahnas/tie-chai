@@ -1,5 +1,23 @@
 import React from 'react';
 
+export const signinField = {
+  emailField: email => (
+    <fieldset className="form-group">
+      <label>Email: </label>
+      <input className="form-control" {...email.input} />
+      {email.meta.touched && email.meta.error && <div className="error">{email.meta.error}</div>}
+    </fieldset>
+  ),
+
+  passwordField: password => (
+    <fieldset className="form-group">
+      <label>Password: </label>
+      <input className="form-control" {...password.input} />
+      {password.meta.touched && password.meta.error && <div className="error">{password.meta.error}</div>}
+    </fieldset>
+  )
+}
+
 export const signupFields = {
   emailField: email => (
     <fieldset className="form-group">
@@ -25,11 +43,19 @@ export const signupFields = {
     </fieldset>
   ),
 
-  locationField: location => (
+  passwordConfirmField: passwordConfirm => (
     <fieldset className="form-group">
-      <label>Location: </label>
-      <input className="form-control" {...location.input} />
-      {location.meta.touched && location.meta.error && <div className="error">{location.meta.error}</div>}
+      <label>Confirm Password: </label>
+      <input className="form-control" {...passwordConfirm.input} />
+      {passwordConfirm.meta.touched && passwordConfirm.meta.error && <div className="error">{passwordConfirm.meta.error}</div>}
+    </fieldset>
+  ),
+
+  cityField: city => (
+    <fieldset className="form-group">
+      <label>City: </label>
+      <input className="form-control" {...city.input} />
+      {city.meta.touched && city.meta.error && <div className="error">{city.meta.error}</div>}
     </fieldset>
   ),
 
