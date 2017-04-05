@@ -12,9 +12,9 @@ type user_interest struct {
 }
 
 func initializeInterests(id uint, interest []string) {
-	var i Interest;
 	for _, v := range interest {
-		db.Where(&Interest{Interest_Name: v}).First(&i);
+		var i Interest;
+		db.Where(&Interest{Interest_Name: v}).Find(&i);
 		db.Create(&UserInterest{UserID: id, InterestID : i.ID });
 	}
 	log.Println("initialized interests table");
@@ -30,13 +30,27 @@ func handleInterest (w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodPut {
 		updateInterests(ui, u, i);
 		successRequest(w, "updated interests", "saved users interests");
+	// } else {
+		// getInterests(u);
 	}
 }
 
 func updateInterests(ui user_interest, u Users, i Interest) {
-	db.Where("User_ID = ?", u.ID).Unscoped().Delete(&UserInterest{});
+	db.Where("user_id = ?", u.ID).Unscoped().Delete(&UserInterest{});
 	for _, v := range ui.Interest {
 		db.Where(&Interest{Interest_Name: v}).First(&i);
 		db.Create(&UserInterest{UserID: u.ID, InterestID: i.ID});
 	}
+}
+
+func getInterests(u Users) []string {
+	var i []UserInterest;
+	var ui []string;
+	db.Where(&UserInterest{UserID: u.ID}).Find(&i);
+	for _ , j := range i {
+		var in Interest;
+		db.Where(&Interest{ID: j.InterestID}).First(&in);
+		ui = append(ui, in.Interest_Name);
+	}
+	return ui;
 }

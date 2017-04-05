@@ -27,7 +27,9 @@ func handleImage(w http.ResponseWriter, req *http.Request) {
 } 
 
 func updateImage(img upload, u Users, i Image) {
-	db.Create(&Image{ImageUrl: img.ImageUrl})
+	u.Image = Image{ImageUrl: img.ImageUrl};
+	db.Save(&u);
+	db.Create(&Image{ImageUrl: img.ImageUrl});
 	db.Where(&Image{ImageUrl: img.ImageUrl}).First(&i);
 	db.Where("id = ?", u.ImageID).Unscoped().Delete(&Image{});
 	u.ImageID = i.ID;
@@ -38,6 +40,12 @@ func fetchImages(u Users, w http.ResponseWriter) {
 	var i Image;
 	db.Where("id = ?", u.ImageID ).First(&i);
 	w.Header().Set("Content-Type", "application/json");
-	r, _ := json.Marshal(i);
+	r, _ := json.Marshal(u.Image);
 	w.Write(r);
+}
+
+func getUserImage(u Users) string {
+	var img Image;
+	db.Where(&Image{ID: u.ImageID}).First(&img);
+	return img.ImageUrl;
 }
