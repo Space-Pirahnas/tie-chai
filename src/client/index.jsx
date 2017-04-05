@@ -1,8 +1,9 @@
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 import reducers from './reducers/index.jsx';
 
@@ -17,7 +18,8 @@ import Profile from './components/Profile/profile.jsx';
 import Message from './components/Message/message.jsx';
 import Nav from './components/Nav/nav.jsx';
 
-const store = createStore(reducers);
+const store = createStore(reducers,
+  applyMiddleware(thunk));
 
 ReactDOM.render(
   <div className="container-fluid">
