@@ -2,22 +2,47 @@ package main;
 
 import (
 	"net/http"
+	"encoding/json"
 )
+
+type UserResponse struct {
+	Name string
+	Email string
+	City string
+	Image string
+	Interests []string
+}
+
 
 func handleUsers(w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodGet {
-		city := req.URL.Query()["City"][0];
-		var cityId Cities;
-		var users []Users;
-		db.Where(&Cities{City_Name : city}).First(&cityId);
-		db.Where(&Users{CityID: cityId.ID}).Find(&users);
-		for _, v := range users {
-			var interests []UserInterest;
-			db.Where(&UserInterest{UserID: v.ID}).Find(&interests);
-			for _, w := range interests {
-				var names []Interest;
-				db.Where("id = ?", w.ID).Find(&names);
-			}
-		}
+		getNearbyUsers(w, req);
 	}
 }
+
+func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
+	var UserResponses []UserResponse;
+	var cityId Cities;
+	var users []Users;
+	q := req.URL.Query();
+	if (len(q["City"]) > 0) {
+		city := req.URL.Query()["City"][0];
+		db.Where(&Cities{City_Name : city}).First(&cityId);
+		db.Where(&Users{CitiesID: cityId.ID}).Find(&users);
+		for _, v := range users {
+			var res UserResponse;
+			res.Interests = getInterests(v);
+			res.Name = v.Name;
+			res.Email = v.Email;
+			res.City = city;
+			res.Image = getUserImage(v);
+			UserResponses = append(UserResponses, res);
+		}
+		w.Header().Set("Content-Type", "application/json");
+		r, _ := json.Marshal(UserResponses);
+		w.Write(r);
+	} else {
+		http.Error(w, "bad get request", http.StatusBadRequest);
+	}
+}
+
