@@ -1,7 +1,9 @@
 import React from 'react';
 import IndexPage from './IndexPage.jsx';
 import Nav from './Nav/nav.jsx';
-
+import Logo from './Logo/logo.jsx';
+// import UserProfile from './Profile/profile.jsx';
+import Search from './Search/search.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,9 +16,10 @@ class App extends React.Component {
     return (
       <div>
         <header className="Header">
-
+          <Logo />
           <Nav />
-
+          <Search />
+          
         </header>
         <div>
           {this.props.children}
