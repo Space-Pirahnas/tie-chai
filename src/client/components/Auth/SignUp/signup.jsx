@@ -26,7 +26,7 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{"margin-top": "30%"}}>
         <h1>Sign Up Page From SignUp.jsx</h1>
         <Survey onSubmit={this.handleFormSubmit} />
       </div>
