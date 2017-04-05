@@ -9,7 +9,11 @@ class Home extends React.Component {
 
   render () {
     return (
-      <h1>Home Page from home.jsx</h1>
+      <div>
+        <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
+          <div className="overlay"></div>
+        </div>
+      </div>
     );
   }
 };
