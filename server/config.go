@@ -9,7 +9,7 @@ type DB_CONFIG struct {
 var dbConfig = DB_CONFIG{
 	"postgres",
 	"localhost",
-	"Ryan",
+	"Work",
 	"tiechai",
 	"disable",
 }
