@@ -9,23 +9,27 @@ import (
 )
 
 type usr struct {
-	Name, Password, Email, City, Image string
+	Name string
+	Password string
+	Email string
+	City string
+	Image string
 	Interests []string
 }
 
 func signUp(w http.ResponseWriter, req *http.Request) {
+	defer req.Body.Close();
 	var u usr;
 	var user User;
 	var city Cities;
 	var id User;
-	defer req.Body.Close();
-	json.NewDecoder(req.Body).Decode(&u);
+	err := json.NewDecoder(req.Body).Decode(&u);
+	if err != nil { log.Println("user structure incorrect"); }
 	if req.Method == http.MethodPost {
 		db.Where(&User{ Email: u.Email }).First(&user);
 		if len(user.Email) > 0 {
-			http.Error(w, "Email already taken", http.StatusBadRequest);
+			badRequest(w, "Email already taken", http.StatusBadRequest);
 		} else {
-			if err != nil { log.Println("user structure incorrect"); }
 			bp, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.MinCost);
 			if err != nil { log.Println("hashing failed"); }
 			db.Where(&Cities{ City_Name: u.City }).First(&city);
@@ -40,23 +44,22 @@ func signUp(w http.ResponseWriter, req *http.Request) {
 }
 
 func logIn(w http.ResponseWriter, req *http.Request) {
+	defer req.Body.Close();
 	var u usr;
 	var user User;
-	defer req.Body.Close();
 	if req.Method == http.MethodPost {
-		decoder := json.NewDecoder(req.Body);
-		err := decoder.Decode(&u);
+		err := json.NewDecoder(req.Body).Decode(&u);
 		if err != nil { log.Println("user structure incorrect"); }
 		db.Where(&User{ Email: u.Email }).First(&user);	
 		if len(user.Email) > 0 {
 			er := bcrypt.CompareHashAndPassword(user.Password, []byte(u.Password));
 			if er != nil {
-				http.Error(w, "password is incorrect", http.StatusBadRequest);
+				badRequest(w, "password is incorrect", http.StatusBadRequest);
 			} else {
 				sendToken(w, u);
 			}
 		} else {
-			http.Error(w, "user not found in db, please signup", http.StatusFound);
+			badRequest(w, "user not found in db, please signup", http.StatusFound);
 		}
 	} else if req.Method != http.MethodOptions {
 		log.Println("post method required");

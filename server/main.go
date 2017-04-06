@@ -28,7 +28,7 @@ func init() {
 	if err != nil || e != nil {
 		panic("can not connect to db");
 	}
-	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, /*&Review{}*/);
+	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{});
 	// seedTables();
 }
 
@@ -60,5 +60,6 @@ func main() {
 	http.HandleFunc("/api/friends", SetHeader(handleFriends));
 	http.HandleFunc("/api/cities", SetHeader(handleCities));
 	http.HandleFunc("/api/token", SetHeader(handleToken));
+	http.HandleFunc("/api/reviews", SetHeader(handleReviews));
 	http.ListenAndServe(":8080", nil);
 }

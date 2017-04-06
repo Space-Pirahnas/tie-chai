@@ -11,11 +11,24 @@ type UserResponse struct {
 	City string
 	Image string
 	Interests []string
+	Reviews []ReviewResponse
 }
+
 
 func handleUsers(w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodGet {
 		getNearbyUsers(w, req);
+	}
+}
+
+func getUser(u User) UserResponse {
+	return UserResponse{
+		u.Name,
+		u.Email,
+		getCity(u),
+		getUserImage(u),
+		getInterests(u),
+		getReviews(u),
 	}
 }
 
@@ -29,18 +42,12 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 		db.Where(&Cities{City_Name : city}).First(&cityId);
 		db.Where(&User{CitiesID: cityId.ID}).Find(&users);
 		for _, v := range users {
-			var res UserResponse;
-			res.Interests = getInterests(v);
-			res.Name = v.Name;
-			res.Email = v.Email;
-			res.City = getCity(v);
-			res.Image = getUserImage(v);
+			res := getUser(v);
 			UserResponses = append(UserResponses, res);
 		}
 		r, _ := json.Marshal(UserResponses);
 		w.Write(r);
 	} else {
-		http.Error(w, "bad get request", http.StatusBadRequest);
+		badRequest(w, "bad get request", http.StatusBadRequest);
 	}
 }
-
