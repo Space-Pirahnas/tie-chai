@@ -11,10 +11,10 @@ type upload struct {
 
 func handleImage(w http.ResponseWriter, req *http.Request) {
 	var img upload;
-	var u Users;
+	var u User;
 	var i Image;
 	if req.Method != http.MethodGet {
-		db.Where(&Users{Email: img.Email}).First(&u);
+		db.Where(&User{Email: img.Email}).First(&u);
 		defer req.Body.Close();
 		json.NewDecoder(req.Body).Decode(&img);
 		if req.Method == http.MethodPost {
@@ -26,12 +26,12 @@ func handleImage(w http.ResponseWriter, req *http.Request) {
 		}
 	} else if req.Method == http.MethodGet {
 		img.Email = req.URL.Query()["Email"][0];	
-		db.Where(&Users{Email: img.Email}).First(&u);
+		db.Where(&User{Email: img.Email}).First(&u);
 		fetchImages(u, w);
 	} 
 } 
 
-func updateImage(img upload, u Users, i Image) {
+func updateImage(img upload, u User, i Image) {
 	u.Image = Image{ImageUrl: img.ImageUrl};
 	db.Save(&u);
 	db.Create(&Image{ImageUrl: img.ImageUrl});
@@ -41,20 +41,20 @@ func updateImage(img upload, u Users, i Image) {
 	db.Save(&u);
 }
 
-func fetchImages(u Users, w http.ResponseWriter) {
+func fetchImages(u User, w http.ResponseWriter) {
 	var i Image;
 	db.Where("id = ?", u.ImageID ).First(&i);
 	r, _ := json.Marshal(u.Image);
 	w.Write(r);
 }
 
-func getUserImage(u Users) string {
+func getUserImage(u User) string {
 	var img Image;
 	db.Where(&Image{ID: u.ImageID}).First(&img);
 	return img.ImageUrl;
 }
 
-func deleteImage(img upload, u Users) {
+func deleteImage(img upload, u User) {
 	var image Image;
 	u.ImageID = 0;
 	db.Save(&u);

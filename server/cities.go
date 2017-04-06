@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 )
 
-func getCity(u Users) string {
+func getCity(u User) string {
 	var city Cities;
 	db.Where(&Cities{ID: u.CitiesID}).First(&city);
 	return city.City_Name;
