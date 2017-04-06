@@ -14,11 +14,13 @@
   "dependencies": {
     "axios": "^0.16.0",
     "body-parser": "^1.17.1",
+    "bootstrap": "^3.3.7",
     "es6-promise": "^4.1.0",
     "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
     "mongoose": "^4.8.6",
     "react": "^15.4.2",
+    "react-bootstrap": "^0.30.8",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
     "react-router": "^3.0.3",
