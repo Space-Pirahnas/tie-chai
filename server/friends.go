@@ -21,7 +21,9 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 		db.Where(&User{Email: fr.User.Email}).First(&u);
 		db.Where(&User{Email: fr.Friend.Email}).First(&f);
 		if req.Method == http.MethodPost {
-			addFriend(u, f, w);
+			if checkMatch(u, f) {
+				addFriend(u, f, w);
+			}
 		} else if req.Method == http.MethodDelete {
 			deleteFriend(u, f, w);
 		}
@@ -71,4 +73,16 @@ func deleteFriend(p User, f User, w http.ResponseWriter) {
 		db.Delete(&u);
 	}
 	successRequest(w, "successfully removed friend", "deletedfriend");
+}
+
+func checkMatch(p User, f User) bool {
+	match, _ := client.Cmd("HGET", f.Email, p.Email).Str();
+	log.Println(match);
+	if match == "true" {
+		client.Cmd("HSET", f.Email, "");
+		return true;
+	} else {
+		client.Cmd("HSET", p.Email, f.Email, "true");
+		return false;
+	}
 }
