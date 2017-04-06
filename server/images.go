@@ -28,9 +28,7 @@ func handleImage(w http.ResponseWriter, req *http.Request) {
 		img.Email = req.URL.Query()["Email"][0];	
 		db.Where(&Users{Email: img.Email}).First(&u);
 		fetchImages(u, w);
-	} else if req.Method == http.MethodDelete {
-		img.E
-	}
+	} 
 } 
 
 func updateImage(img upload, u Users, i Image) {
@@ -59,7 +57,7 @@ func getUserImage(u Users) string {
 
 func deleteImage(img upload, u Users) {
 	var image Image;
-	u.Image = "";
+	u.ImageID = 0;
 	db.Save(&u);
 	db.Where(&Image{ImageUrl: img.ImageUrl}).Find(image);
 	if image.ImageUrl != "" {
