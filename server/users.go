@@ -13,7 +13,6 @@ type UserResponse struct {
 	Interests []string
 }
 
-
 func handleUsers(w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodGet {
 		getNearbyUsers(w, req);
