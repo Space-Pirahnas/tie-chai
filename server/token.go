@@ -7,7 +7,7 @@ import (
 
 type tokenResponse struct {
 	Profile string
-	Found bool
+	Match bool
 }
 
 func storeToken (tokenString string, u user) {
