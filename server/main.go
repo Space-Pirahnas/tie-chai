@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/mediocregopher/radix.v2/redis"
 )
 
 var db *gorm.DB;
-var err error;
+var err, e error;
+var client *redis.Client;
 
 func seedTables() {
 	for _, v := range interests{
@@ -22,11 +24,12 @@ func seedTables() {
 func init() {
 	config := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=%s", dbConfig.DB_HOST, dbConfig.DB_USER, dbConfig.DB_NAME, dbConfig.DB_SSL);
 	db, err = gorm.Open(dbConfig.DB_TYPE, config);
-	if err != nil {
+	client, e = redis.Dial("tcp", "localhost:6379");
+	if err != nil || e != nil {
 		panic("can not connect to db");
 	}
 	db.AutoMigrate(&Users{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{});
-	// seedTables();
+	seedTables();
 }
 
 func SetHeader(h http.HandlerFunc) http.HandlerFunc {
@@ -54,6 +57,7 @@ func main() {
 	http.HandleFunc("/api/users", SetHeader(handleUsers));
 	http.HandleFunc("/api/friends", SetHeader(handleFriends));
 	http.HandleFunc("/api/cities", SetHeader(handleCities));
+	http.HandleFunc("/api/token", SetHeader(handleToken));
 	http.Handle("/favicon.ico", http.NotFoundHandler());
 	Serving();
 	http.ListenAndServe(":8080", nil);
