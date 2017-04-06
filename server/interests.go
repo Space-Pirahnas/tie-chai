@@ -32,6 +32,8 @@ func handleInterest (w http.ResponseWriter, req *http.Request) {
 		successRequest(w, "updated interests", "saved users interests");
 	// } else {
 		// getInterests(u);
+	} else if req.Method == http.MethodGet {
+		getInterestsList(w);
 	}
 }
 
@@ -53,4 +55,11 @@ func getInterests(u Users) []string {
 		ui = append(ui, in.Interest_Name);
 	}
 	return ui;
+}
+
+func getInterestsList(w http.ResponseWriter) {
+	var interests []Interest;
+	db.Where(&Interest{}).Find(&interests);
+	r, _ := json.Marshal(interests);
+	w.Write(r);
 }
