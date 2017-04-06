@@ -22,11 +22,11 @@ func initializeInterests(id uint, interest []string) {
 
 func handleInterest (w http.ResponseWriter, req *http.Request) {
 	var ui user_interest;
-	var u Users;
+	var u User;
 	var i Interest;
 	defer req.Body.Close();
 	json.NewDecoder(req.Body).Decode(&ui);
-	db.Where(&Users{Email: ui.Email}).First(&u);
+	db.Where(&User{Email: ui.Email}).First(&u);
 	if req.Method == http.MethodPut {
 		updateInterests(ui, u, i);
 		successRequest(w, "updated interests", "saved users interests");
@@ -37,7 +37,7 @@ func handleInterest (w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func updateInterests(ui user_interest, u Users, i Interest) {
+func updateInterests(ui user_interest, u User, i Interest) {
 	db.Where("user_id = ?", u.ID).Unscoped().Delete(&UserInterest{});
 	for _, v := range ui.Interest {
 		db.Where(&Interest{Interest_Name: v}).First(&i);
@@ -45,7 +45,7 @@ func updateInterests(ui user_interest, u Users, i Interest) {
 	}
 }
 
-func getInterests(u Users) []string {
+func getInterests(u User) []string {
 	var i []UserInterest;
 	var ui []string;
 	db.Where(&UserInterest{UserID: u.ID}).Find(&i);

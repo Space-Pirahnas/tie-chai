@@ -8,29 +8,29 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-type user struct {
+type usr struct {
 	Name, Password, Email, City, Image string
 	Interests []string
 }
 
 func signUp(w http.ResponseWriter, req *http.Request) {
-	var u user;
-	var users Users;
+	var u usr;
+	var user User;
 	var city Cities;
-	var id Users;
+	var id User;
 	defer req.Body.Close();
 	json.NewDecoder(req.Body).Decode(&u);
 	if req.Method == http.MethodPost {
-		db.Where(&Users{ Email: u.Email }).First(&users);
-		if len(users.Email) > 0 {
+		db.Where(&User{ Email: u.Email }).First(&user);
+		if len(user.Email) > 0 {
 			http.Error(w, "Email already taken", http.StatusBadRequest);
 		} else {
 			if err != nil { log.Println("user structure incorrect"); }
 			bp, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.MinCost);
 			if err != nil { log.Println("hashing failed"); }
 			db.Where(&Cities{ City_Name: u.City }).First(&city);
-			db.Create(&Users{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID });
-			db.Where(&Users{ Email: u.Email}).First(&id);
+			db.Create(&User{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID });
+			db.Where(&User{ Email: u.Email}).First(&id);
 			initializeInterests(id.ID, u.Interests);
 			sendToken(w, u);
 		}
@@ -40,16 +40,16 @@ func signUp(w http.ResponseWriter, req *http.Request) {
 }
 
 func logIn(w http.ResponseWriter, req *http.Request) {
-	var u user;
-	var users Users;
+	var u usr;
+	var user User;
 	defer req.Body.Close();
 	if req.Method == http.MethodPost {
 		decoder := json.NewDecoder(req.Body);
 		err := decoder.Decode(&u);
 		if err != nil { log.Println("user structure incorrect"); }
-		db.Where(&Users{ Email: u.Email }).First(&users);	
-		if len(users.Email) > 0 {
-			er := bcrypt.CompareHashAndPassword(users.Password, []byte(u.Password));
+		db.Where(&User{ Email: u.Email }).First(&user);	
+		if len(user.Email) > 0 {
+			er := bcrypt.CompareHashAndPassword(user.Password, []byte(u.Password));
 			if er != nil {
 				http.Error(w, "password is incorrect", http.StatusBadRequest);
 			} else {
@@ -63,7 +63,7 @@ func logIn(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func sendToken(w http.ResponseWriter, u user){
+func sendToken(w http.ResponseWriter, u usr){
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"Email": u.Email,
 		"Time": time.Now(),
