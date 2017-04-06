@@ -34,11 +34,11 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 			res.Interests = getInterests(v);
 			res.Name = v.Name;
 			res.Email = v.Email;
-			res.City = city;
+			res.City = getCity(v);
 			res.Image = getUserImage(v);
 			UserResponses = append(UserResponses, res);
 		}
-		w.Header().Set("Content-Type", "application/json");
+		// w.Header().Set("Content-Type", "application/json");
 		r, _ := json.Marshal(UserResponses);
 		w.Write(r);
 	} else {
