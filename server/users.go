@@ -22,12 +22,12 @@ func handleUsers(w http.ResponseWriter, req *http.Request) {
 func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 	var UserResponses []UserResponse;
 	var cityId Cities;
-	var users []Users;
+	var users []User;
 	q := req.URL.Query();
 	if (len(q["City"]) > 0) {
 		city := req.URL.Query()["City"][0];
 		db.Where(&Cities{City_Name : city}).First(&cityId);
-		db.Where(&Users{CitiesID: cityId.ID}).Find(&users);
+		db.Where(&User{CitiesID: cityId.ID}).Find(&users);
 		for _, v := range users {
 			var res UserResponse;
 			res.Interests = getInterests(v);

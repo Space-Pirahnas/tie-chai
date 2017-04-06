@@ -28,8 +28,8 @@ func init() {
 	if err != nil || e != nil {
 		panic("can not connect to db");
 	}
-	db.AutoMigrate(&Users{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{});
-	seedTables();
+	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, /*&Review{}*/);
+	// seedTables();
 }
 
 func SetHeader(h http.HandlerFunc) http.HandlerFunc {
@@ -47,8 +47,10 @@ func main() {
 	defer db.Close();
 	bundle := http.StripPrefix("/bundles/", http.FileServer(http.Dir("../src/bundles/")));
 	public := http.FileServer(http.Dir("../public/"));
+	Serving();
 	http.Handle("/", public);
 	http.Handle("/bundles/", bundle);
+	http.Handle("/favicon.ico", http.NotFoundHandler());
 	http.HandleFunc("/api/signup", SetHeader(signUp));
 	http.HandleFunc("/api/login", SetHeader(logIn));
 	http.HandleFunc("/api/create_event", SetHeader(handleEvent));
@@ -58,7 +60,5 @@ func main() {
 	http.HandleFunc("/api/friends", SetHeader(handleFriends));
 	http.HandleFunc("/api/cities", SetHeader(handleCities));
 	http.HandleFunc("/api/token", SetHeader(handleToken));
-	http.Handle("/favicon.ico", http.NotFoundHandler());
-	Serving();
 	http.ListenAndServe(":8080", nil);
 }

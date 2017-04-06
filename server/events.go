@@ -16,54 +16,53 @@ type update struct {
 }
 
 func handleEvent(w http.ResponseWriter, req *http.Request) {
-	var users Users;
+	var user User;
 	var e event;
 	if req.Method != http.MethodGet && req.Method != http.MethodPut {
 		json.NewDecoder(req.Body).Decode(&e);
-		db.Where(&Users{ Email: e.Email }).First(&users);
+		db.Where(&User{ Email: e.Email }).First(&user);
 		if req.Method == http.MethodPost {
-			postEvent(users, e);
+			postEvent(user, e);
 			successRequest(w, "added event", "added event");
 		} else if req.Method == http.MethodDelete {
-			deleteEvent(users, e);
+			deleteEvent(user, e);
 			successRequest(w, "removed event successfully", "deleted event");
 		} else {
 			log.Println("request method not supported");
 		}
 	} else if req.Method == http.MethodGet {
-			getEvents(users, e, w);
+			getEvents(user, e, w);
 	} else {
 		var u update;
 		json.NewDecoder(req.Body).Decode(&u);
-		db.Where(&Users{ Email: u.Old.Email }).First(&users);
-		updateEvent(users, u);
+		db.Where(&User{ Email: u.Old.Email }).First(&user);
+		updateEvent(user, u);
 		successRequest(w, "updated event", "sucessfully updated event");
 	}
 }
 
-func postEvent(users Users, e event) {
-	db.Create(&Event{UsersID: users.ID, Location: e.Location, Date: e.Date, Time: e.Time, Description: e.Description });
+func postEvent(user User, e event) {
+	db.Create(&Event{UserID: user.ID, Location: e.Location, Date: e.Date, Time: e.Time, Description: e.Description });
 }
 
-func deleteEvent(users Users, e event) {
+func deleteEvent(user User, e event) {
 	var ev Event;
-	db.Where(&Event{UsersID: users.ID, Location: e.Location, Date: e.Date, Time: e.Time, Description: e.Description }).First(&ev);
-	if ev.UsersID > 0 {
+	db.Where(&Event{UserID: user.ID, Location: e.Location, Date: e.Date, Time: e.Time, Description: e.Description }).First(&ev);
+	if ev.UserID > 0 {
 		db.Delete(&ev);
 	}
 }
 
-func getEvents(users Users, e event, w http.ResponseWriter) {
+func getEvents(user User, e event, w http.ResponseWriter) {
 	var events []Event;
 	db.Where(&Event{}).Find(&events);
-	// w.Header().Set("Content-Type", "application/json");
 	r, _ := json.Marshal(events);
 	w.Write(r);
 }
 
-func updateEvent(users Users, u update) {
+func updateEvent(user User, u update) {
 	var ev Event;
-	db.Where(&Event{UsersID: users.ID, Location: u.Old.Location, Date: u.Old.Date, Time: u.Old.Time, Description: u.Old.Description }).First(&ev);
+	db.Where(&Event{UserID: user.ID, Location: u.Old.Location, Date: u.Old.Date, Time: u.Old.Time, Description: u.Old.Description }).First(&ev);
 	ev.Date = u.New.Date;
 	ev.Location = u.New.Location;
 	ev.Time = u.New.Time;

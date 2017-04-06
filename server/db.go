@@ -5,7 +5,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-type Users struct {
+type User struct {
 	ID uint `gorm:"PRIMARY_KEY" sql:"AUTO_INCREMENT"`
 	Name string
 	Email string `sql:"unique;not null"`
@@ -24,7 +24,7 @@ type Cities struct {
 
 type Event struct {
 	ID uint
-	UsersID uint 
+	UserID uint 
 	Location string `sql:"index:event_idx;not null"`
 	Date string `sql:"index:event_idx;not null"`
 	Time string `sql:"index:event_idx;not null"`
@@ -51,3 +51,6 @@ type UserFriend struct {
 	FriendID uint `gorm:"ForeignKey:UsersID"`
 }
 
+// type Review struct {
+// 	UserID
+// }
