@@ -29,6 +29,17 @@ func init() {
 	// seedTables();
 }
 
+func SetHeader(h http.HandlerFunc) http.HandlerFunc {
+  return func(w http.ResponseWriter, req *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*");
+		w.Header().Set("Content-Type", "application/json");
+    w.Header().Set("Access-Control-Allow-Credentials", "true");
+    w.Header().Set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+    w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    h(w, req);
+  }
+}
+
 func main() {
 	defer db.Close();
 	bundle := http.StripPrefix("/bundles/", http.FileServer(http.Dir("../src/bundles/")));
@@ -42,18 +53,8 @@ func main() {
 	http.HandleFunc("/api/images", SetHeader(handleImage));
 	http.HandleFunc("/api/users", SetHeader(handleUsers));
 	http.HandleFunc("/api/friends", SetHeader(handleFriends));
+	http.HandleFunc("/api/cities", SetHeader(handleCities));
 	http.Handle("/favicon.ico", http.NotFoundHandler());
 	Serving();
 	http.ListenAndServe(":8080", nil);
-}
-
-func SetHeader(h http.HandlerFunc) http.HandlerFunc {
-  return func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*");
-		w.Header().Set("Content-Type", "application/json");
-    w.Header().Set("Access-Control-Allow-Credentials", "true");
-    w.Header().Set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-    h(w, req);
-  }
 }
