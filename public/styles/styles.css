@@ -388,11 +388,18 @@ p {
   background: transparent;
   background-image: none;
   filter: none;
+  min-width: 0;
 }
 
 .dropdown-menu > li > a {
   background-color: none;
   color: white !important;
+  background-image: none;
+  filter: none;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: #337ab7;
   background-image: none;
   filter: none;
 }
