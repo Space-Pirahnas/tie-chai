@@ -17,6 +17,7 @@ import CreateEvent from './components/Event/event.jsx';
 import Profile from './components/Profile/profile.jsx';
 import Message from './components/Message/message.jsx';
 import Nav from './components/Nav/nav.jsx';
+import checkAuth from './components/Auth/check_auth.jsx';
 
 const store = createStore(reducers,
   applyMiddleware(thunk));
@@ -36,6 +37,6 @@ ReactDOM.render(
           <Route path='/message' component={Message} />
         </Route>
       </Router>
-    </Provider>
+    </Provider> 
   </div>
   , document.getElementById('app'));
