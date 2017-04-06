@@ -8,7 +8,6 @@ import Survey from './survey.jsx';
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    console.log('----------------', props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
