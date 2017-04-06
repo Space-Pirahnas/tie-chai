@@ -15,7 +15,7 @@ class SurveyFirstPage extends React.Component {
         <Field name="name" component={nameField} />
         <Field name="password" type="password" component={passwordField} />
         <Field name="passwordConfirm" type="password" component={passwordConfirmField} />
-        <button type="submit" className="next">Next</button>
+        <button type="submit" className="Button">Next</button>
       </form>
     )
   }

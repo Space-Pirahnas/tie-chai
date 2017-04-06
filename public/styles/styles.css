@@ -396,3 +396,11 @@ p {
   background-image: none;
   filter: none;
 }
+
+label {
+  margin-bottom: 5px !important;
+}
+
+.error {
+  margin-top: 5px !important;
+}
