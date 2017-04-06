@@ -4,7 +4,7 @@ import { hashHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types.jsx';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://e5b70b93.ngrok.io'
+  baseURL: 'http://2174c835.ngrok.io'
 });
 
 export function signinUser({ email, password }) {
