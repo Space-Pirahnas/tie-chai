@@ -38,7 +38,6 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 			res.Image = getUserImage(v);
 			UserResponses = append(UserResponses, res);
 		}
-		// w.Header().Set("Content-Type", "application/json");
 		r, _ := json.Marshal(UserResponses);
 		w.Write(r);
 	} else {
