@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions/index.jsx';
 import SignInForm from './signinForm.jsx';
@@ -21,9 +20,9 @@ class SignIn extends React.Component {
         <h2>Sign In!</h2>
         <SignInForm onSubmit={this.handleFormSubmit} />
       </div>
-    );
+    )
   }
-};
+}
 
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
