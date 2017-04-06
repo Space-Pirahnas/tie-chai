@@ -9,7 +9,7 @@ import (
 )
 
 type user struct {
-	Name, Password, Email, City string
+	Name, Password, Email, City, Image string
 	Interests []string
 }
 
@@ -69,5 +69,6 @@ func sendToken(w http.ResponseWriter, u user){
 		"Time": time.Now(),
 	});
 	tokenString, _ := token.SignedString(secret);
+	storeToken(tokenString, u);
 	successRequest(w, tokenString, "successfully logged in");
 }
