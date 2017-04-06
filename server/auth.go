@@ -13,7 +13,7 @@ type user struct {
 	Interests []string
 }
 
-func signUp (w http.ResponseWriter, req *http.Request) {
+func signUp(w http.ResponseWriter, req *http.Request) {
 	var u user;
 	var users Users;
 	var city Cities;
@@ -32,14 +32,14 @@ func signUp (w http.ResponseWriter, req *http.Request) {
 			db.Create(&Users{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID });
 			db.Where(&Users{ Email: u.Email}).First(&id);
 			initializeInterests(id.ID, u.Interests);
-			successRequest(w, "success", "successfully signed up user");
+			sendToken(w, u);
 		}
 	} else if req.Method != http.MethodOptions {
 		log.Println("cannot send a get request");
 	}
 }
 
-func logIn (w http.ResponseWriter, req *http.Request) {
+func logIn(w http.ResponseWriter, req *http.Request) {
 	var u user;
 	var users Users;
 	defer req.Body.Close();
@@ -53,12 +53,7 @@ func logIn (w http.ResponseWriter, req *http.Request) {
 			if er != nil {
 				http.Error(w, "password is incorrect", http.StatusBadRequest);
 			} else {
-				token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-					"Email": u.Email,
-					"Time": time.Now(),
-				});
-				tokenString, _ := token.SignedString(secret);
-				successRequest(w, tokenString, "successfully logged in");
+				sendToken(w, u);
 			}
 		} else {
 			http.Error(w, "user not found in db, please signup", http.StatusFound);
@@ -66,4 +61,13 @@ func logIn (w http.ResponseWriter, req *http.Request) {
 	} else if req.Method != http.MethodOptions {
 		log.Println("post method required");
 	}
+}
+
+func sendToken(w http.ResponseWriter, u user){
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"Email": u.Email,
+		"Time": time.Now(),
+	});
+	tokenString, _ := token.SignedString(secret);
+	successRequest(w, tokenString, "successfully logged in");
 }
