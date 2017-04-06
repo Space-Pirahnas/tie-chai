@@ -7,7 +7,7 @@ class navProfile extends React.Component {
 
   render() {
     return (
-      <div className="UserProfile">
+      <a href="/#/profile/:userid" className="UserProfile">
         <div className="User">
           <div className="name">Veer Gangwal</div>
           <div className="image"><img src={"styles/user.jpeg"} /></div>
@@ -18,7 +18,7 @@ class navProfile extends React.Component {
         <div className="button-wrapper">
           <a href="/#" className="Button">Sign Out</a>
         </div>
-      </div>
+      </a>
     );
   }
 };

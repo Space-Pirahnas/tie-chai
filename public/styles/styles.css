@@ -339,3 +339,46 @@ p {
   margin-bottom: -15vw;
  
 }
+
+.container {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  left: 10vw;
+  top: 10vw;
+}
+
+.profileImage {
+  border-radius: 44px;
+  box-sizing: border-box;
+  max-width: 30%;
+  margin-bottom: 20px;
+  border: 3px solid transparent;
+  float: left;
+}
+
+.Interests {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+
+#clear {
+  clear: both;
+}
+
+.interest {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  height: 10%;
+  width: 200px;
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(245, 245, 241, 0.1);
+  border-radius: 37px;
+  pointer-events: all;
+  text-align: center;
+  padding: 5px;
+  margin: 10px auto;
+}
