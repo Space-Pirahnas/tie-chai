@@ -16,12 +16,13 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div style={{"margin-top": "30%"}}>
+      <div style={{"margin": "10% auto", "width": "50%"}}>
+        <h2>Sign In!</h2>
         <SignInForm onSubmit={this.handleFormSubmit} />
       </div>
-    );
+    )
   }
-};
+}
 
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
