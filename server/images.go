@@ -44,7 +44,6 @@ func updateImage(img upload, u Users, i Image) {
 func fetchImages(u Users, w http.ResponseWriter) {
 	var i Image;
 	db.Where("id = ?", u.ImageID ).First(&i);
-	// w.Header().Set("Content-Type", "application/json");
 	r, _ := json.Marshal(u.Image);
 	w.Write(r);
 }
