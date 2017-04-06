@@ -48,13 +48,15 @@ func postEvent(users Users, e event) {
 func deleteEvent(users Users, e event) {
 	var ev Event;
 	db.Where(&Event{UsersID: users.ID, Location: e.Location, Date: e.Date, Time: e.Time, Description: e.Description }).First(&ev);
-	db.Delete(&ev);
+	if ev.UsersID > 0 {
+		db.Delete(&ev);
+	}
 }
 
 func getEvents(users Users, e event, w http.ResponseWriter) {
 	var events []Event;
 	db.Where(&Event{}).Find(&events);
-	w.Header().Set("Content-Type", "application/json");
+	// w.Header().Set("Content-Type", "application/json");
 	r, _ := json.Marshal(events);
 	w.Write(r);
 }

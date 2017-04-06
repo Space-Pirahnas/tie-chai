@@ -37,13 +37,17 @@ type Image struct {
 }
 
 type UserInterest struct {
-
-	UserID uint `gorm:"ForeignKey:Users.ID"`
-	InterestID uint `gorm:"ForeignKey:Interests.ID`
+	UserID uint `gorm:"ForeignKey:UsersID"`
+	InterestID uint `gorm:"ForeignKey:InterestsID`
 }
 
 type Interest struct {
 	ID uint
 	Interest_Name string 
+}
+
+type UserFriend struct {
+	UserID uint `gorm:"ForeignKey:UsersID"`
+	FriendID uint `gorm:"ForeignKey:UsersID"`
 }
 

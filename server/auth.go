@@ -19,8 +19,7 @@ func signUp (w http.ResponseWriter, req *http.Request) {
 	var city Cities;
 	var id Users;
 	defer req.Body.Close();
-	decoder := json.NewDecoder(req.Body);
-	err := decoder.Decode(&u);
+	json.NewDecoder(req.Body).Decode(&u);
 	if req.Method == http.MethodPost {
 		db.Where(&Users{ Email: u.Email }).First(&users);
 		if len(users.Email) > 0 {
@@ -35,7 +34,7 @@ func signUp (w http.ResponseWriter, req *http.Request) {
 			initializeInterests(id.ID, u.Interests);
 			successRequest(w, "success", "successfully signed up user");
 		}
-	} else {
+	} else if req.Method != http.MethodOptions {
 		log.Println("cannot send a get request");
 	}
 }
@@ -64,7 +63,7 @@ func logIn (w http.ResponseWriter, req *http.Request) {
 		} else {
 			http.Error(w, "user not found in db, please signup", http.StatusFound);
 		}
-	} else {
+	} else if req.Method != http.MethodOptions {
 		log.Println("post method required");
 	}
 }
