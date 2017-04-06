@@ -3,23 +3,27 @@ package main;
 import (
 	"encoding/json"
 	"net/http"
+	"log"
 )
 
 type tokenResponse struct {
 	Profile string
-	Match bool
 }
 
 func storeToken (tokenString string, u usr) {
 	var user User;
 	var image Image;
 	db.Where(&User{Email: u.Email}).First(&user);
-	db.Where(&Image{ID: user.ImageID}).First(&image);
-	u.Image = image.ImageUrl;
-	u.Password = "";
-	r, _ := json.Marshal(u);
-	client.Cmd("HSET", u.Email, "Token", tokenString);
-	client.Cmd("HSET", u.Email , "Profile", string(r));
+	if len(user.Email) > 0 {
+		db.Where(&Image{ID: user.ImageID}).First(&image);
+		u.Image = image.ImageUrl;
+		u.Password = "";
+		r, _ := json.Marshal(u);
+		client.Cmd("HSET", u.Email, "Token", tokenString);
+		client.Cmd("HSET", u.Email , "Profile", string(r));
+	} else {
+		log.Println("user not found");
+	}
 }
 
 func handleToken (w http.ResponseWriter, req *http.Request) {
@@ -29,10 +33,14 @@ func handleToken (w http.ResponseWriter, req *http.Request) {
 		UserProfile, e := client.Cmd("HGET", email, "Profile").Str();
 		Token, er := client.Cmd("HGET", email, "Token").Str();
 		if e != nil || er != nil {
-			http.Error(w, "unable to access cache", http.StatusNotFound);
+			badRequest(w, "unable to access cache", http.StatusNotFound);
 		}
-		res := tokenResponse{ UserProfile, Token == token};
-		r, _ := json.Marshal(res);
-		w.Write(r);
+		if Token == token {
+			res := tokenResponse{ UserProfile };
+			r, _ := json.Marshal(res);
+			w.Write(r);
+		} else {
+			badRequest(w, "token did not match user email", 400);
+		}
 	}
 }

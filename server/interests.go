@@ -3,7 +3,6 @@ package main;
 import (
 	"net/http"
 	"encoding/json"
-	"log"
 )
 
 type user_interest struct {
@@ -17,7 +16,6 @@ func initializeInterests(id uint, interest []string) {
 		db.Where(&Interest{Interest_Name: v}).Find(&i);
 		db.Create(&UserInterest{UserID: id, InterestID : i.ID });
 	}
-	log.Println("initialized interests table");
 }
 
 func handleInterest (w http.ResponseWriter, req *http.Request) {
