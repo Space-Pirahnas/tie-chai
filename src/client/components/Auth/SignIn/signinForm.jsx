@@ -9,8 +9,8 @@ const SignInForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name='email' type="email" component={emailField} placeholder="Email" require />
-      <Field name='password' type='password' component={passwordField} placeholder="******" require />
+      <Field name='email' type="email" component={emailField} placeholder="Email" />
+      <Field name='password' type='password' component={passwordField} placeholder="******" />
       <div>
         <button type="submit" disabled={pristine || submitting}>Sign In</button>
       </div>
