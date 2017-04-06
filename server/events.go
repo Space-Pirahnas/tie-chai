@@ -54,8 +54,26 @@ func deleteEvent(user User, e event) {
 }
 
 func getEvents(user User, e event, w http.ResponseWriter) {
-	var events []Event;
-	db.Where(&Event{}).Find(&events);
+	var events []event;
+	friends := findFriends(user);
+	for _, f := range friends {
+		var evt []Event;
+		var res []event;
+		var user User;
+		db.Where(&User{Email: f.Email}).First(&user);
+		db.Where(&Event{UserID: user.ID}).Find(&evt);
+		for _, e := range evt {
+			ev := event{
+				f.Email,
+				e.Location,
+				e.Date,
+				e.Time,
+				e.Description,
+			}
+			res = append(res, ev);
+		}
+		events = append(events, res...);
+	}
 	r, _ := json.Marshal(events);
 	w.Write(r);
 }

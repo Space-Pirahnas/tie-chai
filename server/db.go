@@ -51,6 +51,9 @@ type UserFriend struct {
 	FriendID uint `gorm:"ForeignKey:UsersID"`
 }
 
-// type Review struct {
-// 	UserID
-// }
+type Review struct {
+	UserID uint
+	ReviewerID uint
+	Rating int 
+	Text string
+}

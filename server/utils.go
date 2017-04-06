@@ -12,8 +12,7 @@ func successRequest(w http.ResponseWriter, res string, message string) {
 	w.Write(r);
 }
 
-// var test Users;
-// var testcity Cities;
-// db.Where(&Users{}).First(&test);
-// db.Model(&test).Related(&testcity);
-// log.Println(testcity);
+func badRequest(w http.ResponseWriter, message string, status int) {
+	log.Println(message, status);
+	http.Error(w, message, status);
+}

@@ -30,30 +30,33 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 
 func getFriends(w http.ResponseWriter, req *http.Request) {
 	var user User;
-	var fID []UserFriend;
-	var FriendResponses []UserResponse;
 	s := req.URL.Query()["Email"];
 	if len(s) > 0 {
 		db.Where(&User{Email: s[0]}).First(&user);
-		db.Where(&UserFriend{UserID: user.ID}).Find(&fID);
-		for _, uf := range fID {
-			var friend User;
-			var res UserResponse;
-			db.Where(&User{ID: uf.FriendID}).First(&friend);
-			res.Interests = getInterests(friend);
-			res.Image = getUserImage(friend);
-			res.City = getCity(friend);
-			res.Name = friend.Name;
-			res.Email = friend.Email;
-			FriendResponses = append(FriendResponses, res);
-		}
-		r, _ := json.Marshal(FriendResponses);
+		fr := findFriends(user);
+		r, _ := json.Marshal(fr);
 		log.Println("successfully retrieved friends")
 		w.Write(r);		
 	} else {
-		http.Error(w, "user email not found", http.StatusBadRequest);
+		badRequest(w, "user email not found", http.StatusBadRequest);
 	}
 }
+
+func findFriends(u User) []UserResponse {
+	var fID []UserFriend;
+	var FriendResponses []UserResponse;
+	db.Where(&UserFriend{UserID: u.ID}).Find(&fID);
+	for _, uf := range fID {
+		var friend User;
+		if uf.UserID > 0 {
+			db.Where(&User{ID: uf.FriendID}).First(&friend);
+			res := getUser(friend);
+			FriendResponses = append(FriendResponses, res);
+		}
+	}
+	return FriendResponses;
+}
+
 
 func addFriend(p User, f User, w http.ResponseWriter) {
 	db.Create(&UserFriend{UserID: p.ID, FriendID: f.ID});
