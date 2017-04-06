@@ -12,7 +12,7 @@ const SignInForm = (props) => {
       <Field name='email' type="email" component={emailField} placeholder="Email" require />
       <Field name='password' type='password' component={passwordField} placeholder="******" require />
       <div>
-        <button type="submit" disabled={pristine || submitting}>Sign In</button>
+        <button type="submit" className="Button" disabled={pristine || submitting}>Sign In</button>
       </div>
     </form>
   )
