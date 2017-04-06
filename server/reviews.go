@@ -48,7 +48,7 @@ func handleReviews(w http.ResponseWriter, req *http.Request) {
 		defer req.Body.Close();
 		err := json.NewDecoder(req.Body).Decode(&rev);
 		if err != nil {
-			badRequest(w, "could not read request");
+			badRequest(w, "could not read request", http.StatusNotFound);
 		} else if req.Method == http.MethodPost {
 			addReview(rev, w);
 		} else if req.Method == http.MethodDelete {
