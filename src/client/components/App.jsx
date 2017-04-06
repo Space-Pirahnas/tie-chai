@@ -4,6 +4,7 @@ import Nav from './Nav/nav.jsx';
 import Logo from './Logo/logo.jsx';
 import NavProfile from './Profile/navProfile.jsx';
 import Search from './Search/search.jsx';
+import Options from './Options/options.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class App extends React.Component {
           <Nav />
           <Search />
           <NavProfile />
+          <Options />
         </header>
         <div>
           {this.props.children}
