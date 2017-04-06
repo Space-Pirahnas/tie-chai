@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form';
+import * as actions from '../../../actions/index.jsx';
 import Survey from './survey.jsx';
 
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
+    console.log('----------------', props);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleFormSubmit(values) {
@@ -18,15 +21,13 @@ class SignUp extends React.Component {
       Interests: values.interest.split(',')
     }
     console.log("the form value from survey OBJ send to server ", signupObj);
+    this.props.signupUser(signupObj);
     
-    // once user click submit button
-      // axios sent to server to register this user
-      // request token sent to home page
   }
 
   render() {
     return (
-      <div>
+      <div style={{"margin-top": "50%"}}>
         <h1>Sign Up Page From SignUp.jsx</h1>
         <Survey onSubmit={this.handleFormSubmit} />
       </div>
@@ -34,5 +35,8 @@ class SignUp extends React.Component {
   }
 };
 
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error };
+}
 
-export default SignUp;
+export default connect(mapStateToProps, actions)(SignUp);
