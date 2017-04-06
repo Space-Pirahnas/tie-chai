@@ -1,5 +1,4 @@
 import React from 'react';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 class navProfile extends React.Component {
   constructor(props) {
@@ -13,10 +12,6 @@ class navProfile extends React.Component {
           <div className="name">Veer Gangwal</div>
           <div className="image"><img src={"styles/user.jpeg"} /></div>
         </div>
-        <DropdownButton title="Options">
-          <MenuItem href="/#/auth/signin">Sign In</MenuItem>
-          <MenuItem href="/#">Sign Out</MenuItem>
-        </DropdownButton>
       </a>
     );
   }

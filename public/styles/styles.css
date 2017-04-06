@@ -382,3 +382,17 @@ p {
   padding: 5px;
   margin: 10px auto;
 }
+
+.dropdown-menu {
+  background-color: none;
+  background: transparent;
+  background-image: none;
+  filter: none;
+}
+
+.dropdown-menu > li > a {
+  background-color: none;
+  color: white !important;
+  background-image: none;
+  filter: none;
+}
