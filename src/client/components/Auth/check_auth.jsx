@@ -7,7 +7,6 @@ export default function (ComponentNeedCheck) {
       router: React.PropTypes.func.isRequired
     },
     componentWillMount() {
-      console.log('componentWillMount +++++++++++');
       if (!this.props.authenticated) {
         console.log('user not sign in-------------, the context ', this.props.authenticated);
         this.context.router.push('/');

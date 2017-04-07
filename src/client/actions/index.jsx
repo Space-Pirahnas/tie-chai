@@ -1,7 +1,8 @@
 import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 import { hashHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types.jsx';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR,
+        GET_USER_INFO } from './types.jsx';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://b78f8e4a.ngrok.io'
@@ -43,7 +44,7 @@ export function signupUser(signupObj) {
   }
 }
 
-export function getUser(token, email) {
+export function getUserInfo(token, email) {
   return function (dispatch) {
     dispatch({ type: AUTH_USER })
     axiosInstance.get('/api/token', {
@@ -54,8 +55,13 @@ export function getUser(token, email) {
     })
       .then(res => {
         console.log('base on token and email, getUser object ', res.data);
-        // dispatch({ type: AUTH_USER, payload: email });
-        // dispatch(getFavorites(username))
+        dispatch({ type: GET_USER_INFO, payload: {
+          email: email,
+          data: res.data
+        }})
+      })
+      .catch(err => {
+        console.error('Fail to getUserInfo with error ', err);
       })
   }
 }
