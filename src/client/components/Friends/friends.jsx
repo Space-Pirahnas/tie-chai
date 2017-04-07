@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
 import Friend from './friend.jsx';
 import ContactInfo from './contactInfo.jsx';
-import { connect } from 'react-redux';
-import * as actions from '../../../actions/index.jsx';
+// import { connect } from 'react-redux';
+// import * as actions from '../../../actions/index.jsx';
+
+const friends = [
+  {
+    name: 'Veer Gangwal',
+    location: 'Chicago',
+    image: '/styles/user.jpg',
+    email: 'veer.@gmail.com',
+    interests: ['basketball', 'music', 'JS']
+  },
+  {
+    name: 'Summer',
+    location: 'Dublin',
+    image: '/styles/user.jpg',
+    email: 'summer@gmail.com',
+    interests: ['Dancing', 'Ryan']
+  },
+  {
+    name: 'Daryll',
+    location: 'Hong Kong',
+    image: '/styles/user.jpeg',
+    email: 'daryll@gmail.com',
+    interests: ['basketball', 'Food', 'Costco']
+  }
+]
 
 class Friends extends Component {
   constructor(props) {
@@ -15,31 +39,34 @@ class Friends extends Component {
     this.showFriend = this.showFriend.bind(this)
   }
 
-  showFriend(e) {
-    this.setState({ person: e.target.value });
+  showFriend(friend) {
+    console.log('friend: ', friend);
+    this.setState({ person: friend });
   }
 
   render () {
     return (
-      <div>
+      <div className="contactList">
         <div className="left">
           <h2>Contact</h2>
           <div className="contacts-container">
-            { this.props.friends(friend => 
-              <Friend friend={ friend } showFriend={ this.showFriend } person={ this.state.person }/>
+            { friends.map((friend) =>  
+              <Friend friend={ friend } key={ friend.email } showFriend={ this.showFriend } person={ this.state.person }/>
             )}
           </div>
         </div>
         <div className="right">
-          <ContactInfo person={this.state.person} />
+          <ContactInfo person={ this.state.person } />
         </div>
       </div>
     );
   }
 };
 
-function mapStateToProps(state) {
-  return { friends: state.}
-}
 
-export default connect(mapStateToProps, actions)(Friends);
+export default Friends;
+
+// function mapStateToProps(state) {
+//   return { friends: state.}
+// }
+// export default connect(mapStateToProps, actions)(Friends);

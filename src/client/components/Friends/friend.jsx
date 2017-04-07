@@ -2,16 +2,16 @@ import React from 'react';
 
 const Friend = (props) => {
   const imageStyles = {
-    backgroundImage: "url(" + this.props.friend.image + ")"
+    backgroundImage: "url(" + props.friend.image + ")"
   }
   const contactStyles = {
-    backgroundColor: this.props.person === this.props.friend ? "#46733E" : ""
+    backgroundColor: props.person === props.friend ? "#46733E" : ""
   }
 
   return (
-    <div className="contact" onClick={ this.props.showFriend(e) } style={ contactStyles }>
+    <div className="contact" onClick={ () => props.showFriend(props.friend) } style={ contactStyles }>
       <span className="image" style={ imageStyles }></span>
-      <span className="name">{ this.props.friend.name }></span>
+      <span className="name" >{ props.friend.name }</span>
     </div>
   )
 }
