@@ -31,7 +31,13 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 			log.Println("request method not supported");
 		}
 	} else if req.Method == http.MethodGet {
-			getEvents(user, e, w);
+			email := req.Header.Get("Email");
+			if len(email) > 0 {
+				db.Where(&User{Email: email}).First(&user);
+				getEvents(user, e, w);
+			} else {
+				badRequest(w, "email not found", 400)
+			}
 	} else {
 		var u update;
 		json.NewDecoder(req.Body).Decode(&u);

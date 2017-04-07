@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Event from './event.jsx';
-import axios from 'axios'
+import axios from 'axios';
 
 class Events extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       events: [],
       mounted: false
