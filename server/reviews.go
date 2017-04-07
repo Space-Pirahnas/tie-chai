@@ -72,8 +72,10 @@ func handleReviews(w http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			badRequest(w, "could not read request", http.StatusNotFound);
 		} else {
-			deleteReview(update.Old );
-			addReview(update.New);
+			deleted := deleteReview(update.Old );
+			if deleted {
+				addReview(update.New);
+			}
 			successRequest(w, "updated review", "updated review")
 		}
 	}
