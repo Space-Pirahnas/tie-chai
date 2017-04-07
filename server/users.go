@@ -36,11 +36,15 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 	var UserResponses []UserResponse;
 	var cityId Cities;
 	var users []User;
+	var u User;
 	q := req.URL.Query();
 	if (len(q["City"]) > 0) {
 		city := req.URL.Query()["City"][0];
+		email := req.URL.Query()["Email"][0];
+		db.Where(&User{Email: email}).First(&u);
 		db.Where(&Cities{City_Name : city}).First(&cityId);
 		db.Where(&User{CitiesID: cityId.ID}).Find(&users);
+		users = filterRejects(u, users);
 		for _, v := range users {
 			res := getUser(v);
 			UserResponses = append(UserResponses, res);
@@ -50,4 +54,14 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 	} else {
 		badRequest(w, "bad get request", http.StatusBadRequest);
 	}
+}
+
+func filterRejects(u User, users []User) []User {
+	var filtered []User;
+	for _,v := range users {
+		if v.Email != u.Email && checkReject(u, v) {
+			filtered = append(filtered, v)
+		}
+	}
+	return filtered;
 }

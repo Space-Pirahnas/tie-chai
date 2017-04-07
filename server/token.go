@@ -34,8 +34,7 @@ func handleToken (w http.ResponseWriter, req *http.Request) {
 		Token, er := client.Cmd("HGET", email, "Token").Str();
 		if e != nil || er != nil {
 			badRequest(w, "unable to access cache", http.StatusNotFound);
-		}
-		if Token == token {
+		} else if Token == token {
 			res := tokenResponse{ UserProfile };
 			r, _ := json.Marshal(res);
 			w.Write(r);
