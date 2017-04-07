@@ -22,6 +22,10 @@ type review struct {
 	Rating int
 }
 
+type reviewUpdate struct {
+	Old, New review
+}
+
 func getReviews(u User) []ReviewResponse {
 	var res []ReviewResponse;
 	var reviews []Review;
@@ -51,22 +55,38 @@ func handleReviews(w http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			badRequest(w, "could not read request", http.StatusNotFound);
 		} else if req.Method == http.MethodPost {
-			addReview(rev, w);
+			addReview(rev);
+			successRequest(w, "successfully added review", "added review");
 		} else if req.Method == http.MethodDelete {
-			deleteReview(rev, w)
+			deleted := deleteReview(rev);
+			if deleted {
+				successRequest(w, "deleted review", "deleted review");
+			} else {
+				badRequest(w, "could not find event", 400);
+			}
 		}
-	} 
+	} else if req.Method == http.MethodPut {
+		var update reviewUpdate;
+		defer req.Body.Close();
+		err := json.NewDecoder(req.Body).Decode(&update);
+		if err != nil {
+			badRequest(w, "could not read request", http.StatusNotFound);
+		} else {
+			deleteReview(update.Old );
+			addReview(update.New);
+			successRequest(w, "updated review", "updated review")
+		}
+	}
 }
 
-func addReview(rev review, w http.ResponseWriter) {
+func addReview(rev review) {
 	var user, reviewer User;
 	db.Where(&User{Email: rev.Email}).First(&user);
 	db.Where(&User{Email: rev.Reviewer_Email}).First(&reviewer);
 	db.Create(&Review{UserID: user.ID, ReviewerID: reviewer.ID, Rating: rev.Rating, Text: rev.Text});
-	successRequest(w, "successfully added review", "added review");
 }
 
-func deleteReview(rev review, w http.ResponseWriter) {
+func deleteReview(rev review) bool {
 	var r Review;
 	var user, reviewer User;
 	db.Where(&User{Email: rev.Email}).First(&user);
@@ -74,8 +94,7 @@ func deleteReview(rev review, w http.ResponseWriter) {
 	db.Where(&Review{UserID: user.ID, ReviewerID: reviewer.ID, Rating: rev.Rating, Text: rev.Text}).First(&r);
 	if len(r.Text) > 0 {
 		db.Delete(&r);
-		successRequest(w, "deleted review", "deleted review");
-	} else {
-		badRequest(w, "could not find event", 400);
+		return true;
 	}
+	return false;
 }
