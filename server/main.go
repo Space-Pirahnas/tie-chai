@@ -32,6 +32,10 @@ func init() {
 	// seedTables();
 }
 
+func Serving() {
+	fmt.Println("Serving on Port :8080");
+}
+
 func SetHeader(h http.HandlerFunc) http.HandlerFunc {
   return func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*");
@@ -61,5 +65,6 @@ func main() {
 	http.HandleFunc("/api/cities", SetHeader(handleCities));
 	http.HandleFunc("/api/token", SetHeader(handleToken));
 	http.HandleFunc("/api/reviews", SetHeader(handleReviews));
+	http.HandleFunc("/api/reject", SetHeader(handleRejects));
 	http.ListenAndServe(":8080", nil);
 }
