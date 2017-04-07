@@ -3,8 +3,8 @@ import fetch from 'isomorphic-fetch';
 import { hashHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types.jsx';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://2174c835.ngrok.io'
+export const axiosInstance = axios.create({
+  baseURL: 'http://b78f8e4a.ngrok.io'
 });
 
 export function signinUser({ email, password }) {
@@ -54,3 +54,5 @@ export function getUser(token) {
     })
   }
 }
+
+
