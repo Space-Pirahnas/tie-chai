@@ -3,7 +3,6 @@ package main;
 import (
 	"net/http"
 	"encoding/json"
-	"log"
 )
 
 type ReviewResponse struct {
@@ -13,6 +12,7 @@ type ReviewResponse struct {
 	Reviewer_Image string
 	Reviewer_Interests []string
 	Reviewer_Rating int
+	Reviewer_Text string
 }
 
 type review struct {
@@ -36,6 +36,7 @@ func getReviews(u User) []ReviewResponse {
 			getUserImage(reviewer),
 			getInterests(reviewer),
 			v.Rating,
+			v.Text,
 		}
 		res = append(res, singleReview)
 	}
@@ -57,7 +58,6 @@ func handleReviews(w http.ResponseWriter, req *http.Request) {
 	} 
 }
 
-
 func addReview(rev review, w http.ResponseWriter) {
 	var user, reviewer User;
 	db.Where(&User{Email: rev.Email}).First(&user);
@@ -67,14 +67,13 @@ func addReview(rev review, w http.ResponseWriter) {
 }
 
 func deleteReview(rev review, w http.ResponseWriter) {
-	var review Review;
+	var r Review;
 	var user, reviewer User;
 	db.Where(&User{Email: rev.Email}).First(&user);
 	db.Where(&User{Email: rev.Reviewer_Email}).First(&reviewer);
-	db.Where(&Review{UserID: user.ID, ReviewerID: reviewer.ID, Rating: rev.Rating, Text: rev.Text}).First(&review);
-	log.Println(review);
-	if len(review.Text) > 0 {
-		db.Delete(&review);
+	db.Where(&Review{UserID: user.ID, ReviewerID: reviewer.ID, Rating: rev.Rating, Text: rev.Text}).First(&r);
+	if len(r.Text) > 0 {
+		db.Delete(&r);
 		successRequest(w, "deleted review", "deleted review");
 	} else {
 		badRequest(w, "could not find event", 400);

@@ -14,18 +14,24 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 	if req.Method == http.MethodGet {
 		getFriends(w, req);
 	} else {
+		defer req.Body.Close();
 		var fr FriendRequest;
 		var u, f User;
-		defer req.Body.Close();
-		json.NewDecoder(req.Body).Decode(&fr);
-		db.Where(&User{Email: fr.User.Email}).First(&u);
-		db.Where(&User{Email: fr.Friend.Email}).First(&f);
-		if req.Method == http.MethodPost {
-			if checkMatch(u, f) {
-				addFriend(u, f, w);
+		e := json.NewDecoder(req.Body).Decode(&fr);
+		if e != nil {
+			badRequest(w, "unable to decode request", 400);
+		} else {
+			db.Where(&User{Email: fr.User.Email}).First(&u);
+			db.Where(&User{Email: fr.Friend.Email}).First(&f);
+			if req.Method == http.MethodPost {
+				if checkMatch(u, f) {
+					addFriend(u, f, w);
+				} else {
+					badRequest(w, "match not found, placed in cache", 200);
+				}
+			} else if req.Method == http.MethodDelete {
+				deleteFriend(u, f, w);
 			}
-		} else if req.Method == http.MethodDelete {
-			deleteFriend(u, f, w);
 		}
 	}
 }
@@ -77,9 +83,8 @@ func deleteFriend(p User, f User, w http.ResponseWriter) {
 
 func checkMatch(p User, f User) bool {
 	match, _ := client.Cmd("HGET", f.Email, p.Email).Str();
-	log.Println(match);
 	if match == "true" {
-		client.Cmd("HSET", f.Email, "");
+		client.Cmd("HDEL", f.Email, p.Email);
 		return true;
 	} else {
 		client.Cmd("HSET", p.Email, f.Email, "true");

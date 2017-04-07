@@ -52,6 +52,7 @@ type UserFriend struct {
 }
 
 type Review struct {
+	ID uint
 	UserID uint
 	ReviewerID uint
 	Rating int 
