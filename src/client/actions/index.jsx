@@ -3,8 +3,8 @@ import fetch from 'isomorphic-fetch';
 import { hashHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types.jsx';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://2174c835.ngrok.io'
+export const axiosInstance = axios.create({
+  baseURL: 'http://b78f8e4a.ngrok.io'
 });
 
 export function signinUser({ email, password }) {
@@ -14,6 +14,8 @@ export function signinUser({ email, password }) {
       .then(response => {
         console.log("successfully sign in an user and receive token as ", response.data);
         dispatch({ type: AUTH_USER, payload: email });
+        localStorage.setItem('token', response.data);
+        localStorage.setItem('user_email', email);
         hashHistory.push('/home');
       })
       .catch(error => {
@@ -30,6 +32,8 @@ export function signupUser(signupObj) {
       .then(response => {
         console.log("successfully sign up an user and receive token as ", response.data);
         dispatch({ type: AUTH_USER, payload: signupObj.email });
+        localStorage.setItem('token', response.data);
+        localStorage.setItem('user_email', email);
         hashHistory.push('/home');
       })
       .catch(error => {
@@ -39,18 +43,19 @@ export function signupUser(signupObj) {
   }
 }
 
-export function getUser(token) {
-  return function(dispatch) {
-    dispatch({type: AUTH_USER})
-    axios.get('/api/user', {
+export function getUser(token, email) {
+  return function (dispatch) {
+    dispatch({ type: AUTH_USER })
+    axiosInstance.get('/api/token', {
       headers: {
-        authorization: token
+        Token: token,
+        Email: email
       }
     })
-    .then(res => {
-      // const { email } = res.data
-      // dispatch({ type: AUTH_USER, payload: email });
-      // dispatch(getFavorites(username))
-    })
+      .then(res => {
+        console.log('base on token and email, getUser object ', res.data);
+        // dispatch({ type: AUTH_USER, payload: email });
+        // dispatch(getFavorites(username))
+      })
   }
 }
