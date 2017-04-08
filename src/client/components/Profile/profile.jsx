@@ -6,42 +6,50 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state={
-      mounted: false
-    }
-    this.fetchUser = this.fetchUser.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchUser();
-  }
+  // componentWillMount() {
+  //   const token = localStorage.getItem('token');
+  //   const email = localStorage.getItem('user_email');
+  //   if (token && email) {
+  //     this.props.getUserInfo(token, email);
+  //   }
+  // }
 
-  fetchUser() {
-    this.props.getUserInfo(this.props.email);
-  }
+  render() {
 
-  render () {
+    const ProfilePic = () => (
+      <div>
+        <img className="profileImage" src={this.props.userInfo.Image} />
+      </div>
+    )
+    let interests = (this.props.userInfo.Interests).slice(1, this.props.userInfo.Interests.length - 1).split(',');
+    console.log('interests in profile: ', interests);
+
     console.log('props inside profile ', this.props);
+    console.log('props.userInfo: ', this.props.userInfo);
     return (
       <div>
         <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
           <div className="container">
-            <img className="profileImage" src={this.props.image} />
+            {
+              this.props.userInfo.Image ? <ProfilePic /> : <img className="profileImage" src={"styles/user.jpeg"} />
+            }
             <div className="Interests">
               <h2>Interests</h2>
-              {this.props.interests.map((interest) => 
+              { interests.map((interest) =>
                 <div className="interest Button">{interest}</div>
               )}
             </div>
             <div id="clear"></div>
-            <div style={{"margin-left": "50px"}}>
-            <div>
-              <p>{this.props.name} in {this.props.city}</p>
-              <p>{this.props.email}</p>
-            </div>
-            <div className="button-wrapper" style={{width: "20%"}}>
-              <a href="/#/message" className="Button">Message</a>
-            </div>
+            <div style={{ "margin-left": "50px" }}>
+              <div>
+                <p>{this.props.userInfo.Name} in {this.props.userInfo.City}</p>
+                <p>{this.props.userInfo.Email}</p>
+              </div>
+              <div className="button-wrapper" style={{ width: "20%" }}>
+                <a href="/#/message" className="Button">Message</a>
+              </div>
             </div>
           </div>
           <div className="overlay"></div>
@@ -53,14 +61,7 @@ class Profile extends React.Component {
 
 function mapStateToProps(state) {
   console.log('state in profile: ', state);
-  return { 
-    token: state.token,
-    email: state.auth.email,
-    image: state.image,
-    name: state.name,
-    interest: state.interests,
-    city: state.city
-  }
+  return { userInfo: state.userInfo.user }
 }
 
 export default connect(mapStateToProps, actions)(Profile);
