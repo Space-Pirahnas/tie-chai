@@ -10,7 +10,7 @@ type RejectRequest struct {
 }
 
 func handleRejects( w http.ResponseWriter, req *http.Request ) {
-	if req.Method != http.MethodGet{
+	if req.Method != http.MethodGet && req.Method != http.MethodOptions {
 		defer req.Body.Close();
 		var rr RejectRequest;
 		var u, r User;
@@ -34,7 +34,7 @@ func rejectUser(u User, r User, w http.ResponseWriter) {
 
 func checkReject(u User, r User) bool {
 	reject, _ := client.Cmd("HGET", u.Email, r.Email).Str();
-	if reject == "false" {
+	if len(reject) > 0 {
 		return false;
 	} else {
 		return true;

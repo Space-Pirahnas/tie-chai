@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import MatchBar from './matchbar.jsx';
 
-export const Match = ({ match }) => (
-  <div className="match">
-    <div className="home_match">
-      {match.Image ? <img href={match.Image} /> : <img src="http://www.propertybaazaar.com/images/noprofile.png" className="home_image"/> }
-      <div>
-        <div className="home_name">{match.Name}</div>
-        <div>{match.City}</div>
-        <div className="home_match">
-          {match.Interests.map(interest => <div className="interests">{interest}</div>)}
+class Match extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+  render() {
+    return (
+      <div className="match_container">
+        <div className="match">
+          <div className="home_match">
+            {this.props.match.Image ? <img href={this.props.match.Image} /> : <img src="http://www.propertybaazaar.com/images/noprofile.png" className="home_image"/> }
+            <div>
+              <div className="home_name">{this.props.match.Name}</div>
+              <div>{this.props.match.City}</div>
+              <div className="home_match">
+                {this.props.match.Interests.map(interest => <div className="interests">{interest}</div>)}
+              </div>
+            </div>
+          </div>
         </div>
+        <MatchBar addFriend={this.props.addFriend} rejectMatch={this.props.rejectMatch} />
       </div>
-    </div>
-  </div>
-);
+    )
+  }
+}
 
 export default Match;
