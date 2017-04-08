@@ -5,7 +5,7 @@ import {
 } from '../actions/types.jsx';
 
 const initialState = {
-  email: null,
+  email: undefined,
   authenticated: false
 }
 

@@ -13,7 +13,7 @@ type FriendRequest struct {
 func handleFriends( w http.ResponseWriter, req *http.Request ) {
 	if req.Method == http.MethodGet {
 		getFriends(w, req);
-	} else {
+	} else if req.Method != http.MethodOptions {
 		defer req.Body.Close();
 		var fr FriendRequest;
 		var u, f User;
@@ -33,7 +33,7 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 				deleteFriend(u, f, w);
 			}
 		}
-	}
+	} 
 }
 
 func getFriends(w http.ResponseWriter, req *http.Request) {
