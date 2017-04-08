@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 class Options extends React.Component {
@@ -10,12 +11,16 @@ class Options extends React.Component {
     return (
       <div>
         <DropdownButton style={{"background": "transparent", "color": "white", "margin-left": "30px"}} title="Options" className="options">
-          <MenuItem href="/#/auth/signin">Sign In</MenuItem>
-          <MenuItem href="/#/auth/signout">Sign Out</MenuItem>
+          {!this.props.authenticated && <MenuItem href="/#/auth/signin">Sign In</MenuItem>}
+          {this.props.authenticated && <MenuItem href="/#/auth/signout">Sign Out</MenuItem>}
         </DropdownButton>
       </div>
     );
   }
 };
 
-export default Options;
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps)(Options);
