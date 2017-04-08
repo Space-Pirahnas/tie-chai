@@ -55,6 +55,7 @@ export function signoutUser() {
 }
 
 export function getUserInfo(token, email) {
+  console.log("in the getUserInfo funciton, token, email ", token, email);
   return function (dispatch) {
     axiosInstance.get('/api/token', {
       headers: {
@@ -64,9 +65,10 @@ export function getUserInfo(token, email) {
     })
       .then(res => {
         console.log('base on token and email, getUser object ', res.data);
+        dispatch({ type: AUTH_USER, payload: email });
         dispatch({ type: GET_USER_INFO, payload: {
           email: email,
-          data: res.data
+          data: res.data,
         }})
       })
       .catch(err => {
