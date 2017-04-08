@@ -4,7 +4,10 @@ import { reduxForm, Field } from 'redux-form';
 import { signupFields } from '../form-fields.jsx';
 import validate from './validate.jsx';
 
-const { cityField, interestField } = signupFields;
+const { cityField, interestField,
+        stateField, professionField, 
+        companyField, bioField
+      } = signupFields;
 
 class SurveySecondPage extends React.Component {
   render() {
@@ -12,6 +15,10 @@ class SurveySecondPage extends React.Component {
     return (
       <form onSubmit={handleSubmit}>
         <Field name="city" component={cityField} />
+        <Field name="state" component={stateField} />
+        <Field name="profession" component={professionField} />
+        <Field name="company" component={companyField} />
+        <Field name="bio" component={bioField} />
         <Field name="interest" component={interestField} />
         <div>
           <button type="button" className="previous" onClick={previousPage}>Previous</button>
