@@ -55,7 +55,7 @@ class Friends extends Component {
     return (
       <div className="contactList">
         <div className="left">
-          <h2 style={{ "margin": "2em auto" }}>Contact List</h2>
+          <h2 style={{ "margin": "2em auto", "text-align": "center" }}>Contact List</h2>
           <div className="contacts-container">
             { friends.map((friend) =>  
               <Friend friend={ friend } key={ friend.email } showFriend={ this.showFriend } person={ this.state.person }/>
