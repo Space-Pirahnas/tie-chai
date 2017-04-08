@@ -1,8 +1,7 @@
 import React from 'react';
-// import Events from './Events/events.jsx';
-// import Matches from './Matches/matches.jsx';
+import Events from './Events/events.jsx';
+import Matches from './Matches/matches.jsx';
 
-// rendering events and match_list
 
 class Home extends React.Component {
   constructor(props) {
@@ -12,15 +11,22 @@ class Home extends React.Component {
   render () {
     return (
       <div>
-        <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
-          <div className="overlay"></div>
+        {/*<div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>*/}
+        <div> 
+          <div className="home">
+            <div>
+              <h1>Events!</h1>
+              <Events />
+            </div>
+            <div>
+              <h1>Today's Matches!</h1>
+              <Matches />
+            </div>
+          </div>
         </div>
-{/*        <Events />
-        <Matches />*/}
       </div>
     );
   }
 };
-
 
 export default Home;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Friend from './friend.jsx';
 import ContactInfo from './contactInfo.jsx';
-// import { connect } from 'react-redux';
-// import * as actions from '../../../actions/index.jsx';
+import React from 'react';
+import { connect } from 'react-redux';
+import * as action from '../../actions/index.jsx';
 
 const friends = [
   {
@@ -49,6 +50,8 @@ class Friends extends Component {
   showFriend(friend) {
     console.log('friend: ', friend);
     this.setState({ person: friend });
+
+    console.log("Friends component props.friends ", props);
   }
 
   render () {
@@ -70,10 +73,8 @@ class Friends extends Component {
   }
 };
 
+function mapStateToProps(state) {
+  return { friends: state.friends.data};
+}
 
-export default Friends;
-
-// function mapStateToProps(state) {
-//   return { friends: state.}
-// }
-// export default connect(mapStateToProps, actions)(Friends);
+export default connect(mapStateToProps, action)(Friends);

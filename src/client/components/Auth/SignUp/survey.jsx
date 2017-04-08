@@ -10,7 +10,6 @@ class Survey extends React.Component {
     this.state = {
       page: 1
     }
-    console.log('In the survey.jsx contructor')
   }
 
   nextPage() {

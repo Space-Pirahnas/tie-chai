@@ -1,6 +1,6 @@
 /*Landing Page*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+html, body, div, span, applet, object, iframe
+, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -409,6 +409,7 @@ label {
   margin-top: 5px !important;
 }
 
+<<<<<<< HEAD
 /* Friends */
 
 .contactList {
@@ -465,4 +466,62 @@ label {
 }
 .contact-info {
   color: white;
+}
+
+/* <----------------HARDCODED CSS BEGINS HERE ----------->*/
+.home{
+  margin-top: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.matches{
+  height: 500px;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: scroll;
+}
+
+.match {
+  padding-bottom: 50px;
+}
+
+.home_image {
+  height: 70px;
+  width: 70px;
+  margin-right: 10px;
+}
+
+.home_name {
+  font-size: 35px;
+}
+
+.home_match {
+  display:flex;
+  flex-direction: row;
+}
+
+.home_match .interests {
+  padding: 5px 5px 0px 0px;
+  font-size: 12px;
+}
+
+.home_event {
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 150px;
+}
+
+.home_event_date {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.home_event_title {
+  font-size: 25px;
+  margin-bottom: 5px;
 }
