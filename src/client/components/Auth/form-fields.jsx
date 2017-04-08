@@ -59,6 +59,38 @@ export const signupFields = {
     </fieldset>
   ),
 
+  stateField: livingState => (
+    <fieldset className="form-group">
+      <label>State: </label>
+      <input className="form-control" {...livingState.input} />
+      {livingState.meta.touched && livingState.meta.error && <div className="error">{livingState.meta.error}</div>}
+    </fieldset>
+  ),
+
+  professionField: profession => (
+    <fieldset className="form-group">
+      <label>Profession: </label>
+      <input className="form-control" {...profession.input} />
+      {profession.meta.touched && profession.meta.error && <div className="error">{profession.meta.error}</div>}
+    </fieldset>
+  ),
+
+  companyField: company => (
+    <fieldset className="form-group">
+      <label>Company: </label>
+      <input className="form-control" {...company.input} />
+      {company.meta.touched && company.meta.error && <div className="error">{company.meta.error}</div>}
+    </fieldset>
+  ),
+
+  bioField: aboutme => (
+    <fieldset className="form-group">
+      <label>About Me: </label>
+      <input className="form-control" {...aboutme.input} />
+      {aboutme.meta.touched && aboutme.meta.error && <div className="error">{aboutme.meta.error}</div>}
+    </fieldset>
+  ),
+
   interestField: interest => (
     <fieldset className="form-group">
       <label>Interest: </label>
