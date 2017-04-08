@@ -42,7 +42,7 @@ func SetHeader(h http.HandlerFunc) http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json");
     w.Header().Set("Access-Control-Allow-Credentials", "true");
     w.Header().Set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Token, Email, City");
     h(w, req);
   }
 }

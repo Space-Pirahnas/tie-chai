@@ -24,10 +24,11 @@ type Cities struct {
 
 type Event struct {
 	ID uint
-	UserID uint 
+	UserID uint
 	Location string `sql:"index:event_idx;not null"`
 	Date string `sql:"index:event_idx;not null"`
 	Time string `sql:"index:event_idx;not null"`
+	Title string `sql:"index:event_idx;not null"`
 	Description string `sql:"index:event_idx;not null"`
 }
 
