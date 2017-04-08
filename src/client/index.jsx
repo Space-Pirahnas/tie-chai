@@ -19,7 +19,7 @@ import Message from './components/Message/message.jsx';
 import Nav from './components/Nav/nav.jsx';
 
 import checkAuth from './components/Auth/check_auth.jsx';
-import { getUser } from './actions/index.jsx';
+import { getUserInfo } from './actions/index.jsx';
 
 const store = createStore(reducers,
   applyMiddleware(thunk));
@@ -27,7 +27,7 @@ const store = createStore(reducers,
 const token = localStorage.getItem('token');
 const email = localStorage.getItem('user_email');
 if (token) {
-  store.dispatch(getUser(token, email))
+  store.dispatch(getUserInfo(token, email))
 }
 
 ReactDOM.render(
@@ -41,7 +41,7 @@ ReactDOM.render(
           <Route path='/home' component={checkAuth(Home)} />
           <Route path='/friends' component={Friends} />
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
-          <Route path='/profile/:userid' component={Profile} />
+          <Route path='/profile/:userid' component={checkAuth(Profile)} />
           <Route path='/message' component={Message} />
         </Route>
       </Router>

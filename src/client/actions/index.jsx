@@ -34,7 +34,7 @@ export function signupUser(signupObj) {
         console.log("successfully sign up an user and receive token as ", response.data);
         dispatch({ type: AUTH_USER, payload: signupObj.email });
         localStorage.setItem('token', response.data);
-        localStorage.setItem('user_email', email);
+        localStorage.setItem('user_email', signupObj.email);
         hashHistory.push('/home');
       })
       .catch(error => {
@@ -46,7 +46,6 @@ export function signupUser(signupObj) {
 
 export function getUserInfo(token, email) {
   return function (dispatch) {
-    dispatch({ type: AUTH_USER })
     axiosInstance.get('/api/token', {
       headers: {
         Token: token,

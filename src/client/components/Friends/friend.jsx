@@ -5,7 +5,7 @@ const Friend = (props) => {
     backgroundImage: "url(" + props.friend.image + ")"
   }
   const contactStyles = {
-    backgroundColor: props.person === props.friend ? "#46733E" : ""
+    backgroundColor: props.person === props.friend ? "#337ab7" : ""
   }
 
   return (

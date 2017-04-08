@@ -412,15 +412,15 @@ label {
 /* Friends */
 
 .contactList {
-  margin: 10% auto;
+  margin: 25% auto;
   width: 60%;
 }
 
 .left {
-  background: #337ab7;
   color: white;
   height: 100%;
-  overflow: hidden;
+  width: 60%;
+  /*overflow: hidden;*/
   float: left;
 }
 
@@ -432,8 +432,8 @@ label {
 .contact {
   border: solid 2px white;
   background: transparent;
-  height: 20%;
-  align-items: center;
+  border-radius: 7px;
+  margin: 5px auto;
   text-align: center;
   padding: 8px;
   cursor: pointer;

@@ -25,7 +25,14 @@ const friends = [
     image: '/styles/user.jpeg',
     email: 'daryll@gmail.com',
     interests: ['basketball', 'Food', 'Costco']
-  }
+  },
+  {
+    name: 'Felix',
+    location: 'San Francisco',
+    image: '/styles/user.jpeg',
+    email: 'felix@gmail.com',
+    interests: ['golang', 'coding', 'programming']
+  },
 ]
 
 class Friends extends Component {
@@ -48,7 +55,7 @@ class Friends extends Component {
     return (
       <div className="contactList">
         <div className="left">
-          <h2>Contact</h2>
+          <h2 style={{ "margin": "2em auto" }}>Contact List</h2>
           <div className="contacts-container">
             { friends.map((friend) =>  
               <Friend friend={ friend } key={ friend.email } showFriend={ this.showFriend } person={ this.state.person }/>
