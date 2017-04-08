@@ -16,7 +16,7 @@ const ContactInfo = (props) => {
         )}
       </div>
         <div>
-          <p>{props.person.name} in {props.person.location}</p>
+          <p style={{"font-weight": "bold", "color": "#337ab7"}} >{props.person.name}</p><p> in {props.person.location}</p>
           <p>{props.person.email}</p>
         </div>
         <div style={{ "margin": "0 auto", "width": "40%" }}>
