@@ -6,30 +6,38 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state={
+      mounted: false
+    }
+    this.fetchUser = this.fetchUser.bind(this);
   }
 
-  componentWillMount() {
-    
+  componentDidMount() {
+    this.fetchUser();
+  }
+
+  fetchUser() {
+    this.props.getUserInfo(this.props.email);
   }
 
   render () {
-    console.log('props.userInfo: ', this.props.userInfo);
+    console.log('props inside profile ', this.props);
     return (
       <div>
         <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
           <div className="container">
-            <img className="profileImage" src={this.props.getUserInfo.Profile.image} />
+            <img className="profileImage" src={this.props.image} />
             <div className="Interests">
               <h2>Interests</h2>
-              {this.props.getUserInfo.Profile.interests.map((interest) => 
+              {this.props.interests.map((interest) => 
                 <div className="interest Button">{interest}</div>
               )}
             </div>
             <div id="clear"></div>
             <div style={{"margin-left": "50px"}}>
             <div>
-              <p>{this.props.getUserInfo.Profile.name} in {this.props.getUserInfo.Profile.city}</p>
-              <p>{this.props.getUserInfo.Profile.email}</p>
+              <p>{this.props.name} in {this.props.city}</p>
+              <p>{this.props.email}</p>
             </div>
             <div className="button-wrapper" style={{width: "20%"}}>
               <a href="/#/message" className="Button">Message</a>
@@ -44,7 +52,15 @@ class Profile extends React.Component {
 };
 
 function mapStateToProps(state) {
-  return { userInfo: state.userInfo }
+  console.log('state in profile: ', state);
+  return { 
+    token: state.token,
+    email: state.auth.email,
+    image: state.image,
+    name: state.name,
+    interest: state.interests,
+    city: state.city
+  }
 }
 
 export default connect(mapStateToProps, actions)(Profile);

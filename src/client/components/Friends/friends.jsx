@@ -10,7 +10,7 @@ const friends = [
     location: 'Chicago',
     image: '/styles/user.jpg',
     email: 'veer.@gmail.com',
-    interests: ['basketball', 'music', 'JS']
+    interests: ['lebron', 'music', 'JS']
   },
   {
     name: 'Summer',
@@ -31,7 +31,7 @@ const friends = [
     location: 'San Francisco',
     image: '/styles/user.jpeg',
     email: 'felix@gmail.com',
-    interests: ['golang', 'coding', 'programming']
+    interests: ['golang', 'coding', 'programming', 'hacking']
   },
 ]
 
