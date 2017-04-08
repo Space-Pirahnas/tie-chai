@@ -7,7 +7,7 @@ export function getMatches (email, city) {
   return function (dispatch) {
     axiosInstance.get('/api/users', {
       headers: {
-        Email: email,
+        Email: "test555@gmail.com",
         City: "San Jose - CA"
       }
     })
@@ -19,3 +19,5 @@ export function getMatches (email, city) {
     });
   }
 }
+
+

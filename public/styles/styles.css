@@ -489,8 +489,15 @@ label {
   overflow: scroll;
 }
 
-.match {
+.match_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   padding-bottom: 50px;
+}
+
+.match {
+  margin-bottom: 5px;
 }
 
 .home_image {
@@ -530,3 +537,9 @@ label {
   font-size: 25px;
   margin-bottom: 5px;
 }
+
+.match_button {
+  color: black;
+  margin-left: 20px;
+}
+
