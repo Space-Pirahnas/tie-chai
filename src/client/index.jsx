@@ -27,6 +27,7 @@ const store = createStore(reducers,
 
 const token = localStorage.getItem('token');
 const email = localStorage.getItem('user_email');
+
 if (token && email) {
   console.log("user has been login before user email is ", email);
   store.dispatch(getUserInfo(token, email))
@@ -45,7 +46,7 @@ ReactDOM.render(
           <Route path='/home' component={checkAuth(Home)} />
           <Route path='/friends' component={Friends} />
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
-          <Route path='/profile/:userid' component={Profile} />
+          <Route path='/profile/:userid' component={checkAuth(Profile)} />
           <Route path='/message' component={Message} />
         </Route>
       </Router>

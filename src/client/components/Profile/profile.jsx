@@ -1,36 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import * as actions from '../../actions/index.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      name: 'Veer Gangwal',
-      image: '/styles/user.jpeg',
-      email: 'checkmytumblr@gmail.com',
-      location: 'Chicago, IL',
-      interests: ['tumblr', 'UNC', 'Lebron James', 'Mandarin'], 
-      biography: 'Hello!'
-    }
   }
 
+  component
+
   render () {
+    console.log('props.userInfo: ', this.props.userInfo);
     return (
       <div>
         <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
           <div className="container">
-            <img className="profileImage" src={this.state.image} />
+            <img className="profileImage" src={this.props.getUserInfo.Profile.image} />
             <div className="Interests">
               <h2>Interests</h2>
-              {this.state.interests.map((interest) => 
+              {this.props.getUserInfo.Profile.interests.map((interest) => 
                 <div className="interest Button">{interest}</div>
               )}
             </div>
             <div id="clear"></div>
             <div style={{"margin-left": "50px"}}>
             <div>
-              <p>{this.state.name} in {this.state.location}</p>
-              <p>{this.state.email}</p>
+              <p>{this.props.getUserInfo.Profile.name} in {this.props.getUserInfo.Profile.city}</p>
+              <p>{this.props.getUserInfo.Profile.email}</p>
             </div>
             <div className="button-wrapper" style={{width: "20%"}}>
               <a href="/#/message" className="Button">Message</a>
@@ -44,5 +41,8 @@ class Profile extends React.Component {
   }
 };
 
+function mapStateToProps(state) {
+  return { userInfo: state.userInfo }
+}
 
-export default Profile;
+export default connect(mapStateToProps, actions)(Profile);
