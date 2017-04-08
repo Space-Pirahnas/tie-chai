@@ -8,7 +8,9 @@ class Profile extends React.Component {
 
   }
 
-  component
+  componentWillMount() {
+    
+  }
 
   render () {
     console.log('props.userInfo: ', this.props.userInfo);
