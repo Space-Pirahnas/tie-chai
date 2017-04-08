@@ -23,7 +23,7 @@ class Matches extends Component {
 
   render() {
     return (
-      <div>
+      <div className="matches">
         { this.props.matches.map(match => <Match match={ match } />) }
       </div>
     )

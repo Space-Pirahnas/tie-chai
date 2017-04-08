@@ -11,7 +11,6 @@ export function getEvents (email) {
       }
     })
     .then(res => {
-      console.log('im here event action creator', res);
       dispatch({ type: GET_EVENTS , payload: res.data });
     })
     .catch(err => {

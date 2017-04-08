@@ -13,12 +13,15 @@ class Home extends React.Component {
       <div>
         {/*<div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>*/}
         <div> 
-          <div className="overlay"></div>
-          <div style={{margin: 200}}>
-            <Events />
-          </div>
-          <div>
-            <Matches />
+          <div className="home">
+            <div>
+              <h1>Events!</h1>
+              <Events />
+            </div>
+            <div>
+              <h1>Today's Matches!</h1>
+              <Matches />
+            </div>
           </div>
         </div>
       </div>
