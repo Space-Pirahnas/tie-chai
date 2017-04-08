@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions/events.jsx';
 import Event from './event.jsx';
 import axios from 'axios';
 
@@ -6,35 +8,33 @@ class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [],
       mounted: false
     }
     this.fetchEvents = this.fetchEvents.bind(this);
   }
 
+  componentDidMount() {
+    this.fetchEvents();
+  }
+
   fetchEvents() {
-    axios.get('./events')
-    .then(response => {
-      this.setState({
-        events: [...events, response]
-      });
-    })
-    .catch(err => {
-      console.log(`Error in fetching events: ${error}`);
-    })
+    this.props.getEvents(this.props.email);
   }
 
   render() {
     return (
       <div>
-        {
-          this.state.events.map(event => 
-            <Event event={ event } />
-          )
-        }
+        { this.props.events.map(event => <Event event={ event } />) }
       </div>
     )
   }
 }
 
-export default Events;
+function mapStateToProps(state){
+  return {
+    email: state.email,
+    events: state.events
+  }
+}
+
+export default connect(mapStateToProps, actions )(Events);

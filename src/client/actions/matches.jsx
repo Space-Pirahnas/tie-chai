@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
-import { GET_EVENTS } from './types.jsx';
+import { GET_MATCHES } from './types.jsx';
 import { axiosInstance } from './index.jsx';
 
-export function getEvents (email) {
+export function getMatches (email, city) {
   return function (dispatch) {
-    axiosInstance.get('/api/create_event', {
+    axiosInstance.get('/api/users', {
       headers: {
-        Email: email
+        Email: email,
+        City: "San Jose - CA"
       }
     })
     .then(res => {
-      console.log('im here event action creator', res);
-      dispatch({ type: GET_EVENTS , payload: res.data });
+      dispatch({ type: GET_MATCHES, payload: res.data });
     })
     .catch(err => {
       console.error("unable to retrieve events data ", err);

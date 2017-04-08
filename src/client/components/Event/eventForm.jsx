@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { EventField } from './eventformfields.jsx';
 

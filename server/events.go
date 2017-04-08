@@ -27,7 +27,7 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 		} else if req.Method == http.MethodDelete {
 			deleteEvent(user, e);
 			successRequest(w, "removed event successfully", "deleted event");
-		} else {
+		} else if req.Method != http.MethodOptions {
 			log.Println("request method not supported");
 		}
 	} else if req.Method == http.MethodGet {

@@ -2,10 +2,11 @@ import React from 'react';
 
 const Event = ({ event }) => (
   <div>
-    <p>event.location</p>
-    <p>event.details</p>
-    <p>event.host</p>
-    <p>event.time</p>
+    <div>{event.Location}</div>
+    <div>{event.Description}</div>
+    <div>{event.Time}</div>
+    <div>{event.Date}</div>
+    <div>{event.Email}</div>
   </div>
 );
 
