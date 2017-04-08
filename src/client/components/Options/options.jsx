@@ -11,7 +11,7 @@ class Options extends React.Component {
       <div>
         <DropdownButton style={{"background": "transparent", "color": "white", "margin-left": "30px"}} title="Options" className="options">
           <MenuItem href="/#/auth/signin">Sign In</MenuItem>
-          <MenuItem href="/#">Sign Out</MenuItem>
+          <MenuItem href="/#/auth/signout">Sign Out</MenuItem>
         </DropdownButton>
       </div>
     );

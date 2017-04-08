@@ -2,7 +2,8 @@ import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 import { hashHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR,
-        GET_USER_INFO } from './types.jsx';
+        GET_USER_INFO,
+        GET_USER_FRIENDS } from './types.jsx';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://b78f8e4a.ngrok.io'
@@ -44,9 +45,17 @@ export function signupUser(signupObj) {
   }
 }
 
+export function signoutUser() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user_email');
+  hashHistory.push('/');
+  console.log('Sign out user successfully!!!');
+  return { type: UNAUTH_USER };
+
+}
+
 export function getUserInfo(token, email) {
   return function (dispatch) {
-    dispatch({ type: AUTH_USER })
     axiosInstance.get('/api/token', {
       headers: {
         Token: token,
@@ -63,5 +72,22 @@ export function getUserInfo(token, email) {
       .catch(err => {
         console.error('Fail to getUserInfo with error ', err);
       })
+  }
+}
+
+export function getUserFriends(email) {
+  return function (dispatch) {
+    axiosInstance.get('api/friends', {
+      headers: {
+        Email: email
+      }
+    })
+    .then(res => {
+      console.log('Fetching the friends list of current user email', res.data);
+      dispatch({ type: GET_USER_FRIENDS, payload: res.data });
+    })
+    .catch(err => {
+      console.error('Fail to Fetching friends list with error ', err);
+    })
   }
 }
