@@ -10,7 +10,7 @@ const ContactInfo = (props) => {
     <div className="contact-info">
       <img className="image" style={styles} />
       <div>
-        <h2>Interests</h2>
+        <h2 style={{ "margin": "1em auto", "text-align": "center" }}>Interests</h2>
         {props.person.interests.map((interest) =>
           <div className="interest Button">{interest}</div>
         )}
@@ -19,7 +19,7 @@ const ContactInfo = (props) => {
           <p>{props.person.name} in {props.person.location}</p>
           <p>{props.person.email}</p>
         </div>
-        <div className="button-wrapper" style={{ width: "20%" }}>
+        <div style={{ "margin": "0 auto", "width": "40%" }}>
           <a href="/#/message" className="Button">Message</a>
         </div>
       </div>

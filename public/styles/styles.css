@@ -409,20 +409,21 @@ label {
   margin-top: 5px !important;
 }
 
-<<<<<<< HEAD
+
 /* Friends */
 
 .contactList {
   margin: 20% auto;
-  width: 60%;
+  width: 100%;
 }
 
 .left {
   color: white;
   height: 100%;
-  width: 60%;
+  width: 30%;
   /*overflow: hidden;*/
   float: left;
+  margin-left: 20%;
 }
 
 .contacts-container {
@@ -461,8 +462,12 @@ label {
 }
 
 .right {
-  background: #337ab7;
   float: right;
+  border: 1px solid white;
+  border-radius: 7px;
+  padding: 40px;
+  margin-right: 20%;
+  margin-bottom: 20%;
 }
 .contact-info {
   color: white;

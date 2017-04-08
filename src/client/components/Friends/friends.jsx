@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Friend from './friend.jsx';
 import ContactInfo from './contactInfo.jsx';
-import React from 'react';
 import { connect } from 'react-redux';
 import * as action from '../../actions/index.jsx';
 
@@ -58,7 +57,7 @@ class Friends extends Component {
     return (
       <div className="contactList">
         <div className="left">
-          <h2 style={{ "margin": "2em auto", "text-align": "center" }}>Contact List</h2>
+          <h2 style={{ "margin": "1em auto", "text-align": "center" }}>Contact List</h2>
           <div className="contacts-container">
             { friends.map((friend) =>  
               <Friend friend={ friend } key={ friend.email } showFriend={ this.showFriend } person={ this.state.person }/>
