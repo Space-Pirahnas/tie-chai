@@ -15,6 +15,7 @@ export function signinUser({ email, password }) {
     axiosInstance.post('/api/login', { 'Email': email, 'Password': password })
       .then(response => {
         console.log("successfully sign in an user and receive token as ", response.data);
+        dispatch(getUserInfo(response.data, email));
         dispatch({ type: AUTH_USER, payload: email });
         localStorage.setItem('token', response.data);
         localStorage.setItem('user_email', email);

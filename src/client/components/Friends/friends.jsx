@@ -4,46 +4,21 @@ import ContactInfo from './contactInfo.jsx';
 import { connect } from 'react-redux';
 import * as action from '../../actions/index.jsx';
 
-const friends = [
-  {
-    name: 'Veer Gangwal',
-    location: 'Chicago',
-    image: '/styles/user.jpg',
-    email: 'veer.@gmail.com',
-    interests: ['basketball', 'music', 'JS']
-  },
-  {
-    name: 'Summer',
-    location: 'Dublin',
-    image: '/styles/user.jpg',
-    email: 'summer@gmail.com',
-    interests: ['Dancing', 'Ryan']
-  },
-  {
-    name: 'Daryll',
-    location: 'Hong Kong',
-    image: '/styles/user.jpeg',
-    email: 'daryll@gmail.com',
-    interests: ['basketball', 'Food', 'Costco']
-  },
-  {
-    name: 'Felix',
-    location: 'San Francisco',
-    image: '/styles/user.jpeg',
-    email: 'felix@gmail.com',
-    interests: ['golang', 'coding', 'programming']
-  },
-]
 
 class Friends extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      person: friends[0]
+      person: null
     }
 
     this.showFriend = this.showFriend.bind(this)
+  }
+
+  componentDidMount() {
+    console.log('props in friends: ', this.props);
+    this.props.getUserFriends(this.props.email);
   }
 
   showFriend(friend) {
@@ -59,13 +34,15 @@ class Friends extends Component {
         <div className="left">
           <h2 style={{ "margin": "1em auto", "text-align": "center" }}>Contact List</h2>
           <div className="contacts-container">
-            { friends.map((friend) =>  
-              <Friend friend={ friend } key={ friend.email } showFriend={ this.showFriend } person={ this.state.person }/>
-            )}
+            { this.props.friends ? this.props.friends.map((friend) =>  
+              <Friend friend={ friend } key={ friend.Email } showFriend={ this.showFriend.bind(this, friend) } />
+            ): null }
           </div>
         </div>
         <div className="right">
-          <ContactInfo person={ this.state.person } />
+          {
+            this.state.person ? <ContactInfo person={ this.state.person } /> : null
+          }
         </div>
       </div>
     );
@@ -73,7 +50,11 @@ class Friends extends Component {
 };
 
 function mapStateToProps(state) {
-  return { friends: state.friends.data};
+  console.log('props in friends(state): ', state);
+  return { 
+    friends: state.friends,
+    email: state.auth.email
+  };
 }
 
 export default connect(mapStateToProps, action)(Friends);
