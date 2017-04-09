@@ -17,13 +17,13 @@ class Matches extends Component {
   }
 
   fetchMatches() {
-    this.props.getMatches(this.props.email);
+    this.props.getMatches(this.props.email, this.props.city);
   }
 
   handleMatch(match, target, path) {
     let obj = {
       User: {
-        Email: "yooo@123.com" /*this.props.email*/
+        Email: this.props.email
       }
     };
     obj[target] = {
@@ -31,7 +31,7 @@ class Matches extends Component {
     };
     axiosInstance.post(path, obj)
                  .then(res => {
-                   this.props.getMatches(this.props.email);
+                   this.props.getMatches(this.props.email, this.props.city);
                  })
                  .catch(err => {
                    console.error(`cound not ${target} friend`);
@@ -60,9 +60,10 @@ class Matches extends Component {
 }
 
 function mapStateToProps(state){
+  console.log(state, "state herer!!!!")
   return {
-    email: state.email,
-    city: state.city,
+    email: state.userInfo.user.Email,
+    city: state.userInfo.user.City,
     matches: state.matches
   }
 }
