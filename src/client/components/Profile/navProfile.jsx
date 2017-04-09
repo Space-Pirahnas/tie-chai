@@ -8,19 +8,21 @@ class NavProfile extends React.Component {
   }
 
   render() {
-    console.log('userinfo in navprofile: ', this.props.userInfo);
+    if (!this.props.userInfo) {
+      return <div>Loading</div>
+    }
     return (
       <a href="/#/profile/:userid" className="UserProfile">
         <div className="User">
           <div className="name">{ this.props.userInfo.Name }</div>
           <div className="image">
             {
-              this.props.userInfo.Image ? <img src={ this.props.userInfo.Image } /> : null 
+              this.props.userInfo.Image ? <img src={ this.props.userInfo.Image } /> :  <img src={"styles/user.jpeg"} />
             }
           </div>
         </div>
       </a>
-    );
+      );
   }
 };
 
