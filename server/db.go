@@ -15,6 +15,10 @@ type User struct {
 	Image Image
 	Interests []Interest `gorm:many2many:users_interests;"`
 	Events []Event
+	Profession string
+	Company string
+	Bio string
+	State string
 }
 
 type Cities struct {
@@ -58,4 +62,9 @@ type Review struct {
 	ReviewerID uint
 	Rating int 
 	Text string
+}
+
+type UserSave struct {
+	UserID uint `gorm:"ForeignKey:UsersID"`
+	SaveID uint `gorm:"ForeignKey:UsersID"`
 }

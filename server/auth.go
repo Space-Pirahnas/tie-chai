@@ -14,7 +14,11 @@ type usr struct {
 	Email string
 	City string
 	Image string
+	Profession string
+	Company string
 	Interests []string
+	Bio string
+	State string
 }
 
 func signUp(w http.ResponseWriter, req *http.Request) {
@@ -33,14 +37,14 @@ func signUp(w http.ResponseWriter, req *http.Request) {
 			bp, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.MinCost);
 			if err != nil { log.Println("hashing failed"); }
 			db.Where(&Cities{ City_Name: u.City }).First(&city);
-			db.Create(&User{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID });
+			db.Create(&User{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID, Profession: u.Profession, Company: u.Company, Bio: u.Bio, State: u.State });
 			db.Where(&User{ Email: u.Email}).First(&id);
 			initializeInterests(id.ID, u.Interests);
 			sendToken(w, u);
 		}
 	} else if req.Method != http.MethodOptions {
 		log.Println("cannot send a get request");
-	}
+	} 
 }
 
 func logIn(w http.ResponseWriter, req *http.Request) {
@@ -63,7 +67,7 @@ func logIn(w http.ResponseWriter, req *http.Request) {
 		}
 	} else if req.Method != http.MethodOptions {
 		log.Println("post method required");
-	}
+	} 
 }
 
 func sendToken(w http.ResponseWriter, u usr){

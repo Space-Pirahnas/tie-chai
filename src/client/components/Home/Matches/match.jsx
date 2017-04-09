@@ -22,7 +22,7 @@ class Match extends Component {
             </div>
           </div>
         </div>
-        <MatchBar addFriend={this.props.addFriend} rejectMatch={this.props.rejectMatch} />
+        <MatchBar addFriend={this.props.addFriend} rejectMatch={this.props.rejectMatch} saveMatch={this.props.saveMatch} />
       </div>
     )
   }

@@ -12,6 +12,10 @@ type UserResponse struct {
 	Image string
 	Interests []string
 	Reviews []ReviewResponse
+	Profession string
+	Company string
+	Bio string
+	State string
 }
 
 
@@ -29,6 +33,10 @@ func getUser(u User) UserResponse {
 		getUserImage(u),
 		getInterests(u),
 		getReviews(u),
+		u.Profession,
+		u.Company,
+		u.Bio,
+		u.State,
 	}
 }
 
@@ -39,11 +47,11 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 	var u User;
 	city := req.Header.Get("City");
 	email := req.Header.Get("Email");
-	if (len(city) > 0) {
-		db.Where(&User{Email: email}).First(&u);
+	db.Where(&User{Email: email}).First(&u);
+	if (len(city) > 0 && email == u.Email) {
 		db.Where(&Cities{City_Name : city}).First(&cityId);
 		db.Where(&User{CitiesID: cityId.ID}).Find(&users);
-		users = filterRejects(u, users);
+		users = filterSaves(u, filterFriends(u, filterRejects(u, users)));
 		for _, v := range users {
 			res := getUser(v);
 			UserResponses = append(UserResponses, res);

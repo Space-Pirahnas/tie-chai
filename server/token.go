@@ -12,13 +12,10 @@ type tokenResponse struct {
 
 func storeToken (tokenString string, u usr) {
 	var user User;
-	var image Image;
 	db.Where(&User{Email: u.Email}).First(&user);
 	if len(user.Email) > 0 {
-		db.Where(&Image{ID: user.ImageID}).First(&image);
-		u.Image = image.ImageUrl;
-		u.Password = "";
-		r, _ := json.Marshal(u);
+		res := getUser(user);
+		r, _ := json.Marshal(res);
 		client.Cmd("HSET", u.Email, "Token", tokenString);
 		client.Cmd("HSET", u.Email , "Profile", string(r));
 	} else {
@@ -41,5 +38,5 @@ func handleToken (w http.ResponseWriter, req *http.Request) {
 		} else {
 			badRequest(w, "token did not match user email", 400);
 		}
-	}
+	} 
 }

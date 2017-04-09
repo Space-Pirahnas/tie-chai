@@ -6,7 +6,7 @@ import { AUTH_USER, UNAUTH_USER, AUTH_ERROR,
         GET_USER_FRIENDS } from './types.jsx';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://b78f8e4a.ngrok.io'
+  baseURL: 'http://7ec63f64.ngrok.io'
 });
 
 export function signinUser({ email, password }) {
@@ -64,6 +64,7 @@ export function getUserInfo(token, email) {
     })
       .then(res => {
         console.log('base on token and email, getUser object ', res.data);
+        dispatch({ type: AUTH_USER, payload: email });
         dispatch({ type: GET_USER_INFO, payload: {
           email: email,
           data: res.data

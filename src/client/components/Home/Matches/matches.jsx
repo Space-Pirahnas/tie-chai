@@ -9,6 +9,7 @@ class Matches extends Component {
   constructor(props) {
     super(props);
     this.fetchMatches = this.fetchMatches.bind(this);
+    this.handleMatch = this.handleMatch.bind(this);
   }
 
   componentDidMount() {
@@ -19,30 +20,40 @@ class Matches extends Component {
     this.props.getMatches(this.props.email);
   }
 
-  addFriend(friend) {
-    axiosInstance.post('/api/friends', { User: { Email: "test555@gmail.com" }, Friend: {Email: friend.Email}})
+  handleMatch(match, target, path) {
+    let obj = {
+      User: {
+        Email: "yooo@123.com" /*this.props.email*/
+      }
+    };
+    obj[target] = {
+      Email: match.Email
+    };
+    axiosInstance.post(path, obj)
                  .then(res => {
                    this.props.getMatches(this.props.email);
                  })
                  .catch(err => {
-                   console.error("cound not add friend");
+                   console.error(`cound not ${target} friend`);
                  });
   }
 
+  addFriend(friend) {
+    this.handleMatch(friend, "Friend", '/api/friends');
+  }
+
   rejectMatch(reject) {
-    axiosInstance.post('/api/reject', {User: {Email: "test555@gmail.com"}, Reject: {Email: reject.Email}} )
-                 .then(res => {
-                   this.props.getMatches(this.props.email);
-                 })
-                 .catch(err => {
-                   console.error("could not reject");
-                 });
+    this.handleMatch(reject, "Reject", '/api/reject');
+  }
+
+  saveMatch(match) {
+    this.handleMatch(match, "Save", '/api/save');
   }
 
   render() {
     return (
       <div className="matches">
-        { this.props.matches ? this.props.matches.map(match => <Match match={ match } addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} />) : <div></div> }
+        { this.props.matches ? this.props.matches.map(match => <Match match={ match } addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)}/>) : <div></div> }
       </div>
     )
   }

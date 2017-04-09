@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   form,
   auth: authReducer,
   events: eventReducer,
-  matches: matchesReducer
+  matches: matchesReducer,
   userInfo: userInfoReducer,
   friends: friendsReducer
 });
