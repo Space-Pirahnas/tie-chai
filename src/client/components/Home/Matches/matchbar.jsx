@@ -11,7 +11,7 @@ class MatchBar extends Component {
       <div>
         <button className="match_button" onClick={this.props.addFriend}>Yes!</button>
         <button className="match_button" onClick={this.props.rejectMatch}>No!</button>
-        <button className="match_button">Save!</button>
+        <button className="match_button" onClick={this.props.saveMatch}>Save!</button>
       </div>
     )
   }

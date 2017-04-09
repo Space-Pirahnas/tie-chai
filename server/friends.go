@@ -38,9 +38,9 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 
 func getFriends(w http.ResponseWriter, req *http.Request) {
 	var user User;
-	s := req.URL.Query()["Email"];
-	if len(s) > 0 {
-		db.Where(&User{Email: s[0]}).First(&user);
+	email := req.Header.Get("Email");
+	db.Where(&User{Email: email}).First(&user);
+	if email == user.Email {
 		fr := findFriends(user);
 		r, _ := json.Marshal(fr);
 		log.Println("successfully retrieved friends")
@@ -90,4 +90,22 @@ func checkMatch(p User, f User) bool {
 		client.Cmd("HSET", p.Email, f.Email, "true");
 		return false;
 	}
+}
+
+func filterFriends(u User, users []User) []User {
+	var results []User;
+	var friends []UserFriend;
+	db.Where(&UserFriend{UserID: u.ID}).Find(&friends);
+	for _, v := range users {
+		exists := false;
+		for _, f := range friends {
+			if v.ID == f.FriendID {
+				exists = true;
+			}
+		}
+		if !exists {
+			results = append(results, v);
+		}
+	}
+	return results;
 }
