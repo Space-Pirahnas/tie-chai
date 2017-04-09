@@ -7,8 +7,8 @@ export function getMatches (email, city) {
   return function (dispatch) {
     axiosInstance.get('/api/users', {
       headers: {
-        Email: "yooo@123gmail.com",
-        City: "San Jose - CA"
+        Email: email,
+        City: city
       }
     })
     .then(res => {
