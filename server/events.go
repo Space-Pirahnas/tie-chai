@@ -34,6 +34,7 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 			email := req.Header.Get("Email");
 			if len(email) > 0 {
 				db.Where(&User{Email: email}).First(&user);
+				log.Println(email, user);
 				getEvents(user, e, w);
 			} else {
 				badRequest(w, "email not found", 400)
@@ -61,29 +62,33 @@ func deleteEvent(user User, e event) {
 
 func getEvents(user User, e event, w http.ResponseWriter) {
 	var events []event;
-	friends := findFriends(user);
-	for _, f := range friends {
-		var evt []Event;
-		var res []event;
-		var user User;
-		db.Where(&User{Email: f.Email}).First(&user);
-		db.Where(&Event{UserID: user.ID}).Find(&evt);
-		for _, e := range evt {
-			ev := event{
-				f.Name,
-				f.Email,
-				e.Location,
-				e.Date,
-				e.Time,
-				e.Title,
-				e.Description,
+	if user.ID > 0 {
+		friends := findFriends(user);
+		for _, f := range friends {
+			var evt []Event;
+			var res []event;
+			var user User;
+			db.Where(&User{Email: f.Email}).First(&user);
+			if user.ID > 0 {
+				db.Where(&Event{UserID: user.ID}).Find(&evt);
+				for _, e := range evt {
+					ev := event{
+						f.Name,
+						f.Email,
+						e.Location,
+						e.Date,
+						e.Time,
+						e.Title,
+						e.Description,
+					}
+					res = append(res, ev);
+				}
+				events = append(events, res...);
 			}
-			res = append(res, ev);
 		}
-		events = append(events, res...);
-	}
-	r, _ := json.Marshal(events);
-	w.Write(r);
+		r, _ := json.Marshal(events);
+		w.Write(r);
+	} 
 }
 
 func updateEvent(user User, u update) {

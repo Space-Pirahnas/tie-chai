@@ -18,6 +18,7 @@ import CreateEvent from './components/Event/event.jsx';
 import Profile from './components/Profile/profile.jsx';
 import Message from './components/Message/message.jsx';
 import Nav from './components/Nav/nav.jsx';
+import Save from './components/Save/save.jsx'
 
 import checkAuth from './components/Auth/check_auth.jsx';
 import { getUserInfo } from './actions/index.jsx';
@@ -28,6 +29,7 @@ const store = createStore(reducers,
 const token = localStorage.getItem('token');
 const email = localStorage.getItem('user_email');
 if (token && email) {
+  console.log(!!token, !!email, "IN THE BEGINNING");
   store.dispatch(getUserInfo(token, email))
 }
 
@@ -45,6 +47,7 @@ ReactDOM.render(
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
           <Route path='/profile/:userid' component={checkAuth(Profile)} />
           <Route path='/message' component={Message} />
+          <Route path='/save' component={checkAuth(Save)} />
         </Route>
       </Router>
     </Provider> 

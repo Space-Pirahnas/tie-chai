@@ -17,6 +17,10 @@ class SignUp extends React.Component {
       Email: values.email,
       Password: values.password,
       City: values.city,
+      State: values.state,
+      Profession: values.profession,
+      Company: values.company,
+      Bio: values.bio,
       Interests: values.interest.split(',')
     }
     console.log("the form value from survey OBJ send to server ", signupObj);
