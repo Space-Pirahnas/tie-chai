@@ -28,7 +28,7 @@ func init() {
 	if err != nil || e != nil {
 		panic("can not connect to db");
 	}
-	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{}, &UserSave{});
+	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{}, &UserSave{}	);
 	// seedTables();
 }
 
