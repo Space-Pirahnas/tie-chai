@@ -9,17 +9,13 @@ class Profile extends React.Component {
   }
 
   render() {
-
+    const { Email, Image } = this.props.userInfo;
     const ProfilePic = () => (
       <div>
-        <img className="profileImage" src={this.props.userInfo.Image} />
+        <img className="profileImage" src={Image} />
       </div>
     )
     let interests = (this.props.userInfo.Interests).slice(1, this.props.userInfo.Interests.length).split(',');
-    console.log('interests in profile: ', interests);
-
-    console.log('props inside profile ', this.props);
-    console.log('props.userInfo: ', this.props.userInfo);
     return (
       <div>
         <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
@@ -30,7 +26,7 @@ class Profile extends React.Component {
             <div className="Interests">
               <h2>Interests</h2>
               { interests.map((interest) =>
-                <div className="interest Button">{interest}</div>
+                <div className="interest Button" key={Email}>{interest}</div>
               )}
             </div>
             <div id="clear"></div>

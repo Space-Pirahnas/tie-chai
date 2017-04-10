@@ -27,7 +27,6 @@ class NavProfile extends React.Component {
 };
 
 function mapStateToProps(state) {
-  console.log('state in profile: ', state);
   return { userInfo: state.userInfo.user }
 }
 
