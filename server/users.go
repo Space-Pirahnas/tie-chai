@@ -3,6 +3,7 @@ package main;
 import (
 	"net/http"
 	"encoding/json"
+	"log"
 )
 
 type UserResponse struct {
@@ -47,6 +48,7 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 	var u User;
 	city := req.Header.Get("City");
 	email := req.Header.Get("Email");
+	log.Println(email, city, "hiiii test");
 	db.Where(&User{Email: email}).First(&u);
 	if (len(city) > 0 && email == u.Email) {
 		db.Where(&Cities{City_Name : city}).First(&cityId);
