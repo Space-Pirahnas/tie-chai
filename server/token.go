@@ -30,6 +30,7 @@ func handleToken (w http.ResponseWriter, req *http.Request) {
 		UserProfile, e := client.Cmd("HGET", email, "Profile").Str();
 		Token, er := client.Cmd("HGET", email, "Token").Str();
 		if e != nil || er != nil {
+			log.Println(UserProfile, Token, token, email, "cache error in the frontpage");
 			badRequest(w, "unable to access cache", http.StatusNotFound);
 		} else if Token == token {
 			res := tokenResponse{ UserProfile };

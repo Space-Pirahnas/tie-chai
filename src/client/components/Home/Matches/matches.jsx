@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions/matches.jsx';
 import Match from './match.jsx';
-import axios from 'axios';
 import { axiosInstance } from '../../../actions/index.jsx';
 
 class Matches extends Component {
@@ -60,7 +59,6 @@ class Matches extends Component {
 }
 
 function mapStateToProps(state){
-  console.log(state, "state herer!!!!")
   return {
     email: state.userInfo.user.Email,
     city: state.userInfo.user.City,

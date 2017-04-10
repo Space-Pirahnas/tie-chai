@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { hashHistory } from 'react-router';
 import { GET_MATCHES } from './types.jsx';
 import { axiosInstance } from './index.jsx';
 

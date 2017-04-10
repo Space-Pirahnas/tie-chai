@@ -32,7 +32,7 @@ class Events extends Component {
 
 function mapStateToProps(state){
   return {
-    email: state.email,
+    email: state.userInfo.user.Email,
     events: state.events
   }
 }

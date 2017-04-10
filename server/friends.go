@@ -99,7 +99,7 @@ func filterFriends(u User, users []User) []User {
 	for _, v := range users {
 		exists := false;
 		for _, f := range friends {
-			if v.ID == s.FriendID {
+			if v.ID == f.FriendID {
 				exists = true;
 			}
 		}

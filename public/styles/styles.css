@@ -482,7 +482,7 @@ label {
 }
 
 .matches{
-  height: 500px;
+  height: 1000px;
   display:flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -540,6 +540,19 @@ label {
 
 .match_button {
   color: black;
-  margin-left: 20px;
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  border: none;
 }
 
+.match_button_bar {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.save {
+  margin: 150px 0px 0px 200px;
+  
+}

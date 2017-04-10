@@ -5,6 +5,7 @@ import eventReducer from './events_reducer.jsx';
 import matchesReducer from './matches_reducer.jsx';
 import userInfoReducer from './userInfo_reducer.jsx';
 import friendsReducer from './friends_reducer.jsx';
+import savesReducer from './saves_reducer.jsx';
 
 const rootReducer = combineReducers({
   form,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   events: eventReducer,
   matches: matchesReducer,
   userInfo: userInfoReducer,
-  friends: friendsReducer
+  friends: friendsReducer,
+  savedUsers: savesReducer
 });
 
 export default rootReducer;
