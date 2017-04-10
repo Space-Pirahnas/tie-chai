@@ -34,7 +34,6 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 			email := req.Header.Get("Email");
 			if len(email) > 0 {
 				db.Where(&User{Email: email}).First(&user);
-				log.Println(email, user);
 				getEvents(user, e, w);
 			} else {
 				badRequest(w, "email not found", 400)

@@ -8,14 +8,6 @@ class Profile extends React.Component {
 
   }
 
-  // componentWillMount() {
-  //   const token = localStorage.getItem('token');
-  //   const email = localStorage.getItem('user_email');
-  //   if (token && email) {
-  //     this.props.getUserInfo(token, email);
-  //   }
-  // }
-
   render() {
 
     const ProfilePic = () => (
@@ -23,7 +15,7 @@ class Profile extends React.Component {
         <img className="profileImage" src={this.props.userInfo.Image} />
       </div>
     )
-    let interests = (this.props.userInfo.Interests).slice(1, this.props.userInfo.Interests.length - 1).split(',');
+    let interests = (this.props.userInfo.Interests).slice(1, this.props.userInfo.Interests.length).split(',');
     console.log('interests in profile: ', interests);
 
     console.log('props inside profile ', this.props);
