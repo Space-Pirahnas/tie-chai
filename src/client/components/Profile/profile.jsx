@@ -34,7 +34,7 @@ class Profile extends React.Component {
               )}
             </div>
             <div id="clear"></div>
-            <div style={{ "margin-left": "50px" }}>
+            <div style={{ "marginLeft": "50px" }}>
               <div>
                 <p>{this.props.userInfo.Name} in {this.props.userInfo.City}</p>
                 <p>{this.props.userInfo.Email}</p>
