@@ -33,10 +33,11 @@ export function signupUser(signupObj) {
   return function (dispatch) {
     axiosInstance.post('/api/signup', signupObj)
       .then(response => {
-        dispatch({ type: AUTH_USER, payload: signupObj.email });
+        console.log(signupObj, "signup object hereee", response);
+        dispatch({ type: AUTH_USER, payload: signupObj.Email });
+        dispatch(getUserInfo(response.data, signupObj.Email, true));
         localStorage.setItem('token', response.data);
-        localStorage.setItem('user_email', signupObj.email);
-        hashHistory.push('/home');
+        localStorage.setItem('user_email', signupObj.Email);
       })
       .catch(error => {
         console.error("fail to sign in an user with error ", error);
@@ -46,8 +47,7 @@ export function signupUser(signupObj) {
 }
 
 export function signoutUser() {
-  localStorage.removeItem('token');
-  localStorage.removeItem('user_email');
+  localStorage.clear();
   hashHistory.push('/');
   console.log('Sign out user successfully!!!');
   return { type: UNAUTH_USER };

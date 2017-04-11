@@ -6,6 +6,8 @@ import matchesReducer from './matches_reducer.jsx';
 import userInfoReducer from './userInfo_reducer.jsx';
 import friendsReducer from './friends_reducer.jsx';
 import savesReducer from './saves_reducer.jsx';
+import citiesReducer from './cities_reducer.jsx';
+import interestsReducer from './interests_reducer.jsx';
 
 const rootReducer = combineReducers({
   form,
@@ -14,7 +16,9 @@ const rootReducer = combineReducers({
   matches: matchesReducer,
   userInfo: userInfoReducer,
   friends: friendsReducer,
-  savedUsers: savesReducer
+  savedUsers: savesReducer,
+  interests: interestsReducer,
+  cities: citiesReducer
 });
 
 export default rootReducer;
