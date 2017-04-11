@@ -19,9 +19,9 @@ import Profile from './components/Profile/profile.jsx';
 import Message from './components/Message/message.jsx';
 import Nav from './components/Nav/nav.jsx';
 import Save from './components/Save/save.jsx'
-
 import checkAuth from './components/Auth/check_auth.jsx';
 import { getUserInfo } from './actions/index.jsx';
+import { getInterests, getCities } from './actions/interests.jsx';
 
 const store = createStore(reducers,
   applyMiddleware(thunk));
@@ -32,6 +32,9 @@ if (token && email) {
   console.log(!!token, !!email, "IN THE BEGINNING");
   store.dispatch(getUserInfo(token, email, false))
 }
+
+store.dispatch(getInterests());
+store.dispatch(getCities());
 
 ReactDOM.render(
   <div className="container-fluid">

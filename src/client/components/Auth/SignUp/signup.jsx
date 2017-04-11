@@ -21,7 +21,8 @@ class SignUp extends React.Component {
       Profession: values.profession,
       Company: values.company,
       Bio: values.bio,
-      Interests: values.interest.split(',')
+      Interests: values.interest.split(','),
+      Image: ""
     }
     console.log("the form value from survey OBJ send to server ", signupObj);
     this.props.signupUser(signupObj);
