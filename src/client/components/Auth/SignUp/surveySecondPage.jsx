@@ -7,10 +7,7 @@ import Multiselect from 'react-widgets/lib/Multiselect';
 import DropdownList from 'react-widgets/lib/DropdownList';
 import * as actions from '../../../actions/interests.jsx';
 
-const { cityField, interestField,
-        stateField, professionField, 
-        companyField, bioField
-      } = signupFields;
+const { cityField, renderTextField, renderCheckBox } = signupFields;
 
 const renderDropDownList = ({ input, ...rest }) => <DropdownList {...input} {...rest}/>;
 
@@ -22,21 +19,16 @@ class SurveySecondPage extends React.Component {
   }
 
   render() {
-    const { handleSubmit, previousPage } = this.props;
+    const { onSubmit, previousPage } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <Field name="profession" component={professionField} />
-        <Field name="company" component={companyField} />
+        <Field name="profession" component={ renderTextField } label="Profession"/>
+        <Field name="company" component={ renderTextField } label="Company"/>
+        <Field name="bio" component={ renderTextField } label="About me" multiLine={ true } rows={ 2 } />
         <div>
-        <label>City</label>
-          <Field name="city" component={renderDropDownList} data={this.props.cities.map(c => c.City_Name)} valueField="value" textField="city"/>
-        </div>
-        <Field name="state" component={stateField} />
-        <div>
-        <label>Interests</label>
+          <label>Interests</label>
           <Field name="interests" component={renderMultiselect} defaultValue={[]} onBlur={() => props.onBlur()} data={this.props.interests.map(i => i.Interest_Name)}/>
         </div>
-        <Field name="bio" component={bioField} />
         <div>
           <button type="button" className="previous" onClick={previousPage}>Previous</button>
           <button type="submit">Sign Up</button>

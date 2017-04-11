@@ -5,6 +5,9 @@ import Checkbox from 'material-ui/Checkbox';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
+const cities = ["San Francisco - CA", "San Jose - CA", "Seattle - WA"];
+const interests = ["Golang", "JavaScript", "Finance", "Accounting"];
+
 export const signinField = {
   emailField: email => (
     <fieldset className="form-group">
@@ -32,6 +35,23 @@ export const signupFields = {
     errorText={props.touched && props.error}
     {...props}
   />
-)
+  ),
 
+  cityField: city => (
+    <RadioButtonGroup>
+      {
+        cities.map(city => 
+          <RadioButton value={ city } label={ city } />
+        )
+      }
+    </RadioButtonGroup>
+  ),
+
+  renderCheckBox: props => (
+    <Checkbox label={ props.label } 
+      checked={ props.value ? true : false }
+      onCheck={ props.onChange }
+      {...props}
+    />
+  )
 }
