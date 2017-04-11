@@ -32,9 +32,13 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div style={{"margin": "10% auto", "width": "50%"}}>
-        <h2>Sign Up!</h2>
-        <Survey onSubmit={this.handleFormSubmit} />
+      <div>
+        <div id="hero" className="Hero" style={{ "backgroundColor": "white" }}>
+          <div style={{"margin": "10% auto", "width": "50%"}}>
+            <h2 style={{ "color": "black" }} >Sign Up!</h2>
+            <Survey onSubmit={this.handleFormSubmit} />
+          </div>
+        </div>
       </div>
     );
   }

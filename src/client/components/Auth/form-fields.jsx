@@ -1,4 +1,9 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import Checkbox from 'material-ui/Checkbox';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 export const signinField = {
   emailField: email => (
@@ -19,68 +24,27 @@ export const signinField = {
 }
 
 export const signupFields = {
-  emailField: email => (
-    <fieldset className="form-group">
-      <label>Email: </label>
-      <input className="form-control" {...email.input} />
-      {email.meta.touched && email.meta.error && <div className="error">{email.meta.error}</div>}
-    </fieldset> 
+
+  
+  renderTextField: ({ input, label, meta: { touched, error }, ...custom }) => (
+  <TextField hintText={ label }
+    floatingLabelText={ label }
+    errorText={ touched && error }
+    { ...input }
+    { ...custom } 
+  /> 
   ),
 
-  nameField: name => (
-    <fieldset className="form-group">
-      <label>Name: </label>
-      <input className="form-control" {...name.input} />
-      {name.meta.touched && name.meta.error && <div className="error">{name.meta.error}</div>}
-    </fieldset>
+  renderRadioGroup: ({ input, ...rest }) => (
+    <RadioButtonGroup { ...input } { ...rest }
+      valueSelected={ input.value }
+      onChange={(event, value) => input.onChange(value)}/> 
   ),
 
-  passwordField: password => (
-    <fieldset className="form-group">
-      <label>Password: </label>
-      <input className="form-control" type="password" {...password.input} />
-      {password.meta.touched && password.meta.error && <div className="error">{password.meta.error}</div>}
-    </fieldset>
-  ),
-
-  passwordConfirmField: passwordConfirm => (
-    <fieldset className="form-group">
-      <label>Confirm Password: </label>
-      <input className="form-control" type="password" {...passwordConfirm.input} />
-      {passwordConfirm.meta.touched && passwordConfirm.meta.error && <div className="error">{passwordConfirm.meta.error}</div>}
-    </fieldset>
-  ),
-
-  stateField: livingState => (
-    <fieldset className="form-group">
-      <label>State: </label>
-      <input className="form-control" {...livingState.input} />
-      {livingState.meta.touched && livingState.meta.error && <div className="error">{livingState.meta.error}</div>}
-    </fieldset>
-  ),
-
-  professionField: profession => (
-    <fieldset className="form-group">
-      <label>Profession: </label>
-      <input className="form-control" {...profession.input} />
-      {profession.meta.touched && profession.meta.error && <div className="error">{profession.meta.error}</div>}
-    </fieldset>
-  ),
-
-  companyField: company => (
-    <fieldset className="form-group">
-      <label>Company: </label>
-      <input className="form-control" {...company.input} />
-      {company.meta.touched && company.meta.error && <div className="error">{company.meta.error}</div>}
-    </fieldset>
-  ),
-
-  bioField: aboutme => (
-    <fieldset className="form-group">
-      <label>About Me: </label>
-      <input className="form-control" {...aboutme.input} />
-      {aboutme.meta.touched && aboutme.meta.error && <div className="error">{aboutme.meta.error}</div>}
-    </fieldset>
+  renderCheckBox: ({ input, label }) => (
+    <Checkbox label={ label } 
+      checked={ input.value ? true : false }
+      onCheck={ input.onChange }
+    />
   )
-
 }
