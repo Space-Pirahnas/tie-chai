@@ -44,4 +44,4 @@ Survey.PropTypes = {
   onSubmit: PropTypes.func.isRequired
 }
 
-export default Survey
+export default Survey;
