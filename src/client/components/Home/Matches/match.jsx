@@ -12,7 +12,7 @@ class Match extends Component {
       <div className="match_container">
         <div className="match">
           <div className="home_match">
-            {this.props.match.Image ? <img className="home_image" src={this.props.match.Image} /> : <img src="http://www.propertybaazaar.com/images/noprofile.png" className="home_image"/> }
+            {this.props.match.Image ? <img className="home_image" src={this.props.match.Image} /> : <img src={"./styles/noprofile.png"} className="home_image"/> }
             <div>
               <div className="home_name">{this.props.match.Name}</div>
               <div>{this.props.match.City}</div>
