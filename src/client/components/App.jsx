@@ -7,6 +7,7 @@ import Logo from './Logo/logo.jsx';
 import NavProfile from './Profile/navProfile.jsx';
 import Search from './Search/search.jsx';
 import Options from './Options/options.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,9 +25,9 @@ class App extends React.Component {
           {this.props.authenticated ? <NavProfile /> : null}
           <Options />
         </header>
-        <div>
+        <MuiThemeProvider>
           {this.props.children}
-        </div>
+        </MuiThemeProvider>
       </div>
     );
   }

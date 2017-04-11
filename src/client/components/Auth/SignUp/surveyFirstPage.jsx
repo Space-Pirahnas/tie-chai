@@ -4,17 +4,18 @@ import { reduxForm, Field } from 'redux-form';
 import { signupFields } from '../form-fields.jsx';
 import validate from './validate.jsx';
 
-const { emailField, nameField, passwordField, passwordConfirmField } = signupFields;
+const { renderTextField, emailField, nameField, passwordField, passwordConfirmField } = signupFields;
 
 class SurveyFirstPage extends React.Component {
   render() {
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <Field name="email" type="email" component={emailField} />
-        <Field name="name" component={nameField} />
-        <Field name="password" type="password" component={passwordField} />
-        <Field name="passwordConfirm" type="password" component={passwordConfirmField} />
+        <Field name="email" type="email" component={ renderTextField } label="Email" />
+        <Field name="firstName" component={ renderTextField } label="First Name"/>
+        <Field name="lastName" component={ renderTextField } label="Last Name"/>
+        <Field name="password" type="password" component={ renderTextField } label="Password"/>
+        <Field name="passwordConfirm" type="password" component={ renderTextField } label="Comfirm Password"/>
         <button type="submit" className="Button">Next</button>
       </form>
     )
