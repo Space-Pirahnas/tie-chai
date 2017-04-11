@@ -6,9 +6,14 @@ import loadjs from 'loadjs';
 class CreateEvent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      statePlace: ''
+    }
+
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
     this.handleChangeAction = this.handleChangeAction.bind(this);
     this.geolocate = this.geolocate.bind(this);
+    
   }
 
   componentDidMount() {
@@ -16,17 +21,22 @@ class CreateEvent extends React.Component {
     loadjs(url, {
       success: () => {
         const input = document.getElementById('google_auto')
-        const autocomplete = new window.google.maps.places.Autocomplete(input);
+        const searchBox = new window.google.maps.places.SearchBox(input);
+        searchBox.addListener('places_changed', () => {
+          const place = searchBox.getPlaces();
+          this.setState({statePlace : place})
+        });
       },
       error: (error) => {
         console.log("Fail to load google autocomplete api url");
       }
     })
-  
+
   }
 
   handleChangeAction(values) {
     console.log("handleChangeAction Works ,", values);
+    console.log('get the value when change location ', document.getElementById('google_auto').value);
   }
 
   handleEventSubmit(value) {
@@ -47,11 +57,11 @@ class CreateEvent extends React.Component {
 
   render() {
     return (
-      <div style={{"marginTop": "10%"}}>
+      <div style={{ "marginTop": "10%" }}>
         <h1>CreateEvent List From CreateEvent.jsx</h1>
-        <EventForm onSubmit={this.handleEventSubmit} 
-        eventChange={this.handleChangeAction} 
-        geoLocation={this.geolocate} />
+        <EventForm onSubmit={this.handleEventSubmit}
+          eventChange={this.handleChangeAction}
+          geoLocation={this.geolocate} />
       </div>
     );
   }

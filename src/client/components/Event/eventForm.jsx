@@ -5,7 +5,6 @@ import { EventField } from './eventformfields.jsx';
 const { titleField, locationField, meetTimeField, descriptionField } = EventField;
 
 const EventForm = (props) => {
-  console.log("In the EventForm the props.geoLocation is ", props.geoLocation);
   const { handleSubmit, pristine, reset, submitting, eventChange, geoLocation } = props;
   return (
     <form onSubmit={handleSubmit}>
