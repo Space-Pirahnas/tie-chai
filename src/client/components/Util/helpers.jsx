@@ -1,9 +1,9 @@
-const formatResponse = (string) => {
+const formatResponse = string => {
   let map = {};
-  let o = string.replace(/(["\\{}])/g, "").split(',');
+  let o = string.split(',')
   o.forEach((v) => {
-    var tuple = v.split(':');
-    map[tuple[0]] = tuple[1]
+    var tuple = v.replace(/[{}"]/g, "").split(':');
+    map[tuple[0]] = tuple.slice(1).join('');
   });
   
   return map;

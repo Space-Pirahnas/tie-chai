@@ -1,28 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import * as actions from '../../actions/index.jsx';
+import UploadImage from './upload_image.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      edit: false
+    }
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
 
+  toggleEdit() {
+    this.setState({
+      edit: !this.state.edit
+    });
   }
 
   render() {
     const { Email, Image } = this.props.userInfo;
     const ProfilePic = () => (
       <div>
-        <img className="profileImage" src={Image} />
+        <img className="profileImage" src={`http:${Image.slice(5)}`} />
       </div>
     )
-    let interests = (this.props.userInfo.Interests).slice(1, this.props.userInfo.Interests.length).split(',');
+    let interests = (this.props.userInfo.Interests).split('-');
     return (
       <div>
         <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
           <div className="container">
             {
-              this.props.userInfo.Image ? <ProfilePic /> : <img className="profileImage" src={"styles/user.jpeg"} />
+              !this.state.edit ? this.props.userInfo ? <ProfilePic /> : null : null
             }
+            {this.state.edit ? <div><UploadImage /></div> : null }
             <div className="Interests">
               <h2>Interests</h2>
               { interests.map((interest) =>
@@ -32,6 +43,7 @@ class Profile extends React.Component {
             <div id="clear"></div>
             <div style={{ "marginLeft": "50px" }}>
               <div>
+                {this.state.edit ? <button className="Button" onClick={this.toggleEdit}>Cancel</button> : <button className="Button" onClick={this.toggleEdit}>Edit Profile Image!</button> }
                 <p>{this.props.userInfo.Name} in {this.props.userInfo.City}</p>
                 <p>{this.props.userInfo.Email}</p>
               </div>

@@ -1,3 +1,6 @@
-{
+{ 
+  "ignore": [
+        "node_modules/**/*"
+  ],
   "presets":["latest", "react", "stage-3"]
 }
