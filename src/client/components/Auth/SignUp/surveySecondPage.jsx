@@ -9,7 +9,7 @@ import DropdownList from 'react-widgets/lib/DropdownList';
 import * as actions from '../../../actions/interests.jsx';
 
 
-const { cityField, renderTextField, renderCheckBox } = signupFields;
+const { renderRadioGroup, renderTextField, renderCheckBox } = signupFields;
 const renderDropDownList = ({ input, ...rest }) => <DropdownList {...input} {...rest}/>;
 
 const renderMultiselect = ({ input, ...rest }) => <Multiselect {...input} onBlur={() => input.onBlur()} value={input.value || []} {...rest}/>;
@@ -21,15 +21,18 @@ class SurveySecondPage extends React.Component {
 
   render() {
     const { handleSubmit, previousPage } = this.props;
+    console.log('this.props.cities: ', this.props.cities);
     return (
       <form onSubmit={ handleSubmit }>
-        <Field name="city" component={ cityField }>
-          {
-            this.props.cities.map((city, index) => 
-              <RadioButton key={ index } value={ city } label={ city } />
-            )
-          }
-        </Field>
+        <div>
+          <Field name="city" component={ renderRadioGroup }>
+            {
+              this.props.cities.map(city => 
+                <RadioButton key={ city.ID } value={ city.City_Name } label={ city.City_Name } />
+              )
+            }
+          </Field>
+        </div>
         <Field name="state" component={ renderTextField } label="State"/>
         <Field name="profession" component={ renderTextField } label="Profession"/>
         <Field name="company" component={ renderTextField } label="Company"/>

@@ -35,7 +35,7 @@ export const signupFields = {
   /> 
   ),
 
-  cityField: ({ input, ...rest }) => (
+  renderRadioGroup: ({ input, ...rest }) => (
     <RadioButtonGroup { ...input } { ...rest }
       valueSelected={ input.value }
       onChange={(event, value) => input.onChange(value)}/> 
