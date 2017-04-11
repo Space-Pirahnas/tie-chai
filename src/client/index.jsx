@@ -28,7 +28,8 @@ const store = createStore(reducers,
 
 const token = localStorage.getItem('token');
 const email = localStorage.getItem('user_email');
-if (token && email) {
+
+if (token && email) { 
   store.dispatch(getUserInfo(token, email, false))
 }
 

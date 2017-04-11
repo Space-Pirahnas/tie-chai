@@ -19,6 +19,7 @@
     "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
     "material-ui": "^0.17.3",
+    "loadjs": "^3.5.0",
     "mongoose": "^4.8.6",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.8",
