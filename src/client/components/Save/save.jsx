@@ -14,9 +14,10 @@ class Save extends Component {
   }
 
   render() {
+    // console.log(this.props.savedUsers);
     return (
       <div className="save">
-        {this.props.savedUsers ? this.props.savedUsers.map(save => <SavedUser save={save} />) : null}
+        {this.props.savedUsers ? this.props.savedUsers.map((save, i) => <SavedUser key={i} save={save} />) : null}
       </div>
     )
   }
@@ -24,6 +25,7 @@ class Save extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log("state here", state);
   return {
     email: state.userInfo.user.Email,
     savedUsers: state.savedUsers

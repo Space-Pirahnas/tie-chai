@@ -31,7 +31,7 @@ class Profile extends React.Component {
         <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
           <div className="container">
             {
-              !this.state.edit ? this.props.userInfo ? <ProfilePic /> : null : null
+              !this.state.edit ? this.props.userInfo ? <ProfilePic /> : <img className="profileImage" src={"./styles/noprofile.png"} /> : null
             }
             {this.state.edit ? <div><UploadImage /></div> : null }
             <div className="Interests">

@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
   matches: matchesReducer,
   userInfo: userInfoReducer,
   friends: friendsReducer,
+  savedUsers: savesReducer
 });
 
 export default rootReducer;

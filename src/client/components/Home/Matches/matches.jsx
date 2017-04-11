@@ -52,7 +52,7 @@ class Matches extends Component {
   render() {
     return (
       <div className="matches">
-        { this.props.matches ? this.props.matches.map(match => <Match match={ match } addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)}/>) : <div></div> }
+        { this.props.matches ? this.props.matches.map((match, i) => <Match match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)}/>) : <div></div> }
       </div>
     )
   }
