@@ -53,6 +53,21 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 	}
 }
 
+func handleTarget(w http.ResponseWriter, req *http.Request) {
+	var u User;
+	if req.Method == http.MethodGet {
+		email := req.Header.Get("Email");
+		db.Where(&User{Email: email}).First(&u);
+		if u.Email == email {
+			ur := getUser(u);
+			r, _ := json.Marshal(ur);
+			w.Write(r);
+		} else {
+			badRequest(w, "user not found", http.StatusBadRequest);
+		}
+	}
+}
+
 func filterRejects(u User, users []User) []User {
 	var filtered []User;
 	for _,v := range users {
