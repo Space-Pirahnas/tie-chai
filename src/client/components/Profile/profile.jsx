@@ -25,7 +25,7 @@ class Profile extends React.Component {
         <img className="profileImage" src={`http:${Image.slice(5)}`} />
       </div>
     )
-    let interests = (this.props.userInfo.Interests).split('-');
+    let interests = this.props.userInfo.Interests.split('-');
     return (
       <div>
         <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
@@ -36,9 +36,7 @@ class Profile extends React.Component {
             {this.state.edit ? <div><UploadImage /></div> : null }
             <div className="Interests">
               <h2>Interests</h2>
-              { interests.map((interest) =>
-                <div className="interest Button" key={Email}>{interest}</div>
-              )}
+              { interests.map((interest,i) => <div className="interest Button" key={i}>{interest}</div>)}
             </div>
             <div id="clear"></div>
             <div style={{ "marginLeft": "50px" }}>
