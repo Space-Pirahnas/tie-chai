@@ -10,9 +10,9 @@ const { renderTextField } = signupFields;
 
 class SurveyFirstPage extends React.Component {
   render() {
-    const { onSubmit } = this.props;
+    const { handleSubmit } = this.props;
     return (
-      <form onSubmit={ onSubmit }>
+      <form onSubmit={ handleSubmit }>
         <Field name="email" type="email" component={ renderTextField } label="Email" />
         <Field name="firstName" component={ renderTextField } label="First Name"/>
         <Field name="lastName" component={ renderTextField } label="Last Name"/>

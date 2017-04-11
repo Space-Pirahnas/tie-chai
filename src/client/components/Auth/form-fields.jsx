@@ -5,9 +5,6 @@ import Checkbox from 'material-ui/Checkbox';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const cities = ["San Francisco - CA", "San Jose - CA", "Seattle - WA"];
-const interests = ["Golang", "JavaScript", "Finance", "Accounting"];
-
 export const signinField = {
   emailField: email => (
     <fieldset className="form-group">
@@ -29,29 +26,25 @@ export const signinField = {
 export const signupFields = {
 
   
-  renderTextField: props => (
-  <TextField hintText={props.label}
-    floatingLabelText={props.label}
-    errorText={props.touched && props.error}
-    {...props}
-  />
+  renderTextField: ({ input, label, meta: { touched, error }, ...custom }) => (
+  <TextField hintText={ label }
+    floatingLabelText={ label }
+    errorText={ touched && error }
+    { ...input }
+    { ...custom } 
+  /> 
   ),
 
-  cityField: city => (
-    <RadioButtonGroup>
-      {
-        cities.map(city => 
-          <RadioButton value={ city } label={ city } />
-        )
-      }
-    </RadioButtonGroup>
+  cityField: ({ input, ...rest }) => (
+    <RadioButtonGroup { ...input } { ...rest }
+      valueSelected={ input.value }
+      onChange={(event, value) => input.onChange(value)}/> 
   ),
 
-  renderCheckBox: props => (
-    <Checkbox label={ props.label } 
-      checked={ props.value ? true : false }
-      onCheck={ props.onChange }
-      {...props}
+  renderCheckBox: ({ input, label }) => (
+    <Checkbox label={ label } 
+      checked={ input.value ? true : false }
+      onCheck={ input.onChange }
     />
   )
 }
