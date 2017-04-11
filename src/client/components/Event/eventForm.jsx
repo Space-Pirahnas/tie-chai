@@ -5,11 +5,12 @@ import { EventField } from './eventformfields.jsx';
 const { titleField, locationField, meetTimeField, descriptionField } = EventField;
 
 const EventForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+  console.log("In the EventForm the props.eventChange is ", props.eventChange);
+  const { handleSubmit, pristine, reset, submitting, eventChange } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name='title' component={titleField} placeholder="Event Title" />
-      <Field name='location' component={locationField} placeholder="Meeting Location" />
+      <Field name='title' component={titleField} />
+      <Field name='location' component={locationField} onChangeAction={eventChange} />
       <Field name='meettime' component={meetTimeField} />
       <Field name='description' component={descriptionField} />
       <div>
