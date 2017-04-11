@@ -9,9 +9,9 @@ class MatchBar extends Component {
   render() {
     return (
       <div className="match_button_bar" >
-        <button className="match_button" onClick={this.props.addFriend}>Yes!</button>
-        <button className="match_button" onClick={this.props.rejectMatch}>No!</button>
-        <button className="match_button" onClick={this.props.saveMatch}>Save!</button>
+        <input type= "image" onClick={this.props.addFriend} src={"./styles/tick-inside-circle.svg"} className="match_button" />
+        <input type= "image" onClick={this.props.rejectMatch} src={"./styles/delete-button.svg"} className="match_button" />
+        <input type= "image" onClick={this.props.saveMatch} src={"./styles/save-file.svg"} className="match_button" />
       </div>
     )
   }

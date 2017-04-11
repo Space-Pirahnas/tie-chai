@@ -482,11 +482,10 @@ label {
 }
 
 .matches{
-  height: 1000px;
+  height: 700px;
   display:flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow: scroll;
 }
 
 .match_container {
@@ -501,8 +500,8 @@ label {
 }
 
 .home_image {
-  height: 70px;
-  width: 70px;
+  height: 100px;
+  width: 100px;
   margin-right: 10px;
 }
 
@@ -543,16 +542,37 @@ label {
   background-color: rgb(255, 255, 255);
   outline: none;
   border: none;
+  width: 33%;
+  height: 33%;
 }
 
 .match_button_bar {
-  background-color: rgb(255, 255, 255);
+  /*background-color: black;*/
   display: flex;
   flex-direction: row;
+  width: 292.84px;
+  height: 80px;
   justify-content: space-around;
 }
 
 .save {
   margin: 150px 0px 0px 200px;
-  
+}
+
+.friends_image {
+  height: 200px;
+  max-width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.home_buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.arrow {
+  max-height: 15%;
+  max-width: 15%;
 }
