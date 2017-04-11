@@ -17,7 +17,7 @@ export const EventField = {
       onChange={(e) => {
         location.onChangeAction(location.input.value);
         location.input.onChange(e);
-      }} 
+      }}
       placeholder="Enter meet address ..." />
       {location.meta.touched && location.meta.error && <div className="error">{location.meta.error}</div>}
     </fieldset>
