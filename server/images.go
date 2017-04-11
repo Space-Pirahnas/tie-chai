@@ -6,21 +6,17 @@ import (
 )
 
 type upload struct {
-	Email, ImageUrl string
+	Email, ImageUrl, Image string
 }
 
 func handleImage(w http.ResponseWriter, req *http.Request) {
 	var img upload;
 	var u User;
-	var i Image;
 	if req.Method != http.MethodGet {
 		db.Where(&User{Email: img.Email}).First(&u);
 		defer req.Body.Close();
 		json.NewDecoder(req.Body).Decode(&img);
-		if req.Method == http.MethodPost {
-			updateImage(img, u, i);
-			successRequest(w, "success", "posted image url");
-		} else if req.Method == http.MethodDelete {
+		if req.Method == http.MethodDelete {
 			deleteImage(img, u);
 			successRequest(w, "success", "deleted image url");
 		}
@@ -31,14 +27,21 @@ func handleImage(w http.ResponseWriter, req *http.Request) {
 	} 
 } 
 
-func updateImage(img upload, u User, i Image) {
-	u.Image = Image{ImageUrl: img.ImageUrl};
-	db.Save(&u);
-	db.Create(&Image{ImageUrl: img.ImageUrl});
-	db.Where(&Image{ImageUrl: img.ImageUrl}).First(&i);
-	db.Where("id = ?", u.ImageID).Unscoped().Delete(&Image{});
-	u.ImageID = i.ID;
-	db.Save(&u);
+func updateImage(email string, url string, w http.ResponseWriter) {
+	var u User;
+	var i Image;
+	var updated Image;
+	db.Where(&User{Email: email}).First(&u);
+	if u.Email == email {
+		db.Where(&Image{ID: u.ImageID}).First(&i);
+		if i.ID == u.ImageID {
+			db.Delete(&i);
+		}
+		db.Create(&Image{ImageUrl: url});
+		db.Where(&Image{ImageUrl: url}).First(&updated);
+		u.ImageID = updated.ID;
+		db.Save(&u);
+	}
 }
 
 func fetchImages(u User, w http.ResponseWriter) {

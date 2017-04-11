@@ -9,7 +9,7 @@ class NavProfile extends React.Component {
 
   render() {
     if (!this.props.userInfo) {
-      return <div>Loading</div>
+      return null
     }
     return (
       <a href="/#/profile/:userid" className="UserProfile">
@@ -17,7 +17,7 @@ class NavProfile extends React.Component {
           <div className="name">{ this.props.userInfo.Name }</div>
           <div className="image">
             {
-              this.props.userInfo.Image ? <img src={ this.props.userInfo.Image } /> :  <img src={"styles/user.jpeg"} />
+              this.props.userInfo.Image ? <img src={ `http:${this.props.userInfo.Image.slice(5)}` } /> :  <img src={"styles/user.jpeg"} />
             }
           </div>
         </div>
@@ -27,7 +27,6 @@ class NavProfile extends React.Component {
 };
 
 function mapStateToProps(state) {
-  console.log('state in profile: ', state);
   return { userInfo: state.userInfo.user }
 }
 

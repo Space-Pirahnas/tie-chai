@@ -3,6 +3,7 @@ package main;
 import (
 	"net/http"
 	"encoding/json"
+	"strings"
 )
 
 type UserResponse struct {
@@ -10,7 +11,7 @@ type UserResponse struct {
 	Email string
 	City string
 	Image string
-	Interests []string
+	Interests string
 	Reviews []ReviewResponse
 	Profession string
 	Company string
@@ -26,18 +27,7 @@ func handleUsers(w http.ResponseWriter, req *http.Request) {
 }
 
 func getUser(u User) UserResponse {
-	return UserResponse{
-		u.Name,
-		u.Email,
-		getCity(u),
-		getUserImage(u),
-		getInterests(u),
-		getReviews(u),
-		u.Profession,
-		u.Company,
-		u.Bio,
-		u.State,
-	}
+	return UserResponse{ u.Name, u.Email, getCity(u), getUserImage(u), strings.Join(getInterests(u), "-"), getReviews(u), u.Profession, u.Company, u.Bio, u.State,}
 }
 
 func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
