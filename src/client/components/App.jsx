@@ -14,7 +14,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("In the App.jsx render function, the props.authenticated is ", this.props.authenticated);
     return (
       <div>
         <header className="Header">

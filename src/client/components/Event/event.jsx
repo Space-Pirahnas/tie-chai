@@ -1,10 +1,26 @@
 import React from 'react';
 import EventForm from './eventForm.jsx';
+import { GOOGLE_API } from '../../config.js'
+import loadjs from 'loadjs';
 
 class CreateEvent extends React.Component {
   constructor(props) {
     super(props);
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    const url = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_API + "&libraries=places";
+    console.log("calling componentwillmount in event.jsx", url);
+    loadjs(url, {
+      success: () => {
+        console.log("Successfully load google script");
+      },
+      error: (error) => {
+        console.log("Fail to load google autocomplete api url");
+      }
+    })
+  
   }
 
   handleEventSubmit(values) {
