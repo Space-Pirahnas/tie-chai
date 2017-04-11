@@ -24,7 +24,7 @@ class Events extends Component {
   render() {
     return (
       <div>
-        { this.props.events.map((event, idx) => <Event key={idx} event={ event } />) }
+        { this.props.events ? this.props.events.map((event, idx) => <Event key={idx} event={ event } />) : null }
       </div>
     )
   }

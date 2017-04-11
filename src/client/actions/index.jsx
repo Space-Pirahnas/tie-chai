@@ -1,9 +1,11 @@
 import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 import { hashHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR,
-        GET_USER_INFO,
-        GET_USER_FRIENDS } from './types.jsx';
+import {
+  AUTH_USER, UNAUTH_USER, AUTH_ERROR,
+  GET_USER_INFO,
+  GET_USER_FRIENDS
+} from './types.jsx';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://76fc5d04.ngrok.io'
@@ -15,11 +17,10 @@ export function signinUser({ email, password }) {
     axiosInstance.post('/api/login', { 'Email': email, 'Password': password })
       .then(response => {
         console.log("successfully sign in an user and receive token as ", response.data);
-        dispatch(getUserInfo(response.data, email));
+        dispatch(getUserInfo(response.data, email, true));
         dispatch({ type: AUTH_USER, payload: email });
         localStorage.setItem('token', response.data);
         localStorage.setItem('user_email', email);
-        hashHistory.push('/home');
       })
       .catch(error => {
         console.error("fail to sign in an user with error ", error);
@@ -29,11 +30,9 @@ export function signinUser({ email, password }) {
 }
 
 export function signupUser(signupObj) {
-  console.log("Calling signupUser", signupObj);
   return function (dispatch) {
     axiosInstance.post('/api/signup', signupObj)
       .then(response => {
-        console.log("successfully sign up an user and receive token as ", response.data);
         dispatch({ type: AUTH_USER, payload: signupObj.email });
         localStorage.setItem('token', response.data);
         localStorage.setItem('user_email', signupObj.email);
@@ -55,8 +54,8 @@ export function signoutUser() {
 
 }
 
-export function getUserInfo(token, email) {
-  console.log("in the getUserInfo funciton, token, email ", token, email);
+export function getUserInfo(token, email, signedUser) {
+  console.log("In the getUserInfo funciton, token, email ", token, email);
   return function (dispatch) {
     axiosInstance.get('/api/token', {
       headers: {
@@ -67,10 +66,15 @@ export function getUserInfo(token, email) {
       .then(res => {
         console.log('base on token and email, getUser object ', res.data);
         dispatch({ type: AUTH_USER, payload: email });
-        dispatch({ type: GET_USER_INFO, payload: {
-          email: email,
-          data: res.data,
-        }})
+        dispatch({
+          type: GET_USER_INFO, payload: {
+            email: email,
+            data: res.data,
+          }
+        })
+        if (signedUser) {
+          hashHistory.push('/home');
+        }
       })
       .catch(err => {
         console.error('Fail to getUserInfo with error ', err);
@@ -85,13 +89,13 @@ export function getUserFriends(email) {
         Email: email
       }
     })
-    .then(res => {
-      console.log('Fetching the friends list of current user email', res.data);
-      dispatch({ type: GET_USER_FRIENDS, payload: res.data });
-    })
-    .catch(err => {
-      console.error('Fail to Fetching friends list with error ', err);
-    })
+      .then(res => {
+        console.log('Fetching the friends list of current user email', res.data);
+        dispatch({ type: GET_USER_FRIENDS, payload: res.data });
+      })
+      .catch(err => {
+        console.error('Fail to Fetching friends list with error ', err);
+      })
   }
 }
 

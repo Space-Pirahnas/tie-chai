@@ -19,9 +19,10 @@ class Profile extends React.Component {
   }
 
   render() {
+    const { Email, Image } = this.props.userInfo;
     const ProfilePic = () => (
       <div>
-        <img className="profileImage" src={`http:${this.props.userInfo.Image.slice(5)}`} />
+        <img className="profileImage" src={`http:${Image.slice(5)}`} />
       </div>
     )
     let interests = (this.props.userInfo.Interests).split('-');
@@ -36,11 +37,11 @@ class Profile extends React.Component {
             <div className="Interests">
               <h2>Interests</h2>
               { interests.map((interest) =>
-                <div className="interest Button">{interest}</div>
+                <div className="interest Button" key={Email}>{interest}</div>
               )}
             </div>
             <div id="clear"></div>
-            <div style={{ "margin-left": "50px" }}>
+            <div style={{ "marginLeft": "50px" }}>
               <div>
                 {this.state.edit ? <button className="Button" onClick={this.toggleEdit}>Cancel</button> : <button className="Button" onClick={this.toggleEdit}>Edit Profile Image!</button> }
                 <p>{this.props.userInfo.Name} in {this.props.userInfo.City}</p>
