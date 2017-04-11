@@ -11,8 +11,6 @@ import Options from './Options/options.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log("In the App.jsx, the props.authenticated is ", props.authenticated);
   }
 
   render() {

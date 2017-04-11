@@ -13,7 +13,7 @@ class CreateEvent extends React.Component {
 
   render() {
     return (
-      <div style={{"margin-top": "10%"}}>
+      <div style={{"marginTop": "10%"}}>
         <h1>CreateEvent List From CreateEvent.jsx</h1>
         <EventForm onSubmit={this.handleEventSubmit} />
       </div>
