@@ -26,6 +26,7 @@ const validate = values => {
   if (!values.interest) {
     errors.interest = 'Required at least one interest';
   }
+
   return errors
 }
 

@@ -12,6 +12,7 @@ class SignUp extends React.Component {
   }
 
   handleFormSubmit(values) {
+    console.log(values, "valuyes herere");
     const signupObj = {
       Name: values.name,
       Email: values.email,
@@ -21,7 +22,7 @@ class SignUp extends React.Component {
       Profession: values.profession,
       Company: values.company,
       Bio: values.bio,
-      Interests: values.interest.split(','),
+      Interests: values.interests,
       Image: ""
     }
     console.log("the form value from survey OBJ send to server ", signupObj);

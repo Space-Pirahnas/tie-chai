@@ -31,6 +31,7 @@ export function signinUser({ email, password }) {
 
 export function signupUser(signupObj) {
   return function (dispatch) {
+    console.log(signupObj, "signup here");
     axiosInstance.post('/api/signup', signupObj)
       .then(response => {
         console.log(signupObj, "signup object hereee", response);

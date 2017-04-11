@@ -12,6 +12,10 @@ const { cityField, interestField,
         companyField, bioField
       } = signupFields;
 
+const renderDropDownList = ({ input, ...rest }) => <DropdownList {...input} {...rest}/>;
+
+const renderMultiselect = ({ input, ...rest }) => <Multiselect {...input} onBlur={() => input.onBlur()} value={input.value || []} {...rest}/>;
+
 class SurveySecondPage extends React.Component {
   constructor(props) {
     super(props);
@@ -25,12 +29,12 @@ class SurveySecondPage extends React.Component {
         <Field name="company" component={companyField} />
         <div>
         <label>City</label>
-        <Field name="city" component={DropdownList} data={this.props.cities.map(c => c.City_Name)} valueField="value" textField="city"/>
+          <Field name="city" component={renderDropDownList} data={this.props.cities.map(c => c.City_Name)} valueField="value" textField="city"/>
         </div>
         <Field name="state" component={stateField} />
         <div>
         <label>Interests</label>
-          <Field name="interests" component={Multiselect} defaultValue={[]} onBlur={() => props.onBlur()} data={this.props.interests.map(i => i.Interest_Name)}/>
+          <Field name="interests" component={renderMultiselect} defaultValue={[]} onBlur={() => props.onBlur()} data={this.props.interests.map(i => i.Interest_Name)}/>
         </div>
         <Field name="bio" component={bioField} />
         <div>
@@ -50,7 +54,6 @@ SurveySecondPage = reduxForm({
 })(SurveySecondPage);
 
 function mapStateToProps(state){
-  console.log(state, "State here its running");
   return {
     cities: state.cities,
     interests: state.interests
