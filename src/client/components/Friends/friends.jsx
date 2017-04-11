@@ -24,8 +24,6 @@ class Friends extends Component {
   showFriend(friend) {
     console.log('friend: ', friend);
     this.setState({ person: friend });
-
-    console.log("Friends component props.friends ", props);
   }
 
   render () {

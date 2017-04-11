@@ -1,18 +1,13 @@
 import React from 'react';
 
 const ContactInfo = (props) => {
-  console.log('props in contactInfo: ', props);
-  const styles = {
-    backgroundImage: "url(" + props.person.Image + ")"
-  }
-
   return (
     <div className="contact-info">
-      <img className="image" style={styles} />
+      <img className="friends_image" src={props.person.Image} />
       <div>
         <h2 style={{ "margin": "1em auto", "text-align": "center" }}>Interests</h2>
-        {props.person.Interests.map((interest) =>
-          <div className="interest Button">{interest}</div>
+        {props.person.Interests.split('-').map((interest, i) =>
+          <div className="interest Button" key={i}>{interest}</div>
         )}
       </div>
         <div>

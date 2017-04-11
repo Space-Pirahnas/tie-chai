@@ -7,6 +7,11 @@ import { axiosInstance } from '../../../actions/index.jsx';
 class Matches extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      page: 0
+    }
+    this.previous = this.previous.bind(this);
+    this.next = this.next.bind(this);
     this.fetchMatches = this.fetchMatches.bind(this);
     this.handleMatch = this.handleMatch.bind(this);
   }
@@ -49,10 +54,28 @@ class Matches extends Component {
     this.handleMatch(match, "Save", '/api/save');
   }
 
+  previous() {
+    this.setState({
+      page: this.state.page - 1
+    });
+  }
+
+  next() {
+    this.setState({
+      page: this.state.page + 1
+    });
+  }
+
   render() {
     return (
-      <div className="matches">
-        { this.props.matches ? this.props.matches.map((match, i) => <Match match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)}/>) : <div></div> }
+      <div>
+        <div className="matches">
+          { this.props.matches ? this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).map((match, i) => <Match match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)}/>) : <div></div> }
+          <div className="home_buttons">
+            {this.state.page ? <input type= "image" onClick={this.previous} src={"./styles/left-arrow.svg"} className="arrow" /> : null }
+            {this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).length >= 4 ? <input type= "image" onClick={this.next} src={"./styles/right-arrow.svg"} className="arrow" /> : null}
+         </div>
+        </div>
       </div>
     )
   }
