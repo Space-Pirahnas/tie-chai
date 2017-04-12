@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 
 export default function (ComponentNeedCheck) {
   const Authentication = React.createClass({
     contextTypes: {
-      router: React.PropTypes.object.isRequired
+      router: PropTypes.object.isRequired
     },
     componentWillMount(){
       if (!this.props.authenticated) {
