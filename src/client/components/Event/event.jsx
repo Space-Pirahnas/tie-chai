@@ -7,13 +7,12 @@ class CreateEvent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      statePlace: ''
+      statePlace: '',
+      business: ''
     }
-
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
     this.handleChangeAction = this.handleChangeAction.bind(this);
-    this.geolocate = this.geolocate.bind(this);
-    
+    this.handleYelpClick = this.handleYelpClick.bind(this);
   }
 
   componentDidMount() {
@@ -31,28 +30,20 @@ class CreateEvent extends React.Component {
         console.log("Fail to load google autocomplete api url");
       }
     })
-
   }
 
-  handleChangeAction(values) {
-    console.log("handleChangeAction Works ,", values);
-    console.log('get the value when change location ', document.getElementById('google_auto').value);
-  }
+
+  handleChangeAction(value) {
+    console.log("handleChangeAction Works ,", value);
+    this.setState({business: value})
+}
 
   handleEventSubmit(value) {
     console.log("handleEventSubmit values ", value);
   }
 
-  geolocate() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        console.log("Getting geolocation geolocation = ", geolocation);
-      })
-    }
+  handleYelpClick() {
+    console.log("click the yelp button, get business name", this.state.business);
   }
 
   render() {
@@ -61,7 +52,7 @@ class CreateEvent extends React.Component {
         <h1>CreateEvent List From CreateEvent.jsx</h1>
         <EventForm onSubmit={this.handleEventSubmit}
           eventChange={this.handleChangeAction}
-          geoLocation={this.geolocate} />
+          yelp={this.handleYelpClick} />
       </div>
     );
   }

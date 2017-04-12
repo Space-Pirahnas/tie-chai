@@ -2,14 +2,20 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { EventField } from './eventformfields.jsx';
 
-const { titleField, locationField, meetTimeField, descriptionField } = EventField;
+const { titleField, locationField, 
+        meetTimeField, descriptionField,
+        keyWordField } = EventField;
 
 const EventForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting, eventChange, geoLocation } = props;
+  const { handleSubmit, pristine,
+          reset, submitting, 
+          eventChange, yelp } = props;
   return (
     <form onSubmit={handleSubmit}>
       <Field name='title' component={titleField} />
-      <Field name='location' component={locationField} onChangeAction={eventChange} geoLocationAction={geoLocation} />
+      <Field name='location' component={locationField} />
+      <Field name='business' component={keyWordField} onChangeAction={eventChange}/>
+      <button type="button" onClick={yelp}>Yelp</button>
       <Field name='meettime' component={meetTimeField} />
       <Field name='description' component={descriptionField} />
       <div>

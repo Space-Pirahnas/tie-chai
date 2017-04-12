@@ -12,14 +12,23 @@ export const EventField = {
   locationField: location => (
     <fieldset className="form-group" id="locattionField">
       <label>Location: </label>
-      <input id="google_auto" 
-      className="form-control" {...location.input} 
-      onChange={(e) => {
-        location.onChangeAction(location.input.value);
-        location.input.onChange(e);
-      }}
-      placeholder="Enter meet address ..." />
+      <input id="google_auto"
+        className="form-control" {...location.input}
+        placeholder="Enter meet address ..." />
       {location.meta.touched && location.meta.error && <div className="error">{location.meta.error}</div>}
+    </fieldset>
+  ),
+
+  keyWordField: keyword => (
+    <fieldset className="form-group" id="locattionField">
+      <label>Search Business: </label>
+      <input className="form-control" {...keyword.input}
+        onChange={(e) => {
+          keyword.onChangeAction(e.target.value);
+          keyword.input.onChange(e);
+        }}
+        placeholder="Enter Business Name" />
+      {keyword.meta.touched && keyword.meta.error && <div className="error">{keyword.meta.error}</div>}
     </fieldset>
   ),
 
