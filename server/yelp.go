@@ -14,7 +14,7 @@ func handleYelp(w http.ResponseWriter, req *http.Request) {
 		// TODO: use URL.Query to generate query string
 		r, _ := http.NewRequest("GET", "https://api.yelp.com/v3/businesses/search?term=" + keyword + "&location=" + location , nil)
 		// TODO: make a seperate post call to get token, and add to header
-		r.Header.Add("Authorization", "Bearer bXTM7s3UZpMS8aQyzldGE7l98wMw9qrrPbuD2iAAGXzaZsU4HF1LzhvqRW2Xu_W_pwu8uC87pXh2T4lPcQtDpH6omZ-xEemXBgFx5yNrAsnWosxltEo7P0RafE_tWHYx")
+		r.Header.Add("Authorization", YELP_TOKEN)
 
 		resp, _ := client_yelp.Do(r)
 
