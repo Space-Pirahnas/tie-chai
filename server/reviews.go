@@ -100,3 +100,17 @@ func deleteReview(rev review) bool {
 	}
 	return false;
 }
+
+func getAverageRating(u User) float64 {
+	reviews := getReviews(u);
+	var rating int;
+	for _, r := range reviews {
+		rating += r.Reviewer_Rating;
+	}
+
+	if len(reviews) != 0 {
+		return float64(rating/len(reviews));
+	} else {
+		return float64(5);
+	}
+}

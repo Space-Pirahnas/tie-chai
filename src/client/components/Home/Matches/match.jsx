@@ -19,6 +19,7 @@ class Match extends Component {
               <div className="home_match">
                 {this.props.match ? this.props.match.Interests.split('-').map((interest,i) => <div className="interests" key={i}>{interest}</div>) : null}
               </div>
+              {this.props.match ? <div>{this.props.match.Rating_Average}</div> : null }
             </div>
           </div>
         </div>
