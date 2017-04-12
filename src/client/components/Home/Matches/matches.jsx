@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions/matches.jsx';
 import Match from './match.jsx';
 import { axiosInstance } from '../../../actions/index.jsx';
+import { hashHistory } from 'react-router';
 
 class Matches extends Component {
   constructor(props) {
@@ -66,11 +67,15 @@ class Matches extends Component {
     });
   }
 
+  viewMatch(match) {
+    hashHistory.push(`/profile/${match.Email}`);
+  }
+
   render() {
     return (
       <div>
         <div className="matches">
-          { this.props.matches ? this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).map((match, i) => <Match match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)}/>) : <div></div> }
+          { this.props.matches ? this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).map((match, i) => <Match match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)} viewMatch={this.viewMatch.bind(this, match) }/>) : null }
           <div className="home_buttons">
             {this.state.page ? <input type= "image" onClick={this.previous} src={"./styles/left-arrow.svg"} className="arrow" /> : null }
             {this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).length >= 4 ? <input type= "image" onClick={this.next} src={"./styles/right-arrow.svg"} className="arrow" /> : null}

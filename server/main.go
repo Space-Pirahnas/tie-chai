@@ -68,5 +68,6 @@ func main() {
 	http.HandleFunc("/api/reject", SetHeader(handleRejects));
 	http.HandleFunc("/api/save", SetHeader(handleSave));
 	http.HandleFunc("/api/upload_image", SetHeader(handleUpload));
+	http.HandleFunc("/api/target", SetHeader(handleTarget));
 	http.ListenAndServe(":8080", nil);
 }

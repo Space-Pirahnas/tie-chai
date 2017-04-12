@@ -1,4 +1,4 @@
-import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -47,7 +47,7 @@ ReactDOM.render(
           <Route path='/home' component={checkAuth(Home)} />
           <Route path='/friends' component={Friends} />
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
-          <Route path='/profile/:userid' component={checkAuth(Profile)} />
+          <Route path='/profile/:userEmail' component={checkAuth(Profile)} />
           <Route path='/message' component={Message} />
           <Route path='/save' component={checkAuth(Save)} />
         </Route>
