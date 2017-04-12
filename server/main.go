@@ -69,5 +69,6 @@ func main() {
 	http.HandleFunc("/api/save", SetHeader(handleSave));
 	http.HandleFunc("/api/upload_image", SetHeader(handleUpload));
 	http.HandleFunc("/api/target", SetHeader(handleTarget));
+	http.HandleFunc("/api/yelp", SetHeader(handleYelp));
 	http.ListenAndServe(":8080", nil);
 }

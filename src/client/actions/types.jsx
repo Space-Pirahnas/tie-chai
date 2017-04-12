@@ -10,4 +10,5 @@ export const GET_SAVED_USERS = 'get_saved_users';
 export const GET_INTERESTS = 'get_cities';
 export const GET_CITIES = 'get_interests';
 export const GET_TARGET = 'get_target';
+export const GET_YELP_BUSINESS = 'get_business';
 

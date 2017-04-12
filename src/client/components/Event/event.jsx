@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import EventForm from './eventForm.jsx';
 import { GOOGLE_API } from '../../config.js'
 import loadjs from 'loadjs';
+import * as actions from '../../actions/yelp.jsx'
 
 class CreateEvent extends React.Component {
   constructor(props) {
@@ -23,7 +25,8 @@ class CreateEvent extends React.Component {
         const searchBox = new window.google.maps.places.SearchBox(input);
         searchBox.addListener('places_changed', () => {
           const place = searchBox.getPlaces();
-          this.setState({statePlace : place})
+          this.setState({
+            statePlace : place[0].formatted_address})
         });
       },
       error: (error) => {
@@ -34,16 +37,18 @@ class CreateEvent extends React.Component {
 
 
   handleChangeAction(value) {
-    console.log("handleChangeAction Works ,", value);
     this.setState({business: value})
 }
 
   handleEventSubmit(value) {
     console.log("handleEventSubmit values ", value);
+    console.log("Date to meet", JSON.stringify(value.when));
+    console.log("Time to meet", JSON.stringify(value.at));
   }
 
   handleYelpClick() {
-    console.log("click the yelp button, get business name", this.state.business);
+    console.log("click the yelp button, get business name", this.state);
+    
   }
 
   render() {
@@ -58,5 +63,9 @@ class CreateEvent extends React.Component {
   }
 };
 
+function mapStateToProps(state) {
+  return {};
+}
 
-export default CreateEvent;
+
+export default connect(mapStateToProps, actions)(CreateEvent);
