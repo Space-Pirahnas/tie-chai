@@ -603,10 +603,12 @@ label {
   max-width: 10%;
 }
 
+
 .match_rating_star {
   color: #ffda44;
   background-color: #f8f8ff;
 }
+
 
 .reviews {
   height: 50vh;
@@ -629,4 +631,12 @@ label {
 
 i:hover {
   cursor: pointer;
+}
+
+.interests {
+  color: #337ab7;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px
+
 }
