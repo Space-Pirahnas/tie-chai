@@ -49,7 +49,7 @@ class Profile extends React.Component {
                 <h2>Interests</h2>
                 { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="interest Button" key={i}>{interest}</div>) : null}
                 <h2>Reviews</h2>
-                <center><button className="Button" onClick={this.toggleReview} >Write A Review!</button></center>
+                {this.props.user.Email !== this.props.target.Email ? <center>{!this.state.review ? <button className="Button" onClick={this.toggleReview} >Write A Review!</button> : <button className="Button" onClick={this.toggleReview} >Cancel!</button>}</center> : null }
                 {this.state.review ? <SubmitReview  /> : null }
                 {this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} review={review} />) : null}
               </div>
