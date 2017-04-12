@@ -16,6 +16,10 @@ class Profile extends React.Component {
     this.props.getTarget(this.props.params.userEmail);
   }
 
+  componentWillUpdate(){
+    this.props.getTarget(this.props.params.userEmail);
+  }
+
   toggleEdit() {
     this.setState({
       edit: !this.state.edit
