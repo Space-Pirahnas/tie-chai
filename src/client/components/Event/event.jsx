@@ -42,7 +42,7 @@ class CreateEvent extends React.Component {
 
   handleEventSubmit(value) {
     console.log("handleEventSubmit values ", value);
-    console.log("Date to meet", JSON.stringify(value.when));
+    console.log("Date to meet", value.when.toString());
     console.log("Time to meet", JSON.stringify(value.at));
   }
 
