@@ -14,7 +14,7 @@ class SignUp extends React.Component {
   handleFormSubmit(values) {
     console.log(values, "valuyes herere");
     const signupObj = {
-      Name: values.name,
+      Name: `${values.firstName} ${values.lastName}` ,
       Email: values.email,
       Password: values.password,
       City: values.city,

@@ -42,8 +42,8 @@ class SurveySecondPage extends React.Component {
           <Field name="interests" component={renderMultiselect} defaultValue={[]} onBlur={() => props.onBlur()} data={this.props.interests.map(i => i.Interest_Name)}/>
         </div>
         <div>
-          <button type="button" className="previous" onClick={previousPage}>Previous</button>
-          <button type="submit">Sign Up</button>
+          <button type="button" className="Button survey" onClick={previousPage}>Previous</button>
+          <button type="submit" className="Button survey">Sign Up</button>
         </div>
       </form>
     )
