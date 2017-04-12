@@ -59,6 +59,7 @@ class Profile extends React.Component {
                   {!this.state.edit  ? this.props.user.Email === this.props.target.Email ? <button className="Button" onClick={this.toggleEdit}>Edit Profile Picture</button> : null : <button className="Button" onClick={this.toggleEdit}>Cancel</button> }
                   <p>{this.props.target.Name} in {this.props.target.City}</p>
                   <p>{this.props.target.Email}</p>
+                  <p>{this.props.target.Rating_Average} Star Average Rating!</p>
                 </div>
                 <div className="button-wrapper" style={{ width: "20%" }}>
                   <a href="/#/message" className="Button">Message</a>
