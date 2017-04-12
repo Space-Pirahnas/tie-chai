@@ -4,16 +4,31 @@ export const EventField = {
   titleField: eventtitle => (
     <fieldset className="form-group">
       <label>Title: </label>
-      <input className="form-control" {...eventtitle.input} />
+      <input className="form-control" {...eventtitle.input} placeholder="Event Title" />
       {eventtitle.meta.touched && eventtitle.meta.error && <div className="error">{eventtitle.meta.error}</div>}
     </fieldset>
   ),
 
   locationField: location => (
-    <fieldset className="form-group">
+    <fieldset className="form-group" id="locattionField">
       <label>Location: </label>
-      <input className="form-control" {...location.input} />
+      <input id="google_auto"
+        className="form-control" {...location.input}
+        placeholder="Enter meet address ..." />
       {location.meta.touched && location.meta.error && <div className="error">{location.meta.error}</div>}
+    </fieldset>
+  ),
+
+  keyWordField: keyword => (
+    <fieldset className="form-group" id="locattionField">
+      <label>Search Business: </label>
+      <input className="form-control" {...keyword.input}
+        onChange={(e) => {
+          keyword.onChangeAction(e.target.value);
+          keyword.input.onChange(e);
+        }}
+        placeholder="Enter Business Name" />
+      {keyword.meta.touched && keyword.meta.error && <div className="error">{keyword.meta.error}</div>}
     </fieldset>
   ),
 
