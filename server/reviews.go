@@ -48,7 +48,7 @@ func getReviews(u User) []ReviewResponse {
 }
 
 func handleReviews(w http.ResponseWriter, req *http.Request) {
-	if req.Method != http.MethodGet && req.Method != http.MethodPut {
+	if req.Method != http.MethodGet && req.Method != http.MethodPut && req.Method != http.MethodOptions {
 		var rev review;
 		defer req.Body.Close();
 		err := json.NewDecoder(req.Body).Decode(&rev);

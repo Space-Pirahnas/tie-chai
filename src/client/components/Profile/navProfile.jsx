@@ -1,19 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import * as actions from '../../actions/index.jsx';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 
 class NavProfile extends React.Component {
   constructor(props) {
     super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    hashHistory.push('/');
+    setTimeout(() => {
+      hashHistory.push(`/profile/${this.props.userInfo.Email}`)
+    });
   }
 
   render() {
     if (!this.props.userInfo) {
-      return null
+      return null;
     }
     return (
-      <Link to={`profile/${this.props.userInfo.Email}`} className="UserProfile">
+      <div onClick={this.onClick} className="UserProfile">
         <div className="User">
           <div className="name">{ this.props.userInfo.Name }</div>
           <div className="image">
@@ -22,7 +30,7 @@ class NavProfile extends React.Component {
             }
           </div>
         </div>
-      </Link>
+      </div>
       );
   }
 };

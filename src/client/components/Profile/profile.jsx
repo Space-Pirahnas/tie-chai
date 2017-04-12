@@ -2,27 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux'
 import * as actions from '../../actions/matches.jsx';
 import UploadImage from './upload_image.jsx';
+import Review from './Reviews/reviews.jsx';
+import SubmitReview from './Reviews/submit_review.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      edit: false
+      edit: false,
+      review: false
     }
     this.toggleEdit = this.toggleEdit.bind(this);
-  }
-
-  componentWillMount(){
-    this.props.getTarget(this.props.params.userEmail);
-  }
-
-  componentWillUpdate(){
+    this.toggleReview = this.toggleReview.bind(this);
     this.props.getTarget(this.props.params.userEmail);
   }
 
   toggleEdit() {
     this.setState({
       edit: !this.state.edit
+    });
+  }
+
+  toggleReview() {
+    this.setState({
+      review: !this.state.review
     });
   }
 
@@ -41,15 +44,19 @@ class Profile extends React.Component {
               {
                 !this.state.edit ? this.props.target.Image ? <ProfilePic /> : <img className="profileImage" src={"./styles/noprofile.png"} /> : null
               }
-              {this.state.edit ? <div className="profileImage"><UploadImage /></div> : null }
+              {this.state.edit && this.props.target.Email === this.props.user.Email ? <div className="profileImage"><UploadImage /></div> : null }
               <div className="Interests">
                 <h2>Interests</h2>
                 { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="interest Button" key={i}>{interest}</div>) : null}
+                <h2>Reviews</h2>
+                <center><button className="Button" onClick={this.toggleReview} >Write A Review!</button></center>
+                {this.state.review ? <SubmitReview  /> : null }
+                {this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} review={review} />) : null}
               </div>
               <div id="clear"></div>
               <div style={{ "marginLeft": "50px" }}>
                 <div>
-                  {this.state.edit ? <button className="Button" onClick={this.toggleEdit}>Cancel</button> : <button className="Button" onClick={this.toggleEdit}>Edit Profile Image!</button> }
+                  {!this.state.edit  ? this.props.user.Email === this.props.target.Email ? <button className="Button" onClick={this.toggleEdit}>Edit Profile Picture</button> : null : <button className="Button" onClick={this.toggleEdit}>Cancel</button> }
                   <p>{this.props.target.Name} in {this.props.target.City}</p>
                   <p>{this.props.target.Email}</p>
                 </div>
@@ -69,7 +76,7 @@ class Profile extends React.Component {
 };
 
 function mapStateToProps(state) {
-  return { target: state.target.user }
+  return { target: state.target.user, user: state.userInfo.user }
 }
 
 export default connect(mapStateToProps, actions)(Profile);
