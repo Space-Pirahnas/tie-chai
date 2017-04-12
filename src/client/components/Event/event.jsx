@@ -5,6 +5,7 @@ import { GOOGLE_API } from '../../config.js'
 import loadjs from 'loadjs';
 import * as actions from '../../actions/yelp.jsx'
 
+
 class CreateEvent extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +49,15 @@ class CreateEvent extends React.Component {
 
   handleYelpClick() {
     console.log("click the yelp button, get business name", this.state);
-    
+  
+  }
+
+  handleChangeAction(values) {
+    console.log("handleChangeAction Works ,", values);
+  }
+
+  handleEventSubmit(value) {
+    console.log("handleEventSubmit values ", value);
   }
 
   render() {
