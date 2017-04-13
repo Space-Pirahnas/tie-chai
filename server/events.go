@@ -7,7 +7,7 @@ import (
 )
 
 type event struct {
-	Name, Email, Location, Date, Time, Title, Description string
+	Name, Email, Location, Date, Time, Title, Description, Image string
 }
 
 type update struct {
@@ -48,12 +48,12 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 }
 
 func postEvent(user User, e event) {
-	db.Create(&Event{UserID: user.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description });
+	db.Create(&Event{UserID: user.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description, Image: e.Image});
 }
 
 func deleteEvent(user User, e event) {
 	var ev Event;
-	db.Where(&Event{UserID: user.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description }).First(&ev);
+	db.Where(&Event{UserID: user.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description, Image: e.Image }).First(&ev);
 	if ev.UserID > 0 {
 		db.Delete(&ev);
 	}
@@ -79,6 +79,7 @@ func getEvents(user User, e event, w http.ResponseWriter) {
 						e.Time,
 						e.Title,
 						e.Description,
+						e.Image,
 					}
 					res = append(res, ev);
 				}
@@ -92,11 +93,12 @@ func getEvents(user User, e event, w http.ResponseWriter) {
 
 func updateEvent(user User, u update) {
 	var ev Event;
-	db.Where(&Event{UserID: user.ID, Location: u.Old.Location, Date: u.Old.Date, Time: u.Old.Time, Title: u.Old.Title, Description: u.Old.Description }).First(&ev);
+	db.Where(&Event{UserID: user.ID, Location: u.Old.Location, Date: u.Old.Date, Time: u.Old.Time, Title: u.Old.Title, Description: u.Old.Description, Image: u.Old.Image }).First(&ev);
 	ev.Title = u.New.Title;
 	ev.Date = u.New.Date;
 	ev.Location = u.New.Location;
 	ev.Time = u.New.Time;
 	ev.Description = u.New.Description;
+	ev.Image = u.New.Image;
 	db.Save(&ev);
 }

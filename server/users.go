@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"strings"
+	"math/rand"
 )
 
 type UserResponse struct {
@@ -13,6 +14,7 @@ type UserResponse struct {
 	Image string
 	Interests string
 	Reviews []ReviewResponse
+	Rating_Average float64
 	Profession string
 	Company string
 	Bio string
@@ -27,7 +29,7 @@ func handleUsers(w http.ResponseWriter, req *http.Request) {
 }
 
 func getUser(u User) UserResponse {
-	return UserResponse{ u.Name, u.Email, getCity(u), getUserImage(u), strings.Join(getInterests(u), "-"), getReviews(u), u.Profession, u.Company, u.Bio, u.State,}
+	return UserResponse{ u.Name, u.Email, getCity(u), getUserImage(u), strings.Join(getInterests(u), "-"), getReviews(u), getAverageRating(u), u.Profession, u.Company, u.Bio, u.State,}
 }
 
 func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
@@ -41,7 +43,7 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 	if (len(city) > 0 && email == u.Email) {
 		db.Where(&Cities{City_Name : city}).First(&cityId);
 		db.Where(&User{CitiesID: cityId.ID}).Find(&users);
-		users = filterSaves(u, filterFriends(u, filterRejects(u, users)));
+		users = sortUsers(u, filterSaves(u, filterFriends(u, filterRejects(u, users))));
 		for _, v := range users {
 			res := getUser(v);
 			UserResponses = append(UserResponses, res);
@@ -76,4 +78,46 @@ func filterRejects(u User, users []User) []User {
 		}
 	}
 	return filtered;
+}
+
+
+func sortUsers(u User, users []User) []User {
+	ui := getInterests(u);
+	var sortedAndShuffled []User;
+	var sorted = make([][]User, len(interests));
+	for _, v := range users {
+		mi := getInterests(v);
+		matches := countMatchingInterests(ui, mi);
+		sorted[matches] = append(sorted[matches], v);
+	}
+	for i, a := range sorted {
+		sorted[i] = shuffleUsers(a);
+	}	
+	for _, v := range sorted {
+		sortedAndShuffled = append(sortedAndShuffled, v...);
+	}
+	return sortedAndShuffled;
+}
+
+func shuffleUsers(users []User) []User {
+	shuffled := make([]User, len(users));
+	perm := rand.Perm(len(users))
+	for i, v := range perm {
+		shuffled[v] = users[i];
+	}
+	return shuffled;
+}
+
+func countMatchingInterests(ui []string, mi []string) int {
+	count := 0;
+	uHash := make(map[string]bool, len(ui));
+	for _, v := range ui {
+		uHash[v] = true;
+	}
+	for _, m := range mi {
+		if uHash[m] == true {
+			count ++;
+		}
+	}
+	return count;
 }

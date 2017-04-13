@@ -60,8 +60,8 @@ table {
 }
 @import "https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900";
 body {
-  background: #221f1f;
-  color: #ffffff;
+  background: #ffffff;
+  color: #221f1f;
   font-family: "Lato", sans-serif;
 }
 
@@ -393,6 +393,10 @@ p {
   margin: 10px auto;
 }
 
+.matching_interests {
+  color: blue;
+}
+
 .dropdown-menu {
   background-color: none;
   background: transparent;
@@ -516,10 +520,13 @@ label {
   height: 100px;
   width: 100px;
   margin-right: 10px;
+  border-radius: 50px;
+  margin-bottom: 10px;
 }
 
 .home_name {
   font-size: 35px;
+  margin-top: 10px;
 }
 
 .home_match {
@@ -551,12 +558,12 @@ label {
 }
 
 .match_button {
-  color: black;
   background-color: rgb(255, 255, 255);
   outline: none;
   border: none;
-  width: 33%;
-  height: 33%;
+  width: 33px;
+  height: 33px;
+  padding-top: 5px;
 }
 
 .match_button_bar {
@@ -586,6 +593,10 @@ label {
 }
 
 .arrow {
-  max-height: 15%;
-  max-width: 15%;
+  max-height: 10%;
+  max-width: 10%;
+}
+
+.match_rating_star {
+  color: #ffda44
 }

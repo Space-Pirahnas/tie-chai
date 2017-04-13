@@ -49,9 +49,9 @@ class Profile extends React.Component {
                 <h2>Interests</h2>
                 { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="interest Button" key={i}>{interest}</div>) : null}
                 <h2>Reviews</h2>
-                <center><button className="Button" onClick={this.toggleReview} >Write A Review!</button></center>
+                {this.props.user.Email !== this.props.target.Email ? <center>{!this.state.review ? <button className="Button" onClick={this.toggleReview} >Write A Review!</button> : <button className="Button" onClick={this.toggleReview} >Cancel!</button>}</center> : null }
                 {this.state.review ? <SubmitReview  /> : null }
-                {this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} review={review} />) : null}
+                {this.props.target.Reviews ? this.props.target.Reviews.reverse().map((review, i) => <Review key={i} review={review} />) : null}
               </div>
               <div id="clear"></div>
               <div style={{ "marginLeft": "50px" }}>
@@ -59,6 +59,7 @@ class Profile extends React.Component {
                   {!this.state.edit  ? this.props.user.Email === this.props.target.Email ? <button className="Button" onClick={this.toggleEdit}>Edit Profile Picture</button> : null : <button className="Button" onClick={this.toggleEdit}>Cancel</button> }
                   <p>{this.props.target.Name} in {this.props.target.City}</p>
                   <p>{this.props.target.Email}</p>
+                  <p>{this.props.target.Rating_Average} Star Average Rating!</p>
                 </div>
                 <div className="button-wrapper" style={{ width: "20%" }}>
                   <a href="/#/message" className="Button">Message</a>

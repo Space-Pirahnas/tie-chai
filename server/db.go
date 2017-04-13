@@ -34,6 +34,7 @@ type Event struct {
 	Time string `sql:"index:event_idx;not null"`
 	Title string `sql:"index:event_idx;not null"`
 	Description string `sql:"index:event_idx;not null"`
+	Image string 
 }
 
 type Image struct {

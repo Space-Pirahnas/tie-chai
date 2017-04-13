@@ -22,13 +22,13 @@ class Matches extends Component {
   }
 
   fetchMatches() {
-    this.props.getMatches(this.props.email, this.props.city);
+    this.props.getMatches(this.props.user.Email, this.props.user.City);
   }
 
   handleMatch(match, target, path) {
     let obj = {
       User: {
-        Email: this.props.email
+        Email: this.props.user.Email
       }
     };
     obj[target] = {
@@ -36,7 +36,7 @@ class Matches extends Component {
     };
     axiosInstance.post(path, obj)
                  .then(res => {
-                   this.props.getMatches(this.props.email, this.props.city);
+                   this.props.getMatches(this.props.user.Email, this.props.user.City);
                  })
                  .catch(err => {
                    console.error(`cound not ${target} friend`);
@@ -71,11 +71,12 @@ class Matches extends Component {
     hashHistory.push(`/profile/${match.Email}`);
   }
 
+
   render() {
     return (
       <div>
         <div className="matches">
-          { this.props.matches ? this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).map((match, i) => <Match match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)} viewMatch={this.viewMatch.bind(this, match) }/>) : null }
+          { this.props.matches ? this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).map((match, i) => <Match user={this.props.user} match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)} viewMatch={this.viewMatch.bind(this, match) }/>) : null }
           <div className="home_buttons">
             {this.state.page ? <input type= "image" onClick={this.previous} src={"./styles/left-arrow.svg"} className="arrow" /> : null }
             {this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).length >= 4 ? <input type= "image" onClick={this.next} src={"./styles/right-arrow.svg"} className="arrow" /> : null}
@@ -88,9 +89,8 @@ class Matches extends Component {
 
 function mapStateToProps(state){
   return {
-    email: state.userInfo.user.Email,
-    city: state.userInfo.user.City,
-    matches: state.matches
+    user: state.userInfo.user,
+    matches: state.matches.slice().reverse()
   }
 }
 
