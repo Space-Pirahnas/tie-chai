@@ -27,7 +27,8 @@ class CreateEvent extends React.Component {
         searchBox.addListener('places_changed', () => {
           const place = searchBox.getPlaces();
           this.setState({
-            statePlace : place[0].formatted_address})
+            statePlace: place[0].formatted_address
+          })
         });
       },
       error: (error) => {
@@ -38,8 +39,9 @@ class CreateEvent extends React.Component {
 
 
   handleChangeAction(value) {
-    this.setState({business: value})
-}
+    console.log("In the handleChangeAction detect the value change ", value);
+    this.setState({ business: value })
+  }
 
   handleEventSubmit(value) {
     console.log("handleEventSubmit values ", value);
@@ -49,12 +51,9 @@ class CreateEvent extends React.Component {
 
   handleYelpClick() {
     console.log("click the yelp button, get business name", this.state);
-  
+    this.props.getYelpBusiness(this.state.business, this.state.statePlace)
   }
 
-  handleChangeAction(values) {
-    console.log("handleChangeAction Works ,", values);
-  }
 
   handleEventSubmit(value) {
     console.log("handleEventSubmit values ", value);
@@ -63,7 +62,7 @@ class CreateEvent extends React.Component {
   render() {
     return (
       <div style={{ "marginTop": "10%" }}>
-        <h1>CreateEvent List From CreateEvent.jsx</h1>
+        <h1>Host An Event</h1>
         <EventForm onSubmit={this.handleEventSubmit}
           eventChange={this.handleChangeAction}
           yelp={this.handleYelpClick} />
@@ -73,7 +72,7 @@ class CreateEvent extends React.Component {
 };
 
 function mapStateToProps(state) {
-  return {};
+  return { yelp_businesses: state.yelp.businesses };
 }
 
 
