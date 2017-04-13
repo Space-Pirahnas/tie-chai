@@ -93,8 +93,8 @@ func sortUsers(u User, users []User) []User {
 	for i, a := range sorted {
 		sorted[i] = shuffleUsers(a);
 	}	
-	for _, v := range sorted {
-		sortedAndShuffled = append(sortedAndShuffled, v...);
+	for i := len(sorted) - 1; i >= 0; i-- {
+		sortedAndShuffled = append(sortedAndShuffled, sorted[i]...);
 	}
 	return sortedAndShuffled;
 }

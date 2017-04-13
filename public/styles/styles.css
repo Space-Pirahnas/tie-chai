@@ -99,6 +99,7 @@ p {
   width: 100vw;
   box-sizing: border-box;
   z-index: 5;
+  justify-content: space-between;
 }
 
 .Logo {
@@ -251,10 +252,15 @@ p {
 
 .Hero {
   width: 100%;
-  position: relative;
+  position: fixed;
   background-size: cover;
-  min-height: 800px;
+  height: 100%;
+  padding:0;
+  margin:0;
+  top:0;
+  left:0
 }
+
 .Hero .content {
   position: relative;
   z-index: 4;

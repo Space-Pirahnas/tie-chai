@@ -90,7 +90,7 @@ class Matches extends Component {
 function mapStateToProps(state){
   return {
     user: state.userInfo.user,
-    matches: state.matches.slice().reverse()
+    matches: state.matches
   }
 }
 
