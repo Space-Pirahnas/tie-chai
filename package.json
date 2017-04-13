@@ -20,6 +20,7 @@
     "isomorphic-fetch": "^2.2.1",
     "loadjs": "^3.5.0",
     "material-ui": "^0.17.3",
+    "material-ui-rating": "^1.1.0",
     "mongoose": "^4.8.6",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.8",
