@@ -31,7 +31,7 @@ export function deleteReview(user, target, rating, text){
       dispatch(getTarget(target));
     })
     .catch(err => {
-      console.error("could not post review", err);
+      console.error("could not delete review", err);
     });
   }
 }

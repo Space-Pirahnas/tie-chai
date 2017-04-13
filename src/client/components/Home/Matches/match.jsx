@@ -8,18 +8,18 @@ class Match extends Component {
   }
 
   render() {
+    let userInterests = this.props.user.Interests.split('-');
     return (
       <div className="match_container">
         <div className="match">
           <div className="home_match">
             {this.props.match.Image ? <input type="image" className="home_image" src={this.props.match.Image} onClick={this.props.viewMatch}/> : <input type="image" src={"./styles/noprofile.png"} className="home_image" onClick={this.props.viewMatch}/> }
             <div>
-              <div className="home_name">{this.props.match.Name}</div>
+              <div className="home_name">{this.props.match.Name} <img className= "match_button" src="./styles/star.svg" /><span className="match_rating_star">{this.props.match.Rating_Average}</span></div>
               <div>{this.props.match.City}</div>
               <div className="home_match">
-                {this.props.match ? this.props.match.Interests.split('-').map((interest,i) => <div className="interests" key={i}>{interest}</div>) : null}
+                {this.props.match ? this.props.match.Interests.split('-').sort((a,b) => userInterests.indexOf(a) > 0 ? -1 : 1).map((interest,i) => <div className={userInterests.indexOf(interest) > -1 ? "interests matching_interests" : "interests"} key={i}>{interest}</div> ) : null}
               </div>
-              {this.props.match ? <div>{this.props.match.Rating_Average}</div> : null }
             </div>
           </div>
         </div>

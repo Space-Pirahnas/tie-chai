@@ -16,3 +16,5 @@ func badRequest(w http.ResponseWriter, message string, status int) {
 	log.Println(message, status);
 	http.Error(w, message, status);
 }
+
+
