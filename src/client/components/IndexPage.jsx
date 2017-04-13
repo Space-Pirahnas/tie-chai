@@ -15,7 +15,7 @@ class IndexPage extends Component {
 
     return (
       <div>
-        <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
+        <div id="hero" className="Hero" style={{backgroundImage: "url(styles/coffeebackground.jpg)" }}>
           <div className="content">
             <img className="logo" src={"styles/mug.png"} />
             <div>
