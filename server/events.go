@@ -22,10 +22,10 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 		json.NewDecoder(req.Body).Decode(&e);
 		db.Where(&User{ Email: e.Email }).First(&user);
 		if req.Method == http.MethodPost {
-			postEvent(user, e);
+			user.postEvent(e);
 			successRequest(w, "added event", "added event");
 		} else if req.Method == http.MethodDelete {
-			deleteEvent(user, e);
+			user.deleteEvent(e);
 			successRequest(w, "removed event successfully", "deleted event");
 		} else if req.Method != http.MethodOptions {
 			log.Println("request method not supported");
@@ -34,7 +34,9 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 			email := req.Header.Get("Email");
 			if len(email) > 0 {
 				db.Where(&User{Email: email}).First(&user);
-				getEvents(user, e, w);
+				events := user.getEvents(e);
+				r, _ := json.Marshal(events);
+				w.Write(r);
 			} else {
 				badRequest(w, "email not found", 400)
 			}
@@ -42,27 +44,27 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 		var u update;
 		json.NewDecoder(req.Body).Decode(&u);
 		db.Where(&User{ Email: u.Old.Email }).First(&user);
-		updateEvent(user, u);
+		user.updateEvent(u);
 		successRequest(w, "updated event", "sucessfully updated event");
 	}
 }
 
-func postEvent(user User, e event) {
-	db.Create(&Event{UserID: user.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description, Image: e.Image});
+func (u User) postEvent(e event) {
+	db.Create(&Event{UserID: u.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description, Image: e.Image});
 }
 
-func deleteEvent(user User, e event) {
+func (u User) deleteEvent(e event) {
 	var ev Event;
-	db.Where(&Event{UserID: user.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description, Image: e.Image }).First(&ev);
+	db.Where(&Event{UserID: u.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description, Image: e.Image }).First(&ev);
 	if ev.UserID > 0 {
 		db.Delete(&ev);
 	}
 }
 
-func getEvents(user User, e event, w http.ResponseWriter) {
+func (u User) getEvents(e event) []event {
 	var events []event;
-	if user.ID > 0 {
-		friends := findFriends(user);
+	if u.ID > 0 {
+		friends := u.findFriends();
 		for _, f := range friends {
 			var evt []Event;
 			var res []event;
@@ -86,12 +88,11 @@ func getEvents(user User, e event, w http.ResponseWriter) {
 				events = append(events, res...);
 			}
 		}
-		r, _ := json.Marshal(events);
-		w.Write(r);
 	} 
+	return events;
 }
 
-func updateEvent(user User, u update) {
+func (user User) updateEvent(u update) {
 	var ev Event;
 	db.Where(&Event{UserID: user.ID, Location: u.Old.Location, Date: u.Old.Date, Time: u.Old.Time, Title: u.Old.Title, Description: u.Old.Description, Image: u.Old.Image }).First(&ev);
 	ev.Title = u.New.Title;

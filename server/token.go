@@ -3,24 +3,17 @@ package main;
 import (
 	"encoding/json"
 	"net/http"
-	"log"
 )
 
 type tokenResponse struct {
 	Profile string
 }
 
-func storeToken (tokenString string, u usr) {
-	var user User;
-	db.Where(&User{Email: u.Email}).First(&user);
-	if len(user.Email) > 0 {
-		res := getUser(user);
-		r, _ := json.Marshal(res);
-		client.Cmd("HSET", u.Email, "Token", tokenString);
-		client.Cmd("HSET", u.Email , "Profile", string(r));
-	} else {
-		log.Println("user not found");
-	}
+func (u User) storeToken (tokenString string) {
+	res := u.getUser();
+	r, _ := json.Marshal(res);
+	client.Cmd("HSET", u.Email, "Token", tokenString);
+	client.Cmd("HSET", u.Email , "Profile", string(r));
 }
 
 func handleToken (w http.ResponseWriter, req *http.Request) {

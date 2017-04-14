@@ -26,16 +26,16 @@ func handleInterest (w http.ResponseWriter, req *http.Request) {
 	json.NewDecoder(req.Body).Decode(&ui);
 	db.Where(&User{Email: ui.Email}).First(&u);
 	if req.Method == http.MethodPut {
-		updateInterests(ui, u, i);
+		u.updateInterests(ui, i);
 		successRequest(w, "updated interests", "saved users interests");
-	// } else {
-		// getInterests(u);
 	} else if req.Method == http.MethodGet {
-		getInterestsList(w);
+		interests := getInterestsList();
+		r, _ := json.Marshal(interests);
+		w.Write(r);
 	}
 }
 
-func updateInterests(ui user_interest, u User, i Interest) {
+func (u User) updateInterests(ui user_interest, i Interest) {
 	db.Where("user_id = ?", u.ID).Unscoped().Delete(&UserInterest{});
 	for _, v := range ui.Interest {
 		db.Where(&Interest{Interest_Name: v}).First(&i);
@@ -43,7 +43,7 @@ func updateInterests(ui user_interest, u User, i Interest) {
 	}
 }
 
-func getInterests(u User) []string {
+func (u User) getInterests() []string {
 	var i []UserInterest;
 	var ui []string;
 	db.Where(&UserInterest{UserID: u.ID}).Find(&i);
@@ -55,9 +55,8 @@ func getInterests(u User) []string {
 	return ui;
 }
 
-func getInterestsList(w http.ResponseWriter) {
+func getInterestsList() []Interest {
 	var interests []Interest;
 	db.Where(&Interest{}).Find(&interests);
-	r, _ := json.Marshal(interests);
-	w.Write(r);
+	return interests;
 }

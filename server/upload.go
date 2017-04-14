@@ -17,6 +17,7 @@ type file struct {
 }
 
 func handleUpload (w http.ResponseWriter, req *http.Request ) {
+	var u User;
 	if req.Method == http.MethodPost {
 		u1 := uuid.NewV4();
 		email := req.Header.Get("Email");
@@ -43,6 +44,9 @@ func handleUpload (w http.ResponseWriter, req *http.Request ) {
 			fmt.Printf("bad response: %s", err) 
 		}
 		url := AWS.aws_path + path;
-		updateImage(email, url, w);
+		db.Where(&User{Email: email}).First(&u);
+		if u.Email == email {
+			u.updateImage(url);
+		}
 	}
 }

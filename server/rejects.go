@@ -21,15 +21,15 @@ func handleRejects( w http.ResponseWriter, req *http.Request ) {
 			db.Where(&User{Email: rr.User.Email}).First(&u);
 			db.Where(&User{Email: rr.Reject.Email}).First(&r);
 			if req.Method == http.MethodPost {
-				rejectUser(u, r, w);
+				u.rejectUser(r);
+				successRequest(w, "rejected user", "rejected user");
 			}
 		}
 	}
 } 
 
-func rejectUser(u User, r User, w http.ResponseWriter) {
+func (u User) rejectUser(r User) {
 	client.Cmd("HSET", u.Email, r.Email, "false");
-	successRequest(w, "rejected user", "rejected user");
 }
 
 func checkReject(u User, r User) bool {

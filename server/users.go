@@ -29,8 +29,8 @@ func handleUsers(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func getUser(u User) UserResponse {
-	return UserResponse{ u.Name, u.Email, getCity(u), getUserImage(u), strings.Join(getInterests(u), "-"), getReviews(u), getAverageRating(u), u.Profession, u.Company, u.Bio, u.State, u.Verified}
+func (u User) getUser() UserResponse {
+	return UserResponse{ u.Name, u.Email, u.getCity(), u.getUserImage(), strings.Join(u.getInterests(), "-"), u.getReviews(), u.getAverageRating(), u.Profession, u.Company, u.Bio, u.State, u.Verified}
 }
 
 func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
@@ -44,9 +44,9 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 	if (len(city) > 0 && email == u.Email) {
 		db.Where(&Cities{City_Name : city}).First(&cityId);
 		db.Where(&User{CitiesID: cityId.ID}).Find(&users);
-		users = sortUsers(u, filterSaves(u, filterFriends(u, filterRejects(u, users))));
+		users = u.sortUsers(u.filterSaves(u.filterFriends(u.filterRejects(users))));
 		for _, v := range users {
-			res := getUser(v);
+			res := v.getUser();
 			UserResponses = append(UserResponses, res);
 		}
 		r, _ := json.Marshal(UserResponses);
@@ -62,7 +62,7 @@ func handleTarget(w http.ResponseWriter, req *http.Request) {
 		email := req.Header.Get("Email");
 		db.Where(&User{Email: email}).First(&u);
 		if u.Email == email {
-			ur := getUser(u);
+			ur := u.getUser();
 			r, _ := json.Marshal(ur);
 			w.Write(r);
 		} else {
@@ -71,7 +71,7 @@ func handleTarget(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func filterRejects(u User, users []User) []User {
+func (u User) filterRejects(users []User) []User {
 	var filtered []User;
 	for _,v := range users {
 		if v.Email != u.Email && checkReject(u, v) {
@@ -82,12 +82,12 @@ func filterRejects(u User, users []User) []User {
 }
 
 
-func sortUsers(u User, users []User) []User {
-	ui := getInterests(u);
+func (u User) sortUsers(users []User) []User {
+	ui := u.getInterests();
 	var sortedAndShuffled []User;
 	var sorted = make([][]User, len(interests));
 	for _, v := range users {
-		mi := getInterests(v);
+		mi := v.getInterests();
 		matches := countMatchingInterests(ui, mi);
 		sorted[matches] = append(sorted[matches], v);
 	}

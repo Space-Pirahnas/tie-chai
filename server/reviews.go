@@ -26,7 +26,7 @@ type reviewUpdate struct {
 	Old, New review
 }
 
-func getReviews(u User) []ReviewResponse {
+func (u User) getReviews() []ReviewResponse {
 	var res []ReviewResponse;
 	var reviews []Review;
 	db.Where(&Review{UserID: u.ID}).Find(&reviews);
@@ -36,9 +36,9 @@ func getReviews(u User) []ReviewResponse {
 		singleReview := ReviewResponse{
 			reviewer.Name,
 			reviewer.Email,
-			getCity(reviewer),
-			getUserImage(reviewer),
-			getInterests(reviewer),
+			reviewer.getCity(),
+			reviewer.getUserImage(),
+			reviewer.getInterests(),
 			v.Rating,
 			v.Text,
 		}
@@ -101,8 +101,8 @@ func deleteReview(rev review) bool {
 	return false;
 }
 
-func getAverageRating(u User) float64 {
-	reviews := getReviews(u);
+func (u User) getAverageRating() float64 {
+	reviews := u.getReviews();
 	var rating int;
 	for _, r := range reviews {
 		rating += r.Reviewer_Rating;

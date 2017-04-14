@@ -1,4 +1,5 @@
 package main;
+
 import (
 	"net/http"
 	"log"
@@ -40,9 +41,9 @@ func signUp(w http.ResponseWriter, req *http.Request) {
 			db.Where(&Cities{ City_Name: u.City }).First(&city);
 			db.Create(&User{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID, Profession: u.Profession, Company: u.Company, Bio: u.Bio, State: u.State, Verified: "false" });
 			db.Where(&User{ Email: u.Email}).First(&id);
-			sendVerificationEmail(u);
+			u.sendVerificationEmail();
 			initializeInterests(id.ID, u.Interests);
-			sendToken(w, u);
+			id.sendToken(w, secret);
 		}
 	} else if req.Method != http.MethodOptions {
 		log.Println("cannot send a get request");
@@ -62,7 +63,7 @@ func logIn(w http.ResponseWriter, req *http.Request) {
 			if er != nil {
 				badRequest(w, "password is incorrect", http.StatusBadRequest);
 			} else {
-				sendToken(w, u);
+				user.sendToken(w, secret);
 			}
 		} else {
 			badRequest(w, "user not found in db, please signup", http.StatusFound);
@@ -72,12 +73,12 @@ func logIn(w http.ResponseWriter, req *http.Request) {
 	} 
 }
 
-func sendToken(w http.ResponseWriter, u usr){
+func (u User) sendToken(w http.ResponseWriter, secret []byte){
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"Email": u.Email,
 		"Time": time.Now(),
 	});
 	tokenString, _ := token.SignedString(secret);
-	storeToken(tokenString, u);
+	u.storeToken(tokenString);
 	successRequest(w, tokenString, "successfully logged in");
 }

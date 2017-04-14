@@ -24,13 +24,15 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 			db.Where(&User{Email: fr.User.Email}).First(&u);
 			db.Where(&User{Email: fr.Friend.Email}).First(&f);
 			if req.Method == http.MethodPost {
-				if checkMatch(u, f) {
-					addFriend(u, f, w);
+				if u.checkMatch(f) {
+					u.addFriend(f);
+					successRequest(w, "successfully added friend", "added friend");
 				} else {
 					badRequest(w, "match not found, placed in cache", 200);
 				}
 			} else if req.Method == http.MethodDelete {
-				deleteFriend(u, f, w);
+				u.deleteFriend(f);
+				successRequest(w, "successfully removed friend", "deletedfriend");
 			}
 		}
 	} 
@@ -41,7 +43,7 @@ func getFriends(w http.ResponseWriter, req *http.Request) {
 	email := req.Header.Get("Email");
 	db.Where(&User{Email: email}).First(&user);
 	if email == user.Email {
-		fr := findFriends(user);
+		fr := user.findFriends();
 		r, _ := json.Marshal(fr);
 		log.Println("successfully retrieved friends")
 		w.Write(r);		
@@ -50,7 +52,7 @@ func getFriends(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func findFriends(u User) []UserResponse {
+func (u User) findFriends() []UserResponse {
 	var fID []UserFriend;
 	var FriendResponses []UserResponse;
 	db.Where(&UserFriend{UserID: u.ID}).Find(&fID);
@@ -58,7 +60,7 @@ func findFriends(u User) []UserResponse {
 		var friend User;
 		if uf.UserID > 0 {
 			db.Where(&User{ID: uf.FriendID}).First(&friend);
-			res := getUser(friend);
+			res := friend.getUser();
 			FriendResponses = append(FriendResponses, res);
 		}
 	}
@@ -66,35 +68,33 @@ func findFriends(u User) []UserResponse {
 }
 
 
-func addFriend(p User, f User, w http.ResponseWriter) {
-	db.Create(&UserFriend{UserID: p.ID, FriendID: f.ID});
-	db.Create(&UserFriend{UserID: f.ID, FriendID: p.ID});
-	sendEmailsToMatch(p, f);
-	sendEmailsToMatch(f, p);
-	successRequest(w, "successfully added friend", "added friend");
+func (u User) addFriend(f User) {
+	db.Create(&UserFriend{UserID: u.ID, FriendID: f.ID});
+	db.Create(&UserFriend{UserID: f.ID, FriendID: u.ID});
+	u.sendEmailsToMatch(f);
+	f.sendEmailsToMatch(u);
 }
 
-func deleteFriend(p User, f User, w http.ResponseWriter) {
-	var u UserFriend;
-	db.Where(&UserFriend{UserID: p.ID, FriendID: f.ID}).First(&u);
-	if u.FriendID > 0 {
-		db.Delete(&u);
+func (u User) deleteFriend(f User) {
+	var uf UserFriend;
+	db.Where(&UserFriend{UserID: u.ID, FriendID: f.ID}).First(&uf);
+	if uf.FriendID > 0 {
+		db.Delete(&uf);
 	}
-	successRequest(w, "successfully removed friend", "deletedfriend");
 }
 
-func checkMatch(p User, f User) bool {
-	match, _ := client.Cmd("HGET", f.Email, p.Email).Str();
+func (u User) checkMatch(f User) bool {
+	match, _ := client.Cmd("HGET", f.Email, u.Email).Str();
 	if match == "true" {
-		client.Cmd("HDEL", f.Email, p.Email);
+		client.Cmd("HDEL", f.Email, u.Email);
 		return true;
 	} else {
-		client.Cmd("HSET", p.Email, f.Email, "true");
+		client.Cmd("HSET", u.Email, f.Email, "true");
 		return false;
 	}
 }
 
-func filterFriends(u User, users []User) []User {
+func (u User) filterFriends(users []User) []User {
 	var results []User;
 	var friends []UserFriend;
 	db.Where(&UserFriend{UserID: u.ID}).Find(&friends);

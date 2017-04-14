@@ -17,4 +17,3 @@ func badRequest(w http.ResponseWriter, message string, status int) {
 	http.Error(w, message, status);
 }
 
-
