@@ -60,7 +60,7 @@ table {
 }
 @import "https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900";
 body {
-  background: #ffffff;
+  background: #f8f8ff;
   color: #221f1f;
   font-family: "Lato", sans-serif;
 }
@@ -564,7 +564,7 @@ label {
 }
 
 .match_button {
-  background-color: rgb(255, 255, 255);
+  background-color: #f8f8ff;
   outline: none;
   border: none;
   width: 33px;
@@ -604,7 +604,8 @@ label {
 }
 
 .match_rating_star {
-  color: #ffda44
+  color: #ffda44;
+  background-color: #f8f8ff;
 }
 
 .reviews {

@@ -26,21 +26,23 @@ class Matches extends Component {
   }
 
   handleMatch(match, target, path) {
-    let obj = {
-      User: {
-        Email: this.props.user.Email
-      }
-    };
-    obj[target] = {
-      Email: match.Email
-    };
-    axiosInstance.post(path, obj)
-                 .then(res => {
-                   this.props.getMatches(this.props.user.Email, this.props.user.City);
-                 })
-                 .catch(err => {
-                   console.error(`cound not ${target} friend`);
-                 });
+    // if (this.props.user.verified === "true") {
+      let obj = {
+        User: {
+          Email: this.props.user.Email
+        }
+      };
+      obj[target] = {
+        Email: match.Email
+      };
+      axiosInstance.post(path, obj)
+                  .then(res => {
+                    this.props.getMatches(this.props.user.Email, this.props.user.City);
+                  })
+                  .catch(err => {
+                    console.error(`cound not ${target} friend`);
+                  });
+    // }
   }
 
   addFriend(friend) {
@@ -68,7 +70,9 @@ class Matches extends Component {
   }
 
   viewMatch(match) {
-    hashHistory.push(`/profile/${match.Email}`);
+    // if (this.props.user.Verified === "true") {
+      hashHistory.push(`/profile/${match.Email}`);
+    // }
   }
 
 
