@@ -29,7 +29,7 @@ func handleUsers(w http.ResponseWriter, req *http.Request) {
 }
 
 func getUser(u User) UserResponse {
-	return UserResponse{ u.Name, u.Email, getCity(u), getUserImage(u), strings.Join(getInterests(u), "-"), getReviews(u), getAverageRating(u), u.Profession, u.Company, u.Bio, u.State,}
+	return UserResponse{ u.Name, u.Email, getCity(u), getUserImage(u), strings.Join(getInterests(u), "-"), getReviews(u), getAverageRating(u), u.Profession, u.Company, u.Bio, u.State}
 }
 
 func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {

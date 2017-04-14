@@ -35,3 +35,18 @@ export function deleteReview(user, target, rating, text){
     });
   }
 }
+
+export function updateReview(oldReview, newReview){
+  return function(dispatch) {
+    axiosInstance.put('/api/reviews', {
+        Old: oldReview,
+        New: newReview
+      })
+      .then(res => {
+        dispatch(getTarget(oldReview.Email));
+      })
+      .catch(err => {
+        console.error("could not update review", err);
+      });
+  }
+}

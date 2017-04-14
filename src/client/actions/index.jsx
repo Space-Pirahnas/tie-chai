@@ -24,7 +24,7 @@ export function signinUser({ email, password }) {
       })
       .catch(error => {
         console.error("fail to sign in an user with error ", error);
-        dispatch({ type: AUTH_ERROR, payload: error });
+        dispatch({ type: AUTH_ERROR, payload: true });
       })
   }
 }
@@ -42,7 +42,7 @@ export function signupUser(signupObj) {
       })
       .catch(error => {
         console.error("fail to sign in an user with error ", error);
-        dispatch({ type: AUTH_ERROR, payload: error });
+        dispatch({ type: AUTH_ERROR, payload: true });
       })
   }
 }

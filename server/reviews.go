@@ -72,7 +72,7 @@ func handleReviews(w http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			badRequest(w, "could not read request", http.StatusNotFound);
 		} else {
-			deleted := deleteReview(update.Old );
+			deleted := deleteReview(update.Old);
 			if deleted {
 				addReview(update.New);
 			}
@@ -109,7 +109,7 @@ func getAverageRating(u User) float64 {
 	}
 
 	if len(reviews) != 0 {
-		return float64(rating/len(reviews));
+		return float64(rating)/float64(len(reviews));
 	} else {
 		return float64(5);
 	}

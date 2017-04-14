@@ -69,6 +69,8 @@ func findFriends(u User) []UserResponse {
 func addFriend(p User, f User, w http.ResponseWriter) {
 	db.Create(&UserFriend{UserID: p.ID, FriendID: f.ID});
 	db.Create(&UserFriend{UserID: f.ID, FriendID: p.ID});
+	sendEmailsToMatch(p, f);
+	sendEmailsToMatch(f, p);
 	successRequest(w, "successfully added friend", "added friend");
 }
 

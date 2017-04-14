@@ -12,7 +12,6 @@ class SignUp extends React.Component {
   }
 
   handleFormSubmit(values) {
-    console.log(values, "valuyes herere");
     const signupObj = {
       Name: `${values.firstName} ${values.lastName}` ,
       Email: values.email,
@@ -25,7 +24,6 @@ class SignUp extends React.Component {
       Interests: values.interests,
       Image: ""
     }
-    console.log("the form value from survey OBJ send to server ", signupObj);
     this.props.signupUser(signupObj);
     
   }
@@ -37,6 +35,7 @@ class SignUp extends React.Component {
           <div style={{"margin": "10% auto", "width": "50%"}}>
             <h2 style={{ "color": "black" }} >Sign Up!</h2>
             <Survey onSubmit={this.handleFormSubmit} />
+            {this.props.error ? <div style={{ marginTop: "2%", color: "red" }}>ERROR: Email already taken. Please login.</div> : null}
           </div>
         </div>
       </div>
@@ -45,7 +44,7 @@ class SignUp extends React.Component {
 };
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { error: state.auth.error };
 }
 
 export default connect(mapStateToProps, actions)(SignUp);

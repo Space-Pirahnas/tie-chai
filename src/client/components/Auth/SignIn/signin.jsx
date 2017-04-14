@@ -15,16 +15,19 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div style={{"margin": "10% auto", "width": "50%"}}>
-        <h2>Sign In!</h2>
-        <SignInForm onSubmit={this.handleFormSubmit} />
+      <div>
+        <div style={{"margin": "10% auto", "width": "50%"}}>
+          <h2>Sign In!</h2>
+          <SignInForm onSubmit={this.handleFormSubmit} />
+          {this.props.error ? <div style={{ marginTop: "2%", color: "red" }}>ERROR: Invalid Email/Password combination. Please try again.</div> : null}
+        </div>
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { error: state.auth.error };
 }
 
 export default connect(mapStateToProps, actions)(SignIn);
