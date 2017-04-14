@@ -5,10 +5,9 @@ import { EventField } from './eventformfields.jsx';
 import { DatePicker, TimePicker } from 'redux-form-material-ui'
 import BusinessGridList from './business.jsx';
 const { titleField, locationField,
-        descriptionField, keyWordField } = EventField;
+  descriptionField, keyWordField } = EventField;
 
 let EventForm = (props) => {
-  console.log("When rendering Event Form the props.yelp_businesses ", props);
   const required = value => value == null ? 'Required' : undefined
   const { handleSubmit, pristine,
     reset, submitting,
@@ -18,8 +17,10 @@ let EventForm = (props) => {
       <Field name='title' component={titleField} />
       <Field name='location' component={locationField} />
       <Field name='business' component={keyWordField} onChangeAction={eventChange} />
-      <button type="button" onClick={yelp}>Yelp</button>
-      {props.yelp_businesses ? <BusinessGridList /> : null }
+      <div>
+        <button type="button" onClick={yelp}>Yelp</button>
+      </div>
+      {props.yelp_businesses ? <BusinessGridList /> : null}
       <Field name="when"
         component={DatePicker}
         format={null}
@@ -70,7 +71,10 @@ EventForm = reduxForm({
 })(EventForm)
 
 function mapStateToProps(state) {
-  return { yelp_businesses: state.yelp.businesses };
+  return { 
+    yelp_businesses: state.yelp.businesses,
+    selected_business: state.business.selected_business
+   };
 }
 
 EventForm = connect(mapStateToProps, null)(EventForm)

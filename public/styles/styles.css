@@ -878,3 +878,6 @@ i:hover {
   align-self: flex-start;
   margin: 0px 20px 20px 20px;
 }
+.YelpGridTile:hover {
+  cursor: pointer
+}

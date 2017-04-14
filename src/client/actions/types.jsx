@@ -11,4 +11,5 @@ export const GET_INTERESTS = 'get_cities';
 export const GET_CITIES = 'get_interests';
 export const GET_TARGET = 'get_target';
 export const GET_YELP_BUSINESS = 'get_business';
+export const SELECTED_YELP_BUSINESS = 'selected_yelp_business';
 

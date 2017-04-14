@@ -10,6 +10,7 @@ import citiesReducer from './cities_reducer.jsx';
 import interestsReducer from './interests_reducer.jsx';
 import targetReducer from './target_reducer.jsx';
 import yelpReducer from './yelp_reducer.jsx';
+import businessReducer from './business_reducer.jsx';
 
 const rootReducer = combineReducers({
   form,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   interests: interestsReducer,
   cities: citiesReducer,
   target: targetReducer,
-  yelp: yelpReducer
+  yelp: yelpReducer,
+  business: businessReducer
 });
 
 export default rootReducer;

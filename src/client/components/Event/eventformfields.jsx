@@ -3,7 +3,6 @@ import TextField from 'material-ui/TextField';
 
 
 export const EventField = {
-
   titleField: eventtitle => (
     <fieldset className="form-group">
       <TextField hintText="Event Title"
@@ -45,3 +44,6 @@ export const EventField = {
   )
 
 }
+
+
+
