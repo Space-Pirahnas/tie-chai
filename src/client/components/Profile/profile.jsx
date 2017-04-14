@@ -60,7 +60,7 @@ class Profile extends React.Component {
                 </div>
                 <h2>Interests</h2>
                 <div className="ProfileInterests">
-                  { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="interest Button" key={i}>{interest}</div>) : null}
+                  { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="profileInterest" key={i}>{interest}</div>) : null}
                 </div>
                 <div className="ProfileBio">{this.props.target.Bio}</div>
                 <a href="/#/message" className="Button">Message</a>
@@ -70,7 +70,7 @@ class Profile extends React.Component {
               <h2 style={{"margin-top": "50px"}} >Reviews</h2>
               <center><button className="Button" onClick={this.toggleReview} >Write A Review!</button></center>
               {this.state.review ? <SubmitReview  /> : null }
-              <div className="Reviews">
+              <div className="Reviews" style={{backgroundImage: "url(styles/lined_paper.png)"}}>
                 {this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} index={i} review={review} />) : null}
               </div>
             </div>
