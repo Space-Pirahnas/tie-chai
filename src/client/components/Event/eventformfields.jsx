@@ -15,7 +15,7 @@ export const EventField = {
   locationField: location => (
     <fieldset className="form-group" id="locattionField">
       <TextField id="google_auto" hintText="Location" {...location.input}
-        floatingLabelText="Location to host event" 
+        floatingLabelText="Location to host event"
         errorText={location.meta.touched && location.meta.error && "Location is requried"}
       />
     </fieldset>
@@ -37,7 +37,7 @@ export const EventField = {
   descriptionField: description => (
     <fieldset className="form-group">
       <TextField hintText="Description" {...description.input}
-        floatingLabelText="Description to host event" 
+        floatingLabelText="Description to host event"
         errorText={description.meta.touched && description.meta.error && "description is requried"}
       />
     </fieldset>

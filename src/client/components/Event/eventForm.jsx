@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { EventField } from './eventformfields.jsx';
 import { DatePicker, TimePicker } from 'redux-form-material-ui'
-import BusinessGridList from './business.jsx';
 const { titleField, locationField,
   descriptionField, keyWordField } = EventField;
 
@@ -20,7 +19,6 @@ let EventForm = (props) => {
       <div>
         <button type="button" onClick={yelp}>Yelp</button>
       </div>
-      {props.yelp_businesses ? <BusinessGridList /> : null}
       <Field name="when"
         component={DatePicker}
         format={null}

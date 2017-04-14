@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import EventForm from './eventForm.jsx';
+import YelpSearchForm from './yelpSearchForm.jsx';
+import BusinessGridList from './business.jsx';
 import { GOOGLE_API } from '../../config.js'
 import loadjs from 'loadjs';
 import * as actions from '../../actions/yelp.jsx'
@@ -30,6 +32,7 @@ class CreateEvent extends React.Component {
             statePlace: place[0].formatted_address
           })
         });
+
       },
       error: (error) => {
         console.log("Fail to load google autocomplete api url");
@@ -49,9 +52,9 @@ class CreateEvent extends React.Component {
     console.log("Time to meet", JSON.stringify(value.at));
   }
 
-  handleYelpClick() {
-    console.log("click the yelp button, get business name", this.state);
-    this.props.getYelpBusiness(this.state.business, this.state.statePlace)
+  handleYelpClick(value) {
+    console.log("click the yelp button, get business name", value);
+    this.props.getYelpBusiness(value.keywordYelp, value.locationYelp)
   }
 
 
@@ -63,6 +66,9 @@ class CreateEvent extends React.Component {
     return (
       <div style={{ "marginTop": "10%" }}>
         <h1>Host An Event</h1>
+        <YelpSearchForm onSubmit={this.handleYelpClick}/>
+        {this.props.yelp_businesses ? <BusinessGridList /> : null}
+        <hr />
         <EventForm onSubmit={this.handleEventSubmit}
           eventChange={this.handleChangeAction}
           yelp={this.handleYelpClick} />
