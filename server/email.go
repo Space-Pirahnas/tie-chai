@@ -1,9 +1,10 @@
 package main;
 
 import (
-	"github.com/SlyMarbo/gmail"
 	"log"
 	"fmt"
+	"github.com/SlyMarbo/gmail"
+	"github.com/satori/go.uuid"
 )
 
 func sendEmail(recipient string, subject string, body string) {
@@ -41,4 +42,29 @@ func sendEmailsToMatch(u User, f User) {
 	fBody := constructMatchEmail(f, u);
 	fSubject := constructMatchSubject(f.Name);
 	sendEmail(u.Email, fSubject, fBody);
+}
+
+func constructVerifyEmail(u usr, url string, id string) string {
+	return fmt.Sprintf(
+		`<div>
+			<h3>Welcome to Tie-Chai!</h3>
+			<p>Hello %s,</p>
+				<p>Thank you for signing up for Tie-Chai. Before you can begin, there is just one last step:</p>
+				<p>Please verify your email by clicking this <a href="%s/api/verify?Id=%s&Email=%s">link</a>.</p>
+				<p>Once verified, you can begin searching for connections and begin expanding your network!</p>
+		</div>
+		<p>Sincerely,</p>
+		<p>Your Tie-Chai Team</p>
+		`, u.Name, url, id, u.Email);
+}
+
+func constructVerifySubject(name string) string {
+	return fmt.Sprintf("Welcome to Tie-Chai %s!", name);
+}
+
+func sendVerificationEmail(u usr) {
+	u1 := uuid.NewV1();
+	vBody := constructVerifyEmail(u, hostURL, u1.String());
+	vSubject := constructVerifySubject(u.Name);
+	sendEmail(u.Email, vSubject, vBody);
 }
