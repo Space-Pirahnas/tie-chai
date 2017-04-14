@@ -19,6 +19,7 @@ type User struct {
 	Company string
 	Bio string
 	State string
+	Verified bool
 }
 
 type Cities struct {

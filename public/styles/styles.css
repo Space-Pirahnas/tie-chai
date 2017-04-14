@@ -606,3 +606,26 @@ label {
 .match_rating_star {
   color: #ffda44
 }
+
+.reviews {
+  height: 50vh;
+  overflow: scroll;
+}
+
+.profile_review_star {
+  max-height: 3%;
+  max-width: 3%;
+}
+
+.profile_review_text {
+  font-size: 20px;
+  text-align: left;
+}
+
+.profile_review {
+  justify-content: center;
+}
+
+i:hover {
+  cursor: pointer;
+}

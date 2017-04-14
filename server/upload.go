@@ -10,7 +10,6 @@ import(
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
   "github.com/aws/aws-sdk-go/aws/credentials"
-  // "github.com/aws/aws-sdk-go/aws/awsutil"
 )
 	
 type file struct {
@@ -45,6 +44,5 @@ func handleUpload (w http.ResponseWriter, req *http.Request ) {
 		}
 		url := AWS.aws_path + path;
 		updateImage(email, url, w);
-		// fmt.Printf("response %s", awsutil.StringValue(resp)) 
 	}
 }

@@ -6,8 +6,12 @@ class SubmitReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
-      rating: 0
+      value: this.props.value,
+      rating: this.props.rating,
+      initial : {
+        value : this.props.value,
+        rating: this.props.rating
+      }
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeRating = this.changeRating.bind(this);
@@ -15,11 +19,30 @@ class SubmitReview extends Component {
   }
 
   handleSubmit() {
-    this.props.submitReview(this.props.user.Email, this.props.target.Email, +this.state.rating, this.state.value);
-    this.setState({
-      value: "",
-      rating: 0
-    });
+    if (this.props.type === "add") {
+      this.props.submitReview(this.props.user.Email, this.props.target.Email, +this.state.rating, this.state.value);
+      this.setState({
+        value: "",
+        rating: 0
+      });
+    } else if (this.props.type === "update") {
+      let oldReview = {
+        Email: this.props.target.Email,
+        Reviewer_Email : this.props.user.Email,
+        Text: this.state.initial.value,
+        Rating: this.state.initial.rating
+      }
+
+      let newReview = {
+        Email: this.props.target.Email,
+        Reviewer_Email : this.props.user.Email,
+        Text: this.state.value,
+        Rating: +this.state.rating
+      }
+
+      this.props.updateReview(oldReview, newReview);
+      this.props.toggleUpdate();
+    }
   }
 
   changeRating(rating) {
@@ -39,7 +62,7 @@ class SubmitReview extends Component {
       <div>
         <input type="text" value={this.state.value} onChange={this.changeValue} placeholder="Review Text" />
         <select value={this.state.rating} onChange={this.changeRating}>
-          <option disabled={true} >Rating!</option>
+          <option disabled={true} value="0">Rating!</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

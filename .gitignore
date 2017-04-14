@@ -1,9 +1,11 @@
-.DS_Store
+/**/.DS_Store
+/**/config.go
+/**/config.jsx
+/**/*.rdb
+/**/*.out
 .vscode/
 node_modules/
 src/bundles/
 server/vendor
-server/config.go
 npm-debug.log
-src/client/components/Util/config.jsx
 

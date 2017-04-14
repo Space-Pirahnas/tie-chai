@@ -37,7 +37,7 @@ func signUp(w http.ResponseWriter, req *http.Request) {
 			bp, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.MinCost);
 			if err != nil { log.Println("hashing failed"); }
 			db.Where(&Cities{ City_Name: u.City }).First(&city);
-			db.Create(&User{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID, Profession: u.Profession, Company: u.Company, Bio: u.Bio, State: u.State });
+			db.Create(&User{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID, Profession: u.Profession, Company: u.Company, Bio: u.Bio, State: u.State, Verified: false });
 			db.Where(&User{ Email: u.Email}).First(&id);
 			initializeInterests(id.ID, u.Interests);
 			sendToken(w, u);
