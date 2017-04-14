@@ -14,22 +14,20 @@ class IndexPage extends Component {
     )
 
     return (
-      <div>
-        <div id="hero" className="Hero" style={{backgroundImage: "url(styles/coffeebackground.jpg)" }}>
-          <div className="content">
-            <img className="logo" src={"styles/mug.png"} />
-            <div>
-              <img style={{ "maxWidth": "80px", display: "inline-block" }} className="linkedin" src={"styles/linkedin.svg"} />
-              <span style={{ margin: "10px" }} >meets</span>
-              <img style={{ "maxWidth": "50px", display: "inline-block" }} className="tinder" src={"styles/tinder.svg"} />
-              <p> Social media platform for professionals with mutual interest in expanding their network. Users can broadcast and share events that only people in their network can see. Meetings can be arranged between users.</p>
-            </div>
-            <div className="button-wrapper">
-              <HeroButton />
-            </div>
+      <div id="hero" className="Hero" style={{backgroundImage: "url(styles/coffeebackground.jpg)" }}>
+        <div className="content">
+          <img className="logo" src={"styles/mug.png"} />
+          <div>
+            <img style={{ "maxWidth": "80px", display: "inline-block" }} className="linkedin" src={"styles/linkedin.svg"} />
+            <span style={{ margin: "10px" }} >meets</span>
+            <img style={{ "maxWidth": "50px", display: "inline-block" }} className="tinder" src={"styles/tinder.svg"} />
+            <p> Social media platform for professionals with mutual interest in expanding their network. Users can broadcast and share events that only people in their network can see. Meetings can be arranged between users.</p>
           </div>
-          <div className="overlay"></div>
+          <div className="button-wrapper">
+            <HeroButton />
+          </div>
         </div>
+        <div className="overlay"></div>
       </div>
     );
   }

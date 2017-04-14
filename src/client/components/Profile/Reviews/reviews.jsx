@@ -27,17 +27,19 @@ class Review extends Component {
   render() {
     const image = this.props.review.Reviewer_Image || "./styles/noprofile.png";
     return (
-      <div className="Review">
-        <div className="ReviewRating">
-          <Rating value={this.props.review.Reviewer_Rating} max={5} readOnly={true} />
+      <div className={`bubble-container ${ this.props.index % 2 === 0 ? 'bubble-direction-reverse' : ''}`}>
+        <img className="img-circle" src={this.props.review.Reviewer_Image} />
+        <div className={`bubble ${ this.props.index % 2 === 0 ? 'reviewRight' : 'reviewLeft'}`}>
+          <div className="ReviewRating">
+            <Rating value={this.props.review.Reviewer_Rating} max={5} readOnly={true} />
+          </div>
+          <div className="ReviewText">{this.props.review.Reviewer_Text}</div>
+          <div className="ReviewName">{this.props.review.Reviewer_Name} from {this.props.review.Reviewer_City}</div>
+            {/*{this.props.user.Email === this.props.review.Reviewer_Email ? <button className="Button" onClick={this.deleteReview}>Delete</button>: null}*/}
+            {this.props.user.Email === this.props.review.Reviewer_Email ? !this.state.update ? <i onClick={this.deleteReview} className="fa fa-trash-o fa-lg" style={{color: "red"}}></i>: null: null}
+            {this.props.user.Email === this.props.review.Reviewer_Email ? <i onClick={this.toggleUpdate} className="fa fa-pencil-square-o fa-lg" style={{color: "blue"}}/>: null}
+            {this.state.update ? <SubmitReview value={this.props.review.Reviewer_Text} rating={this.props.review.Reviewer_Rating} type={"update"} toggleUpdate={this.toggleUpdate} />  : null}
         </div>
-        <div className="ReviewText">{this.props.review.Reviewer_Text}</div>
-        <img className="ReviewImage" src={this.props.review.Reviewer_Image} />
-        <div className="ReviewName">{this.props.review.Reviewer_Name} from {this.props.review.Reviewer_City}</div>
-        {this.props.user.Email === this.props.review.Reviewer_Email ? !this.state.update ? <i onClick={this.deleteReview} className="fa fa-trash-o fa-lg" style={{color: "red"}}></i>: null: null}
-        {this.props.user.Email === this.props.review.Reviewer_Email ? <i onClick={this.toggleUpdate} className="fa fa-pencil-square-o fa-lg" style={{color: "blue"}}/>: null}
-        {this.state.update ? <SubmitReview value={this.props.review.Reviewer_Text} rating={this.props.review.Reviewer_Rating} type={"update"} toggleUpdate={this.toggleUpdate} />  : null}
-       {/* {this.props.user.Email === this.props.review.Reviewer_Email ? <button className="Button" onClick={this.deleteReview}>Delete</button>: null}*/}
       </div>
     )
   }

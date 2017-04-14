@@ -6,6 +6,7 @@ import Review from './Reviews/reviews.jsx';
 import SubmitReview from './Reviews/submit_review.jsx';
 import { Rating } from 'material-ui-rating';
 
+
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -70,7 +71,7 @@ class Profile extends React.Component {
               <center><button className="Button" onClick={this.toggleReview} >Write A Review!</button></center>
               {this.state.review ? <SubmitReview  /> : null }
               <div className="Reviews">
-                {this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} review={review} />) : null}
+                {this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} index={i} review={review} />) : null}
               </div>
             </div>
           </div>
@@ -85,5 +86,7 @@ class Profile extends React.Component {
 function mapStateToProps(state) {
   return { target: state.target.user, user: state.userInfo.user }
 }
+
+{/*{this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} review={review} />) : null}*/}
 
 export default connect(mapStateToProps, actions)(Profile);
