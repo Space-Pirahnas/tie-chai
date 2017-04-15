@@ -3,6 +3,7 @@ import Friend from './friend.jsx';
 import ContactInfo from './contactInfo.jsx';
 import { connect } from 'react-redux';
 import * as action from '../../actions/index.jsx';
+import FriendCard from './friendCard.jsx';
 
 
 class Friends extends Component {
@@ -29,19 +30,9 @@ class Friends extends Component {
   render () {
     return (
       <div className="contactList">
-        <div className="left">
-          <h2 style={{ "margin": "1em auto", "textAlign": "center" }}>Contact List</h2>
-          <div className="contacts-container">
-            { this.props.friends ? this.props.friends.map((friend) =>  
-              <Friend friend={ friend } key={ friend.Email } showFriend={ this.showFriend.bind(this, friend) } />
-            ): null }
-          </div>
-        </div>
-        <div className="right">
-          {
-            this.state.person ? <ContactInfo person={ this.state.person } /> : null
-          }
-        </div>
+        { this.props.friends ? this.props.friends.map((friend) =>  
+          <FriendCard friend={ friend } key={ friend.Email } showFriend={ this.showFriend.bind(this, friend) } />
+        ): null }
       </div>
     );
   }

@@ -36,8 +36,8 @@ class Review extends Component {
           <div className="ReviewText">{this.props.review.Reviewer_Text}</div>
           <div className="ReviewName">{this.props.review.Reviewer_Name} from {this.props.review.Reviewer_City}</div>
             {/*{this.props.user.Email === this.props.review.Reviewer_Email ? <button className="Button" onClick={this.deleteReview}>Delete</button>: null}*/}
-            {this.props.user.Email === this.props.review.Reviewer_Email ? !this.state.update ? <i onClick={this.deleteReview} className="fa fa-trash-o fa-lg" style={{color: "red"}}></i>: null: null}
-            {this.props.user.Email === this.props.review.Reviewer_Email ? <i onClick={this.toggleUpdate} className="fa fa-pencil-square-o fa-lg" style={{color: "blue"}}/>: null}
+            {this.props.user.Email === this.props.review.Reviewer_Email ? !this.state.update ? <i onClick={this.deleteReview} className="fa fa-trash-o fa-lg" style={{color: "red", margin: "5px"}}></i>: null: null}
+            {this.props.user.Email === this.props.review.Reviewer_Email ? <i onClick={this.toggleUpdate} className="fa fa-pencil-square-o fa-lg" style={{color: "blue", margin: "5px"}}/>: null}
             {this.state.update ? <SubmitReview value={this.props.review.Reviewer_Text} rating={this.props.review.Reviewer_Rating} type={"update"} toggleUpdate={this.toggleUpdate} />  : null}
         </div>
       </div>
