@@ -13,11 +13,17 @@ class SurveyFirstPage extends React.Component {
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={ handleSubmit }>
-        <Field name="email" type="email" component={ renderTextField } label="Email" />
-        <Field name="firstName" component={ renderTextField } label="First Name"/>
-        <Field name="lastName" component={ renderTextField } label="Last Name"/>
-        <Field name="password" type="password" component={ renderTextField } label="Password"/>
-        <Field name="passwordConfirm" type="password" component={ renderTextField } label="Comfirm Password"/>
+        <div>
+          <Field name="email" type="email" component={ renderTextField } label="Email" />
+        </div>
+        <div>
+          <Field name="firstName" component={ renderTextField } label="First Name"/>
+          <Field name="lastName" component={ renderTextField } label="Last Name"/>
+        </div>
+        <div>
+          <Field name="password" type="password" component={ renderTextField } label="Password"/>
+          <Field name="passwordConfirm" type="password" component={ renderTextField } label="Comfirm Password"/>
+        </div>
         <button type="submit" className="Button survey">Next</button>
       </form>
     )

@@ -1,24 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { EventField } from './eventformfields.jsx';
 import { DatePicker, TimePicker } from 'redux-form-material-ui'
-
 const { titleField, locationField,
-  meetTimeField, descriptionField,
-  keyWordField } = EventField;
+  descriptionField, keyWordField } = EventField;
 
-const EventForm = (props) => {
+let EventForm = (props) => {
   const required = value => value == null ? 'Required' : undefined
   const { handleSubmit, pristine,
-    reset, submitting,
-    eventChange, yelp } = props;
+    reset, submitting } = props;
+  const showBusinessAddress = props.selected_business ?
+    props.selected_business.location.display_address.join(', ') : "";
+  const showBusinessName = props.selected_business ? props.selected_business.name : "";
+
   return (
     <form onSubmit={handleSubmit}>
       <Field name='title' component={titleField} />
-      <Field name='location' component={locationField} />
-      <Field name='business' component={keyWordField} onChangeAction={eventChange} />
-      <button type="button" onClick={yelp}>Yelp</button>
-      <Field name="when"
+      <Field name='location' businessAddress={showBusinessAddress} component={locationField} />
+      <Field name='business' businessName={showBusinessName} component={keyWordField} />
+      <Field name="date"
         component={DatePicker}
         format={null}
         onChange={(value) => {
@@ -26,7 +27,7 @@ const EventForm = (props) => {
         }}
         hintText="Day of meeting?"
         validate={required} />
-      <Field name="at"
+      <Field name="time"
         component={TimePicker}
         format={null}
         defaultValue={null} // TimePicker requires an object,
@@ -44,6 +45,8 @@ const EventForm = (props) => {
   )
 }
 
+
+
 const validate = (values) => {
   const errors = {};
 
@@ -54,7 +57,9 @@ const validate = (values) => {
   if (!values.location) {
     errors.location = 'Please enter a location';
   }
-
+  if (!values.business) {
+    errors.business = 'Please enter a business';
+  }
   if (!values.meettime) {
     errors.meettime = 'Please enter a time to meet';
   }
@@ -62,7 +67,18 @@ const validate = (values) => {
   return errors;
 }
 
-export default reduxForm({
+EventForm = reduxForm({
   form: 'event-form',
   validate
 })(EventForm)
+
+function mapStateToProps(state) {
+  return {
+    yelp_businesses: state.yelp.businesses,
+    selected_business: state.business.selected_business
+  };
+}
+
+EventForm = connect(mapStateToProps, null)(EventForm)
+
+export default EventForm;
