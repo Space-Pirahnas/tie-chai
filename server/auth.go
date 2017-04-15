@@ -41,8 +41,8 @@ func signUp(w http.ResponseWriter, req *http.Request) {
 			db.Where(&Cities{ City_Name: u.City }).First(&city);
 			db.Create(&User{Name: u.Name, Email: u.Email, Password: bp, CitiesID: city.ID, Profession: u.Profession, Company: u.Company, Bio: u.Bio, State: u.State, Verified: "false" });
 			db.Where(&User{ Email: u.Email}).First(&id);
-			u.sendVerificationEmail();
-			initializeInterests(id.ID, u.Interests);
+			go u.sendVerificationEmail();
+			go initializeInterests(id.ID, u.Interests);
 			id.sendToken(w, secret);
 		}
 	} else if req.Method != http.MethodOptions {

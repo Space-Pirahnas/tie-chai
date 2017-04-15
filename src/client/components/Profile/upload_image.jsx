@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { axiosInstance } from '../../actions/index.jsx';
 import { connect } from 'react-redux';
+import * as actions from '../../actions/matches.jsx';
+import { getUserInfo } from '../../actions/index.jsx';
 
 class UploadImage extends Component {
     constructor(props) {
@@ -12,7 +14,13 @@ class UploadImage extends Component {
     onDrop(files) {
       axiosInstance.post('/api/upload_image', files[0], { headers: {Email: this.props.email}})
                    .then(res => {
-                    console.log(res, "success!");
+                    this.props.getTarget(this.props.email);
+                    return true;
+                   })
+                   .then(res => {
+                    let token = localStorage.getItem('token');
+                    this.props.toggleEdit();
+                    this.props.getUserInfo(token, this.props.email, false);
                    })
                    .catch(err => {
                      console.error("error uploading image", err);
@@ -36,4 +44,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(UploadImage);
+export default connect(mapStateToProps, {...actions, getUserInfo})(UploadImage);

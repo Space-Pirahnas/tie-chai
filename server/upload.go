@@ -5,6 +5,7 @@ import(
 	"bytes"
 	"net/http"
 	"io/ioutil"
+	"encoding/json"
 	"github.com/satori/go.uuid"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -47,6 +48,10 @@ func handleUpload (w http.ResponseWriter, req *http.Request ) {
 		db.Where(&User{Email: email}).First(&u);
 		if u.Email == email {
 			u.updateImage(url);
+			res := u.getUser();
+			r, _ := json.Marshal(res);
+			client.Cmd("HSET", u.Email , "Profile", string(r));
+			successRequest(w, "successfully uploaded", "successfully uploaded");
 		}
 	}
 }

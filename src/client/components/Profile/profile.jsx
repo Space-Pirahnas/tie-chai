@@ -44,7 +44,7 @@ class Profile extends React.Component {
               {
                 !this.state.edit ? this.props.target.Image ? <ProfilePic /> : <img className="profileImage" src={"./styles/noprofile.png"} /> : null
               }
-              {this.state.edit && this.props.target.Email === this.props.user.Email ? <div className="profileImage"><UploadImage /></div> : null }
+              {this.state.edit && this.props.target.Email === this.props.user.Email ? <div className="profileImage"><UploadImage toggleEdit={this.toggleEdit} /></div> : null }
               <div className="Interests">
                 <h2>Interests</h2>
                 { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="interest Button" key={i}>{interest}</div>) : null}

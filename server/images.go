@@ -29,7 +29,7 @@ func handleImage(w http.ResponseWriter, req *http.Request) {
 	} 
 } 
 
-func (u User) updateImage(url string) {
+func (u *User) updateImage(url string) {
 	var i Image;
 	var updated Image;
 	db.Where(&Image{ID: u.ImageID}).First(&i);
