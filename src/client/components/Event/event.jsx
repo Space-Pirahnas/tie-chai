@@ -1,11 +1,13 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import EventForm from './eventForm.jsx';
 import YelpSearchForm from './yelpSearchForm.jsx';
 import BusinessGridList from './business.jsx';
 import { GOOGLE_API } from '../../config.js'
 import loadjs from 'loadjs';
-import * as actions from '../../actions/yelp.jsx'
+import * as yelpActions from '../../actions/yelp.jsx'
+import * as eventActions from '../../actions/events.jsx'
 
 
 class CreateEvent extends React.Component {
@@ -16,6 +18,8 @@ class CreateEvent extends React.Component {
     }
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
     this.handleYelpClick = this.handleYelpClick.bind(this);
+
+    console.log('constructor props', props)
   }
 
   componentDidMount() {
@@ -39,9 +43,22 @@ class CreateEvent extends React.Component {
   }
 
   handleEventSubmit(value) {
+    const date = value.date.toString().split(' ').slice(0, 4).join('-');
+    const time = value.time.toString().split(' ').slice(4).join('-');
     console.log("handleEventSubmit values ", value);
-    console.log("Date to meet", value.when.toString());
-    console.log("Time to meet", JSON.stringify(value.at));
+    const eventObj = {
+      Name: value.business,
+      Email: localStorage.getItem('user_email'),
+      Location: value.location,
+      Date: date,
+      Time: time,
+      Title: value.title,
+      Description: value.description,
+      Image: this.props.selected_business.image_url
+    }
+    console.log("handleEventSubmit values before post event obj ", eventObj);
+    this.props.postEvents(eventObj);
+
   }
 
   handleYelpClick(value) {
@@ -53,7 +70,7 @@ class CreateEvent extends React.Component {
     return (
       <div style={{ "marginTop": "10%" }}>
         <h1>Host An Event</h1>
-        <YelpSearchForm onSubmit={this.handleYelpClick}/>
+        <YelpSearchForm onSubmit={this.handleYelpClick} />
         {this.props.yelp_businesses ? <BusinessGridList /> : null}
         <hr />
         <EventForm onSubmit={this.handleEventSubmit} />
@@ -63,8 +80,13 @@ class CreateEvent extends React.Component {
 };
 
 function mapStateToProps(state) {
-  return { yelp_businesses: state.yelp.businesses };
+  return {
+    yelp_businesses: state.yelp.businesses,
+    selected_business: state.business.selected_business
+  };
 }
 
 
-export default connect(mapStateToProps, actions)(CreateEvent);
+
+
+export default connect(mapStateToProps, {...yelpActions, ...eventActions})(CreateEvent);

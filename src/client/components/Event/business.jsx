@@ -36,7 +36,7 @@ const BusinessGridList = (props) => {
           subtitle={displayAddress(business.location.display_address)}
           titleStyle={styles.titleStyle}
           titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-          onClick={()=>{window.open(business.url); props.selectedBusiness(business)}}
+          onClick={()=>{props.selectedBusiness(business)}}
         >
           <img src={business.image_url} width={220} />
         </GridTile>
