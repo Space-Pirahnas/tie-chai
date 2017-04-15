@@ -43,15 +43,15 @@ class CreateEvent extends React.Component {
   }
 
   handleEventSubmit(value) {
-    const date = value.date.toString().split(' ').slice(0, 4).join('-');
-    const time = value.time.toString().split(' ').slice(4).join('-');
-    console.log("handleEventSubmit values ", value);
+    const date = value.date.toString().split(' ').slice(0, 4);
+    const time = value.time.toString().split(' ').slice(4);
+    const datetimeString = this.props.translateDateTimeToString(date, time);
+    console.log("handleEventSubmit values ", date, time);
     const eventObj = {
       Name: value.business,
       Email: localStorage.getItem('user_email'),
       Location: value.location,
-      Date: date,
-      Time: time,
+      Date: datetimeString,
       Title: value.title,
       Description: value.description,
       Image: this.props.selected_business.image_url
