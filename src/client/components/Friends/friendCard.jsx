@@ -35,7 +35,7 @@ class FriendCard extends React.Component {
       <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <CardHeader
           title={ this.props.friend.Name }
-          subtitle={ this.props.friend.Email }
+          subtitle={ this.props.friend.City}
           avatar={ this.props.friend.Image }
           actAsExpander={true}
           showExpandableButton={true}
@@ -50,7 +50,6 @@ class FriendCard extends React.Component {
         <CardTitle title={ this.props.friend.Profession } subtitle={` @ ${ this.props.friend.Company }`} expandable={true} />
         <ContactInfo person={this.props.friend} expandable={ true } />
         <CardActions expandable={ true }>
-          <a expandable={ true } href="/#/message" className="Button">Message</a>
         </CardActions>
       </Card>
     )

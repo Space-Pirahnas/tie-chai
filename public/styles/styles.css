@@ -419,7 +419,7 @@ label {
 
 .contactList {
   margin: 20% auto;
-  width: 100%;
+  width: 60%;
 }
 
 .left {
@@ -628,7 +628,7 @@ i:hover {
   justify-content: center;
   align-items: center;
   align-content: center;
-  margin-top: 15%;
+  margin: 15% auto;
   text-align: center;
   font: italic small-caps bold 14px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -847,4 +847,34 @@ i:hover {
 
 .card-1:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.contactContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.contactButtons {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.contactBio {
+  display: flex;
+  margin: 0 20px 20px 20px;
+  text-align: left;
+}
+
+.contactInterests {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: flex-start;
+  margin: 0px 20px 20px 20px;
 }
