@@ -30,13 +30,11 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div>
-        <div id="hero" className="Hero" style={{ "backgroundColor": "white" }}>
-          <div style={{"margin": "10% auto", "width": "50%"}}>
-            <h2 style={{ "color": "black" }} >Sign Up!</h2>
-            <Survey onSubmit={this.handleFormSubmit} />
-            {this.props.error ? <div style={{ marginTop: "2%", color: "red" }}>ERROR: Email already taken. Please login.</div> : null}
-          </div>
+      <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
+        <div className="signupContainer" style={{backgroundImage: "url(styles/creampaper.png)"}}>
+          <h2 style={{ "color": "black" }} >Sign Up!</h2>
+          <Survey onSubmit={this.handleFormSubmit} />
+          {this.props.error ? <div style={{ marginTop: "2%", color: "red" }}>ERROR: Email already taken. Please login.</div> : null}
         </div>
       </div>
     );

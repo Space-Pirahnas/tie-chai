@@ -419,7 +419,7 @@ label {
 /* Friends */
 
 .contactList {
-  margin: 20% auto;
+  margin: 10% auto;
   width: 60%;
 }
 
@@ -639,6 +639,7 @@ i:hover {
   flex-flow: column wrap;
   align-items: center;
   padding: 30px;
+  width: 70%;
 /*  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);*/
@@ -881,4 +882,15 @@ i:hover {
 }
 .YelpGridTile:hover {
   cursor: pointer
+}
+
+.signupContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin: 10% auto;
+  width: 50%;
+  padding: 20px;
 }
