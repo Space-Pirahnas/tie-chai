@@ -9,17 +9,17 @@ const { titleField, locationField,
 let EventForm = (props) => {
   const required = value => value == null ? 'Required' : undefined
   const { handleSubmit, pristine,
-    reset, submitting,
-    eventChange, yelp } = props;
+    reset, submitting } = props;
+  const showBusinessAddress = props.selected_business ?
+    props.selected_business.location.display_address.join(', ') : "";
+  const showBusinessName = props.selected_business ? props.selected_business.name : "";
+
   return (
     <form onSubmit={handleSubmit}>
       <Field name='title' component={titleField} />
-      <Field name='location' component={locationField} />
-      <Field name='business' component={keyWordField} onChangeAction={eventChange} />
-      <div>
-        <button type="button" onClick={yelp}>Yelp</button>
-      </div>
-      <Field name="when"
+      <Field name='location' businessAddress={showBusinessAddress} component={locationField} />
+      <Field name='business' businessName={showBusinessName} component={keyWordField} />
+      <Field name="date"
         component={DatePicker}
         format={null}
         onChange={(value) => {
@@ -27,7 +27,7 @@ let EventForm = (props) => {
         }}
         hintText="Day of meeting?"
         validate={required} />
-      <Field name="at"
+      <Field name="time"
         component={TimePicker}
         format={null}
         defaultValue={null} // TimePicker requires an object,
@@ -44,6 +44,8 @@ let EventForm = (props) => {
     </form>
   )
 }
+
+
 
 const validate = (values) => {
   const errors = {};
@@ -69,10 +71,10 @@ EventForm = reduxForm({
 })(EventForm)
 
 function mapStateToProps(state) {
-  return { 
+  return {
     yelp_businesses: state.yelp.businesses,
-    selected_business: state.business.selected_business
-   };
+    selected_business: state.business.selected_business,
+  };
 }
 
 EventForm = connect(mapStateToProps, null)(EventForm)

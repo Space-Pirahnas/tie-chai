@@ -25,11 +25,12 @@ import { getInterests, getCities } from './actions/interests.jsx';
 
 const store = createStore(reducers,
   applyMiddleware(thunk));
+window.store = store;
 
 const token = localStorage.getItem('token');
 const email = localStorage.getItem('user_email');
 
-if (token && email) { 
+if (token && email) {
   store.dispatch(getUserInfo(token, email, false))
 }
 
@@ -53,6 +54,6 @@ ReactDOM.render(
           <Route path='/save' component={checkAuth(Save)} />
         </Route>
       </Router>
-    </Provider> 
+    </Provider>
   </div>
   , document.getElementById('app'));

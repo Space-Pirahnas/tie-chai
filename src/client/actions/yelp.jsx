@@ -25,7 +25,6 @@ export function getYelpBusiness(keyword, location) {
         Location: location
       }
     }).then(res => {
-      console.log('getYelpBusiness response data', res.data.businesses);
       dispatch({ type: GET_YELP_BUSINESS, payload: res.data.businesses });
     }).catch(err => {
       console.error('Fail to get data from server api/yelp with error ', err);
@@ -35,7 +34,9 @@ export function getYelpBusiness(keyword, location) {
 }
 
 export function selectedBusiness(business) {
-  dispatch({ type: SELECTED_YELP_BUSINESS, payload: business });
+  return function (dispatch) {
+    dispatch({ type: SELECTED_YELP_BUSINESS, payload: business });
+  }
 }
 
 

@@ -15,7 +15,7 @@ export const EventField = {
   locationField: location => (
     <fieldset className="form-group" id="locattionField">
       <TextField id="google_auto" hintText="Location" {...location.input}
-        floatingLabelText="Location to host event"
+        floatingLabelText="Location to host event" value={location.businessAddress}
         errorText={location.meta.touched && location.meta.error && "Location is requried"}
       />
     </fieldset>
@@ -24,11 +24,7 @@ export const EventField = {
   keyWordField: keyword => (
     <fieldset className="form-group" id="keywordField">
       <TextField hintText="Business Name" {...keyword.input}
-        onChange={(e) => {
-          keyword.onChangeAction(e.target.value);
-          keyword.input.onChange(e);
-        }}
-        floatingLabelText="Business Name"
+        floatingLabelText="Business Name" value={keyword.businessName}
         errorText={keyword.meta.touched && keyword.meta.error && "keyword is requried"}
       />
     </fieldset>

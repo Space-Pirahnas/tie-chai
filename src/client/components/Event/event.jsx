@@ -13,10 +13,8 @@ class CreateEvent extends React.Component {
     super(props);
     this.state = {
       statePlace: '',
-      business: ''
     }
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
-    this.handleChangeAction = this.handleChangeAction.bind(this);
     this.handleYelpClick = this.handleYelpClick.bind(this);
   }
 
@@ -40,12 +38,6 @@ class CreateEvent extends React.Component {
     })
   }
 
-
-  handleChangeAction(value) {
-    console.log("In the handleChangeAction detect the value change ", value);
-    this.setState({ business: value })
-  }
-
   handleEventSubmit(value) {
     console.log("handleEventSubmit values ", value);
     console.log("Date to meet", value.when.toString());
@@ -54,12 +46,7 @@ class CreateEvent extends React.Component {
 
   handleYelpClick(value) {
     console.log("click the yelp button, get business name", value);
-    this.props.getYelpBusiness(value.keywordYelp, value.locationYelp)
-  }
-
-
-  handleEventSubmit(value) {
-    console.log("handleEventSubmit values ", value);
+    this.props.getYelpBusiness(value.keywordYelp, this.state.statePlace)
   }
 
   render() {
@@ -69,9 +56,7 @@ class CreateEvent extends React.Component {
         <YelpSearchForm onSubmit={this.handleYelpClick}/>
         {this.props.yelp_businesses ? <BusinessGridList /> : null}
         <hr />
-        <EventForm onSubmit={this.handleEventSubmit}
-          eventChange={this.handleChangeAction}
-          yelp={this.handleYelpClick} />
+        <EventForm onSubmit={this.handleEventSubmit} />
       </div>
     );
   }
