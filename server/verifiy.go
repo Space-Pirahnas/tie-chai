@@ -15,7 +15,7 @@ func handleVerification(w http.ResponseWriter, req *http.Request) {
 			if u.Email == e {
 				u.Verified = "true";
 				db.Save(&u);
-				res := getUser(u);
+				res := u.getUser();
 				r, _ := json.Marshal(res);
 				client.Cmd("HSET", u.Email , "Profile", string(r));
 			}
@@ -27,7 +27,7 @@ func handleVerification(w http.ResponseWriter, req *http.Request) {
 		var u usr;
 		json.NewDecoder(req.Body).Decode(&u);
 		if len(u.Email) > 0 {
-			sendVerificationEmail(u);
+			u.sendVerificationEmail();
 		} else {
 			badRequest(w, "could not read email", 400);
 		}

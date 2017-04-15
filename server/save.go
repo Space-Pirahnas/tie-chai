@@ -23,35 +23,35 @@ func handleSave(w http.ResponseWriter, req *http.Request) {
 			db.Where(&User{Email: sr.User.Email}).First(&u);
 			db.Where(&User{Email: sr.Save.Email}).First(&s);
 			if req.Method == http.MethodPost {
-				saveUser(u, s, w);
+				u.saveUser(s, w);
 			} else if req.Method == http.MethodDelete {
-				deleteSave(u, s, w);
+				u.deleteSave(s, w);
 			}
 		}
 	} else if req.Method == http.MethodGet {
 		email := req.Header.Get("Email");
 		db.Where(&User{Email: email}).First(&u);
 		if u.Email == email {
-			getSaves(u, w);
+			u.getSaves(w);
 		} else {
 			badRequest(w, "could not find user", 400);
 		}
 	}
 }
 
-func saveUser(u User, s User, w http.ResponseWriter ) {
+func (u User) saveUser(s User, w http.ResponseWriter ) {
 	db.Create(&UserSave{UserID: u.ID, SaveID: s.ID});
 	successRequest(w, "successfully save match", "added friend");
 }
 
-func getSaves(u User, w http.ResponseWriter) {
-	su := findSaves(u);
+func (u User) getSaves(w http.ResponseWriter) {
+	su := u.findSaves();
 	r, _ := json.Marshal(su);
 	log.Println("successfully retrieved saves")
 	w.Write(r);		
 }
 
-func findSaves(u User) []UserResponse {
+func (u User) findSaves() []UserResponse {
 	var sID []UserSave;
 	var SaveResponses []UserResponse;
 	db.Where(&UserSave{UserID: u.ID}).Find(&sID);
@@ -59,14 +59,14 @@ func findSaves(u User) []UserResponse {
 		var saveUser User;
 		if us.UserID > 0 {
 			db.Where(&User{ID: us.SaveID}).First(&saveUser);
-			res := getUser(saveUser);
+			res := saveUser.getUser();
 			SaveResponses = append(SaveResponses, res);
 		}
 	}
 	return SaveResponses;
 }
 
-func deleteSave(u User, s User, w http.ResponseWriter) {
+func (u User) deleteSave(s User, w http.ResponseWriter) {
 	var us UserSave;
 	db.Where(&UserSave{UserID: u.ID, SaveID: s.ID}).First(&us);
 	if us.SaveID == s.ID {
@@ -77,7 +77,7 @@ func deleteSave(u User, s User, w http.ResponseWriter) {
 	}
 }
 
-func filterSaves(u User, users []User) []User {
+func (u User) filterSaves(users []User) []User {
 	var results []User;
 	var saves []UserSave;
 	db.Where(&UserSave{UserID: u.ID}).Find(&saves);

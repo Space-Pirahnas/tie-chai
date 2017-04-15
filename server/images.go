@@ -17,47 +17,44 @@ func handleImage(w http.ResponseWriter, req *http.Request) {
 		defer req.Body.Close();
 		json.NewDecoder(req.Body).Decode(&img);
 		if req.Method == http.MethodDelete {
-			deleteImage(img, u);
+			u.deleteImage(img);
 			successRequest(w, "success", "deleted image url");
 		}
 	} else if req.Method == http.MethodGet {
 		img.Email = req.URL.Query()["Email"][0];	
 		db.Where(&User{Email: img.Email}).First(&u);
-		fetchImages(u, w);
+		i := u.fetchImages();
+		r, _ := json.Marshal(i);
+		w.Write(r);
 	} 
 } 
 
-func updateImage(email string, url string, w http.ResponseWriter) {
-	var u User;
+func (u *User) updateImage(url string) {
 	var i Image;
 	var updated Image;
-	db.Where(&User{Email: email}).First(&u);
-	if u.Email == email {
-		db.Where(&Image{ID: u.ImageID}).First(&i);
-		if i.ID == u.ImageID {
-			db.Delete(&i);
-		}
-		db.Create(&Image{ImageUrl: url});
-		db.Where(&Image{ImageUrl: url}).First(&updated);
-		u.ImageID = updated.ID;
-		db.Save(&u);
+	db.Where(&Image{ID: u.ImageID}).First(&i);
+	if i.ID == u.ImageID {
+		db.Delete(&i);
 	}
+	db.Create(&Image{ImageUrl: url});
+	db.Where(&Image{ImageUrl: url}).First(&updated);
+	u.ImageID = updated.ID;
+	db.Save(&u);
 }
 
-func fetchImages(u User, w http.ResponseWriter) {
+func (u User) fetchImages() Image {
 	var i Image;
 	db.Where("id = ?", u.ImageID ).First(&i);
-	r, _ := json.Marshal(u.Image);
-	w.Write(r);
+	return i;
 }
 
-func getUserImage(u User) string {
+func (u User) getUserImage() string {
 	var img Image;
 	db.Where(&Image{ID: u.ImageID}).First(&img);
 	return img.ImageUrl;
 }
 
-func deleteImage(img upload, u User) {
+func (u User) deleteImage(img upload) {
 	var image Image;
 	u.ImageID = 0;
 	db.Save(&u);

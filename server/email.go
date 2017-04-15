@@ -38,7 +38,7 @@ func constructMatchSubject(name string) string {
 	return fmt.Sprintf("%s has matched with you on Tie-Chai", name);
 }
 
-func sendEmailsToMatch(u User, f User) {
+func (u User) sendEmailsToMatch(f User) {
 	fBody := constructMatchEmail(f, u);
 	fSubject := constructMatchSubject(f.Name);
 	sendEmail(u.Email, fSubject, fBody);
@@ -62,7 +62,7 @@ func constructVerifySubject(name string) string {
 	return fmt.Sprintf("Welcome to Tie-Chai %s!", name);
 }
 
-func sendVerificationEmail(u usr) {
+func (u usr) sendVerificationEmail() {
 	u1 := uuid.NewV1();
 	vBody := constructVerifyEmail(u, hostURL, u1.String());
 	vSubject := constructVerifySubject(u.Name);
