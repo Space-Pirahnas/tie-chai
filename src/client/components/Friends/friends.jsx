@@ -29,10 +29,12 @@ class Friends extends Component {
 
   render () {
     return (
-      <div className="contactList">
-        { this.props.friends ? this.props.friends.map((friend) =>  
-          <FriendCard friend={ friend } key={ friend.Email } showFriend={ this.showFriend.bind(this, friend) } />
-        ): null }
+      <div className="background" style={{backgroundImage: "url(styles/sativa.png)"}}>
+        <div className="contactList">
+          { this.props.friends ? this.props.friends.map((friend) =>  
+            <FriendCard friend={ friend } key={ friend.Email } showFriend={ this.showFriend.bind(this, friend) } />
+          ): null }
+        </div>
       </div>
     );
   }

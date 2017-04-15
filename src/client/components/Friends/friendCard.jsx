@@ -32,7 +32,7 @@ class FriendCard extends React.Component {
   
   render () {
     return (
-      <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+      <Card style={{ background: "rgba(248,248,255,0.7)" }} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <CardHeader
           title={ this.props.friend.Name }
           subtitle={ this.props.friend.City}

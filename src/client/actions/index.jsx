@@ -8,7 +8,7 @@ import {
 } from './types.jsx';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://a2212ee3.ngrok.io'
+  baseURL: 'http://80cc0786.ngrok.io'
 });
 
 export function signinUser({ email, password }) {

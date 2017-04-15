@@ -40,23 +40,7 @@ class Profile extends React.Component {
         </div>
       )
       return (
-<!--         <div>
-          <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
-            <div className="container">
-              {
-                !this.state.edit ? this.props.target.Image ? <ProfilePic /> : <img className="profileImage" src={"./styles/noprofile.png"} /> : null
-              }
-              {this.state.edit && this.props.target.Email === this.props.user.Email ? <div className="profileImage"><UploadImage toggleEdit={this.toggleEdit} /></div> : null }
-              <div className="Interests">
-                <h2>Interests</h2>
-                { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="interest Button" key={i}>{interest}</div>) : null}
-                <h2>Reviews</h2>
-                {this.props.user.Email !== this.props.target.Email ? <center>{!this.state.review ? <button className="Button" onClick={this.toggleReview} >Write A Review!</button> : <button className="Button" onClick={this.toggleReview} >Cancel!</button>}</center> : null }
-                {this.state.review ? <SubmitReview type={"add"} rating={0} value={""} /> : null }
-                <div className="reviews">
-                  {this.props.target.Reviews ? this.props.target.Reviews.slice().reverse().map((review, i) => <Review key={i} review={review} />) : null}
-                </div> -->
-        <div className="background" style={{backgroundImage: "url(styles/retina_wood.png)"}}>
+        <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
           <div className="ProfileContainer">
             <div className="Profile" style={{backgroundImage: "url(styles/creampaper.png)"}}>
               <div className="ProfilePicture">
