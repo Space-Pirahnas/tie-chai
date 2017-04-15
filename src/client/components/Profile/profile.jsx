@@ -40,7 +40,7 @@ class Profile extends React.Component {
         </div>
       )
       return (
-<!--         <div>
+/*<!--         <div>
           <div id="hero" className="Hero" style={{ backgroundImage: "url(styles/coffeebackground.jpg)" }}>
             <div className="container">
               {
@@ -55,7 +55,7 @@ class Profile extends React.Component {
                 {this.state.review ? <SubmitReview type={"add"} rating={0} value={""} /> : null }
                 <div className="reviews">
                   {this.props.target.Reviews ? this.props.target.Reviews.slice().reverse().map((review, i) => <Review key={i} review={review} />) : null}
-                </div> -->
+                </div> -->*/
         <div className="background" style={{backgroundImage: "url(styles/retina_wood.png)"}}>
           <div className="ProfileContainer">
             <div className="Profile" style={{backgroundImage: "url(styles/creampaper.png)"}}>
