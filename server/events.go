@@ -63,6 +63,7 @@ func (u User) deleteEvent(e event) {
 
 func (u User) getEvents(e event) []event {
 	var events []event;
+	var userEvents []event;
 	if u.ID > 0 {
 		friends := u.findFriends();
 		for _, f := range friends {
@@ -88,8 +89,12 @@ func (u User) getEvents(e event) []event {
 				events = append(events, res...);
 			}
 		}
+	 db.Where(&Event{UserID: u.ID}).Find(&userEvents);
+	 if len(userEvents) > 0 {
+		 events = append(userEvents, events...);
+	 }
 	} 
-	return events;
+	return sortEvents(events);
 }
 
 func (user User) updateEvent(u update) {
@@ -103,3 +108,4 @@ func (user User) updateEvent(u update) {
 	ev.Image = u.New.Image;
 	db.Save(&ev);
 }
+
