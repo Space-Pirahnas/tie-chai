@@ -894,3 +894,11 @@ i:hover {
   width: 50%;
   padding: 20px;
 }
+
+.signinForm {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  align-items: center;
+}

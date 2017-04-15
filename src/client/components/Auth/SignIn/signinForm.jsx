@@ -1,22 +1,31 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { signinField } from '../form-fields.jsx';
+import { signupFields } from '../form-fields.jsx';
+
+const { renderTextField } = signupFields;
+
+class SignInForm extends React.Component {
+  constructor(props) {
+    super(props);
 
 
-const { emailField, passwordField } = signinField;
-
-const SignInForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
-  return (
-    <form onSubmit={handleSubmit}>
-      <Field name='email' type="email" component={emailField} placeholder="Email" />
-      <Field name='password' type='password' component={passwordField} placeholder="******" />
-      <div>
-        <button type="submit" className="Button" disabled={pristine || submitting}>Sign In</button>
-      </div>
-    </form>
-  )
+  }
+  render() {
+    const { handleSubmit, pristine, reset, submitting } = this.props;
+    return (
+      <form className="signinForm" onSubmit={ handleSubmit }>
+        <div>
+          <Field name="email" type="email" component={ renderTextField } label="Email" />
+          <Field name="password" type="password" component={ renderTextField } label="Password"/>
+        </div>
+        <div style={{ margin: "20px" }}>
+          <button type="submit" className="Button" disabled={pristine || submitting}>Sign In</button>
+        </div>
+      </form>
+    )
+  }
 }
+
 
 const validate = (values) => {
   const errors = {};
