@@ -12,7 +12,6 @@ export const axiosInstance = axios.create({
 });
 
 export function signinUser({ email, password }) {
-  console.log("Calling signinUser");
   return function (dispatch) {
     axiosInstance.post('/api/login', { 'Email': email, 'Password': password })
       .then(response => {
@@ -56,7 +55,6 @@ export function signoutUser() {
 }
 
 export function getUserInfo(token, email, signedUser) {
-  console.log("In the getUserInfo funciton, token, email ", token, email);
   return function (dispatch) {
     axiosInstance.get('/api/token', {
       headers: {

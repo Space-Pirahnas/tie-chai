@@ -18,3 +18,15 @@ export function getEvents (email) {
     });
   }
 }
+
+export function postEvents(events) {
+  return function (dispatch) {
+    axiosInstance.post('/api/create_event', events)
+    .then(()=> {
+      console.log('successfully post events to server /api/create_event');
+    })
+    .catch(err => {
+      console.log('failt to post events to server /api/create_event', err);
+    })
+  }
+}
