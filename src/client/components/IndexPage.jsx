@@ -17,7 +17,8 @@ class IndexPage extends Component {
       <div className="background" style={{backgroundImage: "url(styles/white_leather.png)" }}>
         <div className="indexBody">
           <div className="appInfo">
-            <img className="indexLogo" src={"styles/mug.png"} />
+            <img className="steam" src={"styles/steam.png"} />
+            <img className="indexLogo" src={"styles/tiechailogo.png"} />
             <div>
               <img style={{ "maxWidth": "80px", display: "inline-block" }} className="linkedin" src={"styles/linkedin.svg"} />
               <span style={{ margin: "10px" }} >meets</span>
