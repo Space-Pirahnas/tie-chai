@@ -5,6 +5,7 @@ import IndexPage from './IndexPage.jsx';
 import Nav from './Nav/nav.jsx';
 import Logo from './Logo/logo.jsx';
 import NavProfile from './Profile/navProfile.jsx';
+import Notification from './Nav/notification.jsx';
 import Search from './Search/search.jsx';
 import Options from './Options/options.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -22,6 +23,7 @@ class App extends React.Component {
           {this.props.authenticated ? <Nav /> : null}
           {this.props.authenticated ? <Search /> : null}
           {this.props.authenticated ? <NavProfile /> : null}
+          {this.props.authenticated ? <MuiThemeProvider><Notification /></MuiThemeProvider> : null}
           <Options />
         </header>
         <MuiThemeProvider>
