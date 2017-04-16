@@ -28,7 +28,7 @@ type Cities struct {
 }
 
 type Event struct {
-	ID uint
+	ID int `gorm:"PRIMARY_KEY" sql:"AUTO_INCREMENT"`
 	UserID uint
 	Location string `sql:"index:event_idx;not null"`
 	Date string `sql:"index:event_idx;not null"`
@@ -36,6 +36,7 @@ type Event struct {
 	Title string `sql:"index:event_idx;not null"`
 	Description string `sql:"index:event_idx;not null"`
 	Image string 
+	Owner string
 }
 
 type Image struct {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
-import { GET_EVENTS } from './types.jsx';
+import { GET_EVENTS, GET_TARGET_EVENT } from './types.jsx';
 import { axiosInstance } from './index.jsx';
 
 export function getEvents(email) {
@@ -48,5 +48,20 @@ export function translateDateTimeToString(date, time) {
     console.log('In the tranlate time  result: ', eventTime);
     return eventTime;
   }
+}
 
+export function getTargetEvent(id) {
+  return function (dispatch) {
+    axiosInstance.get('/api/target_event', {
+      headers: {
+        ID: id
+      }
+    })
+      .then(res => {
+        dispatch({ type: GET_TARGET_EVENT, payload: res.data });
+      })
+      .catch(err => {
+        console.error("unable to retrieve target event ", err);
+      });
+  }
 }

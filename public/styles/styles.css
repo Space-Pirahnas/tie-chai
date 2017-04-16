@@ -894,3 +894,8 @@ i:hover {
   width: 50%;
   padding: 20px;
 }
+
+.event_image {
+  max-height: 150px;
+  max-width: 150px;
+}

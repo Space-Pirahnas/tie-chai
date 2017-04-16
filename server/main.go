@@ -42,7 +42,7 @@ func SetHeader(h http.HandlerFunc) http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json, multipart/form-data");
     w.Header().Set("Access-Control-Allow-Credentials", "true");
     w.Header().Set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Token, Email, City, Keyword, Location");
+    w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Token, Email, City, Keyword, Location, ID");
     h(w, req);
   }
 }
@@ -69,6 +69,7 @@ func main() {
 	http.HandleFunc("/api/save", SetHeader(handleSave));
 	http.HandleFunc("/api/upload_image", SetHeader(handleUpload));
 	http.HandleFunc("/api/target", SetHeader(handleTarget));
+	http.HandleFunc("/api/target_event", SetHeader(handleTargetEvent));
 	http.HandleFunc("/api/yelp", SetHeader(handleYelp));
 	http.HandleFunc("/api/verify", SetHeader(handleVerification));
 	http.ListenAndServe(":8080", nil);
