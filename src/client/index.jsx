@@ -22,6 +22,7 @@ import Save from './components/Save/save.jsx'
 import checkAuth from './components/Auth/check_auth.jsx';
 import { getUserInfo } from './actions/index.jsx';
 import { getInterests, getCities } from './actions/interests.jsx';
+import eventView from './components/EventView/eventView.jsx';
 
 const store = createStore(reducers,
   applyMiddleware(thunk));
@@ -49,6 +50,7 @@ ReactDOM.render(
           <Route path='/home' component={checkAuth(Home)} />
           <Route path='/friends' component={Friends} />
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
+          <Route path='/events/:eventID' component={checkAuth(eventView)} />
           <Route path='/profile/:userEmail' component={checkAuth(Profile)} />
           <Route path='/message' component={Message} />
           <Route path='/save' component={checkAuth(Save)} />

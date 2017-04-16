@@ -12,4 +12,5 @@ export const GET_CITIES = 'get_interests';
 export const GET_TARGET = 'get_target';
 export const GET_YELP_BUSINESS = 'get_business';
 export const SELECTED_YELP_BUSINESS = 'selected_yelp_business';
+export const GET_TARGET_EVENT = 'get_target_event';
 
