@@ -32,7 +32,7 @@ type Event struct {
 	UserID uint
 	Location string `sql:"index:event_idx;not null"`
 	Date string `sql:"index:event_idx;not null"`
-	Time string `sql:"index:event_idx;not null"`
+	Original_Date string
 	Title string `sql:"index:event_idx;not null"`
 	Description string `sql:"index:event_idx;not null"`
 	Image string 

@@ -531,8 +531,8 @@ label {
 .home_event {
   display:flex;
   flex-direction: column;
-  justify-content: flex-start;
-  height: 150px;
+  justify-content: space-between;
+  /*height: 150px;*/
 }
 
 .home_event_date {
@@ -729,6 +729,7 @@ i:hover {
   border-radius: 44px;
   margin: 20px;
 }
+
 
 .Review {
   max-width: 30%;

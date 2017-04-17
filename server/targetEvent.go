@@ -18,7 +18,7 @@ func handleTargetEvent (w http.ResponseWriter, req *http.Request) {
 				"",
 				e.Location,
 				e.Date,
-				e.Time,
+				e.Original_Date,
 				e.Title,
 				e.Description,
 				e.Image,
