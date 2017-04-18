@@ -3,6 +3,7 @@
 /**/config.jsx
 /**/*.rdb
 /**/*.out
+hr/
 .vscode/
 node_modules/
 src/bundles/
