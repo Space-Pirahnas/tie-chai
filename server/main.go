@@ -28,7 +28,7 @@ func init() {
 	if err != nil || e != nil {
 		panic("can not connect to db");
 	}
-	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{}, &UserSave{}	);
+	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{}, &UserSave{}, &EventAttendee{}, &EventComment{});
 	// seedTables();
 }
 
@@ -42,7 +42,7 @@ func SetHeader(h http.HandlerFunc) http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json, multipart/form-data");
     w.Header().Set("Access-Control-Allow-Credentials", "true");
     w.Header().Set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Token, Email, City, Keyword, Location, ID");
+    w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Token, Email, City, Keyword, Location, Key");
     h(w, req);
   }
 }
@@ -72,5 +72,8 @@ func main() {
 	http.HandleFunc("/api/target_event", SetHeader(handleTargetEvent));
 	http.HandleFunc("/api/yelp", SetHeader(handleYelp));
 	http.HandleFunc("/api/verify", SetHeader(handleVerification));
+	http.HandleFunc("/api/rsvp", SetHeader(handleRSVP));
+	http.HandleFunc("/api/comment", SetHeader(handleComment));
+	http.HandleFunc("/api/notification", SetHeader(handleNotification));
 	http.ListenAndServe(":8080", nil);
 }

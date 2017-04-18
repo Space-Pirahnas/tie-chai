@@ -27,6 +27,10 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 				if u.checkMatch(f) {
 					u.addFriend(f);
 					successRequest(w, "successfully added friend", "added friend");
+					u.sendEmailsToMatch(f);
+					f.sendEmailsToMatch(u);
+					u.newFriend();
+					f.newFriend();
 				} else {
 					badRequest(w, "match not found, placed in cache", 200);
 				}
@@ -71,8 +75,6 @@ func (u User) findFriends() []UserResponse {
 func (u User) addFriend(f User) {
 	db.Create(&UserFriend{UserID: u.ID, FriendID: f.ID});
 	db.Create(&UserFriend{UserID: f.ID, FriendID: u.ID});
-	u.sendEmailsToMatch(f);
-	f.sendEmailsToMatch(u);
 }
 
 func (u User) deleteFriend(f User) {
@@ -110,4 +112,13 @@ func (u User) filterFriends(users []User) []User {
 		}
 	}
 	return results;
+}
+
+func (u User) newFriend() {
+	var user User;
+	db.Where(&User{Email: u.Email}).First(&user);
+	if u.Email == user.Email {
+		user.NewFriends = user.NewFriends + 1;
+		db.Save(&user);
+	}
 }

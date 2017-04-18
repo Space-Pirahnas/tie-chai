@@ -50,18 +50,50 @@ export function translateDateTimeToString(date, time) {
   }
 }
 
-export function getTargetEvent(id) {
+export function getTargetEvent(key, email) {
   return function (dispatch) {
     axiosInstance.get('/api/target_event', {
       headers: {
-        ID: id
+        Key: key
       }
     })
       .then(res => {
-        dispatch({ type: GET_TARGET_EVENT, payload: res.data });
+        dispatch({ type: GET_TARGET_EVENT, payload: res.data, email: email });
       })
       .catch(err => {
         console.error("unable to retrieve target event ", err);
       });
+  }
+}
+
+export function rsvpForEvent(email, key) {
+  return function(dispatch) {
+    axiosInstance.post('/api/rsvp', {
+      Email: email,
+      Key: key
+    })
+    .then(res => {
+      dispatch(getTargetEvent(key, email));
+    })
+    .catch(err => {
+      console.error("unable to rsvp for event", err);
+    })
+  }
+}
+
+export function deleteRSVP(email, key) {
+  return function(dispatch) {
+    axiosInstance.delete('/api/rsvp', {
+      data: {
+        Email: email,
+        Key: key
+      }
+    })
+    .then(res => {
+      dispatch(getTargetEvent(key, email));
+    })
+    .catch(err => {
+      console.error("unable to rsvp for event", err);
+    })
   }
 }

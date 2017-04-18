@@ -20,6 +20,7 @@ type User struct {
 	Bio string
 	State string
 	Verified string
+	NewFriends int
 }
 
 type Cities struct {
@@ -30,6 +31,7 @@ type Cities struct {
 type Event struct {
 	ID int `gorm:"PRIMARY_KEY" sql:"AUTO_INCREMENT"`
 	UserID uint
+	Business string
 	Location string `sql:"index:event_idx;not null"`
 	Date string `sql:"index:event_idx;not null"`
 	Original_Date string
@@ -37,6 +39,21 @@ type Event struct {
 	Description string `sql:"index:event_idx;not null"`
 	Image string 
 	Owner string
+	Key string
+	Rating string
+}
+
+type EventAttendee struct {
+	EventID int 
+	UserID uint `gorm:"ForeignKey:UserID`
+}
+
+type EventComment struct {
+	EventID int
+	Email string
+	Subject string
+	Text string
+	CreatedAt string
 }
 
 type Image struct {
@@ -45,8 +62,8 @@ type Image struct {
 }
 
 type UserInterest struct {
-	UserID uint `gorm:"ForeignKey:UsersID"`
-	InterestID uint `gorm:"ForeignKey:InterestsID`
+	UserID uint `gorm:"ForeignKey:UserID"`
+	InterestID uint `gorm:"ForeignKey:InterestID`
 }
 
 type Interest struct {

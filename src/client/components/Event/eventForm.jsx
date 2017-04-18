@@ -57,9 +57,11 @@ const validate = (values) => {
   if (!values.location) {
     errors.location = 'Please enter a location';
   }
+  
   if (!values.business) {
     errors.business = 'Please enter a business';
   }
+
   if (!values.meettime) {
     errors.meettime = 'Please enter a time to meet';
   }

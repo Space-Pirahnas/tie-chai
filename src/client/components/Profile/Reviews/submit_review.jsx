@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as actions from '../../../actions/reviews.jsx';
+import TextField from 'material-ui/TextField';
 
 class SubmitReview extends Component {
   constructor(props) {
@@ -59,8 +60,8 @@ class SubmitReview extends Component {
 
   render() {
     return (
-      <div>
-        <input type="text" value={this.state.value} onChange={this.changeValue} placeholder="Review Text" />
+      <div className="profile_submit_review">
+        <TextField onChange={this.changeValue} hintText="Review Text" />
         <select value={this.state.rating} onChange={this.changeRating}>
           <option disabled={true} value="0">Rating!</option>
           <option value="1">1</option>
