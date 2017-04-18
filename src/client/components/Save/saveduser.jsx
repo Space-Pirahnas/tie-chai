@@ -11,16 +11,16 @@ export default class SavedUser extends Component {
   render() {
     const SavedInfo = () => {
       return (
-        <div className="contactContainer">
-          <div className="contactBio">
+        <div className="savedContainer">
+          <div className="savedBio">
             { `${(this.props.save.Bio).substring(0, 300)}...` }     
           </div>
-          <div className="contactInterests">
+          <div className="savedInterests">
             { this.props.save.Interests.split('-').map((interest, i) =>
               <div className="profileInterest" key={i}>{interest}</div>
             )}
           </div>
-          <div className="contactButtons">
+          <div className="savedButtons">
             <a style={{ margin: "0 20px" }} href="/#/message" className="Button">Message</a>
             <a style={{ margin: "0 20px" }} href={`/#/profile/${ this.props.save.Email }`} className="Button">Profile</a>
           </div>
@@ -30,7 +30,8 @@ export default class SavedUser extends Component {
     return (
       <div>
         <Slide
-          media={<img src={ this.props.save.Image } />}
+          className="Slide"
+          media={<img className="savedPic" src={ this.props.save.Image ? this.props.save.Image : "./styles/noprofile.png" } />}
           mediaBackgroundStyle={{ backgroundColor: red400 }}
           contentStyle={{ backgroundColor: red600 }}
           title={ this.props.save.Name }

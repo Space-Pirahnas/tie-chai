@@ -17,7 +17,7 @@ class Save extends Component {
   render() {
     if (this.props && this.props.savedUsers.length) {
       return (
-        <AutoRotatingCarousel label="Get started" open >
+        <AutoRotatingCarousel className="Carousel" label="Connect" >
           {this.props.savedUsers.map((save, i) =>
             <SavedUser save={save} key={i} />
             )
@@ -29,9 +29,6 @@ class Save extends Component {
     }
   }
 }
-
-{/*{this.props.savedUsers ? this.props.savedUsers.map((save, i) => <SavedUser key={i} save={save} />) : null}*/ }
-
 
 function mapStateToProps(state) {
   return {
