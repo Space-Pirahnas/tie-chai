@@ -63,7 +63,7 @@ class Profile extends React.Component {
                   { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="profileInterest" key={i}>{interest}</div>) : null}
                 </div>
                 <div className="ProfileBio">{this.props.target.Bio}</div>
-                <a href="/#/message" className="Button">Message</a>
+                <a href={`/#/message/${this.props.user.Email + this.props.target.Email}`} className="Button">Message</a>
               </div>
             </div>         
             <div className="ProfileReview">

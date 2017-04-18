@@ -1,6 +1,6 @@
 import { GET_YELP_BUSINESS, SELECTED_YELP_BUSINESS } from './types.jsx';
 import { axiosInstance } from './index.jsx';
-import { YELP_TOKEN } from '../config.js';
+import { YELP_TOKEN } from '../config.jsx';
 
 export function getYelpBusiness(keyword, location) {
   return function (dispatch) {
