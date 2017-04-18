@@ -28,17 +28,13 @@ export default class SavedUser extends Component {
       )
     }
     return (
-      <div>
-        <Slide
-          className="Slide"
-          media={<img className="savedPic" src={ this.props.save.Image ? this.props.save.Image : "./styles/noprofile.png" } />}
-          mediaBackgroundStyle={{ backgroundColor: red400 }}
-          contentStyle={{ backgroundColor: red600 }}
-          title={ this.props.save.Name }
-          subtitle={`${ this.props.save.Profession } @ ${ this.props.save.Company }`}
-        />
-        <SavedInfo />
-      </div>
+      <Slide
+        media={<img className="savedPic" src={ this.props.save.Image ? this.props.save.Image : "./styles/noprofile.png" } />}
+        mediaBackgroundStyle={{ backgroundColor: red400 }}
+        contentStyle={{ backgroundColor: red600, margin: "20% auto"}}
+        title={ this.props.save.Name }
+        subtitle={`${ this.props.save.Profession } @ ${ this.props.save.Company } - ${ this.props.save.City }`}
+      />
     )
   }
 }

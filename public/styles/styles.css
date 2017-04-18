@@ -1005,12 +1005,12 @@ filter: blur(7px);
 /* saved */
 
 .Carousel {
-  z-index: 0;
-
+  z-index: 0 !important;
+  overflow: auto !important;
 }
 
 .Slide {
-  margin: 10% auto;
+  margin: 10% auto !important;
 }
 
 .savedPic {
