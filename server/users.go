@@ -20,6 +20,7 @@ type UserResponse struct {
 	Bio string
 	State string
 	Verified string
+	NewFriends int
 }
 
 
@@ -30,7 +31,7 @@ func handleUsers(w http.ResponseWriter, req *http.Request) {
 }
 
 func (u User) getUser() UserResponse {
-	return UserResponse{ u.Name, u.Email, u.getCity(), u.getUserImage(), strings.Join(u.getInterests(), "-"), u.getReviews(), u.getAverageRating(), u.Profession, u.Company, u.Bio, u.State, u.Verified}
+	return UserResponse{ u.Name, u.Email, u.getCity(), u.getUserImage(), strings.Join(u.getInterests(), "-"), u.getReviews(), u.getAverageRating(), u.Profession, u.Company, u.Bio, u.State, u.Verified, u.NewFriends}
 }
 
 func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {

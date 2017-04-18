@@ -4,11 +4,18 @@ import (
 	"net/http"
 	"log"
 	"encoding/json"
+	"github.com/satori/go.uuid"
 )
 
 type event struct {
-	Name, Email, Location, Date, Time, Title, Description, Image, Owner string
-	ID int
+	Name, Email, Business, Location, Date, Original_Date , Title, Description, Image, Owner, Key, Rating string
+	Attendees []UserResponse
+	Comments []eventResponse
+}
+
+type eventResponse struct {
+	Comment EventComment
+	User UserResponse
 }
 
 type update struct {
@@ -51,12 +58,13 @@ func handleEvent(w http.ResponseWriter, req *http.Request) {
 }
 
 func (u User) postEvent(e event) {
-	db.Create(&Event{UserID: u.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description, Image: e.Image, Owner: u.Name});
+	uid := uuid.NewV1().String();
+	db.Create(&Event{UserID: u.ID, Business: e.Name, Location: e.Location, Date: e.Date, Original_Date: e.Original_Date, Title: e.Title, Description: e.Description, Image: e.Image, Owner: u.Name, Key: uid, Rating: e.Rating});
 }
 
 func (u User) deleteEvent(e event) {
 	var ev Event;
-	db.Where(&Event{UserID: u.ID, Location: e.Location, Date: e.Date, Time: e.Time, Title: e.Title, Description: e.Description, Image: e.Image, Owner: u.Name }).First(&ev);
+	db.Where(&Event{UserID: u.ID, Business: e.Name, Location: e.Location, Date: e.Date, Original_Date: e.Original_Date, Title: e.Title, Description: e.Description, Image: e.Image, Owner: u.Name, Key: e.Key, Rating: e.Rating }).First(&ev);
 	if ev.UserID > 0 {
 		db.Delete(&ev);
 	}
@@ -78,14 +86,18 @@ func (u User) getEvents(e event) []event {
 					ev := event{
 						f.Name,
 						f.Email,
+						e.Business,
 						e.Location,
 						e.Date,
-						e.Time,
+						e.Original_Date,
 						e.Title,
 						e.Description,
 						e.Image,
 						e.Owner,
-						e.ID,
+						e.Key,
+						e.Rating,
+						e.getRSVPList(),
+						e.getEventComments(),
 					}
 					res = append(res, ev);
 				}
@@ -102,13 +114,15 @@ func (u User) getEvents(e event) []event {
 
 func (user User) updateEvent(u update) {
 	var ev Event;
-	db.Where(&Event{UserID: user.ID, Location: u.Old.Location, Date: u.Old.Date, Time: u.Old.Time, Title: u.Old.Title, Description: u.Old.Description, Image: u.Old.Image, Owner: u.Old.Owner }).First(&ev);
+	db.Where(&Event{UserID: user.ID, Business: u.Old.Business, Location: u.Old.Location, Date: u.Old.Date, Original_Date: u.Old.Original_Date, Title: u.Old.Title, Description: u.Old.Description, Image: u.Old.Image, Owner: u.Old.Owner, Key: u.Old.Key, Rating: u.Old.Rating }).First(&ev);
+	ev.Business = u.New.Business;
 	ev.Title = u.New.Title;
 	ev.Date = u.New.Date;
 	ev.Location = u.New.Location;
-	ev.Time = u.New.Time;
+	ev.Original_Date = u.New.Original_Date;
 	ev.Description = u.New.Description;
 	ev.Image = u.New.Image;
+	ev.Rating = u.New.Rating;
 	db.Save(&ev);
 }
 

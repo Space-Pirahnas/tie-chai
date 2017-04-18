@@ -2,28 +2,30 @@ package main;
 
 import (
 	"net/http"
-	"strconv"
 	"encoding/json"
 )
 
 func handleTargetEvent (w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodGet {
 		var e Event;
-		id := req.Header.Get("ID");
-		i, _ := strconv.Atoi(id);
-		db.Where(&Event{ID: i}).First(&e);
-		if e.ID == i {
+		key := req.Header.Get("Key");
+		db.Where(&Event{Key: key}).First(&e);
+		if e.Key == key {
 			ev := event{
 				"",
 				"",
+				e.Business,
 				e.Location,
 				e.Date,
-				e.Time,
+				e.Original_Date,
 				e.Title,
 				e.Description,
 				e.Image,
 				e.Owner,
-				e.ID,
+				e.Key,
+				e.Rating,
+				e.getRSVPList(),
+				e.getEventComments(),
 			};
 			r, _ := json.Marshal(ev);
 			w.Write(r);

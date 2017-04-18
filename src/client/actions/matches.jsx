@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { GET_MATCHES, GET_TARGET } from './types.jsx';
-import { axiosInstance } from './index.jsx';
+import { axiosInstance, getUserInfo } from './index.jsx';
 
 export function getMatches (email, city) {
   return function (dispatch) {
@@ -35,4 +35,19 @@ export function getTarget (email) {
   }
 }
 
+
+export function resetNotifications(email) {
+  return function(dispatch) {
+    axiosInstance.post('/api/notification', {
+      Email: email
+    })
+    .then(res => {
+      let token = localStorage.getItem("token");
+      dispatch(getUserInfo(token, email, false));
+    })
+    .catch(err => {
+      console.error("could not reset notifications", err);
+    })
+  }
+}
 

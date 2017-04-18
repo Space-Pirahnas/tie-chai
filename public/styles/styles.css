@@ -531,8 +531,8 @@ label {
 .home_event {
   display:flex;
   flex-direction: column;
-  justify-content: flex-start;
-  height: 150px;
+  justify-content: space-between;
+  /*height: 150px;*/
 }
 
 .home_event_date {
@@ -730,6 +730,7 @@ i:hover {
   margin: 20px;
 }
 
+
 .Review {
   max-width: 30%;
   background: transparent;
@@ -898,6 +899,24 @@ i:hover {
 .event_image {
   max-height: 150px;
   max-width: 150px;
+}
+
+.event_page_image {
+  max-height: 300px;
+  max-width: auto;
+}
+
+.attendees {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile_submit_review {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
   
 .signinForm {
   width: 80%;
