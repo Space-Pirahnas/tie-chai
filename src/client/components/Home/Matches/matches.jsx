@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions/matches.jsx';
 import Match from './match.jsx';
-import { axiosInstance } from '../../../actions/index.jsx';
+import { axiosInstance, getUserInfo } from '../../../actions/index.jsx';
 import { hashHistory } from 'react-router';
 
 class Matches extends Component {
@@ -37,10 +37,12 @@ class Matches extends Component {
       };
       axiosInstance.post(path, obj)
                   .then(res => {
+                    let token = localStorage.getItem("token");
                     this.props.getMatches(this.props.user.Email, this.props.user.City);
+                    this.props.getUserInfo(token, this.props.user.Email, false);
                   })
                   .catch(err => {
-                    console.error(`cound not ${target} friend`);
+                    console.error(`cound not ${target} friend`, err);
                   });
     // }
   }
@@ -98,4 +100,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, actions)(Matches);
+export default connect(mapStateToProps, {...actions, getUserInfo} )(Matches);

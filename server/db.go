@@ -44,6 +44,7 @@ type Event struct {
 }
 
 type EventAttendee struct {
+	ID uint
 	EventID int 
 	UserID uint `gorm:"ForeignKey:UserID`
 }

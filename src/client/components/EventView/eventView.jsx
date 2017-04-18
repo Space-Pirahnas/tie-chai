@@ -15,7 +15,7 @@ class EventView extends Component {
     }
     this.RSVP = this.RSVP.bind(this);
     this.deleteRSVP = this.deleteRSVP.bind(this);
-    this.props.getTargetEvent(this.props.params.eventID);
+    this.props.getTargetEvent(this.props.params.eventID, this.props.user.Email);
     this.toggleComment = this.toggleComment.bind(this);
   }
 
@@ -40,7 +40,6 @@ class EventView extends Component {
 
   render(){
     if (this.props.event.target) {
-      console.log(this.props.event.target);
       return(
         <div>
           <div className="home">

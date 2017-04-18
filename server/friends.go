@@ -26,11 +26,11 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 			if req.Method == http.MethodPost {
 				if u.checkMatch(f) {
 					u.addFriend(f);
-					successRequest(w, "successfully added friend", "added friend");
 					u.sendEmailsToMatch(f);
 					f.sendEmailsToMatch(u);
 					u.newFriend();
 					f.newFriend();
+					successRequest(w, "successfully added friend", "added friend");
 				} else {
 					badRequest(w, "match not found, placed in cache", 200);
 				}
@@ -120,5 +120,8 @@ func (u User) newFriend() {
 	if u.Email == user.Email {
 		user.NewFriends = user.NewFriends + 1;
 		db.Save(&user);
+		res := user.getUser();
+		r, _ := json.Marshal(res);
+		client.Cmd("HSET", u.Email , "Profile", string(r));
 	}
 }
