@@ -24,6 +24,11 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 			db.Where(&User{Email: fr.User.Email}).First(&u);
 			db.Where(&User{Email: fr.Friend.Email}).First(&f);
 			if req.Method == http.MethodPost {
+				var us UserSave;
+				db.Where(&UserSave{UserID: u.ID, SaveID: f.ID}).First(&us);
+				if us.UserID == u.ID && us.SaveID == f.ID {
+					db.Delete(&us);
+				}
 				if u.checkMatch(f) {
 					u.addFriend(f);
 					u.sendEmailsToMatch(f);

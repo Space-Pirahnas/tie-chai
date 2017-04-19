@@ -86,6 +86,7 @@ type Review struct {
 }
 
 type UserSave struct {
+	ID uint
 	UserID uint `gorm:"ForeignKey:UsersID"`
 	SaveID uint `gorm:"ForeignKey:UsersID"`
 }
