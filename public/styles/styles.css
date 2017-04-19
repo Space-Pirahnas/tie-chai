@@ -837,6 +837,7 @@ i:hover {
   border-radius: 42%;
   width:15%;
   align-self: flex-start;
+  margin: 20px;
 }
 
 .bubble-direction-reverse {
@@ -1002,6 +1003,53 @@ filter: blur(7px);
 100% { top: 0px; opacity: 0; visibility: hidden; }
 }
 
+/* saved */
+
+.Carousel {
+  z-index: 0 !important;
+  overflow: auto !important;
+}
+
+.Slide {
+  margin: 10% auto !important;
+}
+
+.savedPic {
+  width: 30%;
+
+}
+
+
+
+.contactContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.contactButtons {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.contactBio {
+  display: flex;
+  margin: 0 20px 20px 20px;
+  text-align: left;
+}
+
+.contactInterests {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: flex-start;
+  margin: 0px 20px 20px 20px;
+}
 @-ms-keyframes steam {
 0% { top: 100px; opacity: .075; visibility: visible; }
 20% { top: 80px; opacity: 0.2; }
