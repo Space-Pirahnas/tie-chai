@@ -79,6 +79,7 @@ p {
   margin-bottom: 1em;
 }
 
+  /* NavBar*/
 
 .Header {
   /* FF3.6-15 */
@@ -214,6 +215,8 @@ p {
   float: right;
 }
 
+  /* Homepage (not logged in) */
+
 .indexLogo {
   flex: 3 1 auto;
   margin-bottom: 20px;
@@ -251,6 +254,7 @@ p {
   justify-content: center
 }
 
+  /* App wide */
 
 .Button {
   background: transparent;
@@ -285,6 +289,8 @@ p {
   cursor: pointer;
 }
 
+  /* Survey*/
+
 .survey {
   border: 2px solid #337ab7;
   color: #337ab7;
@@ -300,6 +306,8 @@ p {
   margin-bottom: -15vw;
  
 }
+
+  /* Profile*/
 
 .container {
   position: relative;
@@ -443,12 +451,6 @@ label {
 }
 
 /* <----------------HARDCODED CSS BEGINS HERE ----------->*/
-.home{
-  margin-top: 150px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
 
 .matches{
   height: 700px;
@@ -890,6 +892,22 @@ i:hover {
   align-items: center;
 }
 
+/* Saved */
+
+.Carousel {
+  z-index: 0 !important;
+  overflow: auto !important;
+}
+
+.Slide {
+  margin: 10% auto !important;
+}
+
+.savedPic {
+  width: 30%;
+
+}
+
 /* steam */
 .steam{
 position: relative;
@@ -969,45 +987,9 @@ filter: blur(7px);
 100% { top: 0px; opacity: 0; visibility: hidden; }
 }
 
-/* saved */
+/* Steam*/
 
-.Carousel {
-  z-index: 0 !important;
-  overflow: auto !important;
-}
-
-.Slide {
-  margin: 10% auto !important;
-}
-
-.savedPic {
-  width: 30%;
-
-}
-
-
-
-.contactContainer {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  text-align: center;
-}
-
-.contactButtons {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-
-.contactBio {
-  display: flex;
-  margin: 0 20px 20px 20px;
-  text-align: left;
-}
-
+<<<<<<< HEAD
 .contactInterests {
   display: flex;
   flex-flow: row wrap;
@@ -1021,6 +1003,8 @@ filter: blur(7px);
   margin-top: 15%;
   justify-content: center;
 }
+=======
+>>>>>>> Restyle home page
 @-ms-keyframes steam {
 0% { top: 100px; opacity: .075; visibility: visible; }
 20% { top: 80px; opacity: 0.2; }
@@ -1046,4 +1030,19 @@ filter: blur(7px);
 60% { top: 40px; opacity: 0.2; }
 80% { top: 20px; opacity: .075; }
 100% { top: 0px; opacity: 0; visibility: hidden; }
+}
+
+
+/* HomePage */
+
+.home {
+  margin-top: 150px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.eventsContainer {
+  width: 60%;
 }

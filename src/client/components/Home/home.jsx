@@ -30,9 +30,7 @@ class Home extends React.Component {
         <div> 
           <div className="home">
             <div>
-             {/*{this.props.verified !== "true" ? <div style={{color: "red", fontSize: "15px"}}><div>Hi! we noticed you haven't verified your email address.</div><div>Unfortunately you are going to need to before using this application. <div>Select <em><u><i onClick={this.resendLink}>here</i></u></em> to resend the link.</div></div></div>:*/}
-              <div>
-                <h1>Events!</h1> 
+              <div className="eventsContainer">
                 <Events />
               </div>
             </div>
