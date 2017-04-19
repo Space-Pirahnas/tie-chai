@@ -14,7 +14,6 @@ class Matches extends Component {
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
     this.fetchMatches = this.fetchMatches.bind(this);
-    this.handleMatch = this.handleMatch.bind(this);
   }
 
   componentDidMount() {
@@ -25,38 +24,16 @@ class Matches extends Component {
     this.props.getMatches(this.props.user.Email, this.props.user.City);
   }
 
-  handleMatch(match, target, path) {
-    // if (this.props.user.verified === "true") {
-      let obj = {
-        User: {
-          Email: this.props.user.Email
-        }
-      };
-      obj[target] = {
-        Email: match.Email
-      };
-      axiosInstance.post(path, obj)
-                  .then(res => {
-                    let token = localStorage.getItem("token");
-                    this.props.getMatches(this.props.user.Email, this.props.user.City);
-                    this.props.getUserInfo(token, this.props.user.Email, false);
-                  })
-                  .catch(err => {
-                    console.error(`cound not ${target} friend`, err);
-                  });
-    // }
-  }
-
   addFriend(friend) {
-    this.handleMatch(friend, "Friend", '/api/friends');
+    this.props.handleMatch(friend, "Friend", '/api/friends', this.props.user);
   }
 
   rejectMatch(reject) {
-    this.handleMatch(reject, "Reject", '/api/reject');
+    this.props.handleMatch(reject, "Reject", '/api/reject', this.props.user);
   }
 
   saveMatch(match) {
-    this.handleMatch(match, "Save", '/api/save');
+    this.props.handleMatch(match, "Save", '/api/save', this.props.user);
   }
 
   previous() {
@@ -100,4 +77,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {...actions, getUserInfo} )(Matches);
+export default connect(mapStateToProps, actions )(Matches);

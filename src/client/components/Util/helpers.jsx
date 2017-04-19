@@ -1,4 +1,4 @@
-const formatResponse = string => {
+export function formatResponse(string) {
   let map = {};
   let o = string.split(',')
   o.forEach((v) => {
@@ -9,4 +9,3 @@ const formatResponse = string => {
   return map;
 }
 
-export default formatResponse;

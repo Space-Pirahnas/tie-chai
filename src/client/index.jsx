@@ -15,6 +15,7 @@ import Friends from './components/Friends/friends.jsx';
 import CreateEvent from './components/Event/event.jsx';
 import Profile from './components/Profile/profile.jsx';
 import Message from './components/Message/message.jsx';
+import Chats from './components/Chats/chats.jsx';
 import Nav from './components/Nav/nav.jsx';
 import Save from './components/Save/save.jsx'
 import checkAuth from './components/Auth/check_auth.jsx';
@@ -53,8 +54,9 @@ ReactDOM.render(
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
           <Route path='/events/:eventID' component={checkAuth(eventView)} />
           <Route path='/profile/:userEmail' component={checkAuth(Profile)} />
-          <Route path='/message/:roomName' component={Message} />
+          <Route path='/message/:roomName/:firstId/:secondId' component={Message} />
           <Route path='/save' component={checkAuth(Save)} />
+          <Route path='/chats' component={checkAuth(Chats)} />
         </Route>
       </Router>
     </Provider>

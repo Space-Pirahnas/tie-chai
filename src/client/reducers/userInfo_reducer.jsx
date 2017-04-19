@@ -1,5 +1,5 @@
 import { GET_USER_INFO } from '../actions/types.jsx';
-import formatResponse from '../components/Util/helpers.jsx';
+import { formatResponse } from '../components/Util/helpers.jsx';
 
 const initialState = {};
 

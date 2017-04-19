@@ -12,6 +12,7 @@ import targetReducer from './target_reducer.jsx';
 import yelpReducer from './yelp_reducer.jsx';
 import businessReducer from './business_reducer.jsx';
 import targetEventReducer from './target_event_reducer.jsx';
+import chatRoomReducer from './chat_rooms_reducer.jsx';
 
 const rootReducer = combineReducers({
   form,
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
   target: targetReducer,
   yelp: yelpReducer,
   business: businessReducer,
-  targetEvent: targetEventReducer
+  targetEvent: targetEventReducer,
+  chats: chatRoomReducer
 });
 
 export default rootReducer;

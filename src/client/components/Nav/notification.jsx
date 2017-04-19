@@ -18,7 +18,6 @@ class Notification extends React.Component {
   }
 
   render() {
-    console.log(this.props.userInfo, "INSIDE THE NTOIFICATION THINGS");
     if (this.props.userInfo) {
       return (
         <Badge onClick={ this.onClick } badgeContent={this.props.userInfo.NewFriends} primary={true} badgeStyle={{top: 12, right: 12}} style={{ padding: "15px 8px 0px 0px" }}>
