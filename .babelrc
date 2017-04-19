@@ -2,5 +2,5 @@
   "ignore": [
         "node_modules/**/*"
   ],
-  "presets":["latest", "react", "stage-3"]
+  "presets":["latest", "react", "stage-3", "airbnb"]
 }

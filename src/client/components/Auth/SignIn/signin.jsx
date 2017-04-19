@@ -17,7 +17,7 @@ class SignIn extends React.Component {
     return (
      <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
         <div className="signupContainer" style={{backgroundImage: "url(styles/creampaper.png)"}}>
-          <h2>Sign In!</h2>
+          <h2>SIGN IN</h2>
           <SignInForm onSubmit={this.handleFormSubmit} />
           {this.props.error ? <div style={{ marginTop: "2%", color: "red" }}>ERROR: Invalid Email/Password combination. Please try again.</div> : null}
         </div>

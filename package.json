@@ -7,7 +7,7 @@
     "start": "cd server && go run *.go && cd ..",
     "build": "webpack",
     "build/watch": "webpack --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require test/setup.js test/*.spec.js"
   },
   "author": "",
   "license": "ISC",
@@ -42,11 +42,21 @@
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.4.0",
+    "babel-preset-airbnb": "^2.2.3",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-3": "^6.22.0",
+    "babel-register": "^6.24.1",
+    "chai": "^3.5.0",
+    "cheerio": "^0.22.0",
+    "enzyme": "^2.8.2",
+    "jsdom": "^9.12.0",
+    "mocha": "^3.2.0",
+    "nock": "^9.0.13",
     "node-sass": "^4.5.2",
     "nodemon": "^1.11.0",
+    "react-addons-test-utils": "^15.5.1",
+    "redux-mock-store": "^1.2.3",
     "webpack": "^2.2.1"
   }
 }
