@@ -71,7 +71,7 @@ class CreateEvent extends React.Component {
 
   render() {
     return (
-      <div className="HostEventPage" style={{ "marginTop": "10%" }}>
+      <div className="HostEventContainer" style={{ "marginTop": "10%" }}>
         <Paper style={titleStyle} zDepth={1}>
           <h1>Host An Event</h1>
           <YelpSearchForm onSubmit={this.handleYelpClick} />
