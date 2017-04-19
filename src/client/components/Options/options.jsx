@@ -9,8 +9,8 @@ class Options extends React.Component {
 
   render() {
     return (
-      <div>
-        <DropdownButton id="Default" style={{"background": "transparent", "color": "white", "marginLeft": "30px", "float": "right"}} title="Options" className="options">
+      <div style={{ display: "flex", flexFlow: "row wrap" }}>
+        <DropdownButton id="Default" title="Options" className="options">
           {!this.props.authenticated && <MenuItem href="/#/auth/signin">Sign In</MenuItem>}
           {this.props.authenticated && <MenuItem href="/#/auth/signout">Sign Out</MenuItem>}
         </DropdownButton>
