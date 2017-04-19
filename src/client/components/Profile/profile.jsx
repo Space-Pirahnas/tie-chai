@@ -54,7 +54,7 @@ class Profile extends React.Component {
               <div className="ProfileInfo">
                 {!this.state.edit  ? this.props.user.Email === this.props.target.Email ? <button className="Button" onClick={this.toggleEdit}>Edit Profile Picture</button> : null : <button className="Button" onClick={this.toggleEdit}>Cancel</button> }
                 <div className="ProfileRating">
-                  <Rating value={this.props.target.Rating_Average} max={5} readOnly={true} />
+                  <Rating value={this.props.target.Rating_Average} max={5} readOnly={true} onChange={() => console.log("nothing")} />
                 </div>
                 <div className="ProfileName">{this.props.target.Name}</div>
                 <div className="ProfileContactInfo">
