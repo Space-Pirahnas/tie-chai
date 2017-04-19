@@ -837,6 +837,7 @@ i:hover {
   border-radius: 42%;
   width:15%;
   align-self: flex-start;
+  margin: 20px;
 }
 
 .bubble-direction-reverse {

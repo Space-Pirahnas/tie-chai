@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import EventForm from './eventForm.jsx';
 import YelpSearchForm from './yelpSearchForm.jsx';
 import BusinessGridList from './business.jsx';
-import { GOOGLE_API } from '../../config.js'
+import { GOOGLE_API } from '../../config.jsx'
 import loadjs from 'loadjs';
 import * as yelpActions from '../../actions/yelp.jsx'
 import * as eventActions from '../../actions/events.jsx'
