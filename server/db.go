@@ -50,6 +50,7 @@ type EventAttendee struct {
 }
 
 type EventComment struct {
+	ID uint
 	EventID int
 	Email string
 	Subject string
@@ -73,6 +74,7 @@ type Interest struct {
 }
 
 type UserFriend struct {
+	ID uint
 	UserID uint `gorm:"ForeignKey:UsersID"`
 	FriendID uint `gorm:"ForeignKey:UsersID"`
 }

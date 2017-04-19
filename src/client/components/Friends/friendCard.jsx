@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import ContactInfo from './contactInfo.jsx';
 import { connect } from 'react-redux';
+import * as actions from '../../actions/matches.jsx';
 
-class FriendCard extends React.Component {
+class FriendCard extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
       expanded: false
     }
+    this.deleteFriend = this.deleteFriend.bind(this);
     this.handleExpandChange = this.handleExpandChange.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleExpand = this.handleExpand.bind(this);
@@ -27,6 +29,10 @@ class FriendCard extends React.Component {
 
   handleExpand() {
     this.setState({expanded: true});
+  }
+
+  deleteFriend(user, friend){
+    this.props.deleteFriend(user, friend);
   }
   
   render () {
@@ -47,7 +53,7 @@ class FriendCard extends React.Component {
           />
         </CardText>
         <CardTitle title={ this.props.friend.Profession } subtitle={` @ ${ this.props.friend.Company }`} expandable={true} />
-        <ContactInfo person={this.props.friend} user={this.props.user} expandable={ true } />
+        <ContactInfo person={this.props.friend} deleteFriend={this.deleteFriend.bind(this, this.props.user, this.props.friend)} user={this.props.user} expandable={ true } />
         <CardActions expandable={ true }>
         </CardActions>
       </Card>
@@ -61,4 +67,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(FriendCard);
+export default connect(mapStateToProps, actions)(FriendCard);

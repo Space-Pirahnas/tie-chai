@@ -54,7 +54,7 @@ ReactDOM.render(
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
           <Route path='/events/:eventID' component={checkAuth(eventView)} />
           <Route path='/profile/:userEmail' component={checkAuth(Profile)} />
-          <Route path='/message/:roomName/:firstId/:secondId' component={Message} />
+          <Route path='/message/:roomName/:firstId/:secondId' component={checkAuth(Message)} />
           <Route path='/save' component={checkAuth(Save)} />
           <Route path='/chats' component={checkAuth(Chats)} />
         </Route>

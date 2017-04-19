@@ -14,7 +14,7 @@ class UploadImage extends Component {
     onDrop(files) {
       axiosInstance.post('/api/upload_image', files[0], { headers: {Email: this.props.email}})
                    .then(res => {
-                    this.props.getTarget(this.props.email);
+                    this.props.getTarget(this.props.email, this.props.email);
                     return true;
                    })
                    .then(res => {

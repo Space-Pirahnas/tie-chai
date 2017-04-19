@@ -24,6 +24,10 @@ type UserResponse struct {
 	NewFriends int
 }
 
+type TargetResponse struct {
+	User UserResponse
+	IsFriend bool
+}
 
 func handleUsers(w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodGet {
@@ -60,17 +64,31 @@ func getNearbyUsers(w http.ResponseWriter, req *http.Request ) {
 
 func handleTarget(w http.ResponseWriter, req *http.Request) {
 	var u User;
+	var t User;
 	if req.Method == http.MethodGet {
-		email := req.Header.Get("Email");
-		db.Where(&User{Email: email}).First(&u);
-		if u.Email == email {
-			ur := u.getUser();
+		targetEmail := req.Header.Get("Target");
+		userEmail := req.Header.Get("User");
+		db.Where(&User{Email: userEmail}).First(&u);
+		db.Where(&User{Email: targetEmail}).First(&t);
+		if u.Email == userEmail && t.Email == targetEmail {
+			var ur TargetResponse;
+			ur.User = t.getUser();
+			ur.IsFriend = isFriend(u, t);
 			r, _ := json.Marshal(ur);
 			w.Write(r);
 		} else {
 			badRequest(w, "user not found", http.StatusBadRequest);
 		}
 	}
+}
+
+func isFriend(u User, t User) bool {
+	var uf UserFriend;
+	db.Where(&UserFriend{UserID: u.ID, FriendID: t.ID}).First(&uf);
+	if uf.UserID == u.ID && uf.FriendID == t.ID {
+		return true;
+	}
+	return false;
 }
 
 func (u User) filterRejects(users []User) []User {

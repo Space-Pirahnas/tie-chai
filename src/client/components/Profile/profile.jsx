@@ -15,9 +15,10 @@ class Profile extends React.Component {
       edit: false,
       review: false
     }
+    this.addFriend = this.addFriend.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.toggleReview = this.toggleReview.bind(this);
-    this.props.getTarget(this.props.params.userEmail);
+    this.props.getTarget(this.props.user.Email, this.props.params.userEmail);
   }
 
   toggleEdit() {
@@ -30,6 +31,10 @@ class Profile extends React.Component {
     this.setState({
       review: !this.state.review
     });
+  }
+
+  addFriend(){
+    this.props.handleMatch(this.props.target, "Friend", "/api/friends", this.props.user);
   }
 
   render() {
@@ -49,7 +54,7 @@ class Profile extends React.Component {
                 {
                   !this.state.edit ? this.props.target.Image ? <ProfilePic /> : <img className="profileImage" src={"./styles/noprofile.png"} /> : null
                 }
-                {this.state.edit && this.props.target.Email === this.props.user.Email ? <div className="profileImage"><UploadImage /></div> : null }
+                {this.state.edit && this.props.target.Email === this.props.user.Email ? <div className="profileImage"><UploadImage toggleEdit={this.toggleEdit} /></div> : null }
               </div>
               <div className="ProfileInfo">
                 {!this.state.edit  ? this.props.user.Email === this.props.target.Email ? <button className="Button" onClick={this.toggleEdit}>Edit Profile Picture</button> : null : <button className="Button" onClick={this.toggleEdit}>Cancel</button> }
@@ -65,12 +70,12 @@ class Profile extends React.Component {
                   { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="profileInterest" key={i}>{interest}</div>) : null}
                 </div>
                 <div className="ProfileBio">{this.props.target.Bio}</div>
-                {this.props.user.Email !== this.props.target.Email ? <a href={`/#/message/${generateChatRoomName(this.props.user.Email,this.props.target.Email)}` + "/" + ids[0] + "/" + ids[1]} className="Button">Message</a> : null }
+                {this.props.friend ? <a href={`/#/message/${generateChatRoomName(this.props.user.Email,this.props.target.Email)}` + "/" + ids[0] + "/" + ids[1]} className="Button">Message</a> : <button className="Button" onClick={this.addFriend} >Connect!</button> }
               </div>
             </div>         
             <div className="ProfileReview">
               <h2 style={{"margin-top": "50px"}} >Reviews</h2>
-              {this.props.user.Email !== this.props.target.Email ? <center>{!this.state.review ? <button className="Button" onClick={this.toggleReview} >Write A Review!</button> : <button className="Button" onClick={this.toggleReview} >Cancel!</button>}</center> : null }
+              {this.props.friend ? <center>{!this.state.review ? <button className="Button" onClick={this.toggleReview} >Write A Review!</button> : <button className="Button" onClick={this.toggleReview} >Cancel!</button>}</center> : null }
               {this.state.review ? <SubmitReview type={"add"} rating={0} value={""} /> : null }
               <div className="Reviews" style={{backgroundImage: "url(styles/lined_paper.png)"}}>
                 {this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} index={i} review={review} />) : null}
@@ -86,7 +91,11 @@ class Profile extends React.Component {
 };
 
 function mapStateToProps(state) {
-  return { target: state.target.user, user: state.userInfo.user }
+  return { 
+    target: state.target.User, 
+    user: state.userInfo.user,
+    friend: state.target.IsFriend,
+  }
 }
 
 {/*{this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} review={review} />) : null}*/}
