@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GET_MATCHES, GET_TARGET } from './types.jsx';
 import { axiosInstance, getUserInfo } from './index.jsx';
+import { getSavedUsers } from './saves.jsx';
 
 export function getMatches (email, city) {
   return function (dispatch) {
@@ -67,6 +68,7 @@ export function handleMatch(match, target, path, user) {
                     let token = localStorage.getItem("token");
                     dispatch(getMatches(user.Email, user.City));
                     dispatch(getUserInfo(token, user.Email, false));
+                    dispatch(getSavedUsers(user.Email));
                   })
                   .catch(err => {
                     console.error(`cound not ${target} friend`, err);
