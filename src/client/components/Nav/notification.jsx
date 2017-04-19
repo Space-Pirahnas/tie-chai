@@ -20,7 +20,7 @@ class Notification extends React.Component {
   render() {
     if (this.props.userInfo) {
       return (
-        <Badge onClick={ this.onClick } badgeContent={this.props.userInfo.NewFriends} primary={true} badgeStyle={{ paddingRight: "12px" }} >
+        <Badge onClick={ this.onClick } badgeContent={this.props.userInfo.NewFriends} primary={true} badgeStyle={{ padding: 0 }} style={{ padding: 0 }} >
           <IconButton tooltip="Notifications">
             <NotificationsIcon  style={{ left: "20px", top: "0px" }}/>
           </IconButton>
