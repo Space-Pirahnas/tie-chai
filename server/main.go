@@ -28,7 +28,7 @@ func init() {
 	if err != nil || e != nil {
 		panic("can not connect to db");
 	}
-	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{}, &UserSave{}, &EventAttendee{}, &EventComment{});
+	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{}, &UserSave{}, &EventAttendee{}, &EventComment{}, &ChatRoom{});
 	// seedTables();
 }
 
@@ -75,5 +75,6 @@ func main() {
 	http.HandleFunc("/api/rsvp", SetHeader(handleRSVP));
 	http.HandleFunc("/api/comment", SetHeader(handleComment));
 	http.HandleFunc("/api/notification", SetHeader(handleNotification));
+	http.HandleFunc("/api/chatroom", SetHeader(handleChatroom));
 	http.ListenAndServe(":8080", nil);
 }

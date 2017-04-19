@@ -89,3 +89,10 @@ type UserSave struct {
 	UserID uint `gorm:"ForeignKey:UsersID"`
 	SaveID uint `gorm:"ForeignKey:UsersID"`
 }
+
+type ChatRoom struct {
+	ID uint
+	FirstId uint
+	SecondId uint
+	RoomNumber float64
+}

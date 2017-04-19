@@ -51,3 +51,27 @@ export function resetNotifications(email) {
   }
 }
 
+export function handleMatch(match, target, path, user) {
+  return function(dispatch) {
+    // if (this.props.user.verified === "true") {
+      let obj = {
+        User: {
+          Email: user.Email
+        }
+      };
+      obj[target] = {
+        Email: match.Email
+      };
+      axiosInstance.post(path, obj)
+                  .then(res => {
+                    let token = localStorage.getItem("token");
+                    dispatch(getMatches(user.Email, user.City));
+                    dispatch(getUserInfo(token, user.Email, false));
+                  })
+                  .catch(err => {
+                    console.error(`cound not ${target} friend`, err);
+                  });
+    // }
+
+  }
+}

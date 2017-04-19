@@ -5,6 +5,7 @@ import UploadImage from './upload_image.jsx';
 import Review from './Reviews/reviews.jsx';
 import SubmitReview from './Reviews/submit_review.jsx';
 import { Rating } from 'material-ui-rating';
+import { generateChatRoomName } from '../../config.jsx';
 
 
 class Profile extends React.Component {
@@ -33,6 +34,7 @@ class Profile extends React.Component {
 
   render() {
     if (this.props.target) {
+      let ids = [this.props.user.ID, this.props.target.ID].sort();
       const { Email, Image } = this.props.target;
       const ProfilePic = () => (
         <div>
@@ -63,7 +65,7 @@ class Profile extends React.Component {
                   { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="profileInterest" key={i}>{interest}</div>) : null}
                 </div>
                 <div className="ProfileBio">{this.props.target.Bio}</div>
-                <a href="/#/message" className="Button">Message</a>
+                {this.props.user.Email !== this.props.target.Email ? <a href={`/#/message/${generateChatRoomName(this.props.user.Email,this.props.target.Email)}` + "/" + ids[0] + "/" + ids[1]} className="Button">Message</a> : null }
               </div>
             </div>         
             <div className="ProfileReview">
