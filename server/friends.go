@@ -29,7 +29,8 @@ func handleFriends( w http.ResponseWriter, req *http.Request ) {
 				if us.UserID == u.ID && us.SaveID == f.ID {
 					db.Delete(&us);
 				}
-				if u.checkMatch(f) {
+				match := u.checkMatch(f);
+				if match {
 					u.addFriend(f);
 					u.sendEmailsToMatch(f);
 					f.sendEmailsToMatch(u);

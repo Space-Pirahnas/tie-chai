@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { GET_MATCHES, GET_TARGET } from './types.jsx';
-import { axiosInstance, getUserInfo } from './index.jsx';
+import { axiosInstance, getUserInfo, getUserFriends } from './index.jsx';
 import { getSavedUsers } from './saves.jsx';
 
 export function getMatches (email, city) {
@@ -20,11 +20,12 @@ export function getMatches (email, city) {
   }
 }
 
-export function getTarget (email) {
+export function getTarget (userEmail, targetEmail) {
   return function (dispatch) {
     axiosInstance.get('/api/target', {
       headers: {
-        Email: email
+        User: userEmail,
+        Target: targetEmail
       }
     })
     .then(res => {
@@ -75,5 +76,26 @@ export function handleMatch(match, target, path, user) {
                   });
     // }
 
+  }
+}
+
+export function deleteFriend(user, friend) {
+  return function (dispatch) {
+    axiosInstance.delete('/api/friends', {
+      data: { 
+        User: {
+          Email: user.Email
+        },
+        Friend: {
+          Email: friend.Email
+        }
+      }
+    })
+    .then(res => {
+      dispatch(getUserFriends(user.Email));
+    })
+    .catch(err => {
+      console.error("unable to delete friend", err);
+    });
   }
 }

@@ -8,7 +8,7 @@ import {
 } from './types.jsx';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://e16de2fb.ngrok.io'
+  baseURL: 'http://729d6da5.ngrok.io'
 });
 
 export function signinUser({ email, password }) {
@@ -63,7 +63,6 @@ export function getUserInfo(token, email, signedUser) {
       }
     })
       .then(res => {
-        console.log('base on token and email, getUser object ', res.data);
         dispatch({ type: AUTH_USER, payload: email });
         dispatch({
           type: GET_USER_INFO, payload: {
@@ -89,7 +88,6 @@ export function getUserFriends(email) {
       }
     })
       .then(res => {
-        console.log('Fetching the friends list of current user email', res.data);
         dispatch({ type: GET_USER_FRIENDS, payload: res.data });
       })
       .catch(err => {
