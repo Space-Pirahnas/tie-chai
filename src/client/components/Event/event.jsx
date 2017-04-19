@@ -47,7 +47,6 @@ class CreateEvent extends React.Component {
     const time = value.time.toString().split(' ').slice(4);
     const orginal = date.join(' ') + ' ' + time.join(' ');
     const datetimeString = this.props.translateDateTimeToString(date, time);
-    console.log("handleEventSubmit values ", date, time);
     const eventObj = {
       Name: value.business,
       Email: localStorage.getItem('user_email'),
@@ -56,15 +55,15 @@ class CreateEvent extends React.Component {
       Original_Date: orginal,
       Title: value.title,
       Description: value.description,
-      Image: this.props.selected_business.image_url
+      Image: this.props.selected_business.image_url,
+      Rating: this.props.selected_business.rating.toString()
     }
-    console.log("handleEventSubmit values before post event obj ", eventObj);
+    console.log('object to sent to server ', eventObj);
     this.props.postEvents(eventObj);
 
   }
 
   handleYelpClick(value) {
-    console.log("click the yelp button, get business name", value);
     this.props.getYelpBusiness(value.keywordYelp, this.state.statePlace)
   }
 
