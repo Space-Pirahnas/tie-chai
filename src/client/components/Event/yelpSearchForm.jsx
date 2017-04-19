@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField'
 import Business from './business.jsx';
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-  <TextField hintText={label}
+  <TextField placeholder="" hintText={label}
     floatingLabelText={label}
     errorText={touched && error}
     {...input}

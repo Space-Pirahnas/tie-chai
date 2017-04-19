@@ -14,7 +14,7 @@ export const EventField = {
 
   locationField: location => (
     <fieldset className="form-group" id="locattionField">
-      <TextField id="google_auto" hintText="Location" {...location.input}
+      <TextField id="google_auto" placeholder="" hintText="Location" {...location.input}
         floatingLabelText="Location to host event" value={location.businessAddress}
         errorText={location.meta.error && "Location is required"}
       />

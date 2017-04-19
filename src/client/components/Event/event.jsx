@@ -7,7 +7,9 @@ import BusinessGridList from './business.jsx';
 import { GOOGLE_API } from '../../config.jsx'
 import loadjs from 'loadjs';
 import * as yelpActions from '../../actions/yelp.jsx'
-import * as eventActions from '../../actions/events.jsx'
+import * as eventActions from '../../actions/events.jsx';
+import Paper from 'material-ui/Paper';
+import { titleStyle } from './paperStyle.jsx';
 
 
 class CreateEvent extends React.Component {
@@ -69,12 +71,14 @@ class CreateEvent extends React.Component {
 
   render() {
     return (
-      <div style={{ "marginTop": "10%" }}>
-        <h1>Host An Event</h1>
-        <YelpSearchForm onSubmit={this.handleYelpClick} />
-        {this.props.yelp_businesses ? <BusinessGridList /> : null}
-        <hr />
-        <EventForm onSubmit={this.handleEventSubmit} />
+      <div className="HostEventPage" style={{ "marginTop": "10%" }}>
+        <Paper style={titleStyle} zDepth={1}>
+          <h1>Host An Event</h1>
+          <YelpSearchForm onSubmit={this.handleYelpClick} />
+          {this.props.yelp_businesses ? <BusinessGridList /> : null}
+          <hr />
+          <EventForm onSubmit={this.handleEventSubmit} />
+        </Paper>
       </div>
     );
   }
@@ -90,4 +94,4 @@ function mapStateToProps(state) {
 
 
 
-export default connect(mapStateToProps, {...yelpActions, ...eventActions})(CreateEvent);
+export default connect(mapStateToProps, { ...yelpActions, ...eventActions })(CreateEvent);
