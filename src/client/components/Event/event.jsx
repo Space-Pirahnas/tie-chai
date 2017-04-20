@@ -21,8 +21,6 @@ class CreateEvent extends React.Component {
     }
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
     this.handleYelpClick = this.handleYelpClick.bind(this);
-
-    console.log('constructor props', props)
   }
 
   componentDidMount() {
@@ -89,7 +87,6 @@ class CreateEvent extends React.Component {
 };
 
 function mapStateToProps(state) {
-  console.log('in the event clicked_yelp', state.business.clicked_yelp)
   return {
     yelp_businesses: state.yelp.businesses,
     selected_business: state.business.selected_business,
