@@ -41,7 +41,7 @@ class SurveySecondPage extends React.Component {
         <Field name="bio" component={ renderTextField } label="About me" multiLine={ true } rows={ 2 } />
          <div> 
           <h3 className="interests">Interests</h3>
-          <Field name="interests" component={renderMultiselect} defaultValue={[]} onBlur={() => props.onBlur()} data={this.props.interests.map(i => i.Interest_Name)}/>
+          <Field name="interests" component={renderMultiselect} defaultValue={[]} data={this.props.interests.map(i => i.Interest_Name)}/>
         </div>
         <div>
           <button type="button" className="Button survey" onClick={previousPage}>Previous</button>
