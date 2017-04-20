@@ -1036,13 +1036,19 @@ filter: blur(7px);
 /* HomePage */
 
 .home {
-  margin-top: 150px;
+  margin: 10% 5%;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   justify-content: space-around;
   align-items: center;
 }
 
 .eventsContainer {
-  width: 60%;
+}
+
+.matchesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
 }

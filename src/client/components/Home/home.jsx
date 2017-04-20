@@ -26,7 +26,7 @@ class Home extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
         <div> 
           <div className="home">
             <div>
@@ -34,7 +34,7 @@ class Home extends React.Component {
                 <Events />
               </div>
             </div>
-            <div>
+            <div className="matchesContainer">
               <h1>Today's Matches!</h1>
               <Matches />
             </div>

@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 import Event from './event.jsx';
 import axios from 'axios';
 import FlatButton from 'material-ui/FlatButton';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
@@ -14,15 +14,11 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    width: '100%',
   },
   gridList: {
-    display: 'flex',
-    flexWrap: 'nowrap',
-    overflowX: 'auto',
-  },
-  titleStyle: {
-    color: 'rgb(0, 188, 212)',
+    width: 500,
+    height: 450,
+    overflowY: 'auto',
   },
 };
 
@@ -74,12 +70,12 @@ class Events extends Component {
   render() {
     let cb = (e) => true;
     if (this.state.view === "past") {
-      cb  = (e) => {
+      cb = (e) => {
         let date = Date.parse(e.Original_Date);
         return date <= new Date();
       }
     } else if (this.state.view === "future") {
-      cb  = (e) => {
+      cb = (e) => {
         let date = Date.parse(e.Original_Date);
         return date > new Date();
       }
@@ -92,20 +88,26 @@ class Events extends Component {
           <FlatButton label="Past" onClick={this.viewPast} />
           <FlatButton label="Future" onClick={this.viewFuture} />
         </div>
-        <div style={ styles.root }>
-          <GridList style={ styles.gridList } cols={ 2.2 } >
-            { this.props.events ? this.props.events.filter(cb).map((event, idx) => (
-              <GridTile 
-                key={ idx }
-                title={ event.Title }
-                subtitle={ <span>{ `hosted by ${ event.Owner }` }</span> }
-                titleStyle={ styles.titleStyle }
-                titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%))"
-                onClick={ () => {this.viewEvent(event) }} 
-              > 
-                <img src={ event.Image } />
-              </GridTile>
-            )) : null }
+        <div style={styles.root}>
+          <GridList
+            cols={2}
+            cellHeight={200}
+            padding={1}
+            style={styles.gridList}
+          >
+          {this.props.events ? this.props.events.filter(cb).map((event, idx) => (
+            <GridTile
+              key={idx}
+              title={event.Title}
+              actionPosition="left"
+              titlePosition="top"
+              subtitle={<span>{`hosted by ${event.Owner}`}</span>}
+              titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+              onClick={() => { this.viewEvent(event) } }
+            >
+              <img src={event.Image} />
+            </GridTile>
+          )) : null}
           </ GridList>
         </div>
       </div>
@@ -113,11 +115,11 @@ class Events extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     email: state.userInfo.user.Email,
     events: state.events
   }
 }
 
-export default connect(mapStateToProps, actions )(Events);
+export default connect(mapStateToProps, actions)(Events);
