@@ -7,14 +7,17 @@ import BusinessGridList from './business.jsx';
 import { GOOGLE_API } from '../../config.jsx'
 import loadjs from 'loadjs';
 import * as yelpActions from '../../actions/yelp.jsx'
-import * as eventActions from '../../actions/events.jsx'
+import * as eventActions from '../../actions/events.jsx';
+import Paper from 'material-ui/Paper';
+import CircularProgress from 'material-ui/CircularProgress';
+import { titleStyle } from './paperStyle.jsx';
 
 
 class CreateEvent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      statePlace: '',
+      statePlace: ''
     }
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
     this.handleYelpClick = this.handleYelpClick.bind(this);
@@ -64,30 +67,37 @@ class CreateEvent extends React.Component {
   }
 
   handleYelpClick(value) {
-    this.props.getYelpBusiness(value.keywordYelp, this.state.statePlace)
+    this.props.getYelpBusiness(value.keywordYelp, this.state.statePlace);
   }
 
   render() {
     return (
-      <div style={{ "marginTop": "10%" }}>
-        <h1>Host An Event</h1>
-        <YelpSearchForm onSubmit={this.handleYelpClick} />
-        {this.props.yelp_businesses ? <BusinessGridList /> : null}
-        <hr />
-        <EventForm onSubmit={this.handleEventSubmit} />
+      <div className="HostEventContainer" style={{ "marginTop": "10%" }}>
+        <Paper style={titleStyle} zDepth={1}>
+          <h1>Host An Event</h1>
+          <h3>Find Meeting Place</h3>
+          <YelpSearchForm onSubmit={this.handleYelpClick} />
+          {this.props.clicked_yelp ? 
+          <CircularProgress size={60} thickness={7} /> :
+          this.props.yelp_businesses ? <BusinessGridList /> : null}
+          <hr size="30px" />
+          <EventForm onSubmit={this.handleEventSubmit} />
+        </Paper>
       </div>
     );
   }
 };
 
 function mapStateToProps(state) {
+  console.log('in the event clicked_yelp', state.business.clicked_yelp)
   return {
     yelp_businesses: state.yelp.businesses,
-    selected_business: state.business.selected_business
+    selected_business: state.business.selected_business,
+    clicked_yelp: state.business.clicked_yelp
   };
 }
 
 
 
 
-export default connect(mapStateToProps, {...yelpActions, ...eventActions})(CreateEvent);
+export default connect(mapStateToProps, { ...yelpActions, ...eventActions })(CreateEvent);
