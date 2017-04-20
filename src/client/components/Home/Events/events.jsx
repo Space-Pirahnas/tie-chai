@@ -16,11 +16,15 @@ const styles = {
     justifyContent: 'space-around',
   },
   gridList: {
-    width: 500,
-    height: 450,
-    overflowY: 'auto',
+    display: 'flex',
+    flexWrap: 'nowrap',
+    overflowX: 'auto',
+  },
+  titleStyle: {
+    color: 'rgb(0, 188, 212)',
   },
 };
+
 
 class Events extends Component {
   constructor(props) {
@@ -89,23 +93,17 @@ class Events extends Component {
           <FlatButton label="Future" onClick={this.viewFuture} />
         </div>
         <div style={styles.root}>
-          <GridList
-            cols={2}
-            cellHeight={200}
-            padding={1}
-            style={styles.gridList}
-          >
+          <GridList style={styles.gridList} cols={2.2}>
           {this.props.events ? this.props.events.filter(cb).map((event, idx) => (
             <GridTile
               key={idx}
               title={event.Title}
-              actionPosition="left"
-              titlePosition="top"
+              titleStyle={styles.titleStyle}
               subtitle={<span>{`hosted by ${event.Owner}`}</span>}
               titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
               onClick={() => { this.viewEvent(event) } }
             >
-              <img src={event.Image} />
+              <img src={event.Image} width={ 220 } />
             </GridTile>
           )) : null}
           </ GridList>
