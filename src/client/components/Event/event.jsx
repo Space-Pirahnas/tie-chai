@@ -48,10 +48,13 @@ class CreateEvent extends React.Component {
     const time = value.time.toString().split(' ').slice(4);
     const orginal = date.join(' ') + ' ' + time.join(' ');
     const datetimeString = this.props.translateDateTimeToString(date, time);
+    const showBusinessAddress = this.props.selected_business ?
+      this.props.selected_business.location.display_address.join(', ') : "";
+    const showBusinessName = this.props.selected_business ? this.props.selected_business.name : "";
     const eventObj = {
-      Name: value.business,
+      Name: showBusinessName,
       Email: localStorage.getItem('user_email'),
-      Location: value.location,
+      Location: showBusinessAddress,
       Date: datetimeString,
       Original_Date: orginal,
       Title: value.title,
@@ -59,7 +62,6 @@ class CreateEvent extends React.Component {
       Image: this.props.selected_business.image_url,
       Rating: this.props.selected_business.rating.toString()
     }
-    console.log('object to sent to server ', eventObj);
     this.props.postEvents(eventObj);
 
   }
@@ -75,9 +77,9 @@ class CreateEvent extends React.Component {
           <h1>Host An Event</h1>
           <h3>Find Meeting Place</h3>
           <YelpSearchForm onSubmit={this.handleYelpClick} />
-          {this.props.clicked_yelp ? 
-          <CircularProgress size={60} thickness={7} /> :
-          this.props.yelp_businesses ? <BusinessGridList /> : null}
+          {this.props.clicked_yelp ?
+            <CircularProgress size={60} thickness={7} /> :
+            this.props.yelp_businesses ? <BusinessGridList /> : null}
           <hr size="30px" />
           <EventForm onSubmit={this.handleEventSubmit} />
         </Paper>

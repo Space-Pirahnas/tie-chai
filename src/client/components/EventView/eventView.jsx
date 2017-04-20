@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { hashHistory } from 'react-router';
 import Comment from './Comments/comment.jsx';
 import SubmitComment from './Comments/submitComment.jsx';
+import TimeComponent from './timeComponent.jsx';
 
 class EventView extends Component {
 
@@ -45,22 +46,26 @@ class EventView extends Component {
 
   render(){
     if (this.props.event.target) {
+      console.log("In the eventView the target evetn is ", this.props.event.target);
+      const { Image, Email, Attendees, Comments, Title, Date } = this.props.event.target;
       return(
         <div>
-          <div className="home">
+          <div>
+            <h1 className="title-display">{Title}</h1>
+            <TimeComponent datetime={Date} />
             <div>
-              <img src={this.props.event.target.Image} className="event_page_image" />
+              <img src={Image} className="event_page_image" />
             </div>
             <div className="attendees">
-              {this.props.user.Email === this.props.event.target.Email ? <FlatButton label="delete event" secondary={true} onClick={this.deleteEvent} /> : null}
-              <h1>{this.props.event.target.Attendees ?  this.props.event.target.Attendees.length : 0} - Attendees</h1>
-              {this.props.event.target.Attendees ? this.props.event.target.Attendees.map((attendee, i) => <FlatButton onClick={this.routeToAttendee.bind(this, attendee)} key={i} label={attendee.Name} />) : null}
+              {this.props.user.Email === Email ? <FlatButton label="delete event" secondary={true} onClick={this.deleteEvent} /> : null}
+              <h1>{Attendees ?  Attendees.length : 0} - Attendees</h1>
+              {Attendees ? Attendees.map((attendee, i) => <FlatButton onClick={this.routeToAttendee.bind(this, attendee)} key={i} label={attendee.Name} />) : null}
               {this.props.event.rsvp ? <FlatButton label="rsvp" onClick={this.RSVP} primary={true} /> : <FlatButton label="cancel rsvp" onClick={this.deleteRSVP} secondary={true} />}
             </div>
           </div>
           <FlatButton label="Write A Comment!" onClick={this.toggleComment} />
           {this.state.comment ? <SubmitComment toggleComment={this.toggleComment} eventKey={this.props.params.eventID} /> : null } 
-          {this.props.event.target.Comments ? this.props.event.target.Comments.map((c, i) => <Comment comment={c} key={i} />) : null}
+          {Comments ? Comments.map((c, i) => <Comment comment={c} key={i} />) : null}
         </div>
       )
     } else {

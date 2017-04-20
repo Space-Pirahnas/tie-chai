@@ -968,6 +968,12 @@ filter: blur(7px);
   justify-content: center;
 }
 
+.title-display {
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: bold;
+}
+
 @-ms-keyframes steam {
 0% { top: 100px; opacity: .075; visibility: visible; }
 20% { top: 80px; opacity: 0.2; }

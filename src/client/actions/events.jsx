@@ -49,8 +49,6 @@ export function deleteEvent(email, key) {
   }
 }
 
-// "Jan 2, 2006 at 3:04pm (MST)"
-// ["Sun", "Apr", "30", "2017"] ["17:51:32", "GMT-0700", "(PDT)"]
 
 export function translateDateTimeToString(date, time) {
   return function (dispatch) {
