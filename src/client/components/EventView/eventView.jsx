@@ -17,6 +17,7 @@ class EventView extends Component {
     this.deleteRSVP = this.deleteRSVP.bind(this);
     this.props.getTargetEvent(this.props.params.eventID, this.props.user.Email);
     this.toggleComment = this.toggleComment.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   toggleComment(){
@@ -37,6 +38,10 @@ class EventView extends Component {
     hashHistory.push(`/profile/${attendee.Email}`);
   }
 
+  deleteEvent(){
+    this.props.deleteEvent(this.props.user.Email, this.props.params.eventID);
+  }
+
 
   render(){
     if (this.props.event.target) {
@@ -47,6 +52,7 @@ class EventView extends Component {
               <img src={this.props.event.target.Image} className="event_page_image" />
             </div>
             <div className="attendees">
+              {this.props.user.Email === this.props.event.target.Email ? <FlatButton label="delete event" secondary={true} onClick={this.deleteEvent} /> : null}
               <h1>{this.props.event.target.Attendees ?  this.props.event.target.Attendees.length : 0} - Attendees</h1>
               {this.props.event.target.Attendees ? this.props.event.target.Attendees.map((attendee, i) => <FlatButton onClick={this.routeToAttendee.bind(this, attendee)} key={i} label={attendee.Name} />) : null}
               {this.props.event.rsvp ? <FlatButton label="rsvp" onClick={this.RSVP} primary={true} /> : <FlatButton label="cancel rsvp" onClick={this.deleteRSVP} secondary={true} />}
