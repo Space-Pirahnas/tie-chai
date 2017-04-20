@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { EventField } from './eventformfields.jsx';
 import { DatePicker, TimePicker } from 'redux-form-material-ui'
+import RaisedButton from 'material-ui/RaisedButton';
 const { titleField, locationField,
   descriptionField, keyWordField } = EventField;
 
@@ -38,8 +39,8 @@ let EventForm = (props) => {
         validate={required} />
       <Field name='description' component={descriptionField} />
       <div>
-        <button type="submit" disabled={pristine || submitting}>Host Event</button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>Reset</button>
+        <RaisedButton type="submit" disabled={pristine || submitting}>Host Event</RaisedButton>
+        <RaisedButton type="button" disabled={pristine || submitting} onClick={reset}>Reset</RaisedButton>
       </div>
     </form>
   )

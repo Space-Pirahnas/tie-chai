@@ -27,22 +27,23 @@ const BusinessGridList = (props) => {
     return (<div>No relative business exist at the location.</div>)
   }
 
-  return (<div style={styles.root}>
-    <GridList style={styles.gridList} cols={2.2} padding={10}>
-      {props.yelp_businesses.map((business) => (
-        <GridTile className="YelpGridTile"
-          key={business.id}
-          title={business.name}
-          subtitle={displayAddress(business.location.display_address)}
-          titleStyle={styles.titleStyle}
-          titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-          onClick={()=>{props.selectedBusiness(business)}}
-        >
-          <img src={business.image_url} width={220} />
-        </GridTile>
-      ))}
-    </GridList>
-  </div>)
+  return (
+    <div style={styles.root}>
+      <GridList style={styles.gridList} cols={2.2} padding={10}>
+        {props.yelp_businesses.map((business) => (
+          <GridTile className="YelpGridTile"
+            key={business.id}
+            title={business.name}
+            subtitle={displayAddress(business.location.display_address)}
+            titleStyle={styles.titleStyle}
+            titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+            onClick={() => { props.selectedBusiness(business) }}
+          >
+            <img src={business.image_url} width={220} />
+          </GridTile>
+        ))}
+      </GridList>
+    </div>)
 };
 
 const displayAddress = (addressArray) => {
