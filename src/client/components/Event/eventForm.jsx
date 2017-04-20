@@ -38,7 +38,7 @@ let EventForm = (props) => {
         validate={required} />
       <Field name='description' component={descriptionField} />
       <div>
-        <button type="submit" disabled={pristine || submitting}>Post Event</button>
+        <button type="submit" disabled={pristine || submitting}>Host Event</button>
         <button type="button" disabled={pristine || submitting} onClick={reset}>Reset</button>
       </div>
     </form>

@@ -30,13 +30,13 @@ const YelpSearchForm = props => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <Field name="locationYelp" id="google_auto" component={renderTextField} label="location" />
+          <Field name="locationYelp" id="google_auto" component={renderTextField} label="Location" />
         </div>
         <div>
-          <Field name="keywordYelp" component={renderTextField} label="keyword" />
+          <Field name="keywordYelp" component={renderTextField} label="Keyword" />
         </div>
         <div>
-          <button type="submit" disabled={pristine || submitting}>Yelp</button>
+          <button type="submit" disabled={pristine || submitting}>Yelp <i className="fa fa-yelp <fa-lg></fa-lg>" style={{"color": "red"}}></i></button>
         </div>
       </form>
     </div>

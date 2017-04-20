@@ -74,6 +74,7 @@ class CreateEvent extends React.Component {
       <div className="HostEventContainer" style={{ "marginTop": "10%" }}>
         <Paper style={titleStyle} zDepth={1}>
           <h1>Host An Event</h1>
+          <h3>Find Meeting Place</h3>
           <YelpSearchForm onSubmit={this.handleYelpClick} />
           {this.props.yelp_businesses ? <BusinessGridList /> : null}
           <hr />
