@@ -9,6 +9,7 @@ import GridList from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import GridTile from './GridTile.js';
+import LatestEvent from './latestEvent.jsx';
 
 const styles = {
   root: {
@@ -88,8 +89,6 @@ class Events extends Component {
     console.log(`this.state.hover on mouseOut: ${this.state.hover}`)
   }
 
-
-
   render() {
     let cb = (e) => true;
     if (this.state.view === "past") {
@@ -105,30 +104,53 @@ class Events extends Component {
     }
 
     return (
-      <div className="home_event">
-        <div className="home_event_date">
-          <FlatButton label="All" onClick={this.viewAll} />
-          <FlatButton label="Past" onClick={this.viewPast} />
-          <FlatButton label="Future" onClick={this.viewFuture} />
-        </div>
-        <div style={styles.root}>
-          <GridList style={styles.gridList} cols={2.2}>
-            {this.props.events ? this.props.events.filter(cb).map((event, idx) => (
-              <GridTile
-                className="event"
-                key={ idx }
-                title={ event.Title }
-                subtitle={ this.state.hover ? <div>{`${ event.Location } on ${ event.Date }` }</div> : <div>{`hosted by ${event.Owner}`}</div>}
-                subtitleStyle={{ 'display': 'flex', 'flexFlow': 'row wrap', 'whiteSpace': 'wrap',  }}
-                titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-                onMouseEnter={() => this.mouseOver()}
-                onMouseLeave={() => this.mouseOut()}
-                onClick={() => { this.viewEvent(event) } }
-                >
-                <img src={event.Image} width={220} />
-              </GridTile>
-            )) : null}
-          </ GridList>
+      <div>
+        { this.props && this.props.events.length  ? 
+          <div className="eventBackground">
+            <img src={ this.props.events.filter(cb)[0].Image } />
+            <div className="latestEventContainer">
+              <h1 className="eventTitle">{ this.props.events.filter(cb)[0].Title }</h1>
+              <div className="eventSubtitle">
+                <div className="eventLocation">
+                  {this.props.events.filter(cb)[0].Location}
+                </div>
+                <div className="eventDate">
+                  {this.props.events.filter(cb)[0].Date}
+                </div>
+                <div className="eventOwner">
+                  {this.props.events.filter(cb)[0].Owner}
+                </div>
+                <div className="eventDescription">
+                  {this.props.events.filter(cb)[0].Description}
+                </div>
+              </div>
+            </div>
+        </div> : <div>Loading</div> }
+        <div className="home_event">
+          <div className="home_event_date">
+            <FlatButton label="All" onClick={this.viewAll} />
+            <FlatButton label="Past" onClick={this.viewPast} />
+            <FlatButton label="Future" onClick={this.viewFuture} />
+          </div>
+          <div style={styles.root}>
+            <GridList style={styles.gridList} cols={2.2}>
+              {this.props.events ? this.props.events.filter(cb).map((event, idx) => (
+                <GridTile
+                  className="event"
+                  key={idx}
+                  title={event.Title}
+                  subtitle={this.state.hover ? <div>{`${event.Location} on ${event.Date}`}</div> : <div>{`hosted by ${event.Owner}`}</div>}
+                  subtitleStyle={{ 'display': 'flex', 'flexFlow': 'row wrap', 'whiteSpace': 'wrap', }}
+                  titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+                  onMouseEnter={() => this.mouseOver()}
+                  onMouseLeave={() => this.mouseOut()}
+                  onClick={() => { this.viewEvent(event) } }
+                  >
+                  <img src={event.Image} width={220} />
+                </GridTile>
+              )) : null}
+            </ GridList>
+          </div>
         </div>
       </div>
     )
