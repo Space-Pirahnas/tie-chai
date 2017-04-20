@@ -9,4 +9,4 @@ node_modules/
 src/bundles/
 server/vendor
 npm-debug.log
-
+server/server

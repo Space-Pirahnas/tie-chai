@@ -4,7 +4,7 @@ import "os";
 
 var secret = []byte(os.Getenv("TIE_CHIA_TOKEN_SECRET"));
 
-var hostURL string = "http://52.53.157.201:8080/";
+var hostURL string = "http://52.9.55.148:8080/";
 
 type DB_CONFIG struct{
 	DB_TYPE, DB_HOST, DB_USER, DB_NAME, DB_SSL string
