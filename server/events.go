@@ -64,9 +64,24 @@ func (u User) postEvent(e event) {
 
 func (u User) deleteEvent(e event) {
 	var ev Event;
+	var rsvps []EventAttendee;
+	var comments []EventComment;
 	db.Where(&Event{UserID: u.ID, Business: e.Name, Location: e.Location, Date: e.Date, Original_Date: e.Original_Date, Title: e.Title, Description: e.Description, Image: e.Image, Owner: u.Name, Key: e.Key, Rating: e.Rating }).First(&ev);
+	db.Where(&EventAttendee{EventID: ev.ID}).Find(&rsvps);
+	db.Where(&EventComment{EventID: ev.ID}).Find(&comments);
 	if ev.UserID > 0 {
 		db.Delete(&ev);
+	}
+	for _, v := range rsvps {
+		if v.EventID == ev.ID {
+			db.Delete(&v);
+		}
+	}
+
+	for _, c := range comments {
+		if c.EventID == ev.ID {
+			db.Delete(&c);
+		}
 	}
 }
 

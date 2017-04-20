@@ -32,6 +32,23 @@ export function postEvents(events) {
   }
 }
 
+export function deleteEvent(email, key) {
+  return function (dispatch) {
+    axiosInstance.delete('/api/create_event', {
+      data: {
+        Email: email,
+        Key: key
+      }
+    })
+      .then(res => {
+        hashHistory.push('/home');
+      })
+      .catch(err => {
+        console.error("unable to delete event", err);
+      });
+  }
+}
+
 // "Jan 2, 2006 at 3:04pm (MST)"
 // ["Sun", "Apr", "30", "2017"] ["17:51:32", "GMT-0700", "(PDT)"]
 

@@ -41,7 +41,7 @@ class FriendCard extends Component {
         <CardHeader
           title={ this.props.friend.Name }
           subtitle={ this.props.friend.City}
-          avatar={ this.props.friend.Image }
+          avatar={ this.props.friend.Image || "./styles/noprofile.png" }
           actAsExpander={true}
           showExpandableButton={true}
         />

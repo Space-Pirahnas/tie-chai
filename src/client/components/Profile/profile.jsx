@@ -12,7 +12,7 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      edit: false,
+      editPhoto: false,
       review: false
     }
     this.addFriend = this.addFriend.bind(this);
@@ -23,7 +23,7 @@ class Profile extends React.Component {
 
   toggleEdit() {
     this.setState({
-      edit: !this.state.edit
+      editPhoto: !this.state.editPhoto
     });
   }
 
@@ -52,7 +52,7 @@ class Profile extends React.Component {
             <div className="Profile" style={{backgroundImage: "url(styles/creampaper.png)"}}>
               <div className="ProfilePicture">
                 {
-                  !this.state.edit ? this.props.target.Image ? <ProfilePic /> : <img className="profileImage" src={"./styles/noprofile.png"} /> : null
+                  !this.state.editPhoto ? this.props.target.Image ? <ProfilePic /> : <img className="profileImage" src={"./styles/noprofile.png"} /> : null
                 }
                 {this.state.edit && this.props.target.Email === this.props.user.Email ? <div className="profileImage"><UploadImage toggleEdit={this.toggleEdit} /></div> : null }
               </div>
@@ -70,7 +70,7 @@ class Profile extends React.Component {
                   { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="profileInterest" key={i}>{interest}</div>) : null}
                 </div>
                 <div className="ProfileBio">{this.props.target.Bio}</div>
-                {this.props.friend ? <a href={`/#/message/${generateChatRoomName(this.props.user.Email,this.props.target.Email)}` + "/" + ids[0] + "/" + ids[1]} className="Button">Message</a> : <button className="Button" onClick={this.addFriend} >Connect!</button> }
+                {this.props.friend ? <a href={`/#/message/${generateChatRoomName(this.props.user.Email,this.props.target.Email)}` + "/" + ids[0] + "/" + ids[1]} className="Button">Message</a> : this.props.user.Email !== this.props.target.Email ? <button className="Button" onClick={this.addFriend} >Connect!</button> : null}
               </div>
             </div>         
             <div className="ProfileReview">
@@ -91,6 +91,7 @@ class Profile extends React.Component {
 };
 
 function mapStateToProps(state) {
+  console.log(state,"state here!!!!");
   return { 
     target: state.target.User, 
     user: state.userInfo.user,
