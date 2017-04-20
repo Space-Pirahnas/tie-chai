@@ -11,7 +11,9 @@ export const GET_INTERESTS = 'get_cities';
 export const GET_CITIES = 'get_interests';
 export const GET_TARGET = 'get_target';
 export const GET_YELP_BUSINESS = 'get_business';
+export const CLICKED_YELP_BUTTON = 'clicked_yelp';
 export const SELECTED_YELP_BUSINESS = 'selected_yelp_business';
 export const GET_TARGET_EVENT = 'get_target_event';
 export const GET_CHAT_ROOMS = 'get_chat_rooms';
+
 

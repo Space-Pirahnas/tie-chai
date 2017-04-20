@@ -31,7 +31,7 @@ class Save extends Component {
   }
 
   render() {
-    if (this.props && this.props.savedUsers.length) {
+    if (this.props.savedUsers && this.props.savedUsers.length) {
       return (
         <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
           <AutoRotatingCarousel style={{ "zIndex": 0, overflow: "auto", margin: "10% auto", height: "600px", background: "transparent" }} autoplay={ false } label="Connect!" onChange={this.changeSlide}  onStart={this.addFriend} open>
