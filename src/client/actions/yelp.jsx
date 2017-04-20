@@ -1,9 +1,15 @@
-import { GET_YELP_BUSINESS, SELECTED_YELP_BUSINESS } from './types.jsx';
+import {
+  GET_YELP_BUSINESS,
+  SELECTED_YELP_BUSINESS,
+  CLICKED_YELP_BUTTON
+} from './types.jsx';
 import { axiosInstance } from './index.jsx';
 import { YELP_TOKEN } from '../config.jsx';
 
 export function getYelpBusiness(keyword, location) {
   return function (dispatch) {
+    console.log('getYelpBusiness is being called', true);
+    dispatch({ type: CLICKED_YELP_BUTTON, payload: true});
     // edge case
     if (!keyword) {
       keyword = 'Cafe'
@@ -25,7 +31,9 @@ export function getYelpBusiness(keyword, location) {
         Location: location
       }
     }).then(res => {
+      console.log('getYelpBusiness successfully get data give ', false);
       dispatch({ type: GET_YELP_BUSINESS, payload: res.data.businesses });
+      dispatch({ type: CLICKED_YELP_BUTTON, payload: false});
     }).catch(err => {
       console.error('Fail to get data from server api/yelp with error ', err);
     })

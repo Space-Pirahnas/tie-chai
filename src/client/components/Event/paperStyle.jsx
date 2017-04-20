@@ -1,5 +1,5 @@
 export const titleStyle = {
-  width: 500,
+  width: 550,
   margin: 20,
   textAlign: 'center',
   display: 'inline-block',

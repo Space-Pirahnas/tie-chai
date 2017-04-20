@@ -17,8 +17,7 @@ class CreateEvent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      statePlace: '',
-      clickedYelp: false
+      statePlace: ''
     }
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
     this.handleYelpClick = this.handleYelpClick.bind(this);
@@ -69,9 +68,6 @@ class CreateEvent extends React.Component {
 
   handleYelpClick(value) {
     this.props.getYelpBusiness(value.keywordYelp, this.state.statePlace);
-    this.setState({
-      clickedYelp: !this.state.clickedYelp
-    })
   }
 
   render() {
@@ -81,10 +77,9 @@ class CreateEvent extends React.Component {
           <h1>Host An Event</h1>
           <h3>Find Meeting Place</h3>
           <YelpSearchForm onSubmit={this.handleYelpClick} />
-          {this.props.yelp_businesses ? 
-          <BusinessGridList /> : 
-          this.state.clickedYelp ? 
-          <CircularProgress size={60} thickness={7} /> : null}
+          {this.props.clicked_yelp ? 
+          <CircularProgress size={60} thickness={7} /> :
+          this.props.yelp_businesses ? <BusinessGridList /> : null}
           <hr size="30px" />
           <EventForm onSubmit={this.handleEventSubmit} />
         </Paper>
@@ -94,9 +89,11 @@ class CreateEvent extends React.Component {
 };
 
 function mapStateToProps(state) {
+  console.log('in the event clicked_yelp', state.business.clicked_yelp)
   return {
     yelp_businesses: state.yelp.businesses,
-    selected_business: state.business.selected_business
+    selected_business: state.business.selected_business,
+    clicked_yelp: state.business.clicked_yelp
   };
 }
 
