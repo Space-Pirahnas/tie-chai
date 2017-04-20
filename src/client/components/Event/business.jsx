@@ -11,11 +11,14 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+    marginTop: '2%',
+    marginBottom: '5%',
   },
   gridList: {
     display: 'flex',
     flexWrap: 'nowrap',
     overflowX: 'auto',
+    textAlign: 'left',
   },
   titleStyle: {
     color: 'rgb(0, 188, 212)',

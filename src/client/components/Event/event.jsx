@@ -9,6 +9,7 @@ import loadjs from 'loadjs';
 import * as yelpActions from '../../actions/yelp.jsx'
 import * as eventActions from '../../actions/events.jsx';
 import Paper from 'material-ui/Paper';
+import CircularProgress from 'material-ui/CircularProgress';
 import { titleStyle } from './paperStyle.jsx';
 
 
@@ -17,6 +18,7 @@ class CreateEvent extends React.Component {
     super(props);
     this.state = {
       statePlace: '',
+      clickedYelp: false
     }
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
     this.handleYelpClick = this.handleYelpClick.bind(this);
@@ -66,7 +68,10 @@ class CreateEvent extends React.Component {
   }
 
   handleYelpClick(value) {
-    this.props.getYelpBusiness(value.keywordYelp, this.state.statePlace)
+    this.props.getYelpBusiness(value.keywordYelp, this.state.statePlace);
+    this.setState({
+      clickedYelp: !this.state.clickedYelp
+    })
   }
 
   render() {
@@ -76,8 +81,11 @@ class CreateEvent extends React.Component {
           <h1>Host An Event</h1>
           <h3>Find Meeting Place</h3>
           <YelpSearchForm onSubmit={this.handleYelpClick} />
-          {this.props.yelp_businesses ? <BusinessGridList /> : null}
-          <hr />
+          {this.props.yelp_businesses ? 
+          <BusinessGridList /> : 
+          this.state.clickedYelp ? 
+          <CircularProgress size={60} thickness={7} /> : null}
+          <hr size="30px" />
           <EventForm onSubmit={this.handleEventSubmit} />
         </Paper>
       </div>

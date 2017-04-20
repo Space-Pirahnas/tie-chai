@@ -23,23 +23,17 @@ let EventForm = (props) => {
       <Field name="date"
         component={DatePicker}
         format={null}
-        onChange={(value) => {
-          console.log('date changed ', value) // eslint-disable-line no-console
-        }}
         hintText="Day of meeting?"
         validate={required} />
       <Field name="time"
         component={TimePicker}
         format={null}
         defaultValue={null} // TimePicker requires an object,
-        onChange={(value) => {
-          console.log('time changed ', value) // eslint-disable-line no-console
-        }}
         hintText="At what time?"
         validate={required} />
       <Field name='description' component={descriptionField} />
-      <div>
-        <RaisedButton type="submit" disabled={pristine || submitting}>Host Event</RaisedButton>
+      <div className="EventFormButton">
+        <RaisedButton type="submit" style={{"marginRight": "50px"}} disabled={pristine || submitting}> Host Event </RaisedButton>
         <RaisedButton type="button" disabled={pristine || submitting} onClick={reset}>Reset</RaisedButton>
       </div>
     </form>
@@ -53,14 +47,6 @@ const validate = (values) => {
 
   if (!values.title) {
     errors.title = 'Please enter an title';
-  }
-
-  if (!values.location) {
-    errors.location = 'Please enter a location';
-  }
-  
-  if (!values.business) {
-    errors.business = 'Please enter a business';
   }
 
   if (!values.meettime) {

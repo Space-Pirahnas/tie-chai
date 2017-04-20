@@ -883,7 +883,7 @@ i:hover {
   margin: 0px 20px 20px 20px;
 }
 .YelpGridTile:hover {
-  cursor: pointer
+  cursor: pointer;
 }
 
 .signupContainer {
@@ -984,6 +984,9 @@ transform: rotate(315deg) skewY(10deg);
 filter: blur(7px);
 }
 
+.EventFormButton {
+  justify-content: space-between;
+}
 
 @-webkit-keyframes steam {
 0% { top: 100px; opacity: .075; visibility: visible; }
