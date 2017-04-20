@@ -932,6 +932,11 @@ filter: blur(7px);
 
 /* HomePage */
 
+.titleBar:hover {
+  height: 100% !important;
+}
+
+
 .home {
   margin: 10% 5%;
   display: flex;
@@ -999,7 +1004,7 @@ filter: blur(7px);
   display:flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 900px;
+  width: 680px;
   /*height: 150px;*/
 }
 

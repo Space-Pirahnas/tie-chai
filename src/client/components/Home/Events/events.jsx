@@ -31,13 +31,16 @@ class Events extends Component {
     super(props);
     this.state = {
       view: "future",
-      page: 0
+      page: 0,
+      hover: false
     }
     this.fetchEvents = this.fetchEvents.bind(this);
     this.viewAll = this.viewAll.bind(this);
     this.viewPast = this.viewPast.bind(this);
     this.viewFuture = this.viewFuture.bind(this);
     this.viewEvent = this.viewEvent.bind(this);
+    this.mouseOver = this.mouseOver.bind(this);
+    this.mouseOut = this.mouseOut.bind(this);
   }
 
   componentDidMount() {
@@ -70,6 +73,21 @@ class Events extends Component {
     });
   }
 
+  mouseOver() {
+    this.setState({
+      hover: true
+    })
+    console.log(`this.state.hover on mouseOver: ${this.state.hover}`)
+  }
+
+  mouseOut() {
+    this.setState({
+      hover: false
+    })
+    console.log(`this.state.hover on mouseOut: ${this.state.hover}`)
+  }
+
+
 
   render() {
     let cb = (e) => true;
@@ -94,18 +112,21 @@ class Events extends Component {
         </div>
         <div style={styles.root}>
           <GridList style={styles.gridList} cols={2.2}>
-          {this.props.events ? this.props.events.filter(cb).map((event, idx) => (
-            <GridTile
-              key={idx}
-              title={event.Title}
-              titleStyle={styles.titleStyle}
-              subtitle={<span>{`hosted by ${event.Owner}`}</span>}
-              titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-              onClick={() => { this.viewEvent(event) } }
-            >
-              <img src={event.Image} width={ 220 } />
-            </GridTile>
-          )) : null}
+            {this.props.events ? this.props.events.filter(cb).map((event, idx) => (
+              <GridTile
+                className="event"
+                key={ idx }
+                title={ event.Title }
+                subtitle={ this.state.hover ? <div>{`${ event.Location } on ${ event.Date }` }</div> : <div>{`hosted by ${event.Owner}`}</div>}
+                subtitleStyle={{ 'display': 'flex', 'flexFlow': 'row wrap', 'whiteSpace': 'wrap',  }}
+                titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+                onMouseEnter={() => this.mouseOver()}
+                onMouseLeave={() => this.mouseOut()}
+                onClick={() => { this.viewEvent(event) } }
+                >
+                <img src={event.Image} width={220} />
+              </GridTile>
+            )) : null}
           </ GridList>
         </div>
       </div>
