@@ -26,10 +26,11 @@ func init() {
 	db, err = gorm.Open(dbConfig.DB_TYPE, config);
 	client, e = redis.Dial("tcp", "localhost:6379");
 	if err != nil || e != nil {
+		fmt.Println("error here", err, e);
 		panic("can not connect to db");
 	}
 	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{}, &UserSave{}, &EventAttendee{}, &EventComment{}, &ChatRoom{});
-	// seedTables();
+//	seedTables();
 }
 
 func Serving() {

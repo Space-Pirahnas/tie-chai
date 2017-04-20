@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as actions from '../../actions/matches.jsx';
 import UploadImage from './upload_image.jsx';
@@ -8,7 +8,7 @@ import { Rating } from 'material-ui-rating';
 import { generateChatRoomName } from '../../config.jsx';
 
 
-class Profile extends React.Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +40,7 @@ class Profile extends React.Component {
   render() {
     if (this.props.target) {
       let ids = [this.props.user.ID, this.props.target.ID].sort();
+      const isUser = this.props.user.Email === this.props.target.Email;
       const { Email, Image } = this.props.target;
       const ProfilePic = () => (
         <div>
@@ -54,10 +55,10 @@ class Profile extends React.Component {
                 {
                   !this.state.editPhoto ? this.props.target.Image ? <ProfilePic /> : <img className="profileImage" src={"./styles/noprofile.png"} /> : null
                 }
-                {this.state.edit && this.props.target.Email === this.props.user.Email ? <div className="profileImage"><UploadImage toggleEdit={this.toggleEdit} /></div> : null }
+                {this.state.edit && isUser ? <div className="profileImage"><UploadImage toggleEdit={this.toggleEdit} /></div> : null }
               </div>
               <div className="ProfileInfo">
-                {!this.state.edit  ? this.props.user.Email === this.props.target.Email ? <button className="Button" onClick={this.toggleEdit}>Edit Profile Picture</button> : null : <button className="Button" onClick={this.toggleEdit}>Cancel</button> }
+                {!this.state.edit  ? isUser ? <button className="Button" onClick={this.toggleEdit}>Edit Profile Picture</button> : null : <button className="Button" onClick={this.toggleEdit}>Cancel</button> }
                 <div className="ProfileRating">
                   <Rating value={this.props.target.Rating_Average} max={5} readOnly={true} onChange={() => console.log("nothing")} />
                 </div>
