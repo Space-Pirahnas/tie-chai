@@ -5,9 +5,10 @@ import { hashHistory } from 'react-router';
 import Event from './event.jsx';
 import axios from 'axios';
 import FlatButton from 'material-ui/FlatButton';
-import { GridList, GridTile } from 'material-ui/GridList';
+import GridList from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import GridTile from './GridTile.js';
 
 const styles = {
   root: {
