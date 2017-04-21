@@ -19,7 +19,8 @@ class SubmitReview extends Component {
     this.changeValue = this.changeValue.bind(this);
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     if (this.props.type === "add") {
       this.props.submitReview(this.props.user.Email, this.props.target.Email, +this.state.rating, this.state.value);
       this.setState({
@@ -77,9 +78,10 @@ class SubmitReview extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state, "state here");
   return {
     user: state.userInfo.user,
-    target: state.target.user
+    target: state.target.User
   }
 }
 

@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/messages.jsx';
+import ChatRoom from './ChatRoom/chatRoom.jsx';
 
 class Message extends Component {
   constructor(props) {
@@ -15,7 +16,6 @@ class Message extends Component {
     this.submitMessage = this.submitMessage.bind(this);
     this.changeValue = this.changeValue.bind(this);
   }
-
   componentDidMount() {
     let roomNumber = +this.props.params.roomName + +this.props.params.firstId + +this.props.params.secondId;
     const rootRef = firebase.database().ref();
@@ -29,6 +29,11 @@ class Message extends Component {
         }
       })
     });
+    this.updateScroll();
+  }
+
+  componentDidUpdate() {
+    this.updateScroll();
   }
 
   changeValue(text){
@@ -37,7 +42,13 @@ class Message extends Component {
     });
   }
 
-  submitMessage(){
+  updateScroll(){
+    let messageComponent = document.getElementById("messageComponent");
+    messageComponent.scrollTop = messageComponent.scrollHeight;
+  }
+
+  submitMessage(e){
+    e.preventDefault();
     const rootRef = firebase.database().ref();
     const roomRef = rootRef.child(+this.props.params.roomName + +this.props.params.firstId + +this.props.params.secondId);
     let time = (new Date()).toString();
@@ -46,6 +57,7 @@ class Message extends Component {
       Message: this.state.text,
       Name: this.props.user.Name,
       Email: this.props.user.Email,
+      Image: this.props.user.Image,
     }
     roomRef.set([...this.state.messages, test]);
     this.setState({
@@ -55,10 +67,18 @@ class Message extends Component {
 
   render () {
     return (
-      <div style={{marginTop: 200}}>
-        <h1>Message Page From Message.jsx {JSON.stringify(this.state.messages)}</h1>
-        <TextField hintText="Message" onChange={this.changeValue} value={this.state.text}/>
-        <RaisedButton label="Submit" primary={true} onClick={this.submitMessage}/>
+      <div className="messageContainer">
+        <div className="messagePage">
+          <div className="messageComponent" id="messageComponent">
+            <ChatRoom messages={this.state.messages} user={this.props.user} />
+          </div>
+        </div>
+        <div>
+          <form onSubmit={this.submitMessage}>
+            <TextField style={{marginTop: "50", width: "80vh"}} hintText="Message" onChange={this.changeValue} value={this.state.text}/>
+            <RaisedButton label="Submit" type="submit" primary={true} onClick={this.submitMessage}/>
+          </form>
+        </div>
       </div>
     );
   }
@@ -66,7 +86,8 @@ class Message extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.userInfo.user
+    user: state.userInfo.user,
+    target: state.target.user
   }
 }
 export default connect(mapStateToProps, actions)(Message);

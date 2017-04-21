@@ -37,6 +37,7 @@
     "redux-form": "^6.6.1",
     "redux-form-material-ui": "^4.1.3",
     "redux-thunk": "^2.2.0",
+    "timeago.js": "^3.0.1",
     "yelp-fusion": "^1.0.3"
   },
   "devDependencies": {
