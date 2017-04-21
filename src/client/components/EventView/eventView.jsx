@@ -68,14 +68,15 @@ class EventView extends Component {
             >
               <img src={Image} />
             </CardMedia>
-            <CardTitle title={Title} subtitle="Card subtitle" />
+            <CardTitle title={Title} subtitle={`${Attendees ? Attendees.length : 0}` + ' going'} />
             <TimeLocation datetime={Date} business={Business} location={Location} />
             <CardText>
               {Description}
             </CardText>
             <CardActions>
-              <FlatButton label="Action1" />
-              <FlatButton label="Action2" />
+              <FlatButton label="RSVP" primary={true} hoverColor="#EDECEC" />
+              <FlatButton label="Comment" icon={<i className="fa fa-comment-o" />} hoverColor="#EDECEC" />
+              {this.props.user.Email === Email ? <FlatButton label="Delete" icon={<i className="fa fa-trash-o"/>} secondary={true} onClick={this.deleteEvent} hoverColor="#EDECEC" /> : null}
             </CardActions>
           </Card>
           <div>
