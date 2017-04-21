@@ -1060,7 +1060,7 @@ filter: blur(7px);
   justify-content: center;
   align-items: center;
   flex-flow: column wrap;
-  margin: 20%;
+  margin: 10%;
 }
 
 .matches{
