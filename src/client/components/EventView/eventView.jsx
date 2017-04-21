@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/events.jsx';
-import FlatButton from 'material-ui/FlatButton';
 import { hashHistory } from 'react-router';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 import Comment from './Comments/comment.jsx';
 import SubmitComment from './Comments/submitComment.jsx';
 import TimeLocation from './timeLocation.jsx';
@@ -48,9 +49,29 @@ class EventView extends Component {
     if (this.props.event.target) {
       console.log("In the eventView the target evetn is ", this.props.event.target);
       const { Image, Email, Attendees,
-        Comments, Title, Date, Business, Location } = this.props.event.target;
+        Comments, Title, Date, Business,
+         Location, Owner, Description } = this.props.event.target;
       return (
-        <div style={{"marginTop": "15%"}}>
+        <div style={{ "marginTop": "15%" }}>
+          <Card className="eventCardContainer">
+            <CardHeader
+              title={Owner}
+              avatar="styles/noprofile.png"
+            />
+            <CardMedia
+              overlay={<div><CardTitle title={Title} /><TimeLocation datetime={Date} business={Business} location={Location} /></div>}
+            >
+              <img src={Image} />
+            </CardMedia>
+            <CardTitle title={Title} subtitle="Card subtitle" />
+            <CardText>
+              {Description}
+            </CardText>
+            <CardActions>
+              <FlatButton label="Action1" />
+              <FlatButton label="Action2" />
+            </CardActions>
+          </Card>
           <div>
             <h1 className="title-display">{Title}</h1>
             <TimeLocation datetime={Date} business={Business} location={Location} />

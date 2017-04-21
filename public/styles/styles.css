@@ -933,6 +933,11 @@ filter: blur(7px);
 .EventFormButton {
   justify-content: space-between;
 }
+.eventCardContainer {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+}
 .subTitle-display {
   font-weight: bold;
 }
