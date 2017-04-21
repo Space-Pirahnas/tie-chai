@@ -18,39 +18,32 @@ class Match extends Component {
     let userInterests = this.props.user.Interests.split('-');
     return (
       <div className="matchCard" style={{ backgroundImage: "url(styles/creampaper.png)", "margin": "20px" }}>
-        <div className="matchImage">
-          {
-            this.props.match.Image ? <img src={`http:${this.props.match.Image.slice(5)}`} /> : <img src={"./styles/noprofile.png"} />
-          }
-        </div>
         <div className="matchProfile">
+          {
+            this.props.match.Image ? <img className="matchImage" src={this.props.match.Image} /> : <img className="matchImage" src={"./styles/noprofile.png"} />
+          }
           <div className="matchName" >
-            { this.props.match.Name }
+            {this.props.match.Name}
           </div>
-          <div className="matchLocation" >
-            { this.props.match.Location }
+          <div className="matchCity" >
+            { this.props.match.City }
           </div>
         </div>
         <div className="matchInfo">
-          <div>
-          
+          <div className="matchCareer">
+            <div className="matchProfession">
+              {this.props.match.Profession}
+            </div>
+            <div className="matchCompany">
+              {`@ ${ this.props.match.Company }`}
+            </div>
+          </div>
+          <div className="matchInterests">
+            {this.props.match ? this.props.match.Interests.split('-').sort((a, b) => userInterests.indexOf(a) > 0 ? -1 : 1).map((interest, i) => <div className={userInterests.indexOf(interest) > -1 ? "interests matching_interests" : "interests"} key={i}>{interest}</div>) : null}
           </div>
         </div>
+        <MatchBar addFriend={this.props.addFriend} rejectMatch={this.props.rejectMatch} saveMatch={this.props.saveMatch} />
       </div>
-      <Card style={{ backgroundImage: "url(styles/creampaper.png)", "margin": "20px" }} >
-        <CardHeader
-          title={this.props.match.Name}
-          subtitle={this.props.match.City}
-          avatar={this.props.match.Image}
-          />
-        <CardTitle title={this.props.match.Profession} subtitle={` @ ${this.props.match.Company}`} />
-        <CardText>
-          {this.props.match ? this.props.match.Interests.split('-').sort((a, b) => userInterests.indexOf(a) > 0 ? -1 : 1).map((interest, i) => <div expandable={true} className={userInterests.indexOf(interest) > -1 ? "interests matching_interests" : "interests"} key={i}>{interest}</div>) : null}
-          <MatchBar addFriend={this.props.addFriend} rejectMatch={this.props.rejectMatch} saveMatch={this.props.saveMatch} />
-        </CardText>
-        <CardActions >
-        </CardActions>
-      </Card>
     )
   }
 }
