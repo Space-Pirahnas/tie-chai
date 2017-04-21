@@ -58,8 +58,8 @@ class EventView extends Component {
         <div style={{ "marginTop": "15%" }}>
           <Card className="eventCardContainer">
             <CardHeader
-              title={Owner}
-              subtitle={eventOwner.Bio}
+              title={<i className="fa fa-user-o"> {Owner}</i>}
+              subtitle={<i className="fa fa-book"> {eventOwner.Bio}</i>}
               avatar={eventOwner.Image ? eventOwner.Image : "styles/noprofile.png"}
             >
             </CardHeader>
@@ -74,25 +74,17 @@ class EventView extends Component {
               {Description}
             </CardText>
             <CardActions>
-              <FlatButton label="RSVP" primary={true} hoverColor="#EDECEC" />
+              {this.props.event.rsvp ? <FlatButton label="RSVP" onClick={this.RSVP} primary={true} hoverColor="#EDECEC" /> : <FlatButton label="Cancel RSVP" onClick={this.deleteRSVP} secondary={true} hoverColor="#EDECEC"/>}
               <FlatButton label="Comment" icon={<i className="fa fa-comment-o" />} hoverColor="#EDECEC" />
               {this.props.user.Email === Email ? <FlatButton label="Delete" icon={<i className="fa fa-trash-o"/>} secondary={true} onClick={this.deleteEvent} hoverColor="#EDECEC" /> : null}
             </CardActions>
           </Card>
           <div>
-            <h1 className="title-display">{Title}</h1>
-            <TimeLocation datetime={Date} business={Business} location={Location} />
-            <div>
-              <img src={Image} className="event_page_image" />
-            </div>
             <div className="attendees">
-              {this.props.user.Email === Email ? <FlatButton label="delete event" secondary={true} onClick={this.deleteEvent} /> : null}
               <h1>{Attendees ? Attendees.length : 0} - Attendees</h1>
               {Attendees ? Attendees.map((attendee, i) => <FlatButton onClick={this.routeToAttendee.bind(this, attendee)} key={i} label={attendee.Name} />) : null}
-              {this.props.event.rsvp ? <FlatButton label="rsvp" onClick={this.RSVP} primary={true} /> : <FlatButton label="cancel rsvp" onClick={this.deleteRSVP} secondary={true} />}
             </div>
           </div>
-          <FlatButton label="Write A Comment!" onClick={this.toggleComment} />
           {this.state.comment ? <SubmitComment toggleComment={this.toggleComment} eventKey={this.props.params.eventID} /> : null}
           {Comments ? Comments.map((c, i) => <Comment comment={c} key={i} />) : null}
         </div>

@@ -4,7 +4,6 @@ const TimeLocation = (props) => {
   const { business, location } = props;
   const datetime = props.datetime.split(' at ');
   const date = datetime[0], time = datetime[1];
-  console.log('in time component date and time', date, time);
   return (
     <div>
       <ul className="event-ul">

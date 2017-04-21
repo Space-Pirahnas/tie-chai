@@ -22,6 +22,7 @@ class SubmitReview extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.props.type === "add") {
+      console.log('------------', this.props.target);
       this.props.submitReview(this.props.user.Email, this.props.target.Email, +this.state.rating, this.state.value);
       this.setState({
         value: "",
