@@ -4,6 +4,7 @@ import * as actions from '../../actions/events.jsx';
 import { hashHistory } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import { Rating } from 'material-ui-rating';
 import Comment from './Comments/comment.jsx';
 import SubmitComment from './Comments/submitComment.jsx';
 import TimeLocation from './timeLocation.jsx';
@@ -47,23 +48,28 @@ class EventView extends Component {
 
   render() {
     if (this.props.event.target) {
-      console.log("In the eventView the target evetn is ", this.props.event.target);
+      console.log("In the eventView the target event is ", this.props.event.target);
+      console.log('In the eventView the Owner of Event is ', this.props.user);
       const { Image, Email, Attendees,
         Comments, Title, Date, Business,
-         Location, Owner, Description } = this.props.event.target;
+        Location, Owner, Description, Rating } = this.props.event.target;
+      const eventOwner = this.props.user
       return (
         <div style={{ "marginTop": "15%" }}>
           <Card className="eventCardContainer">
             <CardHeader
               title={Owner}
-              avatar="styles/noprofile.png"
-            />
+              subtitle={eventOwner.Bio}
+              avatar={eventOwner.Image ? eventOwner.Image : "styles/noprofile.png"}
+            >
+            </CardHeader>
             <CardMedia
-              overlay={<div><CardTitle title={Title} /><TimeLocation datetime={Date} business={Business} location={Location} /></div>}
+              overlay={<CardTitle className='event-display-linebreak' title={Title} subtitle={"by " + `${Owner}` + "\n" + `${Date}`} />}
             >
               <img src={Image} />
             </CardMedia>
             <CardTitle title={Title} subtitle="Card subtitle" />
+            <TimeLocation datetime={Date} business={Business} location={Location} />
             <CardText>
               {Description}
             </CardText>
@@ -99,7 +105,7 @@ class EventView extends Component {
 function mapStateToProps(state) {
   return {
     event: state.targetEvent,
-    user: state.userInfo.user
+    user: state.userInfo.user,
   }
 }
 

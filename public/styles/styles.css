@@ -941,13 +941,22 @@ filter: blur(7px);
 .subTitle-display {
   font-weight: bold;
 }
+.event-ul {
+  margin-left: 10px;
+}
 .eventList {
   display: flex;
   justify-content: flex-start;
   margin-bottom: 10px;
 }
+.event-display-linebreak {
+  white-space: pre-line;
+}
+.event-card-tile {
+  padding-bottom: 0px;
+}
 .iconClass {
-  margin-right: 20px;
+  margin-right: 8px;
 }
 
 @-webkit-keyframes steam {

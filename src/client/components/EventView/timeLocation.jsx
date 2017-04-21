@@ -7,7 +7,7 @@ const TimeLocation = (props) => {
   console.log('in time component date and time', date, time);
   return (
     <div>
-      <ul>
+      <ul className="event-ul">
         <li className="eventList">
           <div className="iconClass"><i className="fa fa-clock-o fa-lg" /></div>
           <ul>
@@ -16,7 +16,7 @@ const TimeLocation = (props) => {
           </ul>
         </li>
         <li className="eventList">
-          <div className="iconClass"><i className="fa fa-map-marker fa-lgs" /></div>
+          <div className="iconClass"><i className="fa fa-map-marker fa-lg" /></div>
           <ul>
             <li><h3 className="subTitle-display">{business}</h3></li>
             <li><h4>{location}</h4></li>
