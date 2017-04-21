@@ -75,17 +75,19 @@ class EventView extends Component {
             </CardText>
             <CardActions>
               {this.props.event.rsvp ? <FlatButton label="RSVP" onClick={this.RSVP} primary={true} hoverColor="#EDECEC" /> : <FlatButton label="Cancel RSVP" onClick={this.deleteRSVP} secondary={true} hoverColor="#EDECEC"/>}
-              <FlatButton label="Comment" icon={<i className="fa fa-comment-o" />} hoverColor="#EDECEC" />
+              <FlatButton label="Comment" icon={<i className="fa fa-comment-o" />} hoverColor="#EDECEC" onClick={this.toggleComment} />
               {this.props.user.Email === Email ? <FlatButton label="Delete" icon={<i className="fa fa-trash-o"/>} secondary={true} onClick={this.deleteEvent} hoverColor="#EDECEC" /> : null}
             </CardActions>
+            {this.state.comment ? <SubmitComment toggleComment={this.toggleComment} eventKey={this.props.params.eventID} /> : null}
           </Card>
+
           <div>
             <div className="attendees">
               <h1>{Attendees ? Attendees.length : 0} - Attendees</h1>
               {Attendees ? Attendees.map((attendee, i) => <FlatButton onClick={this.routeToAttendee.bind(this, attendee)} key={i} label={attendee.Name} />) : null}
             </div>
           </div>
-          {this.state.comment ? <SubmitComment toggleComment={this.toggleComment} eventKey={this.props.params.eventID} /> : null}
+          
           {Comments ? Comments.map((c, i) => <Comment comment={c} key={i} />) : null}
         </div>
       )
