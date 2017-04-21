@@ -789,6 +789,74 @@ i:hover {
   align-items: center;
 }
 
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.messagePage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+}
+
+.messageComponent {
+  width: 80vh;
+  height: 60vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.chat_image {
+  max-height: 50px;
+  max-width: 50px;
+  border-radius: 25px;
+  margin: 5px;
+}
+
+.chat_message {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1%;
+}
+
+.chat-bubble {
+  display: flex;
+  flex-direction: row;
+  /*width: 20%;*/
+  min-width: 20%;
+  max-width: 50%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: slategray;
+}
+
+.chat_message_message {
+  font-size: 20px;
+  justify-content: center;
+  margin-left: 2%;
+}
+
+.chat_message_message_user {
+  font-size: 20px;
+  justify-content: center;
+  margin-right: 2%;
+}
+
+.chat_message_text {
+  font-style: italic;
+  font-size: 15%;
+}
+
+.chat_message_text_user {
+  text-align: right;
+  font-style: italic;
+  font-size: 10%;
+}
+
+
 /* Saved */
 
 .Carousel {
@@ -886,7 +954,6 @@ filter: blur(7px);
 
 /* Steam*/
 
-<<<<<<< HEAD
 .contactInterests {
   display: flex;
   flex-flow: row wrap;
@@ -900,8 +967,7 @@ filter: blur(7px);
   margin-top: 15%;
   justify-content: center;
 }
-=======
->>>>>>> Restyle home page
+
 @-ms-keyframes steam {
 0% { top: 100px; opacity: .075; visibility: visible; }
 20% { top: 80px; opacity: 0.2; }

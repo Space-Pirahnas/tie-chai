@@ -51,7 +51,11 @@ func (u User) fetchImages() Image {
 func (u User) getUserImage() string {
 	var img Image;
 	db.Where(&Image{ID: u.ImageID}).First(&img);
-	return img.ImageUrl;
+	if img.ID == u.ImageID {
+		return img.ImageUrl;
+	} else {
+		return "";
+	}
 }
 
 func (u User) deleteImage(img upload) {

@@ -10,7 +10,7 @@ export function submitReview(user, target, rating, text){
         Rating: rating
       })
       .then(res => {
-        dispatch(getTarget(target));
+        dispatch(getTarget(user, target));
       })
       .catch(err => {
         console.error("could not post review", err);
@@ -28,7 +28,7 @@ export function deleteReview(user, target, rating, text){
       }
     })
     .then(res => {
-      dispatch(getTarget(target));
+      dispatch(getTarget(user, target));
     })
     .catch(err => {
       console.error("could not delete review", err);
@@ -43,7 +43,7 @@ export function updateReview(oldReview, newReview){
         New: newReview
       })
       .then(res => {
-        dispatch(getTarget(oldReview.Email));
+        dispatch(getTarget(oldReview.Reviewer_Email, oldReview.Email));
       })
       .catch(err => {
         console.error("could not update review", err);

@@ -48,7 +48,7 @@ class Review extends Component {
 function mapStateToProps(state) {
   return {
     user: state.userInfo.user,
-    target: state.target.user
+    target: state.target.User
   }
 }
 
