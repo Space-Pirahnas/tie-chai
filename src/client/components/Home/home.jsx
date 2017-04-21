@@ -26,13 +26,11 @@ class Home extends React.Component {
 
   render () {
     return (
-      <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
+      <div className="background" style={{backgroundImage: "url(styles/congruent_outline.png)"}}>
         <div> 
           <div className="home">
-            <div>
-              <div className="eventsContainer">
-                <Events />
-              </div>
+            <div className="eventsContainer">
+              <Events />
             </div>
             <div className="matchesContainer">
               <h1>Today's Matches!</h1>
