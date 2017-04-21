@@ -52,7 +52,7 @@ class SubmitComment extends Component {
             </div>
           </CardText>
           <CardActions>
-            <FlatButton label="Comment" icon={<i className="fa fa-comment-o" />} hoverColor="#EDECEC" primary={true} onClick={this.submitComment}/>
+            <FlatButton label="Comment" disabled={!this.state.text} icon={<i className="fa fa-comment-o" />} hoverColor="#EDECEC" primary={true} onClick={this.submitComment}/>
             <FlatButton label="Cancel" hoverColor="#EDECEC" onClick={this.props.toggleComment} />
           </CardActions>
         </Card>

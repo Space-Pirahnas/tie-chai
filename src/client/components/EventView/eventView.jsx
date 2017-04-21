@@ -6,6 +6,7 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import FlatButton from 'material-ui/FlatButton';
 import { Rating } from 'material-ui-rating';
 import Comment from './Comments/comment.jsx';
+import ListComment from './Comments/comments.jsx';
 import SubmitComment from './Comments/submitComment.jsx';
 import TimeLocation from './timeLocation.jsx';
 
@@ -79,6 +80,7 @@ class EventView extends Component {
               {this.props.user.Email === Email ? <FlatButton label="Delete" icon={<i className="fa fa-trash-o"/>} secondary={true} onClick={this.deleteEvent} hoverColor="#EDECEC" /> : null}
             </CardActions>
             {this.state.comment ? <SubmitComment toggleComment={this.toggleComment} eventKey={this.props.params.eventID} /> : null}
+            {Comments? <ListComment comments={Comments} /> : null}
           </Card>
 
           <div>
