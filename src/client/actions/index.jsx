@@ -8,7 +8,7 @@ import {
 } from './types.jsx';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://52.9.55.148:8080/'
+  baseURL: 'http://52.53.157.201:8080/'
 });
 
 export function signinUser({ email, password }) {

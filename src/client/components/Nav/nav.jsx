@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Nav = () => (
-  <div id="navigation" className="Navigation">
+  <div className="Navigation">
     <nav>
       <ul>
         <li><Link to="/friends">Friends</Link></li>
