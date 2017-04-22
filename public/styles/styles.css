@@ -354,7 +354,10 @@ p {
 }
 
 .matching_interests {
-  color: blue;
+  color: #337ab7;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px
 }
 
 .dropdown-menu {
@@ -479,7 +482,7 @@ i:hover {
 }
 
 .interests {
-  color: #337ab7;
+  color: rgb(167,173,186);
   margin: 0 auto;
   text-align: center;
   font-size: 18px
@@ -822,38 +825,62 @@ i:hover {
   margin-bottom: 1%;
 }
 
-.chat-bubble {
+.chat_bubble {
   display: flex;
   flex-direction: row;
   /*width: 20%;*/
-  min-width: 20%;
-  max-width: 50%;
+  min-width: 22%;
+  max-width: 60%;
   height: 100%;
-  border-radius: 5px;
-  background-color: slategray;
+  border-radius: 10px;
+  background-color: rgba(112,128,144, 0.5);
+}
+
+.chat_bubble_user {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  /*width: 20%;*/
+  min-width: 22%;
+  max-width: 60%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgba(0,222,75,0.4);
 }
 
 .chat_message_message {
-  font-size: 20px;
+  font-size: 110%;
   justify-content: center;
-  margin-left: 2%;
-}
-
-.chat_message_message_user {
-  font-size: 20px;
-  justify-content: center;
-  margin-right: 2%;
+  margin: 5%;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
 }
 
 .chat_message_text {
   font-style: italic;
-  font-size: 15%;
+  font-size: 80%;
 }
 
 .chat_message_text_user {
   text-align: right;
   font-style: italic;
-  font-size: 10%;
+  font-size: 80%;
+}
+
+.chats_page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.chats_list {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat_bar {
+  height: 10%;
+
 }
 
 

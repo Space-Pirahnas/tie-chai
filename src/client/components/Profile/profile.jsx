@@ -71,7 +71,7 @@ class Profile extends Component {
                   { this.props.target ? this.props.target.Interests.split('-').map((interest,i) => <div className="profileInterest" key={i}>{interest}</div>) : null}
                 </div>
                 <div className="ProfileBio">{this.props.target.Bio}</div>
-                {this.props.friend ? <a href={`/#/message/${generateChatRoomName(this.props.user.Email,this.props.target.Email)}` + "/" + ids[0] + "/" + ids[1]} className="Button">Message</a> : this.props.user.Email !== this.props.target.Email ? <button className="Button" onClick={this.addFriend} >Connect!</button> : null}
+                {this.props.friend ? <a href={`/#/messenger`} className="Button">Message</a> : this.props.user.Email !== this.props.target.Email ? <button className="Button" onClick={this.addFriend} >Connect!</button> : null}
               </div>
             </div>         
             <div className="ProfileReview">

@@ -39,7 +39,7 @@ class Match extends Component {
             </div>
           </div>
           <div className="matchInterests">
-            {this.props.match ? this.props.match.Interests.split('-').sort((a, b) => userInterests.indexOf(a) > 0 ? -1 : 1).map((interest, i) => <div className={userInterests.indexOf(interest) > -1 ? "interests matching_interests" : "interests"} key={i}>{interest}</div>) : null}
+            {this.props.match ? this.props.match.Interests.split('-').sort((a, b) => userInterests.indexOf(a) > -1 ? -1 : 1).map((interest, i) => <div className={userInterests.indexOf(interest) > -1 ? "matching_interests" : "interests"} key={i}>{interest}</div>) : null}
           </div>
         </div>
         <MatchBar addFriend={this.props.addFriend} rejectMatch={this.props.rejectMatch} saveMatch={this.props.saveMatch} />

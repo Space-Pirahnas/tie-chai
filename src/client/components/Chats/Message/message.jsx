@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/messages.jsx';
+import * as actions from '../../../actions/messages.jsx';
 import ChatRoom from './ChatRoom/chatRoom.jsx';
+import { generateChatRoomName } from '../../../config.jsx';
 
 class Message extends Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
-      text: ''
+      text: '',
+      created: false
     }
     this.submitMessage = this.submitMessage.bind(this);
     this.changeValue = this.changeValue.bind(this);
+    this.renderMessages = this.renderMessages.bind(this);
+    this.renderMessages(props.roomNumber);
   }
-  componentDidMount() {
-    let roomNumber = +this.props.params.roomName + +this.props.params.firstId + +this.props.params.secondId;
-    const rootRef = firebase.database().ref();
+
+  componentWillReceiveProps(props) {
+    this.renderMessages(props.roomNumber);
+  }
+  
+  renderMessages(roomNumber) {
+    roomNumber = roomNumber || this.props.chats[0].ChatRoom;
+    const rootRef = this.props.firebaseInstance.ref();
     const roomRef = rootRef.child(roomNumber);
     roomRef.on("value", entry => {
       this.setState({
         messages: entry.val() || []
       }, () => {
-        if (this.state.messages.length === 1) {
-          this.props.storeChatRoom(roomNumber, this.props.params.firstId, this.props.params.secondId, this.props.user.Email);
+          if (this.props.friend && this.state.messages.length === 1 && this.state.created === false) {
+            this.props.storeChatRoom(roomNumber, this.props.user.ID, this.props.friend.ID, this.props.user.Email);
+            this.setState({
+              created: true
+            });
         }
-      })
+      });
     });
-    this.updateScroll();
   }
 
   componentDidUpdate() {
@@ -49,8 +59,8 @@ class Message extends Component {
 
   submitMessage(e){
     e.preventDefault();
-    const rootRef = firebase.database().ref();
-    const roomRef = rootRef.child(+this.props.params.roomName + +this.props.params.firstId + +this.props.params.secondId);
+    const rootRef = this.props.firebaseInstance.ref();
+    const roomRef = rootRef.child(this.props.roomNumber);
     let time = (new Date()).toString();
     let test = {
       Time: time,
@@ -87,7 +97,9 @@ class Message extends Component {
 function mapStateToProps(state) {
   return {
     user: state.userInfo.user,
-    target: state.target.user
+    roomNumber: state.roomNumber,
+    firebaseInstance: state.firebaseInstance
+    // target: state.target.user
   }
 }
 export default connect(mapStateToProps, actions)(Message);
