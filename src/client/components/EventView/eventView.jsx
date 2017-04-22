@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { Rating } from 'material-ui-rating';
-import Comment from './Comments/comment.jsx';
+import AttendeesList from './Attendees/attendees.jsx';
 import ListComment from './Comments/comments.jsx';
 import SubmitComment from './Comments/submitComment.jsx';
 import TimeLocation from './timeLocation.jsx';
@@ -22,6 +22,7 @@ class EventView extends Component {
     this.props.getTargetEvent(this.props.params.eventID, this.props.user.Email);
     this.toggleComment = this.toggleComment.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
+    // this.routeToAttendee = this.routeToAttendee.bind(this);
   }
 
   toggleComment() {
@@ -59,9 +60,9 @@ class EventView extends Component {
         <div style={{ "marginTop": "15%" }}>
           <Card className="eventCardContainer">
             <CardHeader
-              title={<i className="fa fa-user-o"> {Owner}</i>}
-              subtitle={<i className="fa fa-book"> {eventOwner.Bio}</i>}
-              avatar={eventOwner.Image ? eventOwner.Image : "styles/noprofile.png"}
+              title={<div><i className="fa fa-user-o"> {Owner}</i></div>}
+              subtitle={<div><i className="fa fa-book"> {eventOwner.Bio}</i></div>}
+              avatar={!!eventOwner.Image ? eventOwner.Image : "styles/noprofile.png"}
             >
             </CardHeader>
             <CardMedia
@@ -69,7 +70,8 @@ class EventView extends Component {
             >
               <img src={Image} />
             </CardMedia>
-            <CardTitle title={Title} subtitle={`${Attendees ? Attendees.length : 0}` + ' going'} />
+            <CardTitle title={Title} subtitle={<div>{Attendees ? Attendees.length : 0} going</div>} />
+            {Attendees? <AttendeesList attendees={Attendees} toggleAttendee={this.routeToAttendee} /> : null}
             <TimeLocation datetime={Date} business={Business} location={Location} />
             <CardText>
               {Description}
@@ -82,15 +84,6 @@ class EventView extends Component {
             {this.state.comment ? <SubmitComment toggleComment={this.toggleComment} eventKey={this.props.params.eventID} /> : null}
             {Comments? <ListComment comments={Comments} /> : null}
           </Card>
-
-          <div>
-            <div className="attendees">
-              <h1>{Attendees ? Attendees.length : 0} - Attendees</h1>
-              {Attendees ? Attendees.map((attendee, i) => <FlatButton onClick={this.routeToAttendee.bind(this, attendee)} key={i} label={attendee.Name} />) : null}
-            </div>
-          </div>
-          
-          {Comments ? Comments.map((c, i) => <Comment comment={c} key={i} />) : null}
         </div>
       )
     } else {

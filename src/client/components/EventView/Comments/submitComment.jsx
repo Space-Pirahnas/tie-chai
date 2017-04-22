@@ -12,11 +12,9 @@ class SubmitComment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subject: '',
       text: ''
     }
     this.textChange = this.textChange.bind(this);
-    this.subjectChange = this.subjectChange.bind(this);
     this.submitComment = this.submitComment.bind(this);
   }
 
@@ -26,15 +24,9 @@ class SubmitComment extends Component {
     });
   }
 
-  subjectChange(e) {
-    this.setState({
-      subject: e.target.value
-    });
-  }
-
   submitComment() {
     this.props.toggleComment();
-    this.props.commentEvent(this.props.eventKey, this.props.user.Email, this.state.subject, this.state.text)
+    this.props.commentEvent(this.props.eventKey, this.props.user.Email, this.state.text)
   }
 
   render() {
