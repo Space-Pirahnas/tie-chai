@@ -482,7 +482,7 @@ i:hover {
   color: #337ab7;
   margin: 0 auto;
   text-align: center;
-  font-size: 18px
+  font-size: 15px
 }
 
 .ProfileContainer {
@@ -999,18 +999,25 @@ filter: blur(7px);
 /* HomePage */
 
 .matchCard {
-  margin: 20px;
+  margin: 50px 20px;
   display: flex;
   width: 450px;
   height: 250px;
   flex-flow: row wrap;
   justify-content: space-around;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  z-index: 1;
+}
+
+.matchCard:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .matchProfile {
   display: flex;
   flex-flow: column wrap;
-  margin: 5% 10px;
+  margin: 5% 1px;
   justify-content: center;
   align-items: center;
 }
@@ -1019,6 +1026,7 @@ filter: blur(7px);
       display: flex;
     flex-flow: column wrap;
     justify-content: center;
+    max-width: 50%;
 }
 
 .matchCity{
@@ -1045,11 +1053,18 @@ filter: blur(7px);
   border-radius: 44px;
   margin-bottom: 10px;
   overflow: hidden;
-  max-width: 150px;
+  max-width: 120px;
   box-sizing: border-box;
   border: 3px solid transparent;
   -webkit-transition: border .125s ease;
   transition: border .125s ease;
+}
+
+.matchesBackgroundImage {
+  width: 100%;
+  position: absolute;
+  opacity: 0.5;
+  z-index: 0;
 }
 
 .eventBackground {
@@ -1057,14 +1072,14 @@ filter: blur(7px);
   height: 100%;
   padding: 20px;
   display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+  flex-flow: column wrap;
+  justify-content: center;
 }
 
 .eventBackgroundImage {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 700px;
   opacity: 0.5;
@@ -1126,13 +1141,30 @@ filter: blur(7px);
   justify-content: center;
   align-items: center;
   flex-flow: column wrap;
-  margin: 10%;
 }
 
 .matches{
   display:flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center;
+  padding: 50px;
+}
+
+.matchTitle {
+  width: 300px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+  margin: 30px;
+  padding: 5px;
+}
+
+.matchesNumber {
+  font-size: 150px;
 }
 
 .match_container {
