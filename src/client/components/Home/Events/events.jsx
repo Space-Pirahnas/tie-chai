@@ -105,7 +105,7 @@ class Events extends Component {
 
     return (
       <div>
-        {this.props && this.props.events.length ?
+        {this.props.events && this.props.events.length ?
           <div className="eventBackground">
             <img className="eventBackgroundImage" src={this.props.events.filter(cb)[0].Image} />
             <div className="latestEventContainer">

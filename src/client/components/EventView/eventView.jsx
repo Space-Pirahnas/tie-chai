@@ -4,7 +4,6 @@ import * as actions from '../../actions/events.jsx';
 import { hashHistory } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import { Rating } from 'material-ui-rating';
 import AttendeesList from './Attendees/attendees.jsx';
 import ListComment from './Comments/comments.jsx';
 import SubmitComment from './Comments/submitComment.jsx';
@@ -22,7 +21,6 @@ class EventView extends Component {
     this.props.getTargetEvent(this.props.params.eventID, this.props.user.Email);
     this.toggleComment = this.toggleComment.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
-    // this.routeToAttendee = this.routeToAttendee.bind(this);
   }
 
   toggleComment() {
@@ -60,9 +58,9 @@ class EventView extends Component {
         <div style={{ "marginTop": "15%" }}>
           <Card className="eventCardContainer">
             <CardHeader
-              title={<div><i className="fa fa-user-o"> {Owner}</i></div>}
-              subtitle={<div><i className="fa fa-book"> {eventOwner.Bio}</i></div>}
-              avatar={!!eventOwner.Image ? eventOwner.Image : "styles/noprofile.png"}
+              title={Owner}
+              subtitle={<span style={{'marginTop': '3px'}}><br/>Owner Bio: {eventOwner.Bio}</span>}
+              avatar={!!eventOwner.Image ? `http:${eventOwner.Image.slice(5)}` : "styles/noprofile.png"}
             >
             </CardHeader>
             <CardMedia

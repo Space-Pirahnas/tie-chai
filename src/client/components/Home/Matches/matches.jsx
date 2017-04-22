@@ -62,7 +62,7 @@ class Matches extends Component {
         <img className="matchesBackgroundImage" src="styles/coffeeshop.jpg" />
           <div className="matchTitle">
             <h1>Today's Matches!</h1>
-            <div className="matchesNumber">{ this.props.matches.length }</div>
+            <div className="matchesNumber">{ this.props.matches ? this.props.matches.length : 0}</div>
           </div>
           { this.props.matches ? this.props.matches.slice(this.state.page * 4, this.state.page*4 + 4).map((match, i) => <Match user={this.props.user} match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)} viewMatch={this.viewMatch.bind(this, match) }/>) : null }
           <div className="home_buttons">

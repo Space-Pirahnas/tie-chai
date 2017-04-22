@@ -36,7 +36,7 @@ class SubmitComment extends Component {
         <Card>
           <CardHeader
             title={Name}
-            avatar={Image ? Image : "styles/noprofile.png"}
+            avatar={Image ? `http:${Image.slice(5)}` : "styles/noprofile.png"}
           />
           <CardText>
             <div>
