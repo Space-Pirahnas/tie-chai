@@ -933,6 +933,31 @@ filter: blur(7px);
 .EventFormButton {
   justify-content: space-between;
 }
+.eventCardContainer {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+}
+.subTitle-display {
+  font-weight: bold;
+}
+.event-ul {
+  margin-left: 10px;
+}
+.eventList {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.event-display-linebreak {
+  white-space: pre-line;
+}
+.event-card-tile {
+  padding-bottom: 0px;
+}
+.iconClass {
+  margin-right: 8px;
+}
 
 @-webkit-keyframes steam {
 0% { top: 100px; opacity: .075; visibility: visible; }
@@ -966,6 +991,12 @@ filter: blur(7px);
   display: flex;
   margin-top: 15%;
   justify-content: center;
+}
+
+.title-display {
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: bold;
 }
 
 @-ms-keyframes steam {

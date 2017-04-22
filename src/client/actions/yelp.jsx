@@ -8,7 +8,6 @@ import { YELP_TOKEN } from '../config.jsx';
 
 export function getYelpBusiness(keyword, location) {
   return function (dispatch) {
-    console.log('getYelpBusiness is being called', true);
     dispatch({ type: CLICKED_YELP_BUTTON, payload: true});
     // edge case
     if (!keyword) {
@@ -31,7 +30,6 @@ export function getYelpBusiness(keyword, location) {
         Location: location
       }
     }).then(res => {
-      console.log('getYelpBusiness successfully get data give ', false);
       dispatch({ type: GET_YELP_BUSINESS, payload: res.data.businesses });
       dispatch({ type: CLICKED_YELP_BUTTON, payload: false});
     }).catch(err => {
