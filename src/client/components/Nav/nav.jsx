@@ -5,10 +5,10 @@ const Nav = () => (
   <div className="Navigation">
     <nav>
       <ul>
-        <li><Link to="/friends">Friends</Link></li>
-        <li><Link to="/save">Saved</Link></li>
-        <li><Link to="/chats">Chats</Link></li>
-        <li><Link to="/postevent">Create Event</Link></li>
+        <li><Link to="/friends">Connections</Link></li>
+        <li><Link to="/save">Saved For Later</Link></li>
+        <li><Link to="/messenger">Messenger</Link></li>
+        <li><Link to="/postevent">Host Event</Link></li>
       </ul>
     </nav>
   </div>

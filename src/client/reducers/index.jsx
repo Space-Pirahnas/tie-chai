@@ -13,6 +13,9 @@ import yelpReducer from './yelp_reducer.jsx';
 import businessReducer from './business_reducer.jsx';
 import targetEventReducer from './target_event_reducer.jsx';
 import chatRoomReducer from './chat_rooms_reducer.jsx';
+import setChatRoomReducer from './set_chat_room_reducer.jsx';
+import firebaseReducer from './firebase_reducer.jsx';
+
 
 const rootReducer = combineReducers({
   form,
@@ -28,7 +31,9 @@ const rootReducer = combineReducers({
   yelp: yelpReducer,
   business: businessReducer,
   targetEvent: targetEventReducer,
-  chats: chatRoomReducer
+  chats: chatRoomReducer,
+  roomNumber: setChatRoomReducer,
+  firebaseInstance: firebaseReducer
 });
 
 export default rootReducer;

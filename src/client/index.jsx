@@ -14,13 +14,13 @@ import Home from './components/Home/home.jsx';
 import Friends from './components/Friends/friends.jsx';
 import CreateEvent from './components/Event/event.jsx';
 import Profile from './components/Profile/profile.jsx';
-import Message from './components/Message/message.jsx';
 import Chats from './components/Chats/chats.jsx';
 import Nav from './components/Nav/nav.jsx';
 import Save from './components/Save/save.jsx'
 import checkAuth from './components/Auth/check_auth.jsx';
 import { getUserInfo } from './actions/index.jsx';
 import { getInterests, getCities } from './actions/interests.jsx';
+import { firebaseCreator } from './actions/firebase.jsx';
 import eventView from './components/EventView/eventView.jsx';
 import { FIREBASE_CONFIG } from './config.jsx';
 import * as firebase from 'firebase';
@@ -36,7 +36,14 @@ if (token && email) {
   store.dispatch(getUserInfo(token, email, false))
 }
 
-firebase.initializeApp(FIREBASE_CONFIG);
+function initializeFirebase() {
+  firebase.initializeApp(FIREBASE_CONFIG);
+  let db = firebase.database();
+  store.dispatch(firebaseCreator(db));
+};
+
+initializeFirebase();
+
 store.dispatch(getInterests());
 store.dispatch(getCities());
 
@@ -54,9 +61,8 @@ ReactDOM.render(
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
           <Route path='/events/:eventID' component={checkAuth(eventView)} />
           <Route path='/profile/:userEmail' component={checkAuth(Profile)} />
-          <Route path='/message/:roomName/:firstId/:secondId' component={checkAuth(Message)} />
           <Route path='/save' component={checkAuth(Save)} />
-          <Route path='/chats' component={checkAuth(Chats)} />
+          <Route path='/messenger' component={checkAuth(Chats)} />
         </Route>
       </Router>
     </Provider>

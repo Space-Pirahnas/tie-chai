@@ -1,5 +1,5 @@
 import { axiosInstance, getUserInfo } from './index.jsx';
-import { GET_CHAT_ROOMS } from './types.jsx';
+import { GET_CHAT_ROOMS, SET_ROOM_NUMBER } from './types.jsx';
 
 export function storeChatRoom(roomNumber, firstId, secondId, email) {
   return function(dispatch) {
@@ -31,6 +31,12 @@ export function getChatRooms(email) {
     .catch(err => {
       console.error("could not add room", err);
     });
+  }
+}
+
+export function setChatRoomNumber(roomNumber) {
+  return function(dispatch) {
+    dispatch({ type: SET_ROOM_NUMBER, payload: roomNumber});
   }
 }
 

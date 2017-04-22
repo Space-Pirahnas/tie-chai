@@ -14,7 +14,7 @@ const ContactInfo = (props) => {
         )}
       </div>
       <div className="contactButtons">
-        <a style={{ margin: "0 20px" }} href={`/#/message/${generateChatRoomName(props.user.Email,props.person.Email)}` + "/" + ids[0] + "/" + ids[1]} className="Button">Message</a>
+        <a style={{ margin: "0 20px" }} href={`/#/messenger`} className="Button">Message</a>
         <a style={{ margin: "0 20px" }} href={`/#/profile/${props.person.Email}`} className="Button">Profile</a>
         <button className="Button" style={{color: "red", border: "2px solid red"}} onClick={props.deleteFriend}>Remove Friend</button>
       </div>

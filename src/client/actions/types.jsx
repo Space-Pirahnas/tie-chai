@@ -15,5 +15,7 @@ export const CLICKED_YELP_BUTTON = 'clicked_yelp';
 export const SELECTED_YELP_BUSINESS = 'selected_yelp_business';
 export const GET_TARGET_EVENT = 'get_target_event';
 export const GET_CHAT_ROOMS = 'get_chat_rooms';
+export const SET_ROOM_NUMBER = 'set_room_number';
+export const INITIALIZE_FIREBASE = 'initialize_firebase';
 
 
