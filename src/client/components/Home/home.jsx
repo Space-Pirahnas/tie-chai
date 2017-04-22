@@ -33,7 +33,6 @@ class Home extends React.Component {
               <Events />
             </div>
             <div className="matchesContainer">
-              <h1 className="matchTitle">Today's Matches!</h1>
               <Matches />
             </div>
           </div>

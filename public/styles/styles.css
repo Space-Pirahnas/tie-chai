@@ -1141,7 +1141,6 @@ filter: blur(7px);
   justify-content: center;
   align-items: center;
   flex-flow: column wrap;
-  margin-top: 10%;
 }
 
 .matches{
@@ -1160,6 +1159,12 @@ filter: blur(7px);
   border: 2px solid white;
   border-radius: 10px;
   color: white;
+  margin: 30px;
+  padding: 5px;
+}
+
+.matchesNumber {
+  font-size: 150px;
 }
 
 .match_container {
