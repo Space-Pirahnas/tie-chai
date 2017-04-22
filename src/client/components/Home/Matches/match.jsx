@@ -17,7 +17,7 @@ class Match extends Component {
   render() {
     let userInterests = this.props.user.Interests.split('-');
     return (
-      <div className="matchCard" style={{ backgroundImage: "url(styles/creampaper.png)", "margin": "20px" }}>
+      <div className="matchCard" style={{ backgroundImage: "url(styles/creampaper.png)" }}>
         <div className="matchProfile">
           {
             this.props.match.Image ? <img className="matchImage" src={this.props.match.Image} /> : <img className="matchImage" src={"./styles/noprofile.png"} />

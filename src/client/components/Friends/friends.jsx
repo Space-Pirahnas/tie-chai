@@ -37,7 +37,7 @@ class Friends extends Component {
     }
     
     return (
-      <div className="background" style={{backgroundImage: "url(styles/sativa.png)"}}>
+      <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
         <div className="contactList">
           { this.props.friends ? this.props.friends.sort(cb).map((friend) =>  
             <FriendCard friend={ friend } key={ friend.Email } showFriend={ this.showFriend.bind(this, friend) } />
