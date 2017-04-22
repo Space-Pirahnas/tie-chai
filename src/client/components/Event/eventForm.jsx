@@ -28,7 +28,6 @@ let EventForm = (props) => {
       <Field name="time"
         component={TimePicker}
         format={null}
-        defaultValue={null} // TimePicker requires an object,
         hintText="At what time?"
         validate={required} />
       <Field name='description' component={descriptionField} />

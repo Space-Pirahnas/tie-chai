@@ -19,6 +19,7 @@ class EventView extends Component {
     this.RSVP = this.RSVP.bind(this);
     this.deleteRSVP = this.deleteRSVP.bind(this);
     this.props.getTargetEvent(this.props.params.eventID, this.props.user.Email);
+    this.props.get
     this.toggleComment = this.toggleComment.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
   }
@@ -47,20 +48,18 @@ class EventView extends Component {
 
 
   render() {
-    if (this.props.event.target) {
-      console.log("In the eventView the target event is ", this.props.event.target);
-      console.log('In the eventView the Owner of Event is ', this.props.user);
+    if (this.props.event.target && this.props.target) {
       const { Image, Email, Attendees,
         Comments, Title, Date, Business,
         Location, Owner, Description, Rating } = this.props.event.target;
-      const eventOwner = this.props.user
+      const eventOwner = this.props.target;
       return (
         <div style={{ "marginTop": "15%" }}>
           <Card className="eventCardContainer">
             <CardHeader
               title={Owner}
               subtitle={<span style={{'marginTop': '3px'}}><br/>Owner Bio: {eventOwner.Bio}</span>}
-              avatar={!!eventOwner.Image ? `http:${eventOwner.Image.slice(5)}` : "styles/noprofile.png"}
+              avatar={!!eventOwner.Image ? eventOwner.Image : "styles/noprofile.png"}
             >
             </CardHeader>
             <CardMedia
@@ -94,6 +93,7 @@ function mapStateToProps(state) {
   return {
     event: state.targetEvent,
     user: state.userInfo.user,
+    target: state.target.User
   }
 }
 

@@ -5,6 +5,7 @@ import * as saves from '../../actions/saves.jsx';
 import { axiosInstance } from '../../actions/index.jsx';
 import { AutoRotatingCarousel, Slide } from 'material-auto-rotating-carousel';
 import { green400, green600, blue400, blue600, red400, red600 } from 'material-ui/styles/colors';
+import { hashHistory } from 'react-router';
 
 class Save extends Component {
   constructor(props) {
@@ -26,6 +27,10 @@ class Save extends Component {
     });
   }
 
+  viewUser(save){
+    hashHistory.push(`/profile/${save.Email}`)
+  }
+
   addFriend(){
     this.props.handleMatch(this.props.savedUsers[this.state.index], "Friend", "/api/friends", this.props.user);
   }
@@ -38,11 +43,11 @@ class Save extends Component {
             {this.props.savedUsers.map((save, i) =>
               <Slide
                 key={ i } 
-                media={<img className="savedPic" src={ save.Image ? save.Image : "./styles/noprofile.png" } />}
+                media={<input type="image" onClick={this.viewUser.bind(this,save)} className="savedPic" src={ save.Image ? save.Image : "./styles/noprofile.png" } />}
                 mediaBackgroundStyle={{ backgroundColor: blue400 }}
                 contentStyle={{ backgroundColor: blue600 }}
                 title={ save.Name }
-                subtitle={`${ save.Profession } @ ${ save.Company } | ${ save.City } | I'm interested in ${ save.Interests.replace(/-/, ', ') } | ${ save.Bio }`}
+                subtitle={`${ save.Profession } @ ${ save.Company } | ${ save.City } | I'm interested in ${ save.Interests.replace(/-/, ', ') } | ${ save.Bio }`.length > 200 ? `${ save.Profession } @ ${ save.Company } | ${ save.City } | I'm interested in ${ save.Interests.replace(/-/, ', ') } | ${ save.Bio }`.slice(0, 200) + '...' : `${ save.Profession } @ ${ save.Company } | ${ save.City } | I'm interested in ${ save.Interests.replace(/-/, ', ') } | ${ save.Bio }`}
               />
               )
             }

@@ -17,26 +17,28 @@ class Message extends Component {
     this.submitMessage = this.submitMessage.bind(this);
     this.changeValue = this.changeValue.bind(this);
     this.renderMessages = this.renderMessages.bind(this);
+    this.chatDoesntExist = this.chatDoesntExist.bind(this);
     this.renderMessages(props.roomNumber);
   }
 
   componentWillReceiveProps(props) {
     this.renderMessages(props.roomNumber);
   }
+
+  chatDoesntExist(roomNumber) {
+    return this.props.chats ? this.props.chats.map(c => c.ChatRoom).indexOf(roomNumber) < 0 : true;
+  }
   
   renderMessages(roomNumber) {
-    roomNumber = roomNumber || this.props.chats[0].ChatRoom;
+    roomNumber = roomNumber ? roomNumber : this.props.chats && this.props.chats.length ? this.props.chats[0].ChatRoom : 0;
     const rootRef = this.props.firebaseInstance.ref();
     const roomRef = rootRef.child(roomNumber);
     roomRef.on("value", entry => {
       this.setState({
         messages: entry.val() || []
       }, () => {
-          if (this.props.friend && this.state.messages.length === 1 && this.state.created === false) {
+          if (this.props.friend && this.chatDoesntExist(roomNumber)) {
             this.props.storeChatRoom(roomNumber, this.props.user.ID, this.props.friend.ID, this.props.user.Email);
-            this.setState({
-              created: true
-            });
         }
       });
     });
@@ -59,20 +61,22 @@ class Message extends Component {
 
   submitMessage(e){
     e.preventDefault();
-    const rootRef = this.props.firebaseInstance.ref();
-    const roomRef = rootRef.child(this.props.roomNumber);
-    let time = (new Date()).toString();
-    let test = {
-      Time: time,
-      Message: this.state.text,
-      Name: this.props.user.Name,
-      Email: this.props.user.Email,
-      Image: this.props.user.Image,
+    if (this.state.text) {
+      const rootRef = this.props.firebaseInstance.ref();
+      const roomRef = rootRef.child(this.props.roomNumber);
+      let time = (new Date()).toString();
+      let test = {
+        Time: time,
+        Message: this.state.text,
+        Name: this.props.user.Name,
+        Email: this.props.user.Email,
+        Image: this.props.user.Image,
+      }
+      roomRef.set([...this.state.messages, test]);
+      this.setState({
+        text: ''
+      });
     }
-    roomRef.set([...this.state.messages, test]);
-    this.setState({
-      text: ''
-    });
   }
 
   render () {
@@ -85,8 +89,8 @@ class Message extends Component {
         </div>
         <div>
           <form onSubmit={this.submitMessage}>
-            <TextField style={{marginTop: "50", width: "80vh"}} hintText="Message" onChange={this.changeValue} value={this.state.text}/>
-            <RaisedButton label="Submit" type="submit" primary={true} onClick={this.submitMessage}/>
+            <TextField style={{marginTop: "50px", width: "80vh"}} hintText="Message" onChange={this.changeValue} value={this.state.text}/>
+            <RaisedButton className="chat_button" label="Submit" type="submit" primary={true} onClick={this.submitMessage}/>
           </form>
         </div>
       </div>

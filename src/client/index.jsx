@@ -57,7 +57,7 @@ ReactDOM.render(
           <Route path='/auth/signin' component={SignIn} />
           <Route path='/auth/signout' component={SignOut} />
           <Route path='/home' component={checkAuth(Home)} />
-          <Route path='/friends' component={Friends} />
+          <Route path='/connections' component={Friends} />
           <Route path='/postevent' component={checkAuth(CreateEvent)} />
           <Route path='/events/:eventID' component={checkAuth(eventView)} />
           <Route path='/profile/:userEmail' component={checkAuth(Profile)} />

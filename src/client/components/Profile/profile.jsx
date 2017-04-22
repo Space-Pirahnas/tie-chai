@@ -75,7 +75,7 @@ class Profile extends Component {
               </div>
             </div>         
             <div className="ProfileReview">
-              <h2 style={{"margin-top": "50px"}} >Reviews</h2>
+              <h2 style={{"marginTop": "50px"}} >Reviews</h2>
               {this.props.friend ? <center>{!this.state.review ? <button className="Button" onClick={this.toggleReview} >Write A Review!</button> : <button className="Button" onClick={this.toggleReview} >Cancel!</button>}</center> : null }
               {this.state.review ? <SubmitReview type={"add"} rating={0} value={""} /> : null }
               <div className="Reviews" style={{backgroundImage: "url(styles/lined_paper.png)"}}>
@@ -92,14 +92,11 @@ class Profile extends Component {
 };
 
 function mapStateToProps(state) {
-  console.log(state,"state here!!!!");
   return { 
     target: state.target.User, 
     user: state.userInfo.user,
     friend: state.target.IsFriend,
   }
 }
-
-{/*{this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} review={review} />) : null}*/}
 
 export default connect(mapStateToProps, actions)(Profile);
