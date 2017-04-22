@@ -24,14 +24,13 @@ class SurveySecondPage extends React.Component {
     return (
       <form onSubmit={ handleSubmit }>
         <div>
-          <Field name="city" component={ renderRadioGroup }>
+          <Field name="city" className="surveyCities" component={ renderRadioGroup }>
             {
               this.props.cities.map(city => 
-                <RadioButton key={ city.ID } value={ city.City_Name } label={ city.City_Name } />
+                <RadioButton style={{ width: 0 }} key={ city.ID } value={ city.City_Name } label={ city.City_Name } />
               )
             }
           </Field>
-          <Field name="state" component={ renderTextField } label="State"/>
         </div>
         <div>
           <Field name="profession" component={ renderTextField } label="Profession"/>

@@ -675,7 +675,7 @@ i:hover {
 }
 
 .reviewLeft {
-  background: rgba(173, 255, 216, 0.7);
+  background: rgba(191, 149, 232, 0.7);
   margin: 5px;
   width: 100%;
 }
@@ -683,7 +683,7 @@ i:hover {
 .reviewLeft::before {
   box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
   left: -9px;
-  background: rgba(173, 255, 216, 0.7);
+  background: rgba(191, 149, 232, 0.7);
 }
 
 .reviewRight {
@@ -1333,4 +1333,20 @@ filter: blur(7px);
   font-size: 50px;
   color: white;
   opacity: 0.5;
+}
+
+.saveDefaultBackground {
+  z-index: 1;
+  font-size: 50px;
+  color: white;
+  opacity: 0.5;
+  margin: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.surveyCities {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }

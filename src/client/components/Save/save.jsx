@@ -20,38 +20,39 @@ class Save extends Component {
     this.props.getSavedUsers(this.props.user.Email);
   }
 
-  changeSlide(index){
+  changeSlide(index) {
     this.setState({
       index: index
     });
   }
 
-  addFriend(){
+  addFriend() {
     this.props.handleMatch(this.props.savedUsers[this.state.index], "Friend", "/api/friends", this.props.user);
   }
 
   render() {
-    if (this.props.savedUsers && this.props.savedUsers.length) {
-      return (
-        <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
-          <AutoRotatingCarousel style={{ "zIndex": 0, overflow: "auto", margin: "10% auto", height: "600px", background: "transparent" }} autoplay={ false } label="Connect!" onChange={this.changeSlide}  onStart={this.addFriend} open>
+    return (
+      <div className="background" style={{ backgroundImage: "url(styles/tweed.png)" }}>
+        {this.props.savedUsers && this.props.savedUsers.length ?
+          <AutoRotatingCarousel style={{ "zIndex": 0, overflow: "auto", margin: "10% auto", height: "600px", background: "transparent" }} autoplay={false} label="Connect!" onChange={this.changeSlide} onStart={this.addFriend} open>
             {this.props.savedUsers.map((save, i) =>
               <Slide
-                key={ i } 
-                media={<img className="savedPic" src={ save.Image ? save.Image : "./styles/noprofile.png" } />}
+                key={i}
+                media={<img className="savedPic" src={save.Image ? save.Image : "./styles/noprofile.png"} />}
                 mediaBackgroundStyle={{ backgroundColor: blue400 }}
                 contentStyle={{ backgroundColor: blue600 }}
-                title={ save.Name }
-                subtitle={`${ save.Profession } @ ${ save.Company } | ${ save.City } | I'm interested in ${ save.Interests.replace(/-/, ', ') } | ${ save.Bio }`}
-              />
-              )
-            }
-          </AutoRotatingCarousel>
-        </div>
-      )
-    } else {
-      return (<div>loading</div>);
-    }
+                title={save.Name}
+                subtitle={`${save.Profession} @ ${save.Company} | ${save.City} | I'm interested in ${save.Interests.replace(/-/, ', ')} | ${save.Bio}`}
+                />
+            )}
+          </AutoRotatingCarousel> : 
+          <div className="saveDefaultBackground" >
+            <img src="styles/lonely.png"/>
+            <p>Empty</p>
+          </div>
+        }
+      </div>
+    )
   }
 }
 
@@ -62,4 +63,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {...matches, ...saves})(Save);
+export default connect(mapStateToProps, { ...matches, ...saves })(Save);
