@@ -1268,3 +1268,11 @@ filter: blur(7px);
   color: #ffda44;
   background-color: #f8f8ff;
 }
+
+
+.eventDefaultBackground {
+  z-index: 1;
+  font-size: 50px;
+  color: white;
+  opacity: 0.5;
+}

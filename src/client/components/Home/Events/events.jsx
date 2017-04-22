@@ -148,7 +148,12 @@ class Events extends Component {
                 </ GridList>
               </div>
             </div>
-          </div> : <div>Loading</div>}
+          </div> : <div className="eventBackground">
+            <img className="eventBackgroundImage" src="styles/hotpot.jpg" />
+            <div className="eventDefaultBackground">
+              No Events
+            </div>
+        </div> }
       </div>
     )
   }
