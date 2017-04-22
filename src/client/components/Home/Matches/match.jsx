@@ -20,7 +20,7 @@ class Match extends Component {
       <div className="matchCard" style={{ backgroundImage: "url(styles/creampaper.png)" }}>
         <div className="matchProfile">
           {
-            this.props.match.Image ? <img className="matchImage" src={this.props.match.Image} /> : <img className="matchImage" src={"./styles/noprofile.png"} />
+            this.props.match.Image ? <input type="image" onClick={this.props.viewMatch} className="matchImage" src={this.props.match.Image} /> : <input type="image" className="matchImage" src={"./styles/noprofile.png"} />
           }
           <div className="matchName" >
             {this.props.match.Name}

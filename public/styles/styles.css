@@ -762,6 +762,10 @@ i:hover {
   padding: 20px;
 }
 
+.survey_container {
+  width: 100%;
+}
+
 .event_image {
   max-height: 150px;
   max-width: 150px;
@@ -828,31 +832,34 @@ i:hover {
 .chat_bubble {
   display: flex;
   flex-direction: row;
-  /*width: 20%;*/
   min-width: 22%;
   max-width: 60%;
   height: 100%;
   border-radius: 10px;
-  background-color: rgba(112,128,144, 0.5);
+  background-color: rgba(	255, 183, 77, 0.8);
 }
 
 .chat_bubble_user {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  /*width: 20%;*/
-  min-width: 22%;
+  min-width: 30%;
   max-width: 60%;
   height: 100%;
   border-radius: 10px;
-  background-color: rgba(0,222,75,0.4);
+  background-color: rgba(128,222,234, 0.8);
+}
+
+.chat_button {
+  background-color: #00838F;
 }
 
 .chat_message_message {
-  font-size: 110%;
+  font-size: 100%;
   justify-content: center;
   margin: 5%;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  max-width: 57%
 }
 
 .chat_message_text {
@@ -876,13 +883,32 @@ i:hover {
 .chats_list {
   display: flex;
   flex-direction: column;
+  height: 60vh;
+  width: 25%;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .chat_bar {
-  height: 10%;
-
+  margin-bottom: 3%;
+  margin-top: 3%;
+  align-items: center;
+  text-align: center;
+  max-width: 100%;
+  min-height: 5%;
+  max-height: 5%;
 }
 
+.cities_list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  width: 255px;
+  font-size: 80%;
+}
 
 /* Saved */
 
@@ -1264,11 +1290,7 @@ filter: blur(7px);
   flex-direction: column;
   justify-content: center;
   width: 680px;
-  al
 
-
-
-  /*height: 150px;*/
 }
 
 .home_event_date {
@@ -1333,4 +1355,33 @@ filter: blur(7px);
   font-size: 50px;
   color: white;
   opacity: 0.5;
+}
+
+.chat_users {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-style: bold;
+  max-width: 100%;
+  margin-left: 10px;
+}
+
+.chat_users:hover {
+  background-color:rgba(211,211,211, 0.3);
+}
+
+.chat_user_images {
+  height: 25px;
+  width: 25px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+.chat_last_message {
+  font-style: italic;
+  font-size: 75%;
+}
+
+.chats_name {
+  font-style: bold;
 }
