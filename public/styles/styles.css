@@ -1125,6 +1125,12 @@ filter: blur(7px);
   z-index: 0;
 }
 
+.matchesSolidBackgroundImage {
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+}
+
 .eventBackground {
   width: 100%;
   height: 100%;
