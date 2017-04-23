@@ -25,7 +25,7 @@ var dbConfig = DB_CONFIG{
 	"localhost",
 	os.Getenv("POSTGRES_USER"),
 	os.Getenv("POSTGRES_DB"),
-	"enabled",
+	"disable",
 }
 
 var interests = []string{

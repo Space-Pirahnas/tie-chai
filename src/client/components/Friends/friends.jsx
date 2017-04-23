@@ -18,12 +18,10 @@ class Friends extends Component {
   }
 
   componentDidMount() {
-    console.log('props in friends: ', this.props);
     this.props.getUserFriends(this.props.email);
   }
 
   showFriend(friend) {
-    console.log('friend: ', friend);
     this.setState({ person: friend });
   }
 
@@ -54,8 +52,7 @@ class Friends extends Component {
 };
 
 function mapStateToProps(state) {
-  console.log('props in friends(state): ', state);
-  return {
+  return { 
     friends: state.friends,
     email: state.auth.email
   };

@@ -5,6 +5,7 @@ import * as saves from '../../actions/saves.jsx';
 import { axiosInstance } from '../../actions/index.jsx';
 import { AutoRotatingCarousel, Slide } from 'material-auto-rotating-carousel';
 import { green400, green600, blue400, blue600, red400, red600 } from 'material-ui/styles/colors';
+import { hashHistory } from 'react-router';
 
 class Save extends Component {
   constructor(props) {
@@ -26,7 +27,11 @@ class Save extends Component {
     });
   }
 
-  addFriend() {
+  viewUser(save){
+    hashHistory.push(`/profile/${save.Email}`)
+  }
+
+  addFriend(){
     this.props.handleMatch(this.props.savedUsers[this.state.index], "Friend", "/api/friends", this.props.user);
   }
 

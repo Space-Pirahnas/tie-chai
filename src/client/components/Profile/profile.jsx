@@ -92,14 +92,11 @@ class Profile extends Component {
 };
 
 function mapStateToProps(state) {
-  console.log(state,"state here!!!!");
   return { 
     target: state.target.User, 
     user: state.userInfo.user,
     friend: state.target.IsFriend,
   }
 }
-
-{/*{this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} review={review} />) : null}*/}
 
 export default connect(mapStateToProps, actions)(Profile);

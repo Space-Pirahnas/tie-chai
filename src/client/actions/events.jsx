@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
 import { GET_EVENTS, GET_TARGET_EVENT } from './types.jsx';
+import { getTarget } from './matches.jsx';
 import { axiosInstance } from './index.jsx';
+
 
 export function getEvents(email) {
   return function (dispatch) {
@@ -74,6 +76,7 @@ export function getTargetEvent(key, email) {
     })
       .then(res => {
         dispatch({ type: GET_TARGET_EVENT, payload: res.data, email: email });
+        dispatch(getTarget(email, res.data.Email ));
       })
       .catch(err => {
         console.error("unable to retrieve target event ", err);

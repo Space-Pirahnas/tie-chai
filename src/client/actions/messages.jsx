@@ -11,6 +11,7 @@ export function storeChatRoom(roomNumber, firstId, secondId, email) {
     .then(res => {
       let token = localStorage.getItem("token");
       dispatch(getUserInfo(token, email, false));
+      dispatch(getChatRooms(email));
     })
     .catch(err => {
       console.error("could not add room", err);

@@ -13,7 +13,7 @@ class Notification extends React.Component {
   }
 
   onClick() {
-    hashHistory.push('/friends');
+    hashHistory.push('/connections');
     this.props.resetNotifications(this.props.userInfo.Email);
   }
 
