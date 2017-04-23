@@ -61,7 +61,7 @@ class Message extends Component {
 
   submitMessage(e){
     e.preventDefault();
-    if (this.state.text) {
+    if (this.state.text && this.props.roomNumber > 0) {
       const rootRef = this.props.firebaseInstance.ref();
       const roomRef = rootRef.child(this.props.roomNumber);
       let time = (new Date()).toString();
