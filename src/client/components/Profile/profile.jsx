@@ -75,10 +75,10 @@ class Profile extends Component {
               </div>
             </div>         
             <div className="ProfileReview">
-              <h2 style={{"marginTop": "50px"}} >Reviews</h2>
-              {this.props.friend ? <center>{!this.state.review ? <button className="Button" onClick={this.toggleReview} >Write A Review!</button> : <button className="Button" onClick={this.toggleReview} >Cancel!</button>}</center> : null }
-              {this.state.review ? <SubmitReview toggleReview={this.toggleReview} type={"add"} rating={0} value={""} /> : null }
-              <div className="Reviews" style={{backgroundImage: "url(styles/lined_paper.png)"}}>
+              <h2 style={{"margin-top": "50px", color: "white"}} >Reviews</h2>
+              {this.props.friend ? <center>{!this.state.review ? <button className="Button" style={{ "color": "white" }} onClick={this.toggleReview} >Write A Review!</button> : <button className="Button" onClick={this.toggleReview} >Cancel!</button>}</center> : null }
+              {this.state.review ? <SubmitReview type={"add"} rating={0} value={""} /> : null }
+              <div className="Reviews">
                 {this.props.target.Reviews ? this.props.target.Reviews.map((review, i) => <Review key={i} index={i} review={review} />) : null}
               </div>
             </div>

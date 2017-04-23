@@ -59,10 +59,11 @@ table {
   border-spacing: 0;
 }
 @import "https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900";
+
 body {
   background: #f8f8ff;
   color: #221f1f;
-  font-family: "Lato", sans-serif;
+  font-family: 'Karla', sans-serif;
 }
 
 h2, .TitleList .Title {
@@ -590,8 +591,6 @@ i:hover {
   align-items: center;
   align-content: center;
   padding: 20px;
-  border: 2px solid rgba(245, 245, 241, 0.2);
-  border-radius: 44px;
   margin: 20px;
 }
 
@@ -675,7 +674,7 @@ i:hover {
 }
 
 .reviewLeft {
-  background: rgba(173, 255, 216, 0.7);
+  background: rgba(191, 149, 232, 0.7);
   margin: 5px;
   width: 100%;
 }
@@ -683,7 +682,7 @@ i:hover {
 .reviewLeft::before {
   box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
   left: -9px;
-  background: rgba(173, 255, 216, 0.7);
+  background: rgba(191, 149, 232, 0.7);
 }
 
 .reviewRight {
@@ -1151,6 +1150,12 @@ filter: blur(7px);
   z-index: 0;
 }
 
+.matchesSolidBackgroundImage {
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+}
+
 .eventBackground {
   width: 100%;
   height: 100%;
@@ -1357,6 +1362,35 @@ filter: blur(7px);
   opacity: 0.5;
 }
 
+.saveDefaultBackground {
+  z-index: 1;
+  font-size: 50px;
+  color: white;
+  opacity: 0.5;
+  margin: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.surveyCities {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+/* parralax */
+
+.parallax { 
+    /* The image used */
+
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .chat_users {
   display: flex;
   flex-direction: row;

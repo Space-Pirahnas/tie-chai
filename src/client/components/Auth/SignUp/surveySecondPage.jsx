@@ -27,11 +27,10 @@ class SurveySecondPage extends React.Component {
           <Field name="city" component={ renderRadioGroup } className="cities_list">
             {
               this.props.cities.map(city => 
-                <RadioButton key={ city.ID } value={ city.City_Name } label={ city.City_Name } />
+                <RadioButton style={{ width: 0 }} key={ city.ID } value={ city.City_Name } label={ city.City_Name } />
               )
             }
           </Field>
-          <Field name="state" component={ renderTextField } label="State"/>
         </div>
         <div>
           <Field name="profession" component={ renderTextField } label="Profession"/>

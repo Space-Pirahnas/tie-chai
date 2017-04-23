@@ -25,21 +25,26 @@ class Friends extends Component {
     this.setState({ person: friend });
   }
 
-  render () {
-    const cb = (a,b) => {
+  render() {
+    const cb = (a, b) => {
       if (a.Name < b.Name) {
         return -1;
       } else {
         return 1;
       }
     }
-    
+
     return (
-      <div className="background" style={{backgroundImage: "url(styles/tweed.png)"}}>
+      <div className="background" style={{ backgroundImage: "url(styles/tweed.png)" }}>
         <div className="contactList">
-          { this.props.friends ? this.props.friends.sort(cb).map((friend) =>  
-            <FriendCard friend={ friend } key={ friend.Email } showFriend={ this.showFriend.bind(this, friend) } />
-          ): null }
+          {this.props.friends ? this.props.friends.sort(cb).map((friend) =>
+            <FriendCard friend={friend} key={friend.Email} showFriend={this.showFriend.bind(this, friend)} />
+          ) :
+            <div className="saveDefaultBackground" >
+              <img src="styles/pepe.png" />
+              <p>Empty</p>
+            </div>
+          }
         </div>
       </div>
     );
