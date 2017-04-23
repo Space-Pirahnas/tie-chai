@@ -59,10 +59,11 @@ table {
   border-spacing: 0;
 }
 @import "https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900";
+
 body {
   background: #f8f8ff;
   color: #221f1f;
-  font-family: "Lato", sans-serif;
+  font-family: 'Karla', sans-serif;
 }
 
 h2, .TitleList .Title {
@@ -590,8 +591,6 @@ i:hover {
   align-items: center;
   align-content: center;
   padding: 20px;
-  border: 2px solid rgba(245, 245, 241, 0.2);
-  border-radius: 44px;
   margin: 20px;
 }
 
@@ -1355,4 +1354,18 @@ filter: blur(7px);
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+}
+
+/* parralax */
+
+.parallax { 
+    /* The image used */
+
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
