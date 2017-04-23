@@ -22,7 +22,6 @@ class SubmitReview extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.props.type === "add") {
-      console.log('------------', this.props.target);
       this.props.submitReview(this.props.user.Email, this.props.target.Email, +this.state.rating, this.state.value);
       this.setState({
         value: "",
@@ -46,6 +45,7 @@ class SubmitReview extends Component {
       this.props.updateReview(oldReview, newReview);
       this.props.toggleUpdate();
     }
+    this.props.toggleReview();
   }
 
   changeRating(rating) {
@@ -63,16 +63,18 @@ class SubmitReview extends Component {
   render() {
     return (
       <div className="profile_submit_review">
-        <TextField onChange={this.changeValue} hintText="Review Text" />
-        <select value={this.state.rating} onChange={this.changeRating}>
-          <option disabled={true} value="0">Rating!</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <button onClick={this.handleSubmit}>Submit</button>
+        <form onSubmit={this.handleSubmit}>
+          <TextField onChange={this.changeValue} hintText="Review Text" />
+          <select value={this.state.rating} onChange={this.changeRating}>
+            <option disabled={true} value="0">Rating!</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button onClick={this.handleSubmit}>Submit</button>
+        </form>
       </div>
     )
   }
