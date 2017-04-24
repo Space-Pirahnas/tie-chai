@@ -15,12 +15,12 @@ class IndexPage extends Component {
     const background = {
       height: "1000px",
       width: "100%",
-      backgroundImage: 'url(https://s-media-cache-ak0.pinimg.com/originals/6e/cc/12/6ecc12a30fffe4f8e0abbbcb826fd3c7.jpg)',
-      margin: '0, auto'
+      backgroundImage: 'url(styles/coffee-meeting.jpg)',
+      margin: '0, auto',
     }
     const box = {
       top: "300px",
-      background: 'rgba(0,0,0,0.4)',
+      background: 'rgba(0,0,0,0.2)',
       margin: 'auto',
       color: '#fff',
       fontSize: '40px',
@@ -44,7 +44,7 @@ class IndexPage extends Component {
                 <img style={{ "maxWidth": "50px", display: "inline-block" }} className="tinder" src={"styles/tinder.svg"} />
               </div>
               <div className="appBio"> Social media platform for professionals with mutual interest in expanding their network. Users can broadcast and share events that only people in their network can see. Meetings can be arranged between users.</div>
-              <a href="/#/auth/signup" className="Button">Sign Up</a>
+              <a href="/#/auth/signup" className="signupButton">Sign Up</a>
             </div>
           </Parallax>
         </section>
