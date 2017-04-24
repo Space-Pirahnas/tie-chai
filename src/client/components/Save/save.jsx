@@ -47,7 +47,7 @@ class Save extends Component {
                 mediaBackgroundStyle={{ backgroundColor: blue400 }}
                 contentStyle={{ backgroundColor: blue600 }}
                 title={save.Name}
-                subtitle={`${save.Profession} @ ${save.Company} | ${save.City} | I'm interested in ${save.Interests.replace(/-/, ', ')} | ${save.Bio}`}
+                subtitle={`${save.Profession} @ ${save.Company} | ${save.City} | I'm interested in ${save.Interests.replace(/-/, ', ')} | ${save.Bio}`.length > 200 ? `${save.Profession} @ ${save.Company} | ${save.City} | I'm interested in ${save.Interests.replace(/-/, ', ')} | ${save.Bio}`.slice(0, 200) + "..." : `${save.Profession} @ ${save.Company} | ${save.City} | I'm interested in ${save.Interests.replace(/-/, ', ')} | ${save.Bio}`}
                 />
             )}
           </AutoRotatingCarousel> : 

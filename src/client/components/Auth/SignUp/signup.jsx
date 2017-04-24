@@ -12,6 +12,9 @@ class SignUp extends React.Component {
   }
 
   handleFormSubmit(values) {
+    const unique = arr => {
+      return Object.keys(arr.reduce((o, i) => (o[i] = true) && o, {}));
+    }
     const signupObj = {
       Name: `${values.firstName} ${values.lastName}` ,
       Email: values.email,
@@ -21,7 +24,7 @@ class SignUp extends React.Component {
       Profession: values.profession,
       Company: values.company,
       Bio: values.bio,
-      Interests: values.interests,
+      Interests: unique(values.interests),
       Image: ""
     }
     this.props.signupUser(signupObj);

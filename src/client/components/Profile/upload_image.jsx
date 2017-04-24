@@ -4,14 +4,22 @@ import { axiosInstance } from '../../actions/index.jsx';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/matches.jsx';
 import { getUserInfo } from '../../actions/index.jsx';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class UploadImage extends Component {
     constructor(props) {
       super(props);
+      this.state = {
+        downloading: false
+      }
       this.onDrop = this.onDrop.bind(this);
     }
 
     onDrop(files) {
+      this.setState({
+        downloading: true
+      });
+
       axiosInstance.post('/api/upload_image', files[0], { headers: {Email: this.props.email}})
                    .then(res => {
                     this.props.getTarget(this.props.email, this.props.email);
@@ -28,13 +36,19 @@ class UploadImage extends Component {
     }
 
     render(){
+      if (!this.state.downloading) {
+        return (
+            <div>
+              <Dropzone name="uploadfile" onDrop={this.onDrop} multiple={false} >
+                <div>Drop a file here, OR click to select a file to upload.</div>
+              </Dropzone>
+            </div>
+        );
+      } else {
       return (
-          <div>
-            <Dropzone name="uploadfile" onDrop={this.onDrop} multiple={false} >
-              <div>Drop a file here, OR click to select a file to upload.</div>
-            </Dropzone>
-          </div>
-      );
+        <div><CircularProgress size={100} thickness={13} color="#FFB300" /></div>
+      )
+      }
     }
 }
 
