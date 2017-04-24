@@ -24,7 +24,8 @@ class SubmitComment extends Component {
     });
   }
 
-  submitComment() {
+  submitComment(e) {
+    e.preventDefault();
     this.props.toggleComment();
     this.props.commentEvent(this.props.eventKey, this.props.user.Email, this.state.text)
   }
@@ -40,7 +41,9 @@ class SubmitComment extends Component {
           />
           <CardText>
             <div>
-              <TextField hintText="Comment" onChange={this.textChange} fullWidth={true} />
+              <form onSubmit={this.submitComment}>
+                <TextField hintText="Comment" onChange={this.textChange} fullWidth={true} />
+              </form>
             </div>
           </CardText>
           <CardActions>

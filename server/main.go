@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/mediocregopher/radix.v2/redis"
+	"github.com/mediocregopher/radix.v2/pool"
 )
 
 var db *gorm.DB
 var err, e error
-var client *redis.Client
+var client *pool.Pool
 
 func seedTables() {
 	for _, v := range interests {
@@ -24,7 +24,7 @@ func seedTables() {
 func init() {
 	config := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=%s", dbConfig.DB_HOST, dbConfig.DB_USER, dbConfig.DB_NAME, dbConfig.DB_SSL)
 	db, err = gorm.Open(dbConfig.DB_TYPE, config)
-	client, e = redis.Dial("tcp", "localhost:6379")
+	client, e = pool.New("tcp", "localhost:6379", 10)
 	if err != nil || e != nil {
 		fmt.Println("error here", err, e)
 		panic("can not connect to db");

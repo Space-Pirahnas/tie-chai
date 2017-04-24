@@ -81,7 +81,6 @@ class SubmitReview extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state, "state here");
   return {
     user: state.userInfo.user,
     target: state.target.User

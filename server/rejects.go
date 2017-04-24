@@ -3,6 +3,7 @@ package main;
 import (
 	"net/http"
 	"encoding/json"
+	"log"
 )
 
 type RejectRequest struct {
@@ -29,11 +30,21 @@ func handleRejects( w http.ResponseWriter, req *http.Request ) {
 } 
 
 func (u User) rejectUser(r User) {
-	client.Cmd("HSET", u.Email, r.Email, "false");
+	conn, err := client.Get();
+	if err != nil {
+		log.Println("error connecting to db");
+	}
+	defer client.Put(conn);
+	conn.Cmd("HSET", u.Email, r.Email, "false");
 }
 
 func checkReject(u User, r User) bool {
-	reject, _ := client.Cmd("HGET", u.Email, r.Email).Str();
+	conn, err := client.Get();
+	if err != nil {
+		log.Println("error connecting to db");
+	}
+	defer client.Put(conn);
+	reject, _ := conn.Cmd("HGET", u.Email, r.Email).Str();
 	if len(reject) > 0 {
 		return false;
 	} else {

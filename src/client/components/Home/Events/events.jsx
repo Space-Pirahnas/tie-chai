@@ -85,7 +85,7 @@ class Events extends Component {
         return date > new Date();
       }
     }
-    let events = this.props.events.filter(cb);
+    let events = this.props.events ? this.props.events.filter(cb) : [];
     return (
       <div>
         {this.props.events && this.props.events.length && events.length ?

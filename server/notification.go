@@ -3,6 +3,7 @@ package main;
 import (
 	"net/http"
 	"encoding/json"
+	"log"
 )
 
 type notification struct {
@@ -11,6 +12,11 @@ type notification struct {
 
 func handleNotification (w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodPost {
+		conn, err := client.Get();
+		if err != nil {
+			log.Println("error connecting to db");
+		}
+		defer client.Put(conn);
 		defer req.Body.Close();
 		var n notification;
 		e := json.NewDecoder(req.Body).Decode(&n);
@@ -24,7 +30,7 @@ func handleNotification (w http.ResponseWriter, req *http.Request) {
 				db.Save(&u);
 				res := u.getUser();
 				r, _ := json.Marshal(res);
-				client.Cmd("HSET", u.Email , "Profile", string(r));
+				conn.Cmd("HSET", u.Email , "Profile", string(r));
 				successRequest(w, "successfully reset notifications", "reset notifications");
 			}
 		}
