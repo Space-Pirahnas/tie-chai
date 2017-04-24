@@ -6,8 +6,6 @@ import { hashHistory } from 'react-router';
 class LatestEvent extends Component {
   constructor(props) {
     super(props);
-
-    console.log(`this.props.event: ${this.props.event}`);
   }
 
   render() {

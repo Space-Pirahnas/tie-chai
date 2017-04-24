@@ -24,11 +24,9 @@ class NavProfile extends React.Component {
       <div onClick={this.onClick} className="UserProfile">
         <div className="User">
           <div className="name">{ this.props.userInfo.Name }</div>
-          <div className="image">
-            {
-              this.props.userInfo.Image ? <img src={ `http:${this.props.userInfo.Image.slice(5)}` } /> :  <img src={"./styles/noprofile.png"} />
-            }
-          </div>
+          {
+            this.props.userInfo.Image ? <img className="image"src={ `http:${this.props.userInfo.Image.slice(5)}` } /> :  <img className="image" src={"./styles/noprofile.png"} />
+          }
         </div>
       </div>
       );
