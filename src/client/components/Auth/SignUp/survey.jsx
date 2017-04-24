@@ -25,7 +25,7 @@ class Survey extends React.Component {
     const { page } = this.state;
     const progressValue = page === 1 ? "50" : "100";
     return (
-      <div>
+      <div className="survey_container">
         <div className="progress">
           <div className="progress-bar progress-bar-info progress-bar-striped"
             role="progressbar" aria-valuenow={progressValue} aria-valuemin="0" aria-valuemax="100"

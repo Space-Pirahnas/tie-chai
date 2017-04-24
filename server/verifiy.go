@@ -1,12 +1,18 @@
 package main;
 
 import (
+	"log"
 	"net/http"
 	"encoding/json"
 )
 
 func handleVerification(w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodGet {
+		conn, err := client.Get();
+		if err != nil {
+			log.Println("error connecting to db");
+		}
+		defer client.Put(conn);
 		var u User;
 		email := req.URL.Query();
 		if len(email["Email"]) > 0 {
@@ -17,7 +23,7 @@ func handleVerification(w http.ResponseWriter, req *http.Request) {
 				db.Save(&u);
 				res := u.getUser();
 				r, _ := json.Marshal(res);
-				client.Cmd("HSET", u.Email , "Profile", string(r));
+				conn.Cmd("HSET", u.Email , "Profile", string(r));
 			}
 			successRequest(w, "verified user email", "verified user email");
 		} else {

@@ -2,6 +2,7 @@ package main;
 
 import(
 	"fmt"
+	"log"
 	"bytes"
 	"net/http"
 	"io/ioutil"
@@ -20,6 +21,11 @@ type file struct {
 func handleUpload (w http.ResponseWriter, req *http.Request ) {
 	var u User;
 	if req.Method == http.MethodPost {
+		conn, e := client.Get();
+		if e != nil {
+			log.Println("error connecting to db");
+		}
+		defer client.Put(conn);
 		u1 := uuid.NewV4();
 		email := req.Header.Get("Email");
 		file, _ := ioutil.ReadAll(req.Body);
@@ -50,7 +56,7 @@ func handleUpload (w http.ResponseWriter, req *http.Request ) {
 			u.updateImage(url);
 			res := u.getUser();
 			r, _ := json.Marshal(res);
-			client.Cmd("HSET", u.Email , "Profile", string(r));
+			conn.Cmd("HSET", u.Email , "Profile", string(r));
 			successRequest(w, "successfully uploaded", "successfully uploaded");
 		}
 	}

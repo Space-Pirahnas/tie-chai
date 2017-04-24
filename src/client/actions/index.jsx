@@ -15,7 +15,6 @@ export function signinUser({ email, password }) {
   return function (dispatch) {
     axiosInstance.post('/api/login', { 'Email': email, 'Password': password })
       .then(response => {
-        console.log("successfully sign in an user and receive token as ", response.data);
         dispatch(getUserInfo(response.data, email, true));
         dispatch({ type: AUTH_USER, payload: email });
         localStorage.setItem('token', response.data);
@@ -30,10 +29,8 @@ export function signinUser({ email, password }) {
 
 export function signupUser(signupObj) {
   return function (dispatch) {
-    console.log(signupObj, "signup here");
     axiosInstance.post('/api/signup', signupObj)
       .then(response => {
-        console.log(signupObj, "signup object hereee", response);
         dispatch({ type: AUTH_USER, payload: signupObj.Email });
         dispatch(getUserInfo(response.data, signupObj.Email, true));
         localStorage.setItem('token', response.data);
@@ -49,7 +46,6 @@ export function signupUser(signupObj) {
 export function signoutUser() {
   localStorage.clear();
   hashHistory.push('/');
-  console.log('Sign out user successfully!!!');
   return { type: UNAUTH_USER };
 
 }

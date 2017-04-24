@@ -92,12 +92,17 @@ func (u User) deleteFriend(f User) {
 }
 
 func (u User) checkMatch(f User) bool {
-	match, _ := client.Cmd("HGET", f.Email, u.Email).Str();
+	conn, err := client.Get();
+	if err != nil {
+		log.Println("error connecting to db");
+	}
+	defer client.Put(conn);
+	match, _ := conn.Cmd("HGET", f.Email, u.Email).Str();
 	if match == "true" {
-		client.Cmd("HDEL", f.Email, u.Email);
+		conn.Cmd("HDEL", f.Email, u.Email);
 		return true;
 	} else {
-		client.Cmd("HSET", u.Email, f.Email, "true");
+		conn.Cmd("HSET", u.Email, f.Email, "true");
 		return false;
 	}
 }
@@ -121,6 +126,11 @@ func (u User) filterFriends(users []User) []User {
 }
 
 func (u User) newFriend() {
+	conn, err := client.Get();
+	if err != nil {
+		log.Println("error connecting to db");
+	}
+	defer client.Put(conn);
 	var user User;
 	db.Where(&User{Email: u.Email}).First(&user);
 	if u.Email == user.Email {
@@ -128,6 +138,6 @@ func (u User) newFriend() {
 		db.Save(&user);
 		res := user.getUser();
 		r, _ := json.Marshal(res);
-		client.Cmd("HSET", u.Email , "Profile", string(r));
+		conn.Cmd("HSET", u.Email , "Profile", string(r));
 	}
 }

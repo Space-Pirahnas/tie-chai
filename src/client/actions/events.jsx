@@ -25,11 +25,10 @@ export function postEvents(events) {
   return function (dispatch) {
     axiosInstance.post('/api/create_event', events)
       .then(() => {
-        console.log('successfully post events to server /api/create_event');
         hashHistory.push('/home');
       })
       .catch(err => {
-        console.log('failt to post events to server /api/create_event', err);
+        console.log('failed to post events to server /api/create_event', err);
       })
   }
 }
@@ -60,10 +59,9 @@ export function translateDateTimeToString(date, time) {
     const timeTransfer = hhmm[0] > 12 ?
       hhmm[0] - 12 + ":" + hhmm[1] + "pm" :
       hhmm[0] === 12 ? "0:" + hhmm[1] + "am" :
-        hhmm[0] + ":" + hhmm[1] + "am";
-    eventTime += " at " + timeTransfer + " " + time[2];
-    console.log('In the tranlate time  result: ', eventTime);
-    return eventTime;
+      hhmm[0] + ":" + hhmm[1] + "am";
+      eventTime += " at " + timeTransfer + " " + time[2];
+      return eventTime;
   }
 }
 
