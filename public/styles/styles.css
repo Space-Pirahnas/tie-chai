@@ -1416,3 +1416,39 @@ filter: blur(7px);
 .chats_name {
   font-style: bold;
 }
+
+.indexLogo {
+  flex: 3 1 auto;
+  margin-bottom: 20px;
+  max-width: 23%
+}
+.indexBody {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: 9%;
+  text-align: center;
+  font: italic small-caps bold 14px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.appInfo {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  padding: 30px;
+}
+.appBio {
+  background: transparent;
+  max-width: 58%;
+  color: white;
+  padding: 20px;
+  font-size: 14px;
+  margin-top: 30%
+}
+.appStats {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center
+}
