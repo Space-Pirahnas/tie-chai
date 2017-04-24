@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/mediocregopher/radix.v2/redis"
@@ -28,14 +27,14 @@ func init() {
 	client, e = redis.Dial("tcp", "localhost:6379")
 	if err != nil || e != nil {
 		fmt.Println("error here", err, e)
-		/*panic("can not connect to db");*/
+		panic("can not connect to db");
 	}
 	db.AutoMigrate(&User{}, &Cities{}, &Event{}, &Interest{}, &UserInterest{}, &Image{}, &UserFriend{}, &Review{}, &UserSave{}, &EventAttendee{}, &EventComment{}, &ChatRoom{})
 	//	seedTables();
 }
 
-func Serving() {
-	fmt.Println("Serving on Port :8080")
+func Serving(port string) {
+	fmt.Println("Serving on Port " + port)
 }
 
 func SetHeader(h http.HandlerFunc) http.HandlerFunc {
@@ -50,13 +49,9 @@ func SetHeader(h http.HandlerFunc) http.HandlerFunc {
 }
 
 func main() {
+	port := ":8080"
 	defer db.Close()
-	bundle := http.StripPrefix("/bundles/", http.FileServer(http.Dir("../src/bundles/")))
-	public := http.FileServer(http.Dir("../public/"))
-	Serving()
-	http.Handle("/", public)
-	http.Handle("/bundles/", bundle)
-	http.Handle("/favicon.ico", http.NotFoundHandler())
+	Serving(port)
 	http.HandleFunc("/api/signup", SetHeader(signUp))
 	http.HandleFunc("/api/login", SetHeader(logIn))
 	http.HandleFunc("/api/create_event", SetHeader(handleEvent))
@@ -78,5 +73,5 @@ func main() {
 	http.HandleFunc("/api/comment", SetHeader(handleComment))
 	http.HandleFunc("/api/notification", SetHeader(handleNotification))
 	http.HandleFunc("/api/chatroom", SetHeader(handleChatroom))
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(port, nil)
 }

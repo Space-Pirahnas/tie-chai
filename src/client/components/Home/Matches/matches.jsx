@@ -64,11 +64,7 @@ class Matches extends Component {
             <h1>Today's Matches!</h1>
             <div className="matchesNumber">{ this.props.matches ? this.props.matches.length : 0}</div>
           </div>
-          { this.props.matches ? this.props.matches.slice(this.state.page * 5, this.state.page*5 + 5).map((match, i) => <Match user={this.props.user} match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)} viewMatch={this.viewMatch.bind(this, match) }/>) : null }
-          <div className="home_buttons">
-            {this.state.page ? <input type= "image" onClick={this.previous} src={"./styles/left-arrow.svg"} className="arrow" /> : null }
-            {this.props.matches ? this.props.matches.slice(this.state.page * 5, this.state.page*5 + 5).length >= 5 ? <input type= "image" onClick={this.next} src={"./styles/right-arrow.svg"} className="arrow" /> : null: null}
-         </div>
+          { this.props.matches ? this.props.matches.slice(this.state.page * 8, this.state.page*8 + 8).map((match, i) => <Match user={this.props.user} match={ match } key={i} addFriend={this.addFriend.bind(this, match)} rejectMatch={this.rejectMatch.bind(this,match)} saveMatch={this.saveMatch.bind(this,match)} viewMatch={this.viewMatch.bind(this, match) }/>) : null }
         </div>
       </div>
     )

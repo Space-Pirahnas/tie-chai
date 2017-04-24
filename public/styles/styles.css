@@ -163,6 +163,7 @@ p {
     justify-content: flex-end;
     flex-flow: row wrap;
 }
+
 .UserProfile .User {
   display: -webkit-box;
   display: -webkit-flex;
@@ -170,10 +171,11 @@ p {
   display: flex;
 }
 .UserProfile .User .image {
-  border-radius: 44px;
+  position: relative;
+  border-radius: 22px;
   margin-left: 10px;
   overflow: hidden;
-  width: 44px;
+  width: auto;
   height: 44px;
   box-sizing: border-box;
   border: 3px solid transparent;
@@ -213,6 +215,7 @@ p {
   background: transparent; 
   color: white;
   margin-left: 30px;
+  margin-top: 5px;
   float: right;
 }
 
@@ -453,11 +456,6 @@ label {
 .contact-info {
   color: white;
 }
-
-/* <----------------HARDCODED CSS BEGINS HERE ----------->*/
-
-
-
 
 .reviews {
   height: 50vh;
@@ -817,7 +815,7 @@ i:hover {
 
 .chat_image {
   max-height: 50px;
-  max-width: 50px;
+  max-width: auto;
   border-radius: 25px;
   margin: 5px;
 }
