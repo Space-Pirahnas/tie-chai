@@ -47,7 +47,3 @@ go get github.com/satori/go.uuid
 go get github.com/SlyMarbo/gmail
 go get github.com/aws/aws-sdk-go/aws
 ```
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
