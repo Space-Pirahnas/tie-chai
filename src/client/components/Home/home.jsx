@@ -27,7 +27,7 @@ class Home extends React.Component {
   render () {
     return (
       <div>
-        <div className="background" style={{backgroundImage: "url(styles/congruent_outline.png)"}}> 
+        <div className="background" style={{backgroundColor: "rgba(0,0,0,1)"}}> 
           <div className="home">
             <div className="eventsContainer">
               <Events />

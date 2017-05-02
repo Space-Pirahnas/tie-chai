@@ -15,7 +15,7 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
+  font-size: 20px;
   font: inherit;
   vertical-align: baseline;
 }
@@ -24,9 +24,124 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
+/* --------- experiments ------ */
 body {
   line-height: 1;
+  width: 100vw;
 }
+
+section {
+  padding: 0 80px;
+}
+
+.index {
+  margin-top: 50px;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(coffee-meeting.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-text-box{
+  position: absolute;
+  width: 1140px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 300;
+}
+
+.hero-text-box h1 {
+  font-size: 250%;
+}
+
+.hero-text-box a {
+  background-color: rgba(41, 128, 185,1.0);
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.hero-text-box a:hover,
+.hero-text-box a:active {
+  background-color: #fff;
+  color: rgba(41, 128, 185,1.0)F;
+  border: 1px solid rgba(41, 128, 185,1.0);
+}
+
+.details-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.details-column {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+
+.details-column p {
+  margin-top: 40px;
+}
+
+.details h1 {
+  color: rgba(41, 128, 185,1.0);
+  width: 100%;
+}
+
+.details h1:after {
+  background-color: rgba(41, 128, 185,1.0);
+  display: block;
+  height: 3px;
+  content: " ";
+  width: 15%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.long-copy {
+  line-height: 190%;
+  width: 58%;
+  font-size: 120%;
+  margin: 70px 21%;
+}
+
+.skills-icon{
+  color: rgba(41, 128, 185,1.0);
+}
+
+.skills-title{
+  font-size: 200%;
+  color: rgba(41, 128, 185,1.0);
+  align-items: center;
+  margin-left: 15px;
+
+}
+
+
+.box p {
+  margin-top: 50px;
+  line-height: 150%;
+}
+
+.footer {
+  background-color: #333;
+  text-align: center;
+  color: #fff;
+  padding: 40px;
+}
+
+
+/* --------- experiments ------ */
+
 ol, ul {
   list-style: none;
 }
@@ -63,7 +178,7 @@ table {
 body {
   background: #f8f8ff;
   color: #221f1f;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Lato', 'Arial', sans-serif;
 }
 
 h2, .TitleList .Title {

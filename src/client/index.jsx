@@ -48,7 +48,8 @@ store.dispatch(getInterests());
 store.dispatch(getCities());
 
 ReactDOM.render(
-  <div className="container-fluid">
+  // <div className="container-fluid">
+  <div>
     <Provider store={store}>
       <Router history={hashHistory} >
         <Route path='/' component={App} >
