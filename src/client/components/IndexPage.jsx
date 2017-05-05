@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import * as actions from '../actions/saves.jsx';
+import { PieChart } from 'react-d3-components'
+
 class IndexPage extends Component {
   constructor(props) {
     super(props);
   }
   render() {
+
+    let data = {
+      label: 'somethingA',
+      values: [{ x: 'SomethingA', y: 10 }, { x: 'SomethingB', y: 4 }, { x: 'SomethingC', y: 3 }]
+    };
+
+    let sort = null;
     return (
       <div>
         <div className="index">
@@ -46,6 +57,25 @@ class IndexPage extends Component {
                 <p>Tie-Chai currently supports all the major cities in the United States and is branching out daily. If your city is not listed yet, do not worry! We shall have it up shortly. </p>
               </div>
             </div>
+            <div className="row">
+              <div className="col span-1-of-2 box">
+                <div>
+                  <i className="fa fa-arrow-circle-o-up fa-4x skills-icon"></i>
+                  <span className="skills-title">100+ Interests!</span>
+                </div>
+                <p>Tie-Chai currently has support for 100+ interests and growing everyday! Meet people who share similar interests to you today!</p>
+              </div>
+              <div className="col span-1-of-2 box">
+                <PieChart
+                  data={data}
+                  width={600}
+                  height={400}
+                  margin={{ top: 10, bottom: 10, left: 100, right: 100 }}
+                  sort={sort}
+                  />
+                <p>At Tie-Chai, your information is completely secure and will not be shared with anyone else. On top of that, there are ZERO advertisements.</p>
+              </div>
+            </div>
           </div>
         </section>
         <footer>
@@ -64,4 +94,12 @@ class IndexPage extends Component {
     );
   }
 };
-export default IndexPage;
+
+function mapStateToProps(state) {
+  return {
+    cities: state.cities,
+    interests: state.interests
+  }
+}
+
+export default connect(mapStateToProps, actions)(IndexPage);

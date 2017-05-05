@@ -26,6 +26,7 @@
     "react-bootstrap": "^0.30.8",
     "react-cardstack": "^0.1.1",
     "react-chat-bubble": "^0.8.6",
+    "react-d3-components": "^0.6.6",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.12.3",
     "react-redux": "^5.0.3",
