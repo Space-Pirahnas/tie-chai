@@ -74,6 +74,7 @@ class IndexPage extends Component {
                 </div>
               </div>
               <div className="row">
+                <p>Top 10 Interests at Tie-Chai</p>
                 {this.props.interests ? <PieChart
                   data={interestData}
                   width={600}
@@ -81,9 +82,9 @@ class IndexPage extends Component {
                   margin={{ top: 10, bottom: 10, left: 100, right: 100 }}
                   sort={sort}
                   /> : <div>Loading</div>}
-                <p>Top 10 Interests at Tie-Chai</p>
               </div>
               <div className="row">
+                <p>Most Populated Cities at Tie-Chai</p>
                 {this.props.cities ? <BarChart
                   data={cityData}
                   width={1200}
@@ -91,7 +92,6 @@ class IndexPage extends Component {
                   margin={{ top: 10, bottom: 50, left: 50, right: 10 }}
                   sort={sort}
                   /> : <div>Loading</div>}
-                <p>Most Populated Cities at Tie-Chai</p>
               </div>
             </div>
           </section>
