@@ -16,7 +16,7 @@ class IndexPage extends Component {
       values: this.props.interests.map((i) => {
         return {
           x: i.Interest_Name,
-          y: 10
+          y: Math.random() * 100
         }
       }).slice(0, 10)
     };
@@ -26,7 +26,7 @@ class IndexPage extends Component {
         values: this.props.cities.map((city) => {
           return {
             x: city.City_Name,
-            y: 10
+            y: Math.random() * 100
           }
         }).slice(0, 5)
       }] : null;
