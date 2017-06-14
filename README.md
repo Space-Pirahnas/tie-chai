@@ -50,5 +50,5 @@ go get github.com/aws/aws-sdk-go/aws
 
 ## Project Plan
 <img src="https://lh4.googleusercontent.com/mNlsqtyyArQIrWP_tQSINa7wHkVQN6kwSIg_TuUyEAGOadL_AdLnXSnn_Wth_L6gYXNejYsj68OuhmGkviJJuu8X4s9GKYNsWBUOPdQFIyr4k22AUO646V4Lg9gXHxN-TWaiOCLD" />
-[More Detials](https://docs.google.com/document/d/1uerfuUsJxRiP2FNMKFjolebVPyhwyWqUuHSkpHxSDsU/edit?usp=sharing)
+[More Details](https://docs.google.com/document/d/1uerfuUsJxRiP2FNMKFjolebVPyhwyWqUuHSkpHxSDsU/edit?usp=sharing)
 
